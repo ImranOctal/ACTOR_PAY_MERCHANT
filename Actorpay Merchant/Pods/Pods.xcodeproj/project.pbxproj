@@ -1,0 +1,1522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		041B655D7F5932F03A65C154BC02BDAA /* IQInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D787EC20F67E11078961DA85662324 /* IQInvocation.swift */; };
+		04B0884964D9592302CA654E0B67E80E /* IQUIView+Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AF6A9875DAFD0F6B562299D9F1EBC1 /* IQUIView+Hierarchy.swift */; };
+		08B185E08278AE7EC55F8BBB19693AC5 /* IQKeyboardManager+OrientationNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B286D357F789D672747E5FE4CD698508 /* IQKeyboardManager+OrientationNotification.swift */; };
+		0F94B2449CA1ADA76AE79C0BF6A08549 /* IQKeyboardManagerConstantsInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966922740ECD9CB0C83E415BEAB3EDC7 /* IQKeyboardManagerConstantsInternal.swift */; };
+		144482DAC57246D42F5FC01258CB8A0D /* NKVPhonePicker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 08427602E03F92A2AF43D511D701D971 /* NKVPhonePicker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17003839D88BD8045F745F722C790D7F /* CountriesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7728A3DE0C948766E7353A8DAC3E979 /* CountriesViewController.storyboard */; };
+		1740CBB33D469AEDD5D7291A9268FA97 /* IQToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C07DDF30214F55F8308171CBA8C65D /* IQToolbar.swift */; };
+		17E5507F92F0DF1DD5C3AB12E53F559F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CF7D56C5D50C18B2EA0ED106D998C7 /* Foundation.framework */; };
+		1A9B9579E46EFBA63C5F57A6B17B5ECA /* IQKeyboardManagerSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DDB38B025FE3A41CD518323CE7597FC /* IQKeyboardManagerSwift-dummy.m */; };
+		1D8031C86A94D32E00ED55B80428A0F3 /* IQKeyboardManager+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570B2592A74D253F8C8A5C896D8313E6 /* IQKeyboardManager+Toolbar.swift */; };
+		20616A47873318F80BFFEABAC9730122 /* IQTitleBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E10B97BD0B5B7DBBE8E17A924139F6 /* IQTitleBarButtonItem.swift */; };
+		24EC44FF102C2635A476CEF7567F89DA /* IQPreviousNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEE6C5D5B87F7DB6F190E331D638057 /* IQPreviousNextView.swift */; };
+		2A048162CC2306DF6C542479F0DD4465 /* TextFieldWithPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C70777F607AFB10C2DFF1A07E4AC01A /* TextFieldWithPattern.swift */; };
+		2CA0B3B43A972DF3AD79F58092E3403E /* IQKeyboardManager+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC44FE322C9F147BA84DC05AE9620CAF /* IQKeyboardManager+Internal.swift */; };
+		2E5138271A6C79BDA3C0835F2596219B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D60AC13D33197690A05C641925DDDA /* UIKit.framework */; };
+		2EC96162DD6740ECE67FF38B8400A7C5 /* IQKeyboardManager+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FFCA68122FAF9625BEED4BB93696EC /* IQKeyboardManager+Debug.swift */; };
+		3478ED6D8427A570A88270E63501AE6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CF7D56C5D50C18B2EA0ED106D998C7 /* Foundation.framework */; };
+		34C39BDBFE7A2CC585787F5AFCA39FDE /* IQUIView+IQKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FD2AAF247009727E17517DA12B844 /* IQUIView+IQKeyboardToolbar.swift */; };
+		3F01EED6380B596E1D0C1497CBCF9B95 /* IQUITextFieldView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2415D8DA95FD8103FD604A0398E300D4 /* IQUITextFieldView+Additions.swift */; };
+		41CD40F5713CD71AD5AB1471E81C97E1 /* IQBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D906C8B83A0A3A41D4CB62C7B381514 /* IQBarButtonItem.swift */; };
+		4202E500293D48228C634E95C6013616 /* NKVPhoneFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591527213832C480527E1BD9FA05FCD9 /* NKVPhoneFormatter.swift */; };
+		5E8F9230E1987C1A20991FC6D0E70DE1 /* CountryCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394D61188A1063EB7F1EC6D0F6B5F052 /* CountryCode.swift */; };
+		60C6606FF8176EE5A38870CFD9F649C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CF7D56C5D50C18B2EA0ED106D998C7 /* Foundation.framework */; };
+		65F1BA50F96FB8BA4A40D1408FC18E7A /* NKVSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FED8413C926885495305BD0A2CC45E /* NKVSource.swift */; };
+		6DFA70326D4C540DC43BD455F5A4A658 /* Toast-Swift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FF6BE44DC1A02B0317EDA120BA63E00B /* Toast-Swift-dummy.m */; };
+		76E3E468AD1C60B702147982ECA4FCF0 /* NKVSourcesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D6DBE6A350BBA6E0830D5F4FC030F /* NKVSourcesHelper.swift */; };
+		7AC995F567A776FC1A80A9FA0733F3D1 /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B337E883B49630E011AFCAD5F9908 /* IQNSArray+Sort.swift */; };
+		841E58A9DD6E5E71FCBBA02E04CC1F56 /* Countries.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8D99D095CE5742F78635981F0397BAF9 /* Countries.bundle */; };
+		85F13B069B06ADF2B6DCA622E4645110 /* IQKeyboardManagerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52989F9AAF6F353E9CD53FE44944528E /* IQKeyboardManagerConstants.swift */; };
+		86A03DE9366D1BE94EB99AA387EACD1F /* IQKeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94FBA1D450BEE4205AA352D9E336A66 /* IQKeyboardManager.swift */; };
+		87E3B15B2AA7D226CB60059610C1241A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42DBD2F42D55606EEBA514009498B87 /* QuartzCore.framework */; };
+		8D03B1DFD5D87DCB62E77BEAC36FC895 /* NKVPhonePicker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 70A4CC48D84BF309AD938080D55A6FAF /* NKVPhonePicker-dummy.m */; };
+		8DF1425D7837517B4F6B8B465533D15C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CF7D56C5D50C18B2EA0ED106D998C7 /* Foundation.framework */; };
+		915D007A40DDE04C919DD0E8A05E7BAF /* NKVPhonePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BDD1C42C55197911458723824BD7D /* NKVPhonePickerTextField.swift */; };
+		95F114A65787E5CB8E7A91DF8F974653 /* Pods-Actorpay Merchant-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 683792BD4DD028C7DD21E3A7941B21ED /* Pods-Actorpay Merchant-dummy.m */; };
+		97C2804F2236AAAB1C93617DD23EC499 /* CountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132B069C2700D37A36E86771DD492429 /* CountriesViewController.swift */; };
+		97E3D9CDF0DADBD63F5F91FE231503EB /* Pods-Actorpay Merchant-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D15A4A8C1B571711ED6B2BB684D96B0 /* Pods-Actorpay Merchant-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A30C1987104CA15E235EE80170EC8876 /* Pods-Actorpay MerchantTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 01658C3C044DC7A5B39C3A45B1F37533 /* Pods-Actorpay MerchantTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A4BAEE317BFF650DCC888FC67BFBF7EF /* IQKeyboardManager+UIKeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27231E989007B92D774C7BD8747C5EF /* IQKeyboardManager+UIKeyboardNotification.swift */; };
+		AEA6FF08EC868363018A3B34FED07B51 /* NKVLocalizationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD888B998C9A450211C9E1D1D30F8A4D /* NKVLocalizationHelper.swift */; };
+		AFF58BC74AB29A8E3693B3A17FF9C9A0 /* Pods-Actorpay MerchantTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F515A7A938BB4AE3DEBDF7A9A88DE09C /* Pods-Actorpay MerchantTests-dummy.m */; };
+		B03D4EF36E2A876FD735C8EF2293C634 /* NKVPhonePickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FCB8C0CA85516F529E382A79C0177F /* NKVPhonePickerPresenter.swift */; };
+		B1B6A2491AC437909DABE20C71BECDBC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 840FA0B75AF62912A30DDC66B647ED98 /* CoreGraphics.framework */; };
+		B6B43B1B78EC0E52CC08F82841A22A31 /* IQKeyboardManagerSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 40C07D92AA292C14F6B903C6DD6A0889 /* IQKeyboardManagerSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6EC6D40823E66D5B389ACEAC9FD7AAE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42DBD2F42D55606EEBA514009498B87 /* QuartzCore.framework */; };
+		BF20C741EBB18F936CA31F2E41DC9F23 /* Toast-Swift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA1C0818C38F41F682740ADB5835FEF /* Toast-Swift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C81CB3B5D25BDBCB6D3A3632BE408229 /* IQKeyboardReturnKeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC990FC9069B44D421610738997E2D8 /* IQKeyboardReturnKeyHandler.swift */; };
+		CAE29563450C7ED7B9BEFD4F8C3788CA /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D48B8058D0644502B3A293E5A0422AD /* Toast.swift */; };
+		D31356D54A39420DB91C892502CFFD57 /* IQUIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF66C9D97FBFD5C479397FC09E1C591B /* IQUIViewController+Additions.swift */; };
+		D6516B5451008BF1ABA150E6482F6325 /* IQKeyboardManager+UITextFieldViewNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1163809882300D2218D5D313889988EB /* IQKeyboardManager+UITextFieldViewNotification.swift */; };
+		DCAE4B3D2EAFA4180BDBB9F73368C9C0 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F1AE8B4D9F84D35CD7A4802C3D11C /* Country.swift */; };
+		DF33C3DE068D6116B3F551B0453ACD23 /* IQUIScrollView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10F17ACC05CFB041A5EB13C12FED2DB /* IQUIScrollView+Additions.swift */; };
+		E16DC959BAD23897E01CD8C31BECC0E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CF7D56C5D50C18B2EA0ED106D998C7 /* Foundation.framework */; };
+		E4878A21B1C8B2EC0EDD6CD5DE65A254 /* NKVFlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB6E8CA9CF6506EE5606F3662BDCAA /* NKVFlagView.swift */; };
+		E653F16526FC8CE92FD3B1D966FF4DE7 /* PhoneExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60963438DEE2B93E3090F67AC1304D6A /* PhoneExtension.swift */; };
+		E72E1BDDFF31003BD089544FC112FAAC /* IQTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C2172769C47CFE490BBFB889CDADF7 /* IQTextView.swift */; };
+		EE39335CBC38D50FD8858CB22B0C4E6E /* Pods-Actorpay Merchant-Actorpay MerchantUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 327D1DF8D296B1B1686A98FE4FB23F3C /* Pods-Actorpay Merchant-Actorpay MerchantUITests-dummy.m */; };
+		F2B1C1D70C629AE19C0D5121B1BBA891 /* IQKeyboardManager+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAE53A208BE5983C342BEBA09F36E2F /* IQKeyboardManager+Position.swift */; };
+		F8206C4C2CAA10DFBCE6A8E22D38F5B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CF7D56C5D50C18B2EA0ED106D998C7 /* Foundation.framework */; };
+		FE4F363EF57AEDA3DDB897539BC7EB46 /* Pods-Actorpay Merchant-Actorpay MerchantUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 32B12B0E21FC7E867A20956328BBA587 /* Pods-Actorpay Merchant-Actorpay MerchantUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0C38CDDB4E80D9E653FCDCAC9E493EAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B490E7485944099E16C9CBD79119D1D4;
+			remoteInfo = IQKeyboardManagerSwift;
+		};
+		1776F48ECD8A948DF2388A080EC9408C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B990BD87169C76A3ED3FE8A9258D91A3;
+			remoteInfo = "Toast-Swift";
+		};
+		224CBBF52F2C5653DED127F94F0F6AB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0B3E64645ABF38D16FF000D9E6EB71E4;
+			remoteInfo = NKVPhonePicker;
+		};
+		479CCB01C3EF6DAD9FB2BBD423DA261C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62B1E302A1AD3AAEE65B03366DB61960;
+			remoteInfo = "Pods-Actorpay Merchant";
+		};
+		80B418FE1491F66C64DCA28B2FA7025A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B490E7485944099E16C9CBD79119D1D4;
+			remoteInfo = IQKeyboardManagerSwift;
+		};
+		ADEAD6DCAA5F21A71B02B31105CC8F14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0B3E64645ABF38D16FF000D9E6EB71E4;
+			remoteInfo = NKVPhonePicker;
+		};
+		C4AA6E830ACC5981F51147E3A004DD49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B990BD87169C76A3ED3FE8A9258D91A3;
+			remoteInfo = "Toast-Swift";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0034B9ADE471526012710551113B6C09 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig"; sourceTree = "<group>"; };
+		01658C3C044DC7A5B39C3A45B1F37533 /* Pods-Actorpay MerchantTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Actorpay MerchantTests-umbrella.h"; sourceTree = "<group>"; };
+		03313639ABBBA45D576C8F50D05A62B9 /* Pods-Actorpay Merchant-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Actorpay Merchant-acknowledgements.markdown"; sourceTree = "<group>"; };
+		04D60AC13D33197690A05C641925DDDA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		08049556FE8A0027A1E944B7D5FD9540 /* Pods-Actorpay Merchant-Actorpay MerchantUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Actorpay Merchant-Actorpay MerchantUITests-frameworks.sh"; sourceTree = "<group>"; };
+		08427602E03F92A2AF43D511D701D971 /* NKVPhonePicker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NKVPhonePicker-umbrella.h"; sourceTree = "<group>"; };
+		1163809882300D2218D5D313889988EB /* IQKeyboardManager+UITextFieldViewNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQKeyboardManager+UITextFieldViewNotification.swift"; path = "IQKeyboardManagerSwift/IQKeyboardManager+UITextFieldViewNotification.swift"; sourceTree = "<group>"; };
+		132B069C2700D37A36E86771DD492429 /* CountriesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CountriesViewController.swift; path = Sources/Main/CountriesViewController.swift; sourceTree = "<group>"; };
+		13DB6E8CA9CF6506EE5606F3662BDCAA /* NKVFlagView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NKVFlagView.swift; path = Sources/Main/NKVFlagView.swift; sourceTree = "<group>"; };
+		15D787EC20F67E11078961DA85662324 /* IQInvocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQInvocation.swift; path = IQKeyboardManagerSwift/IQToolbar/IQInvocation.swift; sourceTree = "<group>"; };
+		19E9482FAFF41175C4547E97F577BE2A /* Pods-Actorpay Merchant-Actorpay MerchantUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Actorpay Merchant-Actorpay MerchantUITests.modulemap"; sourceTree = "<group>"; };
+		1BFF5D61F600448B32D6065D78EFB0ED /* IQKeyboardManagerSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IQKeyboardManagerSwift.release.xcconfig; sourceTree = "<group>"; };
+		2218EDAE9A4C4A450DA3729F56CA8091 /* NKVPhonePicker */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NKVPhonePicker; path = NKVPhonePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2415D8DA95FD8103FD604A0398E300D4 /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUITextFieldView+Additions.swift"; path = "IQKeyboardManagerSwift/Categories/IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
+		2629EFA8B40FFA005B5B8EF4ABDCFD5A /* Pods-Actorpay Merchant-Actorpay MerchantUITests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Actorpay Merchant-Actorpay MerchantUITests"; path = Pods_Actorpay_Merchant_Actorpay_MerchantUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C70777F607AFB10C2DFF1A07E4AC01A /* TextFieldWithPattern.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextFieldWithPattern.swift; path = Sources/Main/TextFieldWithPattern.swift; sourceTree = "<group>"; };
+		2CA1C0818C38F41F682740ADB5835FEF /* Toast-Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Toast-Swift-umbrella.h"; sourceTree = "<group>"; };
+		2D906C8B83A0A3A41D4CB62C7B381514 /* IQBarButtonItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQBarButtonItem.swift; path = IQKeyboardManagerSwift/IQToolbar/IQBarButtonItem.swift; sourceTree = "<group>"; };
+		2DDB38B025FE3A41CD518323CE7597FC /* IQKeyboardManagerSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IQKeyboardManagerSwift-dummy.m"; sourceTree = "<group>"; };
+		30FFCA68122FAF9625BEED4BB93696EC /* IQKeyboardManager+Debug.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQKeyboardManager+Debug.swift"; path = "IQKeyboardManagerSwift/IQKeyboardManager+Debug.swift"; sourceTree = "<group>"; };
+		3120C5F700FE9E9A9D8A86352F14F326 /* Pods-Actorpay MerchantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Actorpay MerchantTests.release.xcconfig"; sourceTree = "<group>"; };
+		327D1DF8D296B1B1686A98FE4FB23F3C /* Pods-Actorpay Merchant-Actorpay MerchantUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Actorpay Merchant-Actorpay MerchantUITests-dummy.m"; sourceTree = "<group>"; };
+		32B12B0E21FC7E867A20956328BBA587 /* Pods-Actorpay Merchant-Actorpay MerchantUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Actorpay Merchant-Actorpay MerchantUITests-umbrella.h"; sourceTree = "<group>"; };
+		394D61188A1063EB7F1EC6D0F6B5F052 /* CountryCode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CountryCode.swift; path = Sources/Models/CountryCode.swift; sourceTree = "<group>"; };
+		3D15A4A8C1B571711ED6B2BB684D96B0 /* Pods-Actorpay Merchant-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Actorpay Merchant-umbrella.h"; sourceTree = "<group>"; };
+		3E04B415BE79C50622221F2F4EF6215C /* Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		40AF6A9875DAFD0F6B562299D9F1EBC1 /* IQUIView+Hierarchy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIView+Hierarchy.swift"; path = "IQKeyboardManagerSwift/Categories/IQUIView+Hierarchy.swift"; sourceTree = "<group>"; };
+		40C07D92AA292C14F6B903C6DD6A0889 /* IQKeyboardManagerSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IQKeyboardManagerSwift-umbrella.h"; sourceTree = "<group>"; };
+		41E905454B0325A09F48DDBD7807D2FF /* Pods-Actorpay MerchantTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Actorpay MerchantTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		44C1CE74C40B71F627055D5484FF9D41 /* Toast-Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Toast-Swift-prefix.pch"; sourceTree = "<group>"; };
+		474967B8F0451B83A23B23169345E984 /* IQKeyboardManagerSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = IQKeyboardManagerSwift.modulemap; sourceTree = "<group>"; };
+		50B65C2D200E82A57F551A6DA18A321E /* Pods-Actorpay MerchantTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Actorpay MerchantTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		51E10B97BD0B5B7DBBE8E17A924139F6 /* IQTitleBarButtonItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQTitleBarButtonItem.swift; path = IQKeyboardManagerSwift/IQToolbar/IQTitleBarButtonItem.swift; sourceTree = "<group>"; };
+		52989F9AAF6F353E9CD53FE44944528E /* IQKeyboardManagerConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardManagerConstants.swift; path = IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstants.swift; sourceTree = "<group>"; };
+		570B2592A74D253F8C8A5C896D8313E6 /* IQKeyboardManager+Toolbar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQKeyboardManager+Toolbar.swift"; path = "IQKeyboardManagerSwift/IQKeyboardManager+Toolbar.swift"; sourceTree = "<group>"; };
+		591527213832C480527E1BD9FA05FCD9 /* NKVPhoneFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NKVPhoneFormatter.swift; path = Sources/Helpers/NKVPhoneFormatter.swift; sourceTree = "<group>"; };
+		5D48B8058D0644502B3A293E5A0422AD /* Toast.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Toast.swift; path = Toast/Toast.swift; sourceTree = "<group>"; };
+		5D6D6DBE6A350BBA6E0830D5F4FC030F /* NKVSourcesHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NKVSourcesHelper.swift; path = Sources/Helpers/NKVSourcesHelper.swift; sourceTree = "<group>"; };
+		60963438DEE2B93E3090F67AC1304D6A /* PhoneExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhoneExtension.swift; path = Sources/Models/PhoneExtension.swift; sourceTree = "<group>"; };
+		63DC942129E4E9795C978AB5011FCCE2 /* IQKeyboardManagerSwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "IQKeyboardManagerSwift-Info.plist"; sourceTree = "<group>"; };
+		683792BD4DD028C7DD21E3A7941B21ED /* Pods-Actorpay Merchant-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Actorpay Merchant-dummy.m"; sourceTree = "<group>"; };
+		684BED660AC49E2F73814ADFD19AE868 /* Pods-Actorpay Merchant-Actorpay MerchantUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Actorpay Merchant-Actorpay MerchantUITests-Info.plist"; sourceTree = "<group>"; };
+		6CAE53A208BE5983C342BEBA09F36E2F /* IQKeyboardManager+Position.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQKeyboardManager+Position.swift"; path = "IQKeyboardManagerSwift/IQKeyboardManager+Position.swift"; sourceTree = "<group>"; };
+		70A4CC48D84BF309AD938080D55A6FAF /* NKVPhonePicker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NKVPhonePicker-dummy.m"; sourceTree = "<group>"; };
+		71324D340947A7235BFE6D31DDC59E4C /* NKVPhonePicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NKVPhonePicker.debug.xcconfig; sourceTree = "<group>"; };
+		79CF7D56C5D50C18B2EA0ED106D998C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		7B670E202D18E77BCF07ABAF73B43D4E /* Pods-Actorpay Merchant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Actorpay Merchant.release.xcconfig"; sourceTree = "<group>"; };
+		836BE6CD3FA614071125DBC213007D5A /* Pods-Actorpay Merchant-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Actorpay Merchant-acknowledgements.plist"; sourceTree = "<group>"; };
+		840FA0B75AF62912A30DDC66B647ED98 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		899D6D31DF500B778EEA36D8FCD38321 /* Toast-Swift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Toast-Swift-Info.plist"; sourceTree = "<group>"; };
+		8CB26061FA2563E9AC167D5B28970447 /* Pods-Actorpay Merchant-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Actorpay Merchant-frameworks.sh"; sourceTree = "<group>"; };
+		8D8D1C899CA56DEC648BEA12531F6DF6 /* Pods-Actorpay MerchantTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Actorpay MerchantTests.modulemap"; sourceTree = "<group>"; };
+		8D99D095CE5742F78635981F0397BAF9 /* Countries.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = Countries.bundle; path = Sources/Bundle/Countries.bundle; sourceTree = "<group>"; };
+		90EACD48CCB2BA7FC061E91CD894E167 /* NKVPhonePicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NKVPhonePicker.release.xcconfig; sourceTree = "<group>"; };
+		91E7A4681B687B6E5A56ECB9853F923D /* Pods-Actorpay Merchant-Actorpay MerchantUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Actorpay Merchant-Actorpay MerchantUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		94C07DDF30214F55F8308171CBA8C65D /* IQToolbar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQToolbar.swift; path = IQKeyboardManagerSwift/IQToolbar/IQToolbar.swift; sourceTree = "<group>"; };
+		966922740ECD9CB0C83E415BEAB3EDC7 /* IQKeyboardManagerConstantsInternal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardManagerConstantsInternal.swift; path = IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstantsInternal.swift; sourceTree = "<group>"; };
+		97FCB8C0CA85516F529E382A79C0177F /* NKVPhonePickerPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NKVPhonePickerPresenter.swift; path = Sources/Main/NKVPhonePickerPresenter.swift; sourceTree = "<group>"; };
+		99178A21AC2D4056F38B046E8816B881 /* NKVPhonePicker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NKVPhonePicker-prefix.pch"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A42DBD2F42D55606EEBA514009498B87 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		A6C3AEF39746FE3A80624F106AEC7F05 /* Pods-Actorpay Merchant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Actorpay Merchant.debug.xcconfig"; sourceTree = "<group>"; };
+		A8E950A16D00F649C54FFB30F81D7842 /* IQKeyboardManagerSwift */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = IQKeyboardManagerSwift; path = IQKeyboardManagerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1CAA2DC374FBEE063924BA2330993C0 /* NKVPhonePicker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NKVPhonePicker-Info.plist"; sourceTree = "<group>"; };
+		B286D357F789D672747E5FE4CD698508 /* IQKeyboardManager+OrientationNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQKeyboardManager+OrientationNotification.swift"; path = "IQKeyboardManagerSwift/IQKeyboardManager+OrientationNotification.swift"; sourceTree = "<group>"; };
+		B566A771BD9903250A53850CDE6BC0A0 /* Pods-Actorpay Merchant-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Actorpay Merchant-Info.plist"; sourceTree = "<group>"; };
+		B59BDD1C42C55197911458723824BD7D /* NKVPhonePickerTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NKVPhonePickerTextField.swift; path = Sources/Main/NKVPhonePickerTextField.swift; sourceTree = "<group>"; };
+		B9226270A87024110DF471DD219557EB /* Toast-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Toast-Swift.debug.xcconfig"; sourceTree = "<group>"; };
+		BD04EB6E19103BA9DB19B9D179E19042 /* IQKeyboardManagerSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IQKeyboardManagerSwift-prefix.pch"; sourceTree = "<group>"; };
+		BF5FD2AAF247009727E17517DA12B844 /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIView+IQKeyboardToolbar.swift"; path = "IQKeyboardManagerSwift/IQToolbar/IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
+		BFC990FC9069B44D421610738997E2D8 /* IQKeyboardReturnKeyHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardReturnKeyHandler.swift; path = IQKeyboardManagerSwift/IQKeyboardReturnKeyHandler.swift; sourceTree = "<group>"; };
+		C01B337E883B49630E011AFCAD5F9908 /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQNSArray+Sort.swift"; path = "IQKeyboardManagerSwift/Categories/IQNSArray+Sort.swift"; sourceTree = "<group>"; };
+		C769BAEA55A7233CB3149DA594A94FB5 /* NKVPhonePicker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NKVPhonePicker.modulemap; sourceTree = "<group>"; };
+		D10F17ACC05CFB041A5EB13C12FED2DB /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIScrollView+Additions.swift"; path = "IQKeyboardManagerSwift/Categories/IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
+		D2B99BB76301EFB944B967960788D035 /* Pods-Actorpay Merchant.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Actorpay Merchant.modulemap"; sourceTree = "<group>"; };
+		D3BFA7E2509E0748D2568E673E18AB11 /* Pods-Actorpay MerchantTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Actorpay MerchantTests"; path = Pods_Actorpay_MerchantTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6043471C96F93DC41F7DD1E0D7D8B35 /* Toast-Swift */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Toast-Swift"; path = Toast_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6D2C47ACEE124BE1E4EE2948E252D2B /* Toast-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Toast-Swift.modulemap"; sourceTree = "<group>"; };
+		D94FBA1D450BEE4205AA352D9E336A66 /* IQKeyboardManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardManager.swift; path = IQKeyboardManagerSwift/IQKeyboardManager.swift; sourceTree = "<group>"; };
+		DB43D9F6ACE9AB34CCFC1A2E435A6E34 /* Pods-Actorpay Merchant-Actorpay MerchantUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Actorpay Merchant-Actorpay MerchantUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		DC3EB41D254BEC11B35A5416952862C4 /* Pods-Actorpay MerchantTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Actorpay MerchantTests-Info.plist"; sourceTree = "<group>"; };
+		DC44FE322C9F147BA84DC05AE9620CAF /* IQKeyboardManager+Internal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQKeyboardManager+Internal.swift"; path = "IQKeyboardManagerSwift/IQKeyboardManager+Internal.swift"; sourceTree = "<group>"; };
+		E27231E989007B92D774C7BD8747C5EF /* IQKeyboardManager+UIKeyboardNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQKeyboardManager+UIKeyboardNotification.swift"; path = "IQKeyboardManagerSwift/IQKeyboardManager+UIKeyboardNotification.swift"; sourceTree = "<group>"; };
+		E6276A2FC012D288E5C4A1BD326CC08E /* Pods-Actorpay Merchant */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Actorpay Merchant"; path = Pods_Actorpay_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6A554BB439AD637FAD599C90C11049E /* Pods-Actorpay MerchantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Actorpay MerchantTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E7C2172769C47CFE490BBFB889CDADF7 /* IQTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQTextView.swift; path = IQKeyboardManagerSwift/IQTextView/IQTextView.swift; sourceTree = "<group>"; };
+		EAD7980BA337BC3EEA03C9E29BEAD616 /* IQKeyboardManagerSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IQKeyboardManagerSwift.debug.xcconfig; sourceTree = "<group>"; };
+		EC4F1AE8B4D9F84D35CD7A4802C3D11C /* Country.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Country.swift; path = Sources/Models/Country.swift; sourceTree = "<group>"; };
+		EF73C5F316749B1B2D48864401C44689 /* Toast-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Toast-Swift.release.xcconfig"; sourceTree = "<group>"; };
+		F515A7A938BB4AE3DEBDF7A9A88DE09C /* Pods-Actorpay MerchantTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Actorpay MerchantTests-dummy.m"; sourceTree = "<group>"; };
+		F6FED8413C926885495305BD0A2CC45E /* NKVSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NKVSource.swift; path = Sources/Models/NKVSource.swift; sourceTree = "<group>"; };
+		F7728A3DE0C948766E7353A8DAC3E979 /* CountriesViewController.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = CountriesViewController.storyboard; path = Sources/Bundle/CountriesViewController.storyboard; sourceTree = "<group>"; };
+		FD888B998C9A450211C9E1D1D30F8A4D /* NKVLocalizationHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NKVLocalizationHelper.swift; path = Sources/Helpers/NKVLocalizationHelper.swift; sourceTree = "<group>"; };
+		FEEE6C5D5B87F7DB6F190E331D638057 /* IQPreviousNextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQPreviousNextView.swift; path = IQKeyboardManagerSwift/IQToolbar/IQPreviousNextView.swift; sourceTree = "<group>"; };
+		FF66C9D97FBFD5C479397FC09E1C591B /* IQUIViewController+Additions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIViewController+Additions.swift"; path = "IQKeyboardManagerSwift/Categories/IQUIViewController+Additions.swift"; sourceTree = "<group>"; };
+		FF6BE44DC1A02B0317EDA120BA63E00B /* Toast-Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Toast-Swift-dummy.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		27AE6978B7DEAB3C99D6DD07D4532395 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17E5507F92F0DF1DD5C3AB12E53F559F /* Foundation.framework in Frameworks */,
+				87E3B15B2AA7D226CB60059610C1241A /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3B77577C54970218F8F8340516D00F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1B6A2491AC437909DABE20C71BECDBC /* CoreGraphics.framework in Frameworks */,
+				60C6606FF8176EE5A38870CFD9F649C8 /* Foundation.framework in Frameworks */,
+				B6EC6D40823E66D5B389ACEAC9FD7AAE /* QuartzCore.framework in Frameworks */,
+				2E5138271A6C79BDA3C0835F2596219B /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDC1DCF38E4890C857D177AACAA08B92 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DF1425D7837517B4F6B8B465533D15C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8430344C41B4B3FE1462A537953CF78 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8206C4C2CAA10DFBCE6A8E22D38F5B5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E0BC196707D9B4EF896B010B7599A151 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E16DC959BAD23897E01CD8C31BECC0E9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD5745DD2D8BFA77E52E379F6E66B479 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3478ED6D8427A570A88270E63501AE6B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1B63B77DB990A49461956459A16C9F07 /* NKVPhonePicker */ = {
+			isa = PBXGroup;
+			children = (
+				132B069C2700D37A36E86771DD492429 /* CountriesViewController.swift */,
+				EC4F1AE8B4D9F84D35CD7A4802C3D11C /* Country.swift */,
+				394D61188A1063EB7F1EC6D0F6B5F052 /* CountryCode.swift */,
+				13DB6E8CA9CF6506EE5606F3662BDCAA /* NKVFlagView.swift */,
+				FD888B998C9A450211C9E1D1D30F8A4D /* NKVLocalizationHelper.swift */,
+				591527213832C480527E1BD9FA05FCD9 /* NKVPhoneFormatter.swift */,
+				97FCB8C0CA85516F529E382A79C0177F /* NKVPhonePickerPresenter.swift */,
+				B59BDD1C42C55197911458723824BD7D /* NKVPhonePickerTextField.swift */,
+				F6FED8413C926885495305BD0A2CC45E /* NKVSource.swift */,
+				5D6D6DBE6A350BBA6E0830D5F4FC030F /* NKVSourcesHelper.swift */,
+				60963438DEE2B93E3090F67AC1304D6A /* PhoneExtension.swift */,
+				2C70777F607AFB10C2DFF1A07E4AC01A /* TextFieldWithPattern.swift */,
+				933AD5B6C23601BF8B29CA8243422C42 /* Resources */,
+				ED730C1C7F9EE8C22547C90C3D84418E /* Support Files */,
+			);
+			name = NKVPhonePicker;
+			path = NKVPhonePicker;
+			sourceTree = "<group>";
+		};
+		1ED6A86D900BF3E07DF15411B87E853A /* Pods-Actorpay Merchant */ = {
+			isa = PBXGroup;
+			children = (
+				D2B99BB76301EFB944B967960788D035 /* Pods-Actorpay Merchant.modulemap */,
+				03313639ABBBA45D576C8F50D05A62B9 /* Pods-Actorpay Merchant-acknowledgements.markdown */,
+				836BE6CD3FA614071125DBC213007D5A /* Pods-Actorpay Merchant-acknowledgements.plist */,
+				683792BD4DD028C7DD21E3A7941B21ED /* Pods-Actorpay Merchant-dummy.m */,
+				8CB26061FA2563E9AC167D5B28970447 /* Pods-Actorpay Merchant-frameworks.sh */,
+				B566A771BD9903250A53850CDE6BC0A0 /* Pods-Actorpay Merchant-Info.plist */,
+				3D15A4A8C1B571711ED6B2BB684D96B0 /* Pods-Actorpay Merchant-umbrella.h */,
+				A6C3AEF39746FE3A80624F106AEC7F05 /* Pods-Actorpay Merchant.debug.xcconfig */,
+				7B670E202D18E77BCF07ABAF73B43D4E /* Pods-Actorpay Merchant.release.xcconfig */,
+			);
+			name = "Pods-Actorpay Merchant";
+			path = "Target Support Files/Pods-Actorpay Merchant";
+			sourceTree = "<group>";
+		};
+		234BFE6E873FCD28B6CE89C3E387A3AC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D6D2C47ACEE124BE1E4EE2948E252D2B /* Toast-Swift.modulemap */,
+				FF6BE44DC1A02B0317EDA120BA63E00B /* Toast-Swift-dummy.m */,
+				899D6D31DF500B778EEA36D8FCD38321 /* Toast-Swift-Info.plist */,
+				44C1CE74C40B71F627055D5484FF9D41 /* Toast-Swift-prefix.pch */,
+				2CA1C0818C38F41F682740ADB5835FEF /* Toast-Swift-umbrella.h */,
+				B9226270A87024110DF471DD219557EB /* Toast-Swift.debug.xcconfig */,
+				EF73C5F316749B1B2D48864401C44689 /* Toast-Swift.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Toast-Swift";
+			sourceTree = "<group>";
+		};
+		2B311083A874D462129A17115D823915 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1ED6A86D900BF3E07DF15411B87E853A /* Pods-Actorpay Merchant */,
+				DF535C8A607AF36511E0BC0B15F09163 /* Pods-Actorpay Merchant-Actorpay MerchantUITests */,
+				9F1682F798C5946FBF0D9DB4F7D6DD9D /* Pods-Actorpay MerchantTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		2DE083CB1BDB32FEC902B1F4B72E3EEF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				474967B8F0451B83A23B23169345E984 /* IQKeyboardManagerSwift.modulemap */,
+				2DDB38B025FE3A41CD518323CE7597FC /* IQKeyboardManagerSwift-dummy.m */,
+				63DC942129E4E9795C978AB5011FCCE2 /* IQKeyboardManagerSwift-Info.plist */,
+				BD04EB6E19103BA9DB19B9D179E19042 /* IQKeyboardManagerSwift-prefix.pch */,
+				40C07D92AA292C14F6B903C6DD6A0889 /* IQKeyboardManagerSwift-umbrella.h */,
+				EAD7980BA337BC3EEA03C9E29BEAD616 /* IQKeyboardManagerSwift.debug.xcconfig */,
+				1BFF5D61F600448B32D6065D78EFB0ED /* IQKeyboardManagerSwift.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/IQKeyboardManagerSwift";
+			sourceTree = "<group>";
+		};
+		3C010713FD1D082F11045D41EC8A77D9 /* Toast-Swift */ = {
+			isa = PBXGroup;
+			children = (
+				5D48B8058D0644502B3A293E5A0422AD /* Toast.swift */,
+				234BFE6E873FCD28B6CE89C3E387A3AC /* Support Files */,
+			);
+			name = "Toast-Swift";
+			path = "Toast-Swift";
+			sourceTree = "<group>";
+		};
+		79B76EED99425745A4FAC317F22713C5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AA4C296A4C86FF583C7743BDC1BE184A /* IQKeyboardManagerSwift */,
+				1B63B77DB990A49461956459A16C9F07 /* NKVPhonePicker */,
+				3C010713FD1D082F11045D41EC8A77D9 /* Toast-Swift */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		933AD5B6C23601BF8B29CA8243422C42 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D99D095CE5742F78635981F0397BAF9 /* Countries.bundle */,
+				F7728A3DE0C948766E7353A8DAC3E979 /* CountriesViewController.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		9F1682F798C5946FBF0D9DB4F7D6DD9D /* Pods-Actorpay MerchantTests */ = {
+			isa = PBXGroup;
+			children = (
+				8D8D1C899CA56DEC648BEA12531F6DF6 /* Pods-Actorpay MerchantTests.modulemap */,
+				41E905454B0325A09F48DDBD7807D2FF /* Pods-Actorpay MerchantTests-acknowledgements.markdown */,
+				50B65C2D200E82A57F551A6DA18A321E /* Pods-Actorpay MerchantTests-acknowledgements.plist */,
+				F515A7A938BB4AE3DEBDF7A9A88DE09C /* Pods-Actorpay MerchantTests-dummy.m */,
+				DC3EB41D254BEC11B35A5416952862C4 /* Pods-Actorpay MerchantTests-Info.plist */,
+				01658C3C044DC7A5B39C3A45B1F37533 /* Pods-Actorpay MerchantTests-umbrella.h */,
+				E6A554BB439AD637FAD599C90C11049E /* Pods-Actorpay MerchantTests.debug.xcconfig */,
+				3120C5F700FE9E9A9D8A86352F14F326 /* Pods-Actorpay MerchantTests.release.xcconfig */,
+			);
+			name = "Pods-Actorpay MerchantTests";
+			path = "Target Support Files/Pods-Actorpay MerchantTests";
+			sourceTree = "<group>";
+		};
+		AA4C296A4C86FF583C7743BDC1BE184A /* IQKeyboardManagerSwift */ = {
+			isa = PBXGroup;
+			children = (
+				2D906C8B83A0A3A41D4CB62C7B381514 /* IQBarButtonItem.swift */,
+				15D787EC20F67E11078961DA85662324 /* IQInvocation.swift */,
+				D94FBA1D450BEE4205AA352D9E336A66 /* IQKeyboardManager.swift */,
+				30FFCA68122FAF9625BEED4BB93696EC /* IQKeyboardManager+Debug.swift */,
+				DC44FE322C9F147BA84DC05AE9620CAF /* IQKeyboardManager+Internal.swift */,
+				B286D357F789D672747E5FE4CD698508 /* IQKeyboardManager+OrientationNotification.swift */,
+				6CAE53A208BE5983C342BEBA09F36E2F /* IQKeyboardManager+Position.swift */,
+				570B2592A74D253F8C8A5C896D8313E6 /* IQKeyboardManager+Toolbar.swift */,
+				E27231E989007B92D774C7BD8747C5EF /* IQKeyboardManager+UIKeyboardNotification.swift */,
+				1163809882300D2218D5D313889988EB /* IQKeyboardManager+UITextFieldViewNotification.swift */,
+				52989F9AAF6F353E9CD53FE44944528E /* IQKeyboardManagerConstants.swift */,
+				966922740ECD9CB0C83E415BEAB3EDC7 /* IQKeyboardManagerConstantsInternal.swift */,
+				BFC990FC9069B44D421610738997E2D8 /* IQKeyboardReturnKeyHandler.swift */,
+				C01B337E883B49630E011AFCAD5F9908 /* IQNSArray+Sort.swift */,
+				FEEE6C5D5B87F7DB6F190E331D638057 /* IQPreviousNextView.swift */,
+				E7C2172769C47CFE490BBFB889CDADF7 /* IQTextView.swift */,
+				51E10B97BD0B5B7DBBE8E17A924139F6 /* IQTitleBarButtonItem.swift */,
+				94C07DDF30214F55F8308171CBA8C65D /* IQToolbar.swift */,
+				D10F17ACC05CFB041A5EB13C12FED2DB /* IQUIScrollView+Additions.swift */,
+				2415D8DA95FD8103FD604A0398E300D4 /* IQUITextFieldView+Additions.swift */,
+				40AF6A9875DAFD0F6B562299D9F1EBC1 /* IQUIView+Hierarchy.swift */,
+				BF5FD2AAF247009727E17517DA12B844 /* IQUIView+IQKeyboardToolbar.swift */,
+				FF66C9D97FBFD5C479397FC09E1C591B /* IQUIViewController+Additions.swift */,
+				2DE083CB1BDB32FEC902B1F4B72E3EEF /* Support Files */,
+			);
+			name = IQKeyboardManagerSwift;
+			path = IQKeyboardManagerSwift;
+			sourceTree = "<group>";
+		};
+		BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F9D206BABE81E6BF0B9B23880B238CC7 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C317B51F8EAF02B27BE42D32636D4DED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A8E950A16D00F649C54FFB30F81D7842 /* IQKeyboardManagerSwift */,
+				2218EDAE9A4C4A450DA3729F56CA8091 /* NKVPhonePicker */,
+				E6276A2FC012D288E5C4A1BD326CC08E /* Pods-Actorpay Merchant */,
+				2629EFA8B40FFA005B5B8EF4ABDCFD5A /* Pods-Actorpay Merchant-Actorpay MerchantUITests */,
+				D3BFA7E2509E0748D2568E673E18AB11 /* Pods-Actorpay MerchantTests */,
+				D6043471C96F93DC41F7DD1E0D7D8B35 /* Toast-Swift */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */,
+				79B76EED99425745A4FAC317F22713C5 /* Pods */,
+				C317B51F8EAF02B27BE42D32636D4DED /* Products */,
+				2B311083A874D462129A17115D823915 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		DF535C8A607AF36511E0BC0B15F09163 /* Pods-Actorpay Merchant-Actorpay MerchantUITests */ = {
+			isa = PBXGroup;
+			children = (
+				19E9482FAFF41175C4547E97F577BE2A /* Pods-Actorpay Merchant-Actorpay MerchantUITests.modulemap */,
+				91E7A4681B687B6E5A56ECB9853F923D /* Pods-Actorpay Merchant-Actorpay MerchantUITests-acknowledgements.markdown */,
+				DB43D9F6ACE9AB34CCFC1A2E435A6E34 /* Pods-Actorpay Merchant-Actorpay MerchantUITests-acknowledgements.plist */,
+				327D1DF8D296B1B1686A98FE4FB23F3C /* Pods-Actorpay Merchant-Actorpay MerchantUITests-dummy.m */,
+				08049556FE8A0027A1E944B7D5FD9540 /* Pods-Actorpay Merchant-Actorpay MerchantUITests-frameworks.sh */,
+				684BED660AC49E2F73814ADFD19AE868 /* Pods-Actorpay Merchant-Actorpay MerchantUITests-Info.plist */,
+				32B12B0E21FC7E867A20956328BBA587 /* Pods-Actorpay Merchant-Actorpay MerchantUITests-umbrella.h */,
+				3E04B415BE79C50622221F2F4EF6215C /* Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig */,
+				0034B9ADE471526012710551113B6C09 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig */,
+			);
+			name = "Pods-Actorpay Merchant-Actorpay MerchantUITests";
+			path = "Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests";
+			sourceTree = "<group>";
+		};
+		ED730C1C7F9EE8C22547C90C3D84418E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C769BAEA55A7233CB3149DA594A94FB5 /* NKVPhonePicker.modulemap */,
+				70A4CC48D84BF309AD938080D55A6FAF /* NKVPhonePicker-dummy.m */,
+				B1CAA2DC374FBEE063924BA2330993C0 /* NKVPhonePicker-Info.plist */,
+				99178A21AC2D4056F38B046E8816B881 /* NKVPhonePicker-prefix.pch */,
+				08427602E03F92A2AF43D511D701D971 /* NKVPhonePicker-umbrella.h */,
+				71324D340947A7235BFE6D31DDC59E4C /* NKVPhonePicker.debug.xcconfig */,
+				90EACD48CCB2BA7FC061E91CD894E167 /* NKVPhonePicker.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/NKVPhonePicker";
+			sourceTree = "<group>";
+		};
+		F9D206BABE81E6BF0B9B23880B238CC7 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				840FA0B75AF62912A30DDC66B647ED98 /* CoreGraphics.framework */,
+				79CF7D56C5D50C18B2EA0ED106D998C7 /* Foundation.framework */,
+				A42DBD2F42D55606EEBA514009498B87 /* QuartzCore.framework */,
+				04D60AC13D33197690A05C641925DDDA /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		05C727494D4C39856EEC8524BE7AA0FA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE4F363EF57AEDA3DDB897539BC7EB46 /* Pods-Actorpay Merchant-Actorpay MerchantUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41DF74F332CA5CF58011973B3E2F5988 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97E3D9CDF0DADBD63F5F91FE231503EB /* Pods-Actorpay Merchant-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63D019064C2255A3D74C25BDF1937802 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF20C741EBB18F936CA31F2E41DC9F23 /* Toast-Swift-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4F45950B0B8DF7A64AADD413D09330C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A30C1987104CA15E235EE80170EC8876 /* Pods-Actorpay MerchantTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCEEFAA8C63580C9CB8978EDA9312BDF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6B43B1B78EC0E52CC08F82841A22A31 /* IQKeyboardManagerSwift-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E0684FA006CDB51E41AA3929F3CC9475 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				144482DAC57246D42F5FC01258CB8A0D /* NKVPhonePicker-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0B3E64645ABF38D16FF000D9E6EB71E4 /* NKVPhonePicker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE8D64CB26FA704CF081268716AC3FA2 /* Build configuration list for PBXNativeTarget "NKVPhonePicker" */;
+			buildPhases = (
+				E0684FA006CDB51E41AA3929F3CC9475 /* Headers */,
+				BEE7D5A8D321ED3B5690C0BB89FB86E4 /* Sources */,
+				D8430344C41B4B3FE1462A537953CF78 /* Frameworks */,
+				B3F503015FCBDFD77DA24F7B413E0240 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NKVPhonePicker;
+			productName = NKVPhonePicker;
+			productReference = 2218EDAE9A4C4A450DA3729F56CA8091 /* NKVPhonePicker */;
+			productType = "com.apple.product-type.framework";
+		};
+		52F72F3951BE1D35BEBB41A30285C597 /* Pods-Actorpay Merchant-Actorpay MerchantUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AF2D69D1DA052FBF0CAF141E5CC937E /* Build configuration list for PBXNativeTarget "Pods-Actorpay Merchant-Actorpay MerchantUITests" */;
+			buildPhases = (
+				05C727494D4C39856EEC8524BE7AA0FA /* Headers */,
+				4EBCBCCAE4EFF84C8F955D47199F9A84 /* Sources */,
+				E0BC196707D9B4EF896B010B7599A151 /* Frameworks */,
+				1C68D8B6033D4FD907040E635E4000F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C0A58E8612CCD0486B5EB369713F709 /* PBXTargetDependency */,
+				60240FA8C17258D5D20E655ADCE1906C /* PBXTargetDependency */,
+				F991072C9173FC0B4ED999309B2E5BF5 /* PBXTargetDependency */,
+			);
+			name = "Pods-Actorpay Merchant-Actorpay MerchantUITests";
+			productName = Pods_Actorpay_Merchant_Actorpay_MerchantUITests;
+			productReference = 2629EFA8B40FFA005B5B8EF4ABDCFD5A /* Pods-Actorpay Merchant-Actorpay MerchantUITests */;
+			productType = "com.apple.product-type.framework";
+		};
+		62B1E302A1AD3AAEE65B03366DB61960 /* Pods-Actorpay Merchant */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CF0E0E4460B64F2D1D1810AB3BAD8F2 /* Build configuration list for PBXNativeTarget "Pods-Actorpay Merchant" */;
+			buildPhases = (
+				41DF74F332CA5CF58011973B3E2F5988 /* Headers */,
+				A609BCD5F1A8C5CAB6080FD0A115B7CA /* Sources */,
+				FD5745DD2D8BFA77E52E379F6E66B479 /* Frameworks */,
+				22B476FF6398898E78D621BF039B35DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07E8F1C3DAB3BA4B6694B3BC09DAF066 /* PBXTargetDependency */,
+				83BFE9473C0BCBC10DA4431E4A778B36 /* PBXTargetDependency */,
+				7F63237F0F1970CA358A92CDDD331DB4 /* PBXTargetDependency */,
+			);
+			name = "Pods-Actorpay Merchant";
+			productName = Pods_Actorpay_Merchant;
+			productReference = E6276A2FC012D288E5C4A1BD326CC08E /* Pods-Actorpay Merchant */;
+			productType = "com.apple.product-type.framework";
+		};
+		95C2CDD733487B44657030BD20956AD0 /* Pods-Actorpay MerchantTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 98DC54D79C29D31202124CCC89C1B22F /* Build configuration list for PBXNativeTarget "Pods-Actorpay MerchantTests" */;
+			buildPhases = (
+				C4F45950B0B8DF7A64AADD413D09330C /* Headers */,
+				20CDC62A2ADA075F44995DCBE16E5A0D /* Sources */,
+				CDC1DCF38E4890C857D177AACAA08B92 /* Frameworks */,
+				2A606F841422ECB65D3552F8AC9EFFBB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C3F18520AA5355C89619E1E25F40002 /* PBXTargetDependency */,
+			);
+			name = "Pods-Actorpay MerchantTests";
+			productName = Pods_Actorpay_MerchantTests;
+			productReference = D3BFA7E2509E0748D2568E673E18AB11 /* Pods-Actorpay MerchantTests */;
+			productType = "com.apple.product-type.framework";
+		};
+		B490E7485944099E16C9CBD79119D1D4 /* IQKeyboardManagerSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42F76AA8E84D32E2DED70BBA35321CB1 /* Build configuration list for PBXNativeTarget "IQKeyboardManagerSwift" */;
+			buildPhases = (
+				CCEEFAA8C63580C9CB8978EDA9312BDF /* Headers */,
+				AC7850B8AD058752CD0E80D5A5B07A42 /* Sources */,
+				A3B77577C54970218F8F8340516D00F2 /* Frameworks */,
+				DAEA1F953296419744C852BAA2739BA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IQKeyboardManagerSwift;
+			productName = IQKeyboardManagerSwift;
+			productReference = A8E950A16D00F649C54FFB30F81D7842 /* IQKeyboardManagerSwift */;
+			productType = "com.apple.product-type.framework";
+		};
+		B990BD87169C76A3ED3FE8A9258D91A3 /* Toast-Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3393B836BCDFD5292B077E63A26DC97F /* Build configuration list for PBXNativeTarget "Toast-Swift" */;
+			buildPhases = (
+				63D019064C2255A3D74C25BDF1937802 /* Headers */,
+				C576B265A93E25312929172E0AB5B460 /* Sources */,
+				27AE6978B7DEAB3C99D6DD07D4532395 /* Frameworks */,
+				39537AB4608D9B5FE694169E21AD9F19 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Toast-Swift";
+			productName = Toast_Swift;
+			productReference = D6043471C96F93DC41F7DD1E0D7D8B35 /* Toast-Swift */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = C317B51F8EAF02B27BE42D32636D4DED /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B490E7485944099E16C9CBD79119D1D4 /* IQKeyboardManagerSwift */,
+				0B3E64645ABF38D16FF000D9E6EB71E4 /* NKVPhonePicker */,
+				62B1E302A1AD3AAEE65B03366DB61960 /* Pods-Actorpay Merchant */,
+				52F72F3951BE1D35BEBB41A30285C597 /* Pods-Actorpay Merchant-Actorpay MerchantUITests */,
+				95C2CDD733487B44657030BD20956AD0 /* Pods-Actorpay MerchantTests */,
+				B990BD87169C76A3ED3FE8A9258D91A3 /* Toast-Swift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1C68D8B6033D4FD907040E635E4000F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22B476FF6398898E78D621BF039B35DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A606F841422ECB65D3552F8AC9EFFBB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39537AB4608D9B5FE694169E21AD9F19 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3F503015FCBDFD77DA24F7B413E0240 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				841E58A9DD6E5E71FCBBA02E04CC1F56 /* Countries.bundle in Resources */,
+				17003839D88BD8045F745F722C790D7F /* CountriesViewController.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAEA1F953296419744C852BAA2739BA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		20CDC62A2ADA075F44995DCBE16E5A0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFF58BC74AB29A8E3693B3A17FF9C9A0 /* Pods-Actorpay MerchantTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EBCBCCAE4EFF84C8F955D47199F9A84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE39335CBC38D50FD8858CB22B0C4E6E /* Pods-Actorpay Merchant-Actorpay MerchantUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A609BCD5F1A8C5CAB6080FD0A115B7CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95F114A65787E5CB8E7A91DF8F974653 /* Pods-Actorpay Merchant-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC7850B8AD058752CD0E80D5A5B07A42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41CD40F5713CD71AD5AB1471E81C97E1 /* IQBarButtonItem.swift in Sources */,
+				041B655D7F5932F03A65C154BC02BDAA /* IQInvocation.swift in Sources */,
+				86A03DE9366D1BE94EB99AA387EACD1F /* IQKeyboardManager.swift in Sources */,
+				2EC96162DD6740ECE67FF38B8400A7C5 /* IQKeyboardManager+Debug.swift in Sources */,
+				2CA0B3B43A972DF3AD79F58092E3403E /* IQKeyboardManager+Internal.swift in Sources */,
+				08B185E08278AE7EC55F8BBB19693AC5 /* IQKeyboardManager+OrientationNotification.swift in Sources */,
+				F2B1C1D70C629AE19C0D5121B1BBA891 /* IQKeyboardManager+Position.swift in Sources */,
+				1D8031C86A94D32E00ED55B80428A0F3 /* IQKeyboardManager+Toolbar.swift in Sources */,
+				A4BAEE317BFF650DCC888FC67BFBF7EF /* IQKeyboardManager+UIKeyboardNotification.swift in Sources */,
+				D6516B5451008BF1ABA150E6482F6325 /* IQKeyboardManager+UITextFieldViewNotification.swift in Sources */,
+				85F13B069B06ADF2B6DCA622E4645110 /* IQKeyboardManagerConstants.swift in Sources */,
+				0F94B2449CA1ADA76AE79C0BF6A08549 /* IQKeyboardManagerConstantsInternal.swift in Sources */,
+				1A9B9579E46EFBA63C5F57A6B17B5ECA /* IQKeyboardManagerSwift-dummy.m in Sources */,
+				C81CB3B5D25BDBCB6D3A3632BE408229 /* IQKeyboardReturnKeyHandler.swift in Sources */,
+				7AC995F567A776FC1A80A9FA0733F3D1 /* IQNSArray+Sort.swift in Sources */,
+				24EC44FF102C2635A476CEF7567F89DA /* IQPreviousNextView.swift in Sources */,
+				E72E1BDDFF31003BD089544FC112FAAC /* IQTextView.swift in Sources */,
+				20616A47873318F80BFFEABAC9730122 /* IQTitleBarButtonItem.swift in Sources */,
+				1740CBB33D469AEDD5D7291A9268FA97 /* IQToolbar.swift in Sources */,
+				DF33C3DE068D6116B3F551B0453ACD23 /* IQUIScrollView+Additions.swift in Sources */,
+				3F01EED6380B596E1D0C1497CBCF9B95 /* IQUITextFieldView+Additions.swift in Sources */,
+				04B0884964D9592302CA654E0B67E80E /* IQUIView+Hierarchy.swift in Sources */,
+				34C39BDBFE7A2CC585787F5AFCA39FDE /* IQUIView+IQKeyboardToolbar.swift in Sources */,
+				D31356D54A39420DB91C892502CFFD57 /* IQUIViewController+Additions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEE7D5A8D321ED3B5690C0BB89FB86E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97C2804F2236AAAB1C93617DD23EC499 /* CountriesViewController.swift in Sources */,
+				DCAE4B3D2EAFA4180BDBB9F73368C9C0 /* Country.swift in Sources */,
+				5E8F9230E1987C1A20991FC6D0E70DE1 /* CountryCode.swift in Sources */,
+				E4878A21B1C8B2EC0EDD6CD5DE65A254 /* NKVFlagView.swift in Sources */,
+				AEA6FF08EC868363018A3B34FED07B51 /* NKVLocalizationHelper.swift in Sources */,
+				4202E500293D48228C634E95C6013616 /* NKVPhoneFormatter.swift in Sources */,
+				8D03B1DFD5D87DCB62E77BEAC36FC895 /* NKVPhonePicker-dummy.m in Sources */,
+				B03D4EF36E2A876FD735C8EF2293C634 /* NKVPhonePickerPresenter.swift in Sources */,
+				915D007A40DDE04C919DD0E8A05E7BAF /* NKVPhonePickerTextField.swift in Sources */,
+				65F1BA50F96FB8BA4A40D1408FC18E7A /* NKVSource.swift in Sources */,
+				76E3E468AD1C60B702147982ECA4FCF0 /* NKVSourcesHelper.swift in Sources */,
+				E653F16526FC8CE92FD3B1D966FF4DE7 /* PhoneExtension.swift in Sources */,
+				2A048162CC2306DF6C542479F0DD4465 /* TextFieldWithPattern.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C576B265A93E25312929172E0AB5B460 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAE29563450C7ED7B9BEFD4F8C3788CA /* Toast.swift in Sources */,
+				6DFA70326D4C540DC43BD455F5A4A658 /* Toast-Swift-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07E8F1C3DAB3BA4B6694B3BC09DAF066 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IQKeyboardManagerSwift;
+			target = B490E7485944099E16C9CBD79119D1D4 /* IQKeyboardManagerSwift */;
+			targetProxy = 0C38CDDB4E80D9E653FCDCAC9E493EAE /* PBXContainerItemProxy */;
+		};
+		2C3F18520AA5355C89619E1E25F40002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Actorpay Merchant";
+			target = 62B1E302A1AD3AAEE65B03366DB61960 /* Pods-Actorpay Merchant */;
+			targetProxy = 479CCB01C3EF6DAD9FB2BBD423DA261C /* PBXContainerItemProxy */;
+		};
+		60240FA8C17258D5D20E655ADCE1906C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NKVPhonePicker;
+			target = 0B3E64645ABF38D16FF000D9E6EB71E4 /* NKVPhonePicker */;
+			targetProxy = 224CBBF52F2C5653DED127F94F0F6AB6 /* PBXContainerItemProxy */;
+		};
+		7F63237F0F1970CA358A92CDDD331DB4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Toast-Swift";
+			target = B990BD87169C76A3ED3FE8A9258D91A3 /* Toast-Swift */;
+			targetProxy = 1776F48ECD8A948DF2388A080EC9408C /* PBXContainerItemProxy */;
+		};
+		83BFE9473C0BCBC10DA4431E4A778B36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NKVPhonePicker;
+			target = 0B3E64645ABF38D16FF000D9E6EB71E4 /* NKVPhonePicker */;
+			targetProxy = ADEAD6DCAA5F21A71B02B31105CC8F14 /* PBXContainerItemProxy */;
+		};
+		9C0A58E8612CCD0486B5EB369713F709 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IQKeyboardManagerSwift;
+			target = B490E7485944099E16C9CBD79119D1D4 /* IQKeyboardManagerSwift */;
+			targetProxy = 80B418FE1491F66C64DCA28B2FA7025A /* PBXContainerItemProxy */;
+		};
+		F991072C9173FC0B4ED999309B2E5BF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Toast-Swift";
+			target = B990BD87169C76A3ED3FE8A9258D91A3 /* Toast-Swift */;
+			targetProxy = C4AA6E830ACC5981F51147E3A004DD49 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		064B27CC67850338B252C0842AA2D231 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3120C5F700FE9E9A9D8A86352F14F326 /* Pods-Actorpay MerchantTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Actorpay MerchantTests/Pods-Actorpay MerchantTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Actorpay MerchantTests/Pods-Actorpay MerchantTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		097FCE19784279F44DBAEC516A352B10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BFF5D61F600448B32D6065D78EFB0ED /* IQKeyboardManagerSwift.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.modulemap";
+				PRODUCT_MODULE_NAME = IQKeyboardManagerSwift;
+				PRODUCT_NAME = IQKeyboardManagerSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.5;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		1A7AC19F92E65F936E5EDF6C53D15D83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6C3AEF39746FE3A80624F106AEC7F05 /* Pods-Actorpay Merchant.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1F6D3DD34E8A819816BB3E88E22EDACC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9226270A87024110DF471DD219557EB /* Toast-Swift.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Toast-Swift/Toast-Swift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Toast-Swift/Toast-Swift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Toast-Swift/Toast-Swift.modulemap";
+				PRODUCT_MODULE_NAME = Toast_Swift;
+				PRODUCT_NAME = Toast_Swift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3D3D28C1C55E7DAA8FBDE48B853DE8D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B670E202D18E77BCF07ABAF73B43D4E /* Pods-Actorpay Merchant.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		75E16CD62887BBEBAF1A0FEB643A2387 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71324D340947A7235BFE6D31DDC59E4C /* NKVPhonePicker.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/NKVPhonePicker/NKVPhonePicker-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/NKVPhonePicker/NKVPhonePicker-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/NKVPhonePicker/NKVPhonePicker.modulemap";
+				PRODUCT_MODULE_NAME = NKVPhonePicker;
+				PRODUCT_NAME = NKVPhonePicker;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7FC4E2F77371528BA010DDDC46F0C7D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAD7980BA337BC3EEA03C9E29BEAD616 /* IQKeyboardManagerSwift.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.modulemap";
+				PRODUCT_MODULE_NAME = IQKeyboardManagerSwift;
+				PRODUCT_NAME = IQKeyboardManagerSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.5;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		801FA0A67CCCA30AE11BE4AB1A2F637C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90EACD48CCB2BA7FC061E91CD894E167 /* NKVPhonePicker.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/NKVPhonePicker/NKVPhonePicker-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/NKVPhonePicker/NKVPhonePicker-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/NKVPhonePicker/NKVPhonePicker.modulemap";
+				PRODUCT_MODULE_NAME = NKVPhonePicker;
+				PRODUCT_NAME = NKVPhonePicker;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		903A0004D3E6651EFD5D2E16214D101B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		9B80D355091AA81A5A28B17B71E13808 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0034B9ADE471526012710551113B6C09 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		AED9831524F50203B82F7A7AFB47309A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6A554BB439AD637FAD599C90C11049E /* Pods-Actorpay MerchantTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Actorpay MerchantTests/Pods-Actorpay MerchantTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Actorpay MerchantTests/Pods-Actorpay MerchantTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		C1E97B31034C3BA57697478F5D99F78E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E04B415BE79C50622221F2F4EF6215C /* Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DD076AFEEE0A686B597DD62BCA7E46CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF73C5F316749B1B2D48864401C44689 /* Toast-Swift.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Toast-Swift/Toast-Swift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Toast-Swift/Toast-Swift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Toast-Swift/Toast-Swift.modulemap";
+				PRODUCT_MODULE_NAME = Toast_Swift;
+				PRODUCT_NAME = Toast_Swift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3393B836BCDFD5292B077E63A26DC97F /* Build configuration list for PBXNativeTarget "Toast-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F6D3DD34E8A819816BB3E88E22EDACC /* Debug */,
+				DD076AFEEE0A686B597DD62BCA7E46CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42F76AA8E84D32E2DED70BBA35321CB1 /* Build configuration list for PBXNativeTarget "IQKeyboardManagerSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FC4E2F77371528BA010DDDC46F0C7D4 /* Debug */,
+				097FCE19784279F44DBAEC516A352B10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */,
+				903A0004D3E6651EFD5D2E16214D101B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AF2D69D1DA052FBF0CAF141E5CC937E /* Build configuration list for PBXNativeTarget "Pods-Actorpay Merchant-Actorpay MerchantUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1E97B31034C3BA57697478F5D99F78E /* Debug */,
+				9B80D355091AA81A5A28B17B71E13808 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CF0E0E4460B64F2D1D1810AB3BAD8F2 /* Build configuration list for PBXNativeTarget "Pods-Actorpay Merchant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A7AC19F92E65F936E5EDF6C53D15D83 /* Debug */,
+				3D3D28C1C55E7DAA8FBDE48B853DE8D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		98DC54D79C29D31202124CCC89C1B22F /* Build configuration list for PBXNativeTarget "Pods-Actorpay MerchantTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AED9831524F50203B82F7A7AFB47309A /* Debug */,
+				064B27CC67850338B252C0842AA2D231 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE8D64CB26FA704CF081268716AC3FA2 /* Build configuration list for PBXNativeTarget "NKVPhonePicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75E16CD62887BBEBAF1A0FEB643A2387 /* Debug */,
+				801FA0A67CCCA30AE11BE4AB1A2F637C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

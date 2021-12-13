@@ -1,0 +1,25 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Actorpay Merchant' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Actorpay Merchant
+
+  pod 'Toast-Swift', '~> 5.0.1'
+  pod 'IQKeyboardManagerSwift'
+  pod 'NKVPhonePicker'
+
+
+
+  target 'Actorpay MerchantTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Actorpay MerchantUITests' do
+    # Pods for testing
+  end
+
+end

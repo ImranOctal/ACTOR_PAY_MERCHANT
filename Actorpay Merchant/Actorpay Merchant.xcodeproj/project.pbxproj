@@ -1,0 +1,824 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		66A95678B16B3F1FFBFE15C4 /* Pods_Actorpay_Merchant_Actorpay_MerchantUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 815C70700E83A3B91DF77D6F /* Pods_Actorpay_Merchant_Actorpay_MerchantUITests.framework */; };
+		88D08D0B27621A2F001D5282 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D0A27621A2F001D5282 /* AppDelegate.swift */; };
+		88D08D0D27621A2F001D5282 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D0C27621A2F001D5282 /* SceneDelegate.swift */; };
+		88D08D0F27621A2F001D5282 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D0E27621A2F001D5282 /* LoginViewController.swift */; };
+		88D08D1227621A2F001D5282 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88D08D1027621A2F001D5282 /* Main.storyboard */; };
+		88D08D1427621A30001D5282 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88D08D1327621A30001D5282 /* Assets.xcassets */; };
+		88D08D1727621A30001D5282 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88D08D1527621A30001D5282 /* LaunchScreen.storyboard */; };
+		88D08D2227621A31001D5282 /* Actorpay_MerchantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D2127621A30001D5282 /* Actorpay_MerchantTests.swift */; };
+		88D08D2D27621A31001D5282 /* Actorpay_MerchantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D2C27621A31001D5282 /* Actorpay_MerchantUITests.swift */; };
+		88D08D5227621DE9001D5282 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D4A27621DE9001D5282 /* Global.swift */; };
+		88D08D5327621DE9001D5282 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D4B27621DE9001D5282 /* Extensions.swift */; };
+		88D08D5427621DE9001D5282 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88D08D4D27621DE9001D5282 /* Poppins-Light.ttf */; };
+		88D08D5527621DE9001D5282 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88D08D4E27621DE9001D5282 /* Poppins-Medium.ttf */; };
+		88D08D5627621DE9001D5282 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88D08D4F27621DE9001D5282 /* Poppins-Regular.ttf */; };
+		88D08D5727621DE9001D5282 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88D08D5027621DE9001D5282 /* Poppins-Bold.ttf */; };
+		88D08D5827621DE9001D5282 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88D08D5127621DE9001D5282 /* Poppins-SemiBold.ttf */; };
+		88D08D6327622841001D5282 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D6227622841001D5282 /* SignUpViewController.swift */; };
+		88D08D7127623357001D5282 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D7027623357001D5282 /* WebViewController.swift */; };
+		8F70A3EEC62EA4011BDC2FEB /* Pods_Actorpay_MerchantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0949857CDCB7E94823204911 /* Pods_Actorpay_MerchantTests.framework */; };
+		B3C4DDD9E45542C9DAC515F7 /* Pods_Actorpay_Merchant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 999E378EC9879DA78D2D0C75 /* Pods_Actorpay_Merchant.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		88D08D1E27621A30001D5282 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88D08CFF27621A2F001D5282 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88D08D0627621A2F001D5282;
+			remoteInfo = "Actorpay Merchant";
+		};
+		88D08D2927621A31001D5282 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88D08CFF27621A2F001D5282 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88D08D0627621A2F001D5282;
+			remoteInfo = "Actorpay Merchant";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0949857CDCB7E94823204911 /* Pods_Actorpay_MerchantTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Actorpay_MerchantTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DC5C418E783C687EE9684E3 /* Pods-Actorpay Merchant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay Merchant.debug.xcconfig"; path = "Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant.debug.xcconfig"; sourceTree = "<group>"; };
+		237964F75444FB93D955DE37 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig"; path = "Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		815C70700E83A3B91DF77D6F /* Pods_Actorpay_Merchant_Actorpay_MerchantUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Actorpay_Merchant_Actorpay_MerchantUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88D08D0727621A2F001D5282 /* Actorpay Merchant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Actorpay Merchant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88D08D0A27621A2F001D5282 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		88D08D0C27621A2F001D5282 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		88D08D0E27621A2F001D5282 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		88D08D1127621A2F001D5282 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		88D08D1327621A30001D5282 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		88D08D1627621A30001D5282 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		88D08D1827621A30001D5282 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88D08D1D27621A30001D5282 /* Actorpay MerchantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Actorpay MerchantTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88D08D2127621A30001D5282 /* Actorpay_MerchantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actorpay_MerchantTests.swift; sourceTree = "<group>"; };
+		88D08D2327621A31001D5282 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88D08D2827621A31001D5282 /* Actorpay MerchantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Actorpay MerchantUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88D08D2C27621A31001D5282 /* Actorpay_MerchantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actorpay_MerchantUITests.swift; sourceTree = "<group>"; };
+		88D08D2E27621A31001D5282 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88D08D4A27621DE9001D5282 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		88D08D4B27621DE9001D5282 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		88D08D4D27621DE9001D5282 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
+		88D08D4E27621DE9001D5282 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		88D08D4F27621DE9001D5282 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		88D08D5027621DE9001D5282 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		88D08D5127621DE9001D5282 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		88D08D6227622841001D5282 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		88D08D7027623357001D5282 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		96A260A736382054B2B80112 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig"; path = "Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig"; sourceTree = "<group>"; };
+		999E378EC9879DA78D2D0C75 /* Pods_Actorpay_Merchant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Actorpay_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C812B1459D3D85C4551359BC /* Pods-Actorpay Merchant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay Merchant.release.xcconfig"; path = "Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant.release.xcconfig"; sourceTree = "<group>"; };
+		CD79B66A6644087136985E85 /* Pods-Actorpay MerchantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay MerchantTests.debug.xcconfig"; path = "Target Support Files/Pods-Actorpay MerchantTests/Pods-Actorpay MerchantTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D05E4518FF5D9A96D83F3947 /* Pods-Actorpay MerchantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay MerchantTests.release.xcconfig"; path = "Target Support Files/Pods-Actorpay MerchantTests/Pods-Actorpay MerchantTests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		88D08D0427621A2F001D5282 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3C4DDD9E45542C9DAC515F7 /* Pods_Actorpay_Merchant.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88D08D1A27621A30001D5282 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F70A3EEC62EA4011BDC2FEB /* Pods_Actorpay_MerchantTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88D08D2527621A31001D5282 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66A95678B16B3F1FFBFE15C4 /* Pods_Actorpay_Merchant_Actorpay_MerchantUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4940E03F2834AFE823C07D91 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				999E378EC9879DA78D2D0C75 /* Pods_Actorpay_Merchant.framework */,
+				815C70700E83A3B91DF77D6F /* Pods_Actorpay_Merchant_Actorpay_MerchantUITests.framework */,
+				0949857CDCB7E94823204911 /* Pods_Actorpay_MerchantTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		88D08CFE27621A2F001D5282 = {
+			isa = PBXGroup;
+			children = (
+				88D08D0927621A2F001D5282 /* Actorpay Merchant */,
+				88D08D2027621A30001D5282 /* Actorpay MerchantTests */,
+				88D08D2B27621A31001D5282 /* Actorpay MerchantUITests */,
+				88D08D0827621A2F001D5282 /* Products */,
+				C0C88B74FA3F5DE318418FE4 /* Pods */,
+				4940E03F2834AFE823C07D91 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		88D08D0827621A2F001D5282 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				88D08D0727621A2F001D5282 /* Actorpay Merchant.app */,
+				88D08D1D27621A30001D5282 /* Actorpay MerchantTests.xctest */,
+				88D08D2827621A31001D5282 /* Actorpay MerchantUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		88D08D0927621A2F001D5282 /* Actorpay Merchant */ = {
+			isa = PBXGroup;
+			children = (
+				88D08D0A27621A2F001D5282 /* AppDelegate.swift */,
+				88D08D0C27621A2F001D5282 /* SceneDelegate.swift */,
+				88D08D5D276220CA001D5282 /* ViewController */,
+				88D08D1027621A2F001D5282 /* Main.storyboard */,
+				88D08D4927621DE9001D5282 /* Other */,
+				88D08D1327621A30001D5282 /* Assets.xcassets */,
+				88D08D1527621A30001D5282 /* LaunchScreen.storyboard */,
+				88D08D1827621A30001D5282 /* Info.plist */,
+			);
+			path = "Actorpay Merchant";
+			sourceTree = "<group>";
+		};
+		88D08D2027621A30001D5282 /* Actorpay MerchantTests */ = {
+			isa = PBXGroup;
+			children = (
+				88D08D2127621A30001D5282 /* Actorpay_MerchantTests.swift */,
+				88D08D2327621A31001D5282 /* Info.plist */,
+			);
+			path = "Actorpay MerchantTests";
+			sourceTree = "<group>";
+		};
+		88D08D2B27621A31001D5282 /* Actorpay MerchantUITests */ = {
+			isa = PBXGroup;
+			children = (
+				88D08D2C27621A31001D5282 /* Actorpay_MerchantUITests.swift */,
+				88D08D2E27621A31001D5282 /* Info.plist */,
+			);
+			path = "Actorpay MerchantUITests";
+			sourceTree = "<group>";
+		};
+		88D08D4927621DE9001D5282 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				88D08D4A27621DE9001D5282 /* Global.swift */,
+				88D08D4B27621DE9001D5282 /* Extensions.swift */,
+				88D08D4C27621DE9001D5282 /* Font */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		88D08D4C27621DE9001D5282 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				88D08D4D27621DE9001D5282 /* Poppins-Light.ttf */,
+				88D08D4E27621DE9001D5282 /* Poppins-Medium.ttf */,
+				88D08D4F27621DE9001D5282 /* Poppins-Regular.ttf */,
+				88D08D5027621DE9001D5282 /* Poppins-Bold.ttf */,
+				88D08D5127621DE9001D5282 /* Poppins-SemiBold.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		88D08D5C276220BE001D5282 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				88D08D0E27621A2F001D5282 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		88D08D5D276220CA001D5282 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				88D08D6127622833001D5282 /* Signup */,
+				88D08D5C276220BE001D5282 /* Login */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		88D08D6127622833001D5282 /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				88D08D6227622841001D5282 /* SignUpViewController.swift */,
+				88D08D7027623357001D5282 /* WebViewController.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		C0C88B74FA3F5DE318418FE4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0DC5C418E783C687EE9684E3 /* Pods-Actorpay Merchant.debug.xcconfig */,
+				C812B1459D3D85C4551359BC /* Pods-Actorpay Merchant.release.xcconfig */,
+				237964F75444FB93D955DE37 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig */,
+				96A260A736382054B2B80112 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig */,
+				CD79B66A6644087136985E85 /* Pods-Actorpay MerchantTests.debug.xcconfig */,
+				D05E4518FF5D9A96D83F3947 /* Pods-Actorpay MerchantTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		88D08D0627621A2F001D5282 /* Actorpay Merchant */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88D08D3127621A31001D5282 /* Build configuration list for PBXNativeTarget "Actorpay Merchant" */;
+			buildPhases = (
+				94D06D9448BDE65DB0782A0F /* [CP] Check Pods Manifest.lock */,
+				88D08D0327621A2F001D5282 /* Sources */,
+				88D08D0427621A2F001D5282 /* Frameworks */,
+				88D08D0527621A2F001D5282 /* Resources */,
+				4F174104F73DC631C9047028 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Actorpay Merchant";
+			productName = "Actorpay Merchant";
+			productReference = 88D08D0727621A2F001D5282 /* Actorpay Merchant.app */;
+			productType = "com.apple.product-type.application";
+		};
+		88D08D1C27621A30001D5282 /* Actorpay MerchantTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88D08D3427621A31001D5282 /* Build configuration list for PBXNativeTarget "Actorpay MerchantTests" */;
+			buildPhases = (
+				1D5D9C308B4072CAD71EB98E /* [CP] Check Pods Manifest.lock */,
+				88D08D1927621A30001D5282 /* Sources */,
+				88D08D1A27621A30001D5282 /* Frameworks */,
+				88D08D1B27621A30001D5282 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				88D08D1F27621A30001D5282 /* PBXTargetDependency */,
+			);
+			name = "Actorpay MerchantTests";
+			productName = "Actorpay MerchantTests";
+			productReference = 88D08D1D27621A30001D5282 /* Actorpay MerchantTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		88D08D2727621A31001D5282 /* Actorpay MerchantUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88D08D3727621A31001D5282 /* Build configuration list for PBXNativeTarget "Actorpay MerchantUITests" */;
+			buildPhases = (
+				2378A3AF48AE05E3E22FE6B3 /* [CP] Check Pods Manifest.lock */,
+				88D08D2427621A31001D5282 /* Sources */,
+				88D08D2527621A31001D5282 /* Frameworks */,
+				88D08D2627621A31001D5282 /* Resources */,
+				C68A8565DCA33D2653C32D39 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				88D08D2A27621A31001D5282 /* PBXTargetDependency */,
+			);
+			name = "Actorpay MerchantUITests";
+			productName = "Actorpay MerchantUITests";
+			productReference = 88D08D2827621A31001D5282 /* Actorpay MerchantUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		88D08CFF27621A2F001D5282 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					88D08D0627621A2F001D5282 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					88D08D1C27621A30001D5282 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 88D08D0627621A2F001D5282;
+					};
+					88D08D2727621A31001D5282 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 88D08D0627621A2F001D5282;
+					};
+				};
+			};
+			buildConfigurationList = 88D08D0227621A2F001D5282 /* Build configuration list for PBXProject "Actorpay Merchant" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 88D08CFE27621A2F001D5282;
+			productRefGroup = 88D08D0827621A2F001D5282 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				88D08D0627621A2F001D5282 /* Actorpay Merchant */,
+				88D08D1C27621A30001D5282 /* Actorpay MerchantTests */,
+				88D08D2727621A31001D5282 /* Actorpay MerchantUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		88D08D0527621A2F001D5282 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88D08D1727621A30001D5282 /* LaunchScreen.storyboard in Resources */,
+				88D08D1427621A30001D5282 /* Assets.xcassets in Resources */,
+				88D08D5727621DE9001D5282 /* Poppins-Bold.ttf in Resources */,
+				88D08D1227621A2F001D5282 /* Main.storyboard in Resources */,
+				88D08D5627621DE9001D5282 /* Poppins-Regular.ttf in Resources */,
+				88D08D5827621DE9001D5282 /* Poppins-SemiBold.ttf in Resources */,
+				88D08D5427621DE9001D5282 /* Poppins-Light.ttf in Resources */,
+				88D08D5527621DE9001D5282 /* Poppins-Medium.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88D08D1B27621A30001D5282 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88D08D2627621A31001D5282 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D5D9C308B4072CAD71EB98E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Actorpay MerchantTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2378A3AF48AE05E3E22FE6B3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Actorpay Merchant-Actorpay MerchantUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4F174104F73DC631C9047028 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94D06D9448BDE65DB0782A0F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Actorpay Merchant-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C68A8565DCA33D2653C32D39 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		88D08D0327621A2F001D5282 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88D08D6327622841001D5282 /* SignUpViewController.swift in Sources */,
+				88D08D5327621DE9001D5282 /* Extensions.swift in Sources */,
+				88D08D5227621DE9001D5282 /* Global.swift in Sources */,
+				88D08D0F27621A2F001D5282 /* LoginViewController.swift in Sources */,
+				88D08D7127623357001D5282 /* WebViewController.swift in Sources */,
+				88D08D0B27621A2F001D5282 /* AppDelegate.swift in Sources */,
+				88D08D0D27621A2F001D5282 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88D08D1927621A30001D5282 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88D08D2227621A31001D5282 /* Actorpay_MerchantTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88D08D2427621A31001D5282 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88D08D2D27621A31001D5282 /* Actorpay_MerchantUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		88D08D1F27621A30001D5282 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88D08D0627621A2F001D5282 /* Actorpay Merchant */;
+			targetProxy = 88D08D1E27621A30001D5282 /* PBXContainerItemProxy */;
+		};
+		88D08D2A27621A31001D5282 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88D08D0627621A2F001D5282 /* Actorpay Merchant */;
+			targetProxy = 88D08D2927621A31001D5282 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		88D08D1027621A2F001D5282 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				88D08D1127621A2F001D5282 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		88D08D1527621A30001D5282 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				88D08D1627621A30001D5282 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		88D08D2F27621A31001D5282 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		88D08D3027621A31001D5282 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		88D08D3227621A31001D5282 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0DC5C418E783C687EE9684E3 /* Pods-Actorpay Merchant.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Actorpay Merchant/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.actorpaymerchant;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		88D08D3327621A31001D5282 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C812B1459D3D85C4551359BC /* Pods-Actorpay Merchant.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Actorpay Merchant/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.actorpaymerchant;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		88D08D3527621A31001D5282 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD79B66A6644087136985E85 /* Pods-Actorpay MerchantTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Actorpay MerchantTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.actorpaymerchant.Actorpay-MerchantTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Actorpay Merchant.app/Actorpay Merchant";
+			};
+			name = Debug;
+		};
+		88D08D3627621A31001D5282 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D05E4518FF5D9A96D83F3947 /* Pods-Actorpay MerchantTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Actorpay MerchantTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.actorpaymerchant.Actorpay-MerchantTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Actorpay Merchant.app/Actorpay Merchant";
+			};
+			name = Release;
+		};
+		88D08D3827621A31001D5282 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 237964F75444FB93D955DE37 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Actorpay MerchantUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.actorpaymerchant.Actorpay-MerchantUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Actorpay Merchant";
+			};
+			name = Debug;
+		};
+		88D08D3927621A31001D5282 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96A260A736382054B2B80112 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Actorpay MerchantUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.actorpaymerchant.Actorpay-MerchantUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Actorpay Merchant";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		88D08D0227621A2F001D5282 /* Build configuration list for PBXProject "Actorpay Merchant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88D08D2F27621A31001D5282 /* Debug */,
+				88D08D3027621A31001D5282 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88D08D3127621A31001D5282 /* Build configuration list for PBXNativeTarget "Actorpay Merchant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88D08D3227621A31001D5282 /* Debug */,
+				88D08D3327621A31001D5282 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88D08D3427621A31001D5282 /* Build configuration list for PBXNativeTarget "Actorpay MerchantTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88D08D3527621A31001D5282 /* Debug */,
+				88D08D3627621A31001D5282 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88D08D3727621A31001D5282 /* Build configuration list for PBXNativeTarget "Actorpay MerchantUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88D08D3827621A31001D5282 /* Debug */,
+				88D08D3927621A31001D5282 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 88D08CFF27621A2F001D5282 /* Project object */;
+}
