@@ -41,6 +41,15 @@ func topCorner(bgView:UIView, maskToBounds: Bool) {
     bgView.layer.masksToBounds = maskToBounds
  }
 
+func rightCorners(bgView:UIView, maskToBounds: Bool) {
+    bgView.layer.maskedCorners = [.layerMaxXMinYCorner,.layerMaxXMaxYCorner]
+    bgView.layer.shadowOffset = CGSize(width: -1, height: -2)
+    bgView.layer.shadowRadius = 2
+    bgView.layer.shadowOpacity = 0.1
+    bgView.layer.cornerRadius = 50
+    bgView.layer.masksToBounds = maskToBounds
+ }
+
 func topCorners(bgView:UIView, cornerRadius: CGFloat ,maskToBounds: Bool) {
     bgView.layer.maskedCorners = [.layerMaxXMinYCorner,.layerMinXMinYCorner]
 //    bgView.layer.shadowOffset = CGSize(width: -1, height: -2)

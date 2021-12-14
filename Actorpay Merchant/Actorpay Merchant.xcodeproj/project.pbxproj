@@ -25,6 +25,10 @@
 		88D08D5827621DE9001D5282 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88D08D5127621DE9001D5282 /* Poppins-SemiBold.ttf */; };
 		88D08D6327622841001D5282 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D6227622841001D5282 /* SignUpViewController.swift */; };
 		88D08D7127623357001D5282 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D7027623357001D5282 /* WebViewController.swift */; };
+		88DC1523276368C700627F17 /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC1520276368C700627F17 /* HamburgerViewController.swift */; };
+		88DC1524276368C700627F17 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC1521276368C700627F17 /* HomeViewController.swift */; };
+		88DC152D27636DC200627F17 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC152C27636DBF00627F17 /* SideMenuCell.swift */; };
+		88DC15382763866900627F17 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC15372763866900627F17 /* ProductTableViewCell.swift */; };
 		8F70A3EEC62EA4011BDC2FEB /* Pods_Actorpay_MerchantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0949857CDCB7E94823204911 /* Pods_Actorpay_MerchantTests.framework */; };
 		B3C4DDD9E45542C9DAC515F7 /* Pods_Actorpay_Merchant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 999E378EC9879DA78D2D0C75 /* Pods_Actorpay_Merchant.framework */; };
 /* End PBXBuildFile section */
@@ -74,6 +78,10 @@
 		88D08D5127621DE9001D5282 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		88D08D6227622841001D5282 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		88D08D7027623357001D5282 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		88DC1520276368C700627F17 /* HamburgerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
+		88DC1521276368C700627F17 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		88DC152C27636DBF00627F17 /* SideMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		88DC15372763866900627F17 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		96A260A736382054B2B80112 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig"; path = "Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig"; sourceTree = "<group>"; };
 		999E378EC9879DA78D2D0C75 /* Pods_Actorpay_Merchant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Actorpay_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C812B1459D3D85C4551359BC /* Pods-Actorpay Merchant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay Merchant.release.xcconfig"; path = "Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,11 +154,12 @@
 			children = (
 				88D08D0A27621A2F001D5282 /* AppDelegate.swift */,
 				88D08D0C27621A2F001D5282 /* SceneDelegate.swift */,
-				88D08D5D276220CA001D5282 /* ViewController */,
 				88D08D1027621A2F001D5282 /* Main.storyboard */,
+				88D08D1527621A30001D5282 /* LaunchScreen.storyboard */,
+				88D08D5D276220CA001D5282 /* ViewController */,
+				88DC15362763864B00627F17 /* Cell */,
 				88D08D4927621DE9001D5282 /* Other */,
 				88D08D1327621A30001D5282 /* Assets.xcassets */,
-				88D08D1527621A30001D5282 /* LaunchScreen.storyboard */,
 				88D08D1827621A30001D5282 /* Info.plist */,
 			);
 			path = "Actorpay Merchant";
@@ -207,6 +216,8 @@
 		88D08D5D276220CA001D5282 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				88DC15342763863000627F17 /* New Group */,
+				88DC15352763863C00627F17 /* Home */,
 				88D08D6127622833001D5282 /* Signup */,
 				88D08D5C276220BE001D5282 /* Login */,
 			);
@@ -220,6 +231,31 @@
 				88D08D7027623357001D5282 /* WebViewController.swift */,
 			);
 			path = Signup;
+			sourceTree = "<group>";
+		};
+		88DC15342763863000627F17 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				88DC1520276368C700627F17 /* HamburgerViewController.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		88DC15352763863C00627F17 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				88DC1521276368C700627F17 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		88DC15362763864B00627F17 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				88DC152C27636DBF00627F17 /* SideMenuCell.swift */,
+				88DC15372763866900627F17 /* ProductTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		C0C88B74FA3F5DE318418FE4 /* Pods */ = {
@@ -481,7 +517,11 @@
 				88D08D6327622841001D5282 /* SignUpViewController.swift in Sources */,
 				88D08D5327621DE9001D5282 /* Extensions.swift in Sources */,
 				88D08D5227621DE9001D5282 /* Global.swift in Sources */,
+				88DC152D27636DC200627F17 /* SideMenuCell.swift in Sources */,
+				88DC15382763866900627F17 /* ProductTableViewCell.swift in Sources */,
+				88DC1524276368C700627F17 /* HomeViewController.swift in Sources */,
 				88D08D0F27621A2F001D5282 /* LoginViewController.swift in Sources */,
+				88DC1523276368C700627F17 /* HamburgerViewController.swift in Sources */,
 				88D08D7127623357001D5282 /* WebViewController.swift in Sources */,
 				88D08D0B27621A2F001D5282 /* AppDelegate.swift in Sources */,
 				88D08D0D27621A2F001D5282 /* SceneDelegate.swift in Sources */,
