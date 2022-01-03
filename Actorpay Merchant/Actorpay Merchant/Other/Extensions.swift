@@ -728,6 +728,14 @@ extension String {
             .removingPercentEncoding
         return result!
     }
+    
+    func toFormatedDate(from: String, to:String) -> String?{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = from
+        let date = dateFormatter.date(from: self)
+        return date?.getFormattedDate(format: to)
+
+    }
 }
 
 class BlurLoader: UIView {
@@ -760,41 +768,137 @@ class BlurLoader: UIView {
 }
 
 class DashedBorderView: UIView {
-
-//    @IBInspectable var cornerRadius: CGFloat = 4
-//    @IBInspectable var borderColor: UIColor = UIColor.black
-    @IBInspectable var dashPaintedSize: Int = 5
-    @IBInspectable var dashUnpaintedSize: Int = 5
-
-    let dashedBorder = CAShapeLayer()
-
+    let borderLayer = CAShapeLayer()
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-
+    
     private func commonInit() {
         //custom initialization
-        self.layer.addSublayer(dashedBorder)
         applyDashBorder()
     }
-
+    
     override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
         applyDashBorder()
     }
-
+    
     func applyDashBorder() {
-        dashedBorder.strokeColor = UIColor.gray.cgColor
-        dashedBorder.lineDashPattern = [NSNumber(value: dashPaintedSize), NSNumber(value: dashUnpaintedSize)]
-        dashedBorder.fillColor = nil
-        dashedBorder.cornerRadius = cornerRadius
-        dashedBorder.path = UIBezierPath(rect: self.bounds).cgPath
-        dashedBorder.frame = self.bounds
+        borderLayer.strokeColor = #colorLiteral(red: 0.5293717384, green: 0.5293846726, blue: 0.5293776989, alpha: 1)
+        borderLayer.lineDashPattern = [2,2]
+        borderLayer.frame = bounds
+        borderLayer.fillColor = nil
+        borderLayer.path = UIBezierPath(roundedRect: bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 5, height: 5)).cgPath
+        layer.addSublayer(borderLayer)
     }
+}
+
+extension UISwitch {
+
+    static let standardHeight: CGFloat = 31
+    static let standardWidth: CGFloat = 51
+    
+    @IBInspectable var width: CGFloat {
+        set {
+            set(width: newValue, height: height)
+        }
+        get {
+            frame.width
+        }
+    }
+    
+    @IBInspectable var height: CGFloat {
+        set {
+            set(width: width, height: newValue)
+        }
+        get {
+            frame.height
+        }
+    }
+    
+    func set(width: CGFloat, height: CGFloat) {
+
+        let heightRatio = height / UISwitch.standardHeight
+        let widthRatio = width / UISwitch.standardWidth
+
+        transform = CGAffineTransform(scaleX: widthRatio, y: heightRatio)
+    }    
+}
+
+extension UIDevice {
+    var hasNotch: Bool {
+        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        return bottom > 0
+    }
+    
+    static let modelName: String = {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        
+        func mapToDevice(identifier: String) -> String {
+            #if os(iOS)
+            switch identifier {
+            case "iPhone1,1" : return "iPhone"
+            case "iPhone1,2" : return "iPhone 3G"
+            case "iPhone2,1" : return "iPhone 3GS"
+            case "iPhone3,1" : return "iPhone 4"
+            case "iPhone3,2" : return "iPhone 4 GSM Rev A"
+            case "iPhone3,3" : return "iPhone 4 CDMA"
+            case "iPhone4,1" : return "iPhone 4S"
+            case "iPhone5,1" : return "iPhone 5 (GSM)"
+            case "iPhone5,2" : return "iPhone 5 (GSM+CDMA)"
+            case "iPhone5,3" : return "iPhone 5C (GSM)"
+            case "iPhone5,4" : return "iPhone 5C (Global)"
+            case "iPhone6,1" : return "iPhone 5S (GSM)"
+            case "iPhone6,2" : return "iPhone 5S (Global)"
+            case "iPhone7,1" : return "iPhone 6 Plus"
+            case "iPhone7,2" : return "iPhone 6"
+            case "iPhone8,1" : return "iPhone 6s"
+            case "iPhone8,2" : return "iPhone 6s Plus"
+            case "iPhone8,4" : return "iPhone SE (GSM)"
+            case "iPhone9,1" : return "iPhone 7"
+            case "iPhone9,2" : return "iPhone 7 Plus"
+            case "iPhone9,3" : return "iPhone 7"
+            case "iPhone9,4" : return "iPhone 7 Plus"
+            case "iPhone10,1" : return "iPhone 8"
+            case "iPhone10,2" : return "iPhone 8 Plus"
+            case "iPhone10,3" : return "iPhone X Global"
+            case "iPhone10,4" : return "iPhone 8"
+            case "iPhone10,5" : return "iPhone 8 Plus"
+            case "iPhone10,6" : return "iPhone X GSM"
+            case "iPhone11,2" : return "iPhone XS"
+            case "iPhone11,4" : return "iPhone XS Max"
+            case "iPhone11,6" : return "iPhone XS Max Global"
+            case "iPhone11,8" : return "iPhone XR"
+            case "iPhone12,1" : return "iPhone 11"
+            case "iPhone12,3" : return "iPhone 11 Pro"
+            case "iPhone12,5" : return "iPhone 11 Pro Max"
+            case "iPhone12,8" : return "iPhone SE 2nd Gen"
+            case "iPhone13,1" : return "iPhone 12 Mini"
+            case "iPhone13,2" : return "iPhone 12"
+            case "iPhone13,3" : return "iPhone 12 Pro"
+            case "iPhone13,4" : return "iPhone 12 Pro Max"
+            case "iPhone14,2" : return "iPhone 13 Pro"
+            case "iPhone14,3" : return "iPhone 13 Pro Max"
+            case "iPhone14,4" : return "iPhone 13 Mini"
+            case "iPhone14,5" : return "iPhone 13"
+            case "i386", "x86_64": return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "iOS"))"
+            default:                                        return identifier
+            }
+            #endif
+        }
+        
+        return mapToDevice(identifier: identifier)
+    }()
 }

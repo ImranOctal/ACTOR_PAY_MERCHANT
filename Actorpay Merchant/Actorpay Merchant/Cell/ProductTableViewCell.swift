@@ -19,6 +19,23 @@ class ProductTableViewCell: UITableViewCell {
     @IBOutlet weak var itemPriceLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    var item: Items? {
+        didSet {
+            let totalGst = (item?.cgst ?? 0) + (item?.sgst ?? 0)
+            let totalPrice = totalGst + (item?.dealPrice ?? 0)
+            if let item = self.item {
+//                let date = item.createdAt?.toDate()
+                titleLabel.text = item.name
+                dealPricLabel.text = "$\(totalPrice)"
+                itemPriceLabel.text = "\(item.actualPrice ?? 0)"
+                dateLabel.text = item.createdAt?.toFormatedDate(from: "yyyy-MM-dd HH:mm", to: "HH:mm a, dd MMM yyyy")
+            }
+        }
+    }
+    
+    var editButtonHandler: (() -> ())!
+    var deleteButtonHandler: (() -> ())!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,9 +46,12 @@ class ProductTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
     @IBAction func editButtonAction(_ sender: UIButton) {
+        editButtonHandler()
     }
     @IBAction func deleteButtonAction(_ sender: UIButton) {
+        deleteButtonHandler()
     }
     
 }

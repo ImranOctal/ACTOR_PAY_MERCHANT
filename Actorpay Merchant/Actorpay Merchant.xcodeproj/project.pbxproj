@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		66A95678B16B3F1FFBFE15C4 /* Pods_Actorpay_Merchant_Actorpay_MerchantUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 815C70700E83A3B91DF77D6F /* Pods_Actorpay_Merchant_Actorpay_MerchantUITests.framework */; };
+		88078800277C17B000F9FF85 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880787FC277C17AF00F9FF85 /* APIHelper.swift */; };
+		88078801277C17B000F9FF85 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880787FD277C17AF00F9FF85 /* AppManager.swift */; };
+		88078802277C17B000F9FF85 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880787FE277C17AF00F9FF85 /* Constant.swift */; };
+		88078803277C17B000F9FF85 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880787FF277C17B000F9FF85 /* APIManager.swift */; };
+		88078808277C17E000F9FF85 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88078807277C17E000F9FF85 /* Dictionary+Extension.swift */; };
+		8807882E277C2B9B00F9FF85 /* Merchant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8807882D277C2B9B00F9FF85 /* Merchant.swift */; };
+		88078833277C2E6700F9FF85 /* ProductList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88078832277C2E6700F9FF85 /* ProductList.swift */; };
+		88078838277C2E7200F9FF85 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88078837277C2E7200F9FF85 /* Items.swift */; };
+		881DD7F0276740FC00B48A1F /* NewSubAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD7EF276740FC00B48A1F /* NewSubAdminViewController.swift */; };
+		881DD7FC27674F1800B48A1F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD7FA27674F1800B48A1F /* ChangePasswordViewController.swift */; };
+		881DD7FD27674F1800B48A1F /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD7FB27674F1800B48A1F /* ForgotPasswordViewController.swift */; };
+		881DD8042767535700B48A1F /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD8032767535700B48A1F /* ProductDetailsViewController.swift */; };
 		88D08D0B27621A2F001D5282 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D0A27621A2F001D5282 /* AppDelegate.swift */; };
 		88D08D0D27621A2F001D5282 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D0C27621A2F001D5282 /* SceneDelegate.swift */; };
 		88D08D0F27621A2F001D5282 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D0E27621A2F001D5282 /* LoginViewController.swift */; };
@@ -25,10 +37,17 @@
 		88D08D5827621DE9001D5282 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88D08D5127621DE9001D5282 /* Poppins-SemiBold.ttf */; };
 		88D08D6327622841001D5282 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D6227622841001D5282 /* SignUpViewController.swift */; };
 		88D08D7127623357001D5282 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D7027623357001D5282 /* WebViewController.swift */; };
-		88DC1523276368C700627F17 /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC1520276368C700627F17 /* HamburgerViewController.swift */; };
+		88DC1523276368C700627F17 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC1520276368C700627F17 /* SideMenuViewController.swift */; };
 		88DC1524276368C700627F17 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC1521276368C700627F17 /* HomeViewController.swift */; };
 		88DC152D27636DC200627F17 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC152C27636DBF00627F17 /* SideMenuCell.swift */; };
 		88DC15382763866900627F17 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC15372763866900627F17 /* ProductTableViewCell.swift */; };
+		88E2615E27645D2700BC84B2 /* RaiseDisputeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E2615827645D2700BC84B2 /* RaiseDisputeViewController.swift */; };
+		88E2616027645D2700BC84B2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E2615C27645D2700BC84B2 /* ProfileViewController.swift */; };
+		88E261992764774F00BC84B2 /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E261982764774F00BC84B2 /* AddProductViewController.swift */; };
+		88FBDE4A276702C100EB9BCE /* ManageOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FBDE49276702C100EB9BCE /* ManageOrdersViewController.swift */; };
+		88FBDE5C27670C9600EB9BCE /* ManageOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FBDE5B27670C9600EB9BCE /* ManageOrderTableViewCell.swift */; };
+		88FBDE652767142B00EB9BCE /* PayRollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FBDE642767142B00EB9BCE /* PayRollViewController.swift */; };
+		88FBDE6A276723A800EB9BCE /* PayRollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FBDE69276723A800EB9BCE /* PayRollTableViewCell.swift */; };
 		8F70A3EEC62EA4011BDC2FEB /* Pods_Actorpay_MerchantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0949857CDCB7E94823204911 /* Pods_Actorpay_MerchantTests.framework */; };
 		B3C4DDD9E45542C9DAC515F7 /* Pods_Actorpay_Merchant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 999E378EC9879DA78D2D0C75 /* Pods_Actorpay_Merchant.framework */; };
 /* End PBXBuildFile section */
@@ -55,6 +74,18 @@
 		0DC5C418E783C687EE9684E3 /* Pods-Actorpay Merchant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay Merchant.debug.xcconfig"; path = "Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant.debug.xcconfig"; sourceTree = "<group>"; };
 		237964F75444FB93D955DE37 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig"; path = "Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		815C70700E83A3B91DF77D6F /* Pods_Actorpay_Merchant_Actorpay_MerchantUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Actorpay_Merchant_Actorpay_MerchantUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		880787FC277C17AF00F9FF85 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
+		880787FD277C17AF00F9FF85 /* AppManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
+		880787FE277C17AF00F9FF85 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		880787FF277C17B000F9FF85 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		88078807277C17E000F9FF85 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		8807882D277C2B9B00F9FF85 /* Merchant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchant.swift; sourceTree = "<group>"; };
+		88078832277C2E6700F9FF85 /* ProductList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductList.swift; sourceTree = "<group>"; };
+		88078837277C2E7200F9FF85 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		881DD7EF276740FC00B48A1F /* NewSubAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSubAdminViewController.swift; sourceTree = "<group>"; };
+		881DD7FA27674F1800B48A1F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		881DD7FB27674F1800B48A1F /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		881DD8032767535700B48A1F /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		88D08D0727621A2F001D5282 /* Actorpay Merchant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Actorpay Merchant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D08D0A27621A2F001D5282 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88D08D0C27621A2F001D5282 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,10 +109,17 @@
 		88D08D5127621DE9001D5282 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		88D08D6227622841001D5282 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		88D08D7027623357001D5282 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		88DC1520276368C700627F17 /* HamburgerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
+		88DC1520276368C700627F17 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		88DC1521276368C700627F17 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		88DC152C27636DBF00627F17 /* SideMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		88DC15372763866900627F17 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		88E2615827645D2700BC84B2 /* RaiseDisputeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaiseDisputeViewController.swift; sourceTree = "<group>"; };
+		88E2615C27645D2700BC84B2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		88E261982764774F00BC84B2 /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
+		88FBDE49276702C100EB9BCE /* ManageOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageOrdersViewController.swift; sourceTree = "<group>"; };
+		88FBDE5B27670C9600EB9BCE /* ManageOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageOrderTableViewCell.swift; sourceTree = "<group>"; };
+		88FBDE642767142B00EB9BCE /* PayRollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayRollViewController.swift; sourceTree = "<group>"; };
+		88FBDE69276723A800EB9BCE /* PayRollTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayRollTableViewCell.swift; sourceTree = "<group>"; };
 		96A260A736382054B2B80112 /* Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig"; path = "Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests.release.xcconfig"; sourceTree = "<group>"; };
 		999E378EC9879DA78D2D0C75 /* Pods_Actorpay_Merchant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Actorpay_Merchant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C812B1459D3D85C4551359BC /* Pods-Actorpay Merchant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actorpay Merchant.release.xcconfig"; path = "Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +165,43 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		880787F8277C178500F9FF85 /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				880787FC277C17AF00F9FF85 /* APIHelper.swift */,
+				880787FF277C17B000F9FF85 /* APIManager.swift */,
+				880787FD277C17AF00F9FF85 /* AppManager.swift */,
+				880787FE277C17AF00F9FF85 /* Constant.swift */,
+			);
+			path = APIManager;
+			sourceTree = "<group>";
+		};
+		8807882C277C2B7200F9FF85 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8807882D277C2B9B00F9FF85 /* Merchant.swift */,
+				88078832277C2E6700F9FF85 /* ProductList.swift */,
+				88078837277C2E7200F9FF85 /* Items.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		881DD7EE276740D300B48A1F /* SubAdmin */ = {
+			isa = PBXGroup;
+			children = (
+				881DD7EF276740FC00B48A1F /* NewSubAdminViewController.swift */,
+			);
+			path = SubAdmin;
+			sourceTree = "<group>";
+		};
+		881DD8022767534100B48A1F /* ProductDetails */ = {
+			isa = PBXGroup;
+			children = (
+				881DD8032767535700B48A1F /* ProductDetailsViewController.swift */,
+			);
+			path = ProductDetails;
+			sourceTree = "<group>";
+		};
 		88D08CFE27621A2F001D5282 = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +233,8 @@
 				88D08D1527621A30001D5282 /* LaunchScreen.storyboard */,
 				88D08D5D276220CA001D5282 /* ViewController */,
 				88DC15362763864B00627F17 /* Cell */,
+				8807882C277C2B7200F9FF85 /* Model */,
+				880787F8277C178500F9FF85 /* APIManager */,
 				88D08D4927621DE9001D5282 /* Other */,
 				88D08D1327621A30001D5282 /* Assets.xcassets */,
 				88D08D1827621A30001D5282 /* Info.plist */,
@@ -186,6 +263,7 @@
 		88D08D4927621DE9001D5282 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				88078807277C17E000F9FF85 /* Dictionary+Extension.swift */,
 				88D08D4A27621DE9001D5282 /* Global.swift */,
 				88D08D4B27621DE9001D5282 /* Extensions.swift */,
 				88D08D4C27621DE9001D5282 /* Font */,
@@ -208,6 +286,8 @@
 		88D08D5C276220BE001D5282 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				881DD7FA27674F1800B48A1F /* ChangePasswordViewController.swift */,
+				881DD7FB27674F1800B48A1F /* ForgotPasswordViewController.swift */,
 				88D08D0E27621A2F001D5282 /* LoginViewController.swift */,
 			);
 			path = Login;
@@ -216,7 +296,12 @@
 		88D08D5D276220CA001D5282 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				88DC15342763863000627F17 /* New Group */,
+				881DD7EE276740D300B48A1F /* SubAdmin */,
+				88FBDE632767140800EB9BCE /* Payroll */,
+				88FBDE482767026D00EB9BCE /* ManageOrders */,
+				88E2615B27645D2700BC84B2 /* Profile */,
+				88E2615727645D2700BC84B2 /* RaiseDispute */,
+				88E2616427645E8200BC84B2 /* Sidemenu */,
 				88DC15352763863C00627F17 /* Home */,
 				88D08D6127622833001D5282 /* Signup */,
 				88D08D5C276220BE001D5282 /* Login */,
@@ -233,17 +318,11 @@
 			path = Signup;
 			sourceTree = "<group>";
 		};
-		88DC15342763863000627F17 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				88DC1520276368C700627F17 /* HamburgerViewController.swift */,
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		88DC15352763863C00627F17 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				881DD8022767534100B48A1F /* ProductDetails */,
+				88E261972764773A00BC84B2 /* AddProduct */,
 				88DC1521276368C700627F17 /* HomeViewController.swift */,
 			);
 			path = Home;
@@ -254,8 +333,59 @@
 			children = (
 				88DC152C27636DBF00627F17 /* SideMenuCell.swift */,
 				88DC15372763866900627F17 /* ProductTableViewCell.swift */,
+				88FBDE5B27670C9600EB9BCE /* ManageOrderTableViewCell.swift */,
+				88FBDE69276723A800EB9BCE /* PayRollTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		88E2615727645D2700BC84B2 /* RaiseDispute */ = {
+			isa = PBXGroup;
+			children = (
+				88E2615827645D2700BC84B2 /* RaiseDisputeViewController.swift */,
+			);
+			path = RaiseDispute;
+			sourceTree = "<group>";
+		};
+		88E2615B27645D2700BC84B2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				88E2615C27645D2700BC84B2 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		88E2616427645E8200BC84B2 /* Sidemenu */ = {
+			isa = PBXGroup;
+			children = (
+				88DC1520276368C700627F17 /* SideMenuViewController.swift */,
+			);
+			name = Sidemenu;
+			path = "New Group/Sidemenu";
+			sourceTree = "<group>";
+		};
+		88E261972764773A00BC84B2 /* AddProduct */ = {
+			isa = PBXGroup;
+			children = (
+				88E261982764774F00BC84B2 /* AddProductViewController.swift */,
+			);
+			path = AddProduct;
+			sourceTree = "<group>";
+		};
+		88FBDE482767026D00EB9BCE /* ManageOrders */ = {
+			isa = PBXGroup;
+			children = (
+				88FBDE49276702C100EB9BCE /* ManageOrdersViewController.swift */,
+			);
+			path = ManageOrders;
+			sourceTree = "<group>";
+		};
+		88FBDE632767140800EB9BCE /* Payroll */ = {
+			isa = PBXGroup;
+			children = (
+				88FBDE642767142B00EB9BCE /* PayRollViewController.swift */,
+			);
+			path = Payroll;
 			sourceTree = "<group>";
 		};
 		C0C88B74FA3F5DE318418FE4 /* Pods */ = {
@@ -514,16 +644,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				881DD7F0276740FC00B48A1F /* NewSubAdminViewController.swift in Sources */,
+				88FBDE5C27670C9600EB9BCE /* ManageOrderTableViewCell.swift in Sources */,
 				88D08D6327622841001D5282 /* SignUpViewController.swift in Sources */,
+				88078833277C2E6700F9FF85 /* ProductList.swift in Sources */,
+				88E261992764774F00BC84B2 /* AddProductViewController.swift in Sources */,
+				88078800277C17B000F9FF85 /* APIHelper.swift in Sources */,
 				88D08D5327621DE9001D5282 /* Extensions.swift in Sources */,
 				88D08D5227621DE9001D5282 /* Global.swift in Sources */,
 				88DC152D27636DC200627F17 /* SideMenuCell.swift in Sources */,
+				88E2615E27645D2700BC84B2 /* RaiseDisputeViewController.swift in Sources */,
+				881DD7FD27674F1800B48A1F /* ForgotPasswordViewController.swift in Sources */,
+				88078803277C17B000F9FF85 /* APIManager.swift in Sources */,
 				88DC15382763866900627F17 /* ProductTableViewCell.swift in Sources */,
 				88DC1524276368C700627F17 /* HomeViewController.swift in Sources */,
 				88D08D0F27621A2F001D5282 /* LoginViewController.swift in Sources */,
-				88DC1523276368C700627F17 /* HamburgerViewController.swift in Sources */,
+				88DC1523276368C700627F17 /* SideMenuViewController.swift in Sources */,
+				88078838277C2E7200F9FF85 /* Items.swift in Sources */,
+				8807882E277C2B9B00F9FF85 /* Merchant.swift in Sources */,
+				881DD8042767535700B48A1F /* ProductDetailsViewController.swift in Sources */,
+				88078801277C17B000F9FF85 /* AppManager.swift in Sources */,
 				88D08D7127623357001D5282 /* WebViewController.swift in Sources */,
+				88078802277C17B000F9FF85 /* Constant.swift in Sources */,
+				881DD7FC27674F1800B48A1F /* ChangePasswordViewController.swift in Sources */,
+				88E2616027645D2700BC84B2 /* ProfileViewController.swift in Sources */,
+				88FBDE6A276723A800EB9BCE /* PayRollTableViewCell.swift in Sources */,
 				88D08D0B27621A2F001D5282 /* AppDelegate.swift in Sources */,
+				88078808277C17E000F9FF85 /* Dictionary+Extension.swift in Sources */,
+				88FBDE4A276702C100EB9BCE /* ManageOrdersViewController.swift in Sources */,
+				88FBDE652767142B00EB9BCE /* PayRollViewController.swift in Sources */,
 				88D08D0D27621A2F001D5282 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -702,6 +851,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W8NLTEFLJ2;
 				INFOPLIST_FILE = "Actorpay Merchant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -722,6 +872,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W8NLTEFLJ2;
 				INFOPLIST_FILE = "Actorpay Merchant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

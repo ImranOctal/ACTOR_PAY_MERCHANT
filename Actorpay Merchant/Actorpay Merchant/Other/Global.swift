@@ -7,17 +7,54 @@
 
 import Foundation
 import UIKit
+import MBProgressHUD
 
 
 let obj_AppDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 let myApp = UIApplication.shared.delegate as! AppDelegate
-let token = "adas"
+let token = ""
+var deviceFcmToken = ""
 typealias typeAliasStringDictionary         = [String: String]
 var selectedTabIndex = 0
 var selectedTabTag = 1001
 let VAL_TITLE                               = "Val_TITLE"
 let VAL_IMAGE                               = "VAL_IMAGE"
 var primaryColor = UIColor.init(hexFromString: "#183967")
+var progressHud = MBProgressHUD()
+
+func startAnimationLoader() {
+    DispatchQueue.main.async {
+        if progressHud.superview != nil {
+            progressHud.hide(animated: false)
+        }
+        progressHud = MBProgressHUD.showAdded(to: (myApp.window?.rootViewController!.view)!, animated: true)
+        if #available(iOS 9.0, *) {
+            UIActivityIndicatorView.appearance(whenContainedInInstancesOf: [MBProgressHUD.self]).color = UIColor.gray
+        } else {
+        }
+        DispatchQueue.main.async {
+            progressHud.show(animated: true)
+        }
+    }
+}
+
+func dissmissLoader() {
+    DispatchQueue.main.async {
+        progressHud.hide(animated: true)
+    }
+}
+
+func deviceID() -> String{
+    return UIDevice.current.identifierForVendor?.uuidString ?? ""
+}
+
+func appVersion() -> String {
+    if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+        return version
+    }
+    return ""
+}
+
 
 func attributedString(countryCode: String, arrow : String) -> NSMutableAttributedString {
     let countryCodeAttr = [ NSAttributedString.Key.foregroundColor: UIColor.black ]
@@ -37,7 +74,7 @@ func topCorner(bgView:UIView, maskToBounds: Bool) {
     bgView.layer.shadowOffset = CGSize(width: -1, height: -2)
     bgView.layer.shadowRadius = 2
     bgView.layer.shadowOpacity = 0.1
-    bgView.layer.cornerRadius = 50
+    bgView.layer.cornerRadius = 40
     bgView.layer.masksToBounds = maskToBounds
  }
 
@@ -78,7 +115,6 @@ struct ScreenSize
 
 func isValidEmail(email: String) -> Bool {
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-    
     let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
     emailPred.evaluate(with: email)
     

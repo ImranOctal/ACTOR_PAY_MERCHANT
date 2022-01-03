@@ -9,12 +9,16 @@ import UIKit
 import WebKit
 
 class WebViewController: UIViewController {
+    
+    //MARK: - Properties -
 
     @IBOutlet weak var headerTitleLabel: UILabel!
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var mainView: UIView!
     
     var titleLabel = ""
+    
+    //MARK: - Life Cycle Function -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,19 +33,11 @@ class WebViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
+    
+    //MARK: - Selector -
 
     @IBAction func backButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

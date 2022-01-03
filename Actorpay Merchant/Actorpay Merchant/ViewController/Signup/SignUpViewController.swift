@@ -7,17 +7,21 @@
 
 import UIKit
 import NKVPhonePicker
+import Alamofire
 
 class SignUpViewController: UIViewController {
     
+    //MARK: - Properties -
+    
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
     @IBOutlet weak var phoneCodeTextField: NKVPhonePickerTextField!
     @IBOutlet weak var businessNameTextField: UITextField!
     @IBOutlet weak var mobileNumberTextField: UITextField!
     @IBOutlet weak var shopAddressTextField: UITextField!
+    @IBOutlet weak var fullAddressTextField: UITextField!
     @IBOutlet weak var shopActNoOrLicenceTextField: UITextField!
     @IBOutlet weak var resourceTypeTextField: UITextField!
     @IBOutlet weak var termsAndPrivacyLabel: UILabel!
@@ -25,6 +29,8 @@ class SignUpViewController: UIViewController {
     var isPassTap = false
     var isRememberMeTap = false
     var mobileCode: String?
+    
+    //MARK: - Life Cycle Functions -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +41,11 @@ class SignUpViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    //MARK: - Selectors -
+    
     @IBAction func backButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
+        //BAck Button
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -50,7 +59,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction func phoneCodeButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        print("Tap")
+        //Phone Code Button
         if let delegate = phoneCodeTextField.phonePickerDelegate {
             let countriesVC = CountriesViewController.standardController()
             countriesVC.delegate = self as CountriesViewControllerDelegate
@@ -69,12 +78,11 @@ class SignUpViewController: UIViewController {
             sender.backgroundColor = isRememberMeTap ? UIColor(named: "BlueColor") : .none
             sender.borderColor = isRememberMeTap ? UIColor(named: "BlueColor") : .systemGray5
         }
-
     }
     
     @IBAction func signUpButtonAction(_ sender: UIButton) {
        //Signup Button Action
-        //  Login Validation
+        /// Signup Validation
         if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
             self.alertViewController(message: "Please Enter an email address.")
             return
@@ -115,14 +123,61 @@ class SignUpViewController: UIViewController {
             self.alertViewController(message: "Please accept terms and privacy policy.")
             return
         }
+        
+        /*
+         "email": "jugal16@yopmail.com",
+         "extensionNumber": "+93",
+         "contactNumber": "2323423",
+         "password": "1234",
+         "firstName": "jugal",
+         "shopAddress": "test",
+         "fullAddress": "test",
+         "businessName": "tert",
+         "licenceNumber": "tetrer",
+         "fcmToken":"dIeFaHzvRq-mAbFYGAouJp:APA91bE295F20WN5OvqWlPCwsqiOqtneADq0KCXFUbdPsr14sF_Z5XXd7Py2lLdxr14MxC85sqL8RD6VU-yGYgJzpdPZ9HWHi40m2Fn-XJ7Riv_gxRZWwUkN7VcQCbL0t89GTEqIjlEm"
+         */
+        
+        let params: Parameters = [
+            "email":"\(emailTextField.text ?? "")",
+            "extensionNumber":"+\(phoneCodeTextField.text ?? "")",
+            "contactNumber":"\(mobileNumberTextField.text ?? "")",
+            "password":"\(passwordTextField.text ?? "")",
+            "firstName":"\(firstNameTextField.text ?? "")",
+            "shopAddress": "\(shopAddressTextField.text ?? "")",
+            "fullAddress": "\(fullAddressTextField.text ?? "")",
+            "businessName": "\(businessNameTextField.text ?? "")",
+            "licenceNumber": "\(shopActNoOrLicenceTextField.text ?? "")",
+            "fcmToken": "\(deviceFcmToken)",
+            "deviceInfo": [
+                "deviceType":"iPhone",
+                "appVersion":appVersion(),
+                "deviceToken":deviceFcmToken,
+                "deviceData":"\(UIDevice.modelName)"
+            ]
+        ]
+        /*b49115b3-1d75-4e1a-962c-1a0febc7b8e0*/
+        print(params)
+        startAnimationLoader()
+        APIHelper.registerUser(params: params) { (success,response)  in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                self.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                self.view.makeToast(response.message)
+            }
+        }
     }
     
     @IBAction func loginButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
+        //Login Button
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func tapLabel(gesture: UITapGestureRecognizer) {
+        // Terms and privacy Action
         if gesture.didTapAttributedTextInLabel(label: termsAndPrivacyLabel, targetText: "Terms of Use") {
             print("Terms of Use")
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
@@ -135,6 +190,8 @@ class SignUpViewController: UIViewController {
             self.navigationController?.pushViewController(newVC, animated: true)
         }
     }
+    
+    //MARK: - helper Functions -
     
     func numberPickerSetup() {
         phoneCodeTextField.phonePickerDelegate = self
@@ -165,6 +222,7 @@ class SignUpViewController: UIViewController {
     }
     
     func setupMultipleTapLabel() {
+        /// Setup Terms and Privacy Label
         termsAndPrivacyLabel.text = "By Signing up you are agreeing to our Terms of Use and Privacy Policy"
         termsAndPrivacyLabel.textAlignment = .left
         let text = (termsAndPrivacyLabel.text)!
@@ -226,7 +284,6 @@ extension SignUpViewController: CountriesViewControllerDelegate, UITextFieldDele
         print("✳️ Did select country: \(country.countryCode)")
         UserDefaults.standard.set(country.countryCode, forKey: "countryCode")
         mobileCode = country.phoneExtension
-        //        phoneCodeButton.setAttributedTitle(attributedString(countryCode: "+\(country.phoneExtension)", arrow: " ▾"), for: .normal)
         phoneCodeTextField.country = country
     }
     
