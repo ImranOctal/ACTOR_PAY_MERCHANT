@@ -28,8 +28,6 @@ public class Items {
     public var cgst : Double?
     public var productTaxId : String?
     public var createdAt : String?
-    public var active: Bool?
-    public var categoryName: String?    
     
     init(json: JSON) {
         id = json["id"].string
@@ -50,7 +48,5 @@ public class Items {
         cgst = json["cgst"].double
         productTaxId = json["productTaxId"].string
         createdAt = json["createdAt"].string
-        active = json["active"].bool
-        categoryName = json["categoryName"].string
     }
 }

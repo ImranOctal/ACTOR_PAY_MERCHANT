@@ -15,7 +15,7 @@ target 'Actorpay Merchant' do
   pod 'SwiftyJSON'
   pod 'SDWebImage', '~> 5.0'
   pod 'MBProgressHUD', '~> 1.1.0'
-
+  pod 'SVPullToRefresh'
 
 
   target 'Actorpay MerchantTests' do

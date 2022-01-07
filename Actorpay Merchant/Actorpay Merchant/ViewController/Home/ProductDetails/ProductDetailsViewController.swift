@@ -17,6 +17,9 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var discountPriceLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var orderIdLabel: UILabel!
+    
+    var productDetails: Items?
+    var productId: String?
 
     //MARK:- life Cycle Function -
     
@@ -31,4 +34,34 @@ class ProductDetailsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    //MARK: - Helper Functions -
+    
+    func reloadFunction() {
+        self.getProductDetailsByIdApi(id: productId ?? "")
+    }
+    
+}
+
+//MARK: - Extensions -
+
+//MARK: Api Call
+extension ProductDetailsViewController {
+    
+    // Get Product Details By Id
+    func getProductDetailsByIdApi(id: String) {
+        showLoading()
+        APIHelper.getProductDetails(id: id) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let data = response.response["data"]
+                self.productDetails = Items.init(json: data)
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }
+        }
+    }
 }

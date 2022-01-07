@@ -6,12 +6,18 @@
 //
 
 import UIKit
+import Alamofire
 
 class ForgotPasswordViewController: UIViewController {
+    
+    //MARK: - Properties -
 
     @IBOutlet weak var forgotPasswordView: UIView!
     @IBOutlet weak var forgotPasswordLabelView: UIView!
     @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var emailTextField: UITextField!
+    
+    //MARK: - Life Cycles -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +28,34 @@ class ForgotPasswordViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
+    //MARK: - Selectors -
+    
+    // Cancel Button Action
+    @IBAction func cancelButtonAction(_ sender: UIButton){
+        removeAnimate()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    // Ok Button Action
+    @IBAction func okButtonAction(_ sender: UIButton){
+        
+        // Validations
+        if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            self.view.makeToast("Please Enter an Email Address.")
+            return
+        }
+        
+        if !isValidEmail(emailTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""){
+            self.alertViewController(message: "Please enter a valid Email ID.")
+            return
+        }
+        
+        self.forgotPasswordApi()
+    }
+    
+    //MARK: - Helper Functions -
+    
+    // Show View With Animation
     func showAnimate(){
         self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         self.view.alpha = 0.0;
@@ -31,6 +65,7 @@ class ForgotPasswordViewController: UIViewController {
         });
     }
     
+    // Remove View With Animation
     func removeAnimate(){
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
@@ -42,18 +77,39 @@ class ForgotPasswordViewController: UIViewController {
         });
     }
     
+    // View End Editing
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if(touches.first?.view != forgotPasswordView){
             removeAnimate()
         }
     }
     
-    @IBAction func cancelButtonAction(_ sender: UIButton){
-        removeAnimate()
-        self.dismiss(animated: true, completion: nil)
-    }
-    @IBAction func okButtonAction(_ sender: UIButton){
-        removeAnimate()
-        self.dismiss(animated: true, completion: nil)
+}
+
+//MARK: - Extensions -
+
+//MARK: Api call
+extension ForgotPasswordViewController {
+    
+    //Forgot Password Api
+    func forgotPasswordApi() {
+        let params: Parameters = [
+            "emailId": "\(emailTextField.text ?? "")"
+        ]
+        showLoading()
+        APIHelper.forgotPassword(params: params) { (success,response)  in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.removeAnimate()
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+
     }
 }

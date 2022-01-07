@@ -22,7 +22,7 @@ let VAL_IMAGE                               = "VAL_IMAGE"
 var primaryColor = UIColor.init(hexFromString: "#183967")
 var progressHud = MBProgressHUD()
 
-func startAnimationLoader() {
+func showLoading() {
     DispatchQueue.main.async {
         if progressHud.superview != nil {
             progressHud.hide(animated: false)

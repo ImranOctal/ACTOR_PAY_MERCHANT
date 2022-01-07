@@ -7,6 +7,8 @@
 
 import UIKit
 import NKVPhonePicker
+import Alamofire
+import SDWebImage
 
 class ProfileViewController: UIViewController {
     
@@ -24,6 +26,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var shopAddressTextField: UITextField!
     @IBOutlet weak var fullAddressTextField: UITextField!
     @IBOutlet weak var shopActNoOrLicenceTextField: UITextField!
+    @IBOutlet weak var profileImgView: UIImageView!
     
     var mobileCode: String?
     
@@ -32,21 +35,23 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         phoneCodeTextField.delegate = self
         numberPickerSetup()
-
+        setMerchantDetailsData()
     }
     
     //MARK: - Selectors -
     
+    //Back Button Action
     @IBAction func backButttonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
     }
     
+    // Save Button Action
     @IBAction func saveButtonAction(_ sender: UIButton) {
-       //save Button Action
-        /// save Validation
+        // save Validation
         if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
             self.alertViewController(message: "Please Enter an email address.")
             return
@@ -79,11 +84,13 @@ class ProfileViewController: UIViewController {
             self.alertViewController(message: "Please Enter a shop act number or licence.")
             return
         }
+        
+        self.updateMerchantProfile()
     }
     
+    //Country Code Button Action
     @IBAction func phoneCodeButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        //Phone Code Button
         if let delegate = phoneCodeTextField.phonePickerDelegate {
             let countriesVC = CountriesViewController.standardController()
             countriesVC.delegate = self as CountriesViewControllerDelegate
@@ -94,6 +101,18 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Helper Functions -
     
+    //Set Merchant Details Data
+    func setMerchantDetailsData() {
+        emailTextField.text = merchantDetails?.email
+        businessNameTextField.text = merchantDetails?.businessName
+        mobileNumberTextField.text = merchantDetails?.contactNumber
+        shopAddressTextField.text = merchantDetails?.shopAddress
+        fullAddressTextField.text = merchantDetails?.fullAddress
+        shopActNoOrLicenceTextField.text = merchantDetails?.licenceNumber
+        profileImgView.sd_setImage(with: URL(string: merchantDetails?.profilePicture ?? ""), placeholderImage: UIImage(named: "men_fashion"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+    }
+    
+    //Country Code Picker SetUp
     func numberPickerSetup() {
         phoneCodeTextField.phonePickerDelegate = self
         phoneCodeTextField.countryPickerDelegate = self
@@ -107,7 +126,6 @@ class ProfileViewController: UIViewController {
             let country = Country.country(for: NKVSource(countryCode: code))
             phoneCodeTextField.country = country
             phoneCodeTextField.text = country?.phoneExtension
-            //            phoneCodeButton.setAttributedTitle(attributedString(countryCode: "+\(country?.phoneExtension ?? "")", arrow: " ▾"), for: .normal)
             phoneCodeTextField.setCode(source: NKVSource(country: country!))
             mobileCode = country?.phoneExtension ?? ""
             UserDefaults.standard.synchronize()
@@ -116,14 +134,49 @@ class ProfileViewController: UIViewController {
             let country = Country.country(for: NKVSource(countryCode: code))
             phoneCodeTextField.country = country
             phoneCodeTextField.text = country?.phoneExtension
-            //            phoneCodeButton.setAttributedTitle(attributedString(countryCode: "+\(country?.phoneExtension ?? "")", arrow: " ▾"), for: .normal)
             phoneCodeTextField.setCode(source: NKVSource(country: country!))
             mobileCode = country?.phoneExtension ?? ""
         }
     }
 }
 
-extension ProfileViewController: CountriesViewControllerDelegate, UITextFieldDelegate {
+//MARK:- Extensions -
+
+//MARK: Api Call
+extension ProfileViewController {
+    
+    // Update Profile Api
+    func updateMerchantProfile() {
+        
+        let params: Parameters = [
+            "id":AppManager.shared.merchantUserId,
+            "email":emailTextField.text ?? "",
+            "extensionNumber":"+91",
+            "contactNumber":mobileNumberTextField.text ?? "",
+            "shopAddress":shopAddressTextField.text ?? "",
+            "fullAddress":fullAddressTextField.text ?? "",
+            "businessName":businessNameTextField.text ?? "",
+            "password":"Test@111"
+        ]
+        showLoading()
+        APIHelper.updateMerchantDetails(params: params) { (success,response)  in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                myApp.window?.rootViewController?.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let message = response.message
+                myApp.window?.rootViewController?.view.makeToast(message)
+                NotificationCenter.default.post(name:Notification.Name("getMerchantDetailsByIdApi"), object: self)
+            }
+        } 
+    }
+}
+
+//MARK: Country Code Picker Delegate Methods
+extension ProfileViewController: CountriesViewControllerDelegate {
+    
     func countriesViewController(_ sender: CountriesViewController, didSelectCountry country: Country) {
         print("✳️ Did select country: \(country.countryCode)")
         UserDefaults.standard.set(country.countryCode, forKey: "countryCode")
@@ -134,6 +187,10 @@ extension ProfileViewController: CountriesViewControllerDelegate, UITextFieldDel
     func countriesViewControllerDidCancel(_ sender: CountriesViewController) {
         print("😕")
     }
+}
+
+//MARK: TextField Delegate Methods
+extension ProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)

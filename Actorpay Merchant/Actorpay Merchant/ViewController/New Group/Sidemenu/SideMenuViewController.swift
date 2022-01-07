@@ -20,7 +20,9 @@ protocol SideMenuViewControllerDelegate {
 }
 
 class SideMenuViewController: UIViewController {
+    
     //MARK:- Properties -
+    
     @IBOutlet var sideMenuTableView: UITableView! {
         didSet {
             self.sideMenuTableView.delegate = self
@@ -55,33 +57,25 @@ class SideMenuViewController: UIViewController {
         self.delegate?.hideHamburgerMenu()
     }
     
+    // LogOut Button Action
     @IBAction func logoutButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        // Logout
-        self.delegate?.hideHamburgerMenu()
-        let alert = UIAlertController(title: "Logout", message: "Are you sure you want to Logout??", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "ok", style: .default) { (action) in
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginNav") as! UINavigationController
-            myApp.window?.rootViewController = newVC
+        if let opo = obj_AppDelegate.window?.rootViewController {
+            let popOverConfirmVC = self.storyboard?.instantiateViewController(withIdentifier: "LogOutAlertViewController") as! LogOutAlertViewController
+            popOverConfirmVC.isSideMenu = true
+            obj_AppDelegate.window?.rootViewController?.addChild(popOverConfirmVC)
+            popOverConfirmVC.view.frame = opo.view.frame
+            opo.view.center = popOverConfirmVC.view.center
+            opo.view.addSubview(popOverConfirmVC.view)
+            popOverConfirmVC.didMove(toParent: self)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-            self.dismiss(animated: true, completion: nil)
-        }
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        obj_AppDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 }
 
 // MARK: - Extensions -
 
-extension SideMenuViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
-    }
-}
-
-extension SideMenuViewController: UITableViewDataSource {
+//MARK: TableView SetUp
+extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.menu.count
     }
@@ -123,5 +117,9 @@ extension SideMenuViewController: UITableViewDataSource {
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
     }
 }

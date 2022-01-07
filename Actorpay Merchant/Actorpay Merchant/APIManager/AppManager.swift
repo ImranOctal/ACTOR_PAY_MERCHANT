@@ -22,13 +22,43 @@ class AppManager {
         }
     }
     
-    var merchantId: String {
+    var merchantUserId: String {
         get {
             let merchantId =  AppUserDefaults.getSavedObject(forKey: .activeUserId) as? String
             return merchantId ?? ""
         }
         set(merchantId) {
             AppUserDefaults.saveObject(merchantId, forKey: .activeUserId)
+        }
+    }
+    
+    var merchantId: String {
+        get {
+            let merchantId =  AppUserDefaults.getSavedObject(forKey: .activeMerchantId) as? String
+            return merchantId ?? ""
+        }
+        set(merchantId) {
+            AppUserDefaults.saveObject(merchantId, forKey: .activeMerchantId)
+        }
+    }
+    
+    var rememberMeEmail: String {
+        get {
+            let rememberMeEmail =  AppUserDefaults.getSavedObject(forKey: .rememberMeEmail) as? String
+            return rememberMeEmail ?? ""
+        }
+        set(rememberMeEmail) {
+            AppUserDefaults.saveObject(rememberMeEmail, forKey: .rememberMeEmail)
+        }
+    }
+    
+    var rememberMePassword: String {
+        get {
+            let rememberMePassword =  AppUserDefaults.getSavedObject(forKey: .rememberMePassword) as? String
+            return rememberMePassword ?? ""
+        }
+        set(rememberMePassword) {
+            AppUserDefaults.saveObject(rememberMePassword, forKey: .rememberMePassword)
         }
     }
 }
@@ -49,4 +79,7 @@ class AppUserDefaults {
 enum UserDefaultsConstant: String {
     case userAuthToken = "keyAcccessToken"
     case activeUserId = "activeUserId"
+    case activeMerchantId = "activeMerchantId"
+    case rememberMeEmail = "rememberMeEmail"
+    case rememberMePassword = "rememberMePassword"
 }

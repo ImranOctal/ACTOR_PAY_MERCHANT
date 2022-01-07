@@ -65,6 +65,7 @@ class APIManager {
                     success(APIResponse.createSuccessAPIResponse(message, responseJSON))
                     break
                 case .failure(let errorGiven):
+                    dissmissLoader()
                     print(errorGiven.errorDescription ?? "")
                     break
                 }
@@ -94,6 +95,37 @@ class APIManager {
         absoluteUrl = APIBaseUrlPoint.localHostBaseURL.rawValue + url
         print(absoluteUrl)
         let headers: HTTPHeaders = [.authorization(bearerToken: AppManager.shared.token)]
+        var param:Parameters? = parameters
+        if method == .delete {
+            if let urlParameters = param {
+                if !(urlParameters.isEmpty) {
+                    absoluteUrl.append("?")
+                    var array:[String] = []
+                    let _ = urlParameters.map { (key, value) -> Bool in
+                        let str = key + "=" +  String(describing: value)
+                        array.append(str)
+                        return true
+                    }
+                    absoluteUrl.append(array.joined(separator: "&"))
+                }
+            }
+            param = nil
+        }
+        if method == .put {
+            if let urlParameters = param {
+                if !(urlParameters.isEmpty) {
+                    absoluteUrl.append("?")
+                    var array:[String] = []
+                    let _ = urlParameters.map { (key, value) -> Bool in
+                        let str = key + "=" +  String(describing: value)
+                        array.append(str)
+                        return true
+                    }
+                    absoluteUrl.append(array.joined(separator: "&"))
+                }
+            }
+            param = nil
+        }
         manager.request(absoluteUrl, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseJSON(completionHandler: { (response) in
                 switch response.result {
@@ -103,6 +135,7 @@ class APIManager {
                     success(APIResponse.createSuccessAPIResponse(message, responseJSON))
                     break
                 case .failure(let errorGiven):
+                    dissmissLoader()
                     print(errorGiven.errorDescription ?? "")
                     break
                 }
@@ -110,4 +143,69 @@ class APIManager {
     }
     
     
+    func uploadData (method : HTTPMethod,url:String,parameters:Parameters, imgData:Data?, imageKey:String, success:@escaping (APICompletionBlock)) {
+        
+        let headers: HTTPHeaders = [.authorization(bearerToken: AppManager.shared.token)]
+        print(headers)
+        let absoluteUrl = APIBaseUrlPoint.localHostBaseURL.rawValue + url
+        AF.upload(multipartFormData: { (multipartFormData) in
+            
+            for (key, value) in parameters {
+                var jsonString: String?
+                if let theJSONData = try? JSONSerialization.data(
+                    withJSONObject: value,
+                    options: []) {
+                    let theJSONText = String(data: theJSONData,
+                                             encoding: .ascii)
+                    print("JSON string = \(theJSONText!)")
+                    jsonString = theJSONText!
+                }
+                multipartFormData.append(((jsonString ?? "") as String).data(using: String.Encoding.utf8)!, withName: key as String, mimeType: "application/json")
+            }
+            if let data = imgData {
+                multipartFormData.append(data, withName: imageKey, fileName: "file.jpg", mimeType: "image/jpg")
+            }
+        }, to: absoluteUrl, method: method, headers: headers).uploadProgress { progress in
+            print("Upload Progress: \(progress.fractionCompleted)")
+        }
+        .downloadProgress { progress in
+            print("Download Progress: \(progress.fractionCompleted)")
+        }.responseJSON { (response) in
+            switch response.result {
+            case .success(let retrivedResult):
+                let responseJSON = JSON(retrivedResult)
+                let message = responseJSON["message"].stringValue
+                success(APIResponse.createSuccessAPIResponse(message, responseJSON))
+                break
+            case .failure(let errorGiven):
+                dissmissLoader()
+                print(errorGiven.errorDescription ?? "")
+                break
+            }
+        }
+        
+    }
+    
+    func putRequest(method : HTTPMethod, url:String, parameters:Parameters, success:@escaping APICompletionBlock){
+        absoluteUrl = APIBaseUrlPoint.localHostBaseURL.rawValue + url
+        print(absoluteUrl)
+        let headers: HTTPHeaders = [.authorization(bearerToken: AppManager.shared.token)]
+        manager.request(absoluteUrl, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let retrivedResult):
+                    let responseJSON = JSON(retrivedResult)
+                    let message = responseJSON["message"].stringValue
+                    success(APIResponse.createSuccessAPIResponse(message, responseJSON))
+                    break
+                case .failure(let errorGiven):
+                    dissmissLoader()
+                    print(errorGiven.errorDescription ?? "")
+                    break
+                }
+            })
+    }
+    
 }
+    
+    

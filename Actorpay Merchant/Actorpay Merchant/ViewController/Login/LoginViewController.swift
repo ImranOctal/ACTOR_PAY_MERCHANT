@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
     }
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var remberMeBtn: UIButton!
 
     var isPassTap = false
     var isRememberMeTap = false
@@ -30,10 +31,36 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        if AppManager.shared.rememberMeEmail != "" {
+            emailTextField.text = AppManager.shared.rememberMeEmail
+            passwordTextField.text = AppManager.shared.rememberMePassword
+            isRememberMeTap = true
+            if #available(iOS 13.0, *) {
+                remberMeBtn.setImage(UIImage(systemName: "checkmark"), for: .normal)
+            }
+            remberMeBtn.tintColor = .white
+            remberMeBtn.backgroundColor = UIColor(named: "BlueColor")
+            remberMeBtn.borderColor = UIColor(named: "BlueColor")
+        } else {
+            if #available(iOS 13.0, *) {
+                remberMeBtn.setImage(UIImage(systemName:""), for: .normal)
+                remberMeBtn.tintColor = .systemGray5
+                remberMeBtn.backgroundColor = .none
+                remberMeBtn.borderColor = .systemGray5
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if !isRememberMeTap {
+            emailTextField.text = ""
+            passwordTextField.text = ""
+        }
     }
 
     //MARK: - Selector -
     
+    //Password Toggel Button Action
     @IBAction func passwordButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         // login password
@@ -42,6 +69,7 @@ class LoginViewController: UIViewController {
         sender.setImage(UIImage(named: isPassTap ? "hide" : "show"), for: .normal)
     }
     
+    //Remember Me Button Action
     @IBAction func rememberMeButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         // remember Me
@@ -55,6 +83,7 @@ class LoginViewController: UIViewController {
 
     }
     
+    // Forgot Password Button Action
     @IBAction func forgotPasswordButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         let popOverConfirmVC = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
@@ -65,6 +94,7 @@ class LoginViewController: UIViewController {
         popOverConfirmVC.didMove(toParent: self)
     }
     
+    // Login Button Action
     @IBAction func loginButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         //  Login Validation
@@ -80,34 +110,16 @@ class LoginViewController: UIViewController {
             self.alertViewController(message: "Please Enter an Password.")
             return
         }
-        let params: Parameters = [
-            "email": "\(emailTextField.text ?? "")",
-            "password": "\(passwordTextField.text ?? "")",
-            "deviceInfo": [
-                "deviceType":"mobile" as String,
-                "appVersion":appVersion(),
-                "deviceToken":deviceFcmToken,
-                "deviceData":"\(UIDevice.modelName)"
-            ]
-        ]
-        startAnimationLoader()
-        APIHelper.loginUser(params: params) { (success,response)  in
-            if !success {
-                dissmissLoader()
-                let message = response.message
-                myApp.window?.rootViewController?.view.makeToast(message)
-            }else {
-                dissmissLoader()
-                let data = response.response["data"]
-                self.merchant = Merchant.init(json: data)
-                AppManager.shared.token = self.merchant?.access_token ?? ""
-                AppManager.shared.merchantId = self.merchant?.id ?? ""
-                let newVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeNav") as! UINavigationController
-                myApp.window?.rootViewController = newVC
-                myApp.window?.rootViewController?.view.makeToast(response.message)
-            }
+        if isRememberMeTap {
+            AppManager.shared.rememberMeEmail = emailTextField.text ?? ""
+            AppManager.shared.rememberMePassword = passwordTextField.text ?? ""
         }
+        
+        self.loginApi()
+        
     }
+    
+    //Facial Recognaition Button Action
     @IBAction func faceLoginButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         // Face Login
@@ -128,9 +140,10 @@ class LoginViewController: UIViewController {
             print("success")
         }
     }
+    
+    // SignUp Button Action
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        // signup Button action
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
         self.navigationController?.pushViewController(newVC, animated: true)
     }
@@ -145,10 +158,42 @@ class LoginViewController: UIViewController {
         alertView.addAction(okAction)
         present(alertView, animated: true)
     }
+}
+
+//MARK: - Extensions -
+
+//MARK: Api Call
+extension LoginViewController {
     
+    //Login Api
     func loginApi() {
-       
+        let params: Parameters = [
+            "email": "\(emailTextField.text ?? "")",
+            "password": "\(passwordTextField.text ?? "")",
+            "deviceInfo": [
+                "deviceType":"mobile" as String,
+                "appVersion":appVersion(),
+                "deviceToken":deviceFcmToken,
+                "deviceData":"\(UIDevice.modelName)"
+            ]
+        ]
+        showLoading()
+        APIHelper.loginUser(params: params) { (success,response)  in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let data = response.response["data"]
+                self.merchant = Merchant.init(json: data)
+                AppManager.shared.token = self.merchant?.access_token ?? ""
+                AppManager.shared.merchantUserId = self.merchant?.id ?? ""
+                let newVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeNav") as! UINavigationController
+                myApp.window?.rootViewController = newVC
+                myApp.window?.rootViewController?.view.makeToast(response.message)
+            }
+        }
     }
-    
 }
 

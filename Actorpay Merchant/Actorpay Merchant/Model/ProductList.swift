@@ -8,13 +8,14 @@
 import Foundation
 import SwiftyJSON
 
-public class ProductList {
-    public var totalPages : Int?
-    public var totalItems : Int?
-    public var items : Array<Items>?
-    public var pageNumber : Int?
-    public var pageSize : Int?
-
+struct ProductList {
+    
+    let totalPages : Int?
+    let totalItems : Int?
+    let items : Array<Items>?
+    let pageNumber : Int?
+    let pageSize : Int?
+    
     init(json: JSON) {
         totalPages = json["totalPages"].int
         totalItems = json["totalItems"].int
@@ -22,4 +23,5 @@ public class ProductList {
         pageNumber = json["pageNumber"].int
         pageSize = json["pageSize"].int
     }
+    
 }

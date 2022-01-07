@@ -7,8 +7,10 @@
 
 import UIKit
 import Alamofire
+import SVPullToRefresh
 
 class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
+    
     //MARK:- Properties -
     
     @IBOutlet weak var mainBackView: UIView!
@@ -40,15 +42,27 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
     var page = 0
     var totalCount = 10
     var productList: ProductList?
-    var itemsList:[Items] = []
+    
+    var getTaxDataByHSNCode: TaxList?
+    var viewActiveTaxDataById: TaxList?
     
     //MARK:- Life Cycle Function -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        getProductListAPI()
+        
         self.backViewForHamburger.isHidden = true
+        self.getMerchantDetailsByIdApi()
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("getMerchantDetailsByIdApi"), object: nil)
+        NotificationCenter.default.addObserver(self,selector: #selector(self.getMerchantDetailsByIdApi),name:Notification.Name("getMerchantDetailsByIdApi"), object: nil)
+        self.getProductListAPI()
+       
+        self.getAllTaxDataByHSNCode(HSNCode: "0007")
+        self.viewActiveTaxDataByIDApi(taxID: "16111609-bff3-477a-b4cf-603592597721")
+        tableView.addPullToRefresh {
+            self.getProductListAPI()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,11 +78,13 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
     
     //MARK:- Selector -
     
+    // Humburger Back View Action
     @IBAction func tappedOnHamburgerbackView(_ sender: Any) {
         self.view.endEditing(true)
         self.hideHamburgerView()
     }
     
+    //Add Product Button Action
     @IBAction func addProductButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "AddProductViewController") as! AddProductViewController
@@ -76,6 +92,7 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
         self.navigationController?.pushViewController(newVC, animated: true)        
     }
     
+    // humburgerMenu Button Action
     @IBAction func showHamburgerMenu(_ sender: Any) {
         self.view.endEditing(true)
         UIView.animate(withDuration: 0.1) {
@@ -97,38 +114,12 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
     
     //MARK:- helper Functions -
     
-    func getProductListAPI(){
-        let params: Parameters = [
-            "pageNo":page,
-            "pageSize":10
-        ]
-        print(params)
-        startAnimationLoader()
-        APIHelper.getProductList(parameters: params) { (success, response) in
-            if !success {
-                dissmissLoader()
-                let message = response.message
-                myApp.window?.rootViewController?.view.makeToast(message)
-            }else {
-                dissmissLoader()
-                self.itemsList.removeAll()
-                let data = response.response["data"]
-                self.productList = ProductList.init(json: data)
-                self.totalCount = self.productList?.totalItems ?? 0
-                for item in self.productList?.items ?? [] {
-                    self.itemsList.append(item)
-                }
-                let message = response.message
-                myApp.window?.rootViewController?.view.makeToast(message)
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
+    // Hide Humburger Menu
     func hideHamburgerMenu() {
         self.hideHamburgerView()
     }
     
+    //Hide Humburger View
     private func hideHamburgerView(){
         UIView.animate(withDuration: 0.1) {
             self.leadingConstraintForHamburgerView.constant = 10
@@ -145,6 +136,7 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
         }
     }
     
+    // Side Menu Segue Action
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "hamburgerSegue"){
             if let controller = segue.destination as? SideMenuViewController{
@@ -154,6 +146,7 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
         }
     }
     
+    // SetTouch For Humburger Back View
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (isHamburgerMenuShown)
         {
@@ -204,23 +197,157 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
 
 // MARK: - Extensions -
 
+//MARK: Api Call
+extension HomeViewController {
+    
+    //Get Merchant Details By Id Api
+    @objc func getMerchantDetailsByIdApi() {
+       showLoading()
+        APIHelper.getMerchantDetailsById(id: AppManager.shared.merchantUserId) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let data = response.response
+                merchantDetails = MerchantDetails.init(json: data)
+                AppManager.shared.merchantId = merchantDetails?.merchantId ?? ""
+                print(AppManager.shared.merchantId)
+            }
+        }
+    }
+    
+    //Product List Api
+    func getProductListAPI(){
+        let params: Parameters = [
+            "pageNo":page,
+            "pageSize":10
+        ]
+        print(params)
+        showLoading()
+        APIHelper.getProductList(parameters: params) { (success, response) in
+            self.tableView.pullToRefreshView?.stopAnimating()
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let data = response.response["data"]
+                self.productList = ProductList.init(json: data)
+                self.totalCount = self.productList?.totalItems ?? 0
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    // Remove Product By Id
+    func removeProductByIdApi(productId: String) {
+        let params: Parameters = [
+            "productId" : productId
+        ]
+        showLoading()
+        APIHelper.removeProductById(params: params) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.getProductListAPI()
+            }
+        }
+    }
+    
+    // Change Product Status By Id
+    func changeProductStatusApi(productId: String, status: String) {
+        let params: Parameters = [
+            "id" : productId,
+            "status" : status
+        ]
+        showLoading()
+        APIHelper.changeProductStatusApi(params: params) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.getProductListAPI()
+            }
+        }
+    }
+    
+    
+    
+    // Get All Tax Data By HSN Code Api
+    func getAllTaxDataByHSNCode(HSNCode: String) {
+        showLoading()
+        APIHelper.getAllTaxDataByHSNCodeApi(parameters: [:],HSNCode: HSNCode) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let data = response.response["data"]
+                self.getTaxDataByHSNCode = TaxList.init(json: data)
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }
+        }
+    }
+    
+    // View Active Tax Data By ID
+    func viewActiveTaxDataByIDApi(taxID: String) {
+        showLoading()
+        APIHelper.viewActiveTaxDataByIDApi(parameters: [:], taxID: taxID) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let data = response.response["data"]
+                self.viewActiveTaxDataById = TaxList.init(json: data)
+                let message = response.message
+                 // myApp.window?.rootViewController?.view.makeToast(message)
+            }
+        }
+    }
+    
+    
+}
+
+//MARK: TableView SetUp
 extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.itemsList.count
+        return self.productList?.items?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell", for: indexPath) as! ProductTableViewCell
-        let item = self.itemsList[indexPath.row]
+        let item = self.productList?.items?[indexPath.row]
         cell.item = item
         
         cell.editButtonHandler = {
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "AddProductViewController") as! AddProductViewController
             newVC.titleLabel = "UPDATE PRODUCT"
+            newVC.isUpdate = true
+            newVC.productItem = self.productList?.items?[indexPath.row]
             self.navigationController?.pushViewController(newVC, animated: true)
+//            self.changeProductStatusApi(productId: item?.productId ?? "", status: "true")
         }
         cell.deleteButtonHandler = {
-            self.view.makeToast("Not Available Service")
+            self.removeProductByIdApi(productId: item?.productId ?? "")
         }
         cell.selectionStyle = .none
         return cell
@@ -228,7 +355,26 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let item = self.productList?.items?[indexPath.row]
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
+        newVC.productId = item?.productId
+        newVC.reloadFunction()
         self.navigationController?.pushViewController(newVC, animated: true)
     }
+    
+}
+// MARK: ScrollView Setup
+extension HomeViewController: UIScrollViewDelegate{
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+        let totalRecords = self.productList?.items?.count ?? 0
+        // Change 10.0 to adjust the distance from bottom
+        if maximumOffset - currentOffset <= 10.0 && totalRecords < totalCount {
+            page += 1
+            self.getProductListAPI()
+        }
+    }
+    
 }

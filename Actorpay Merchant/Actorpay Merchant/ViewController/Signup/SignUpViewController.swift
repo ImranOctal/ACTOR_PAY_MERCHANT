@@ -23,7 +23,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var shopAddressTextField: UITextField!
     @IBOutlet weak var fullAddressTextField: UITextField!
     @IBOutlet weak var shopActNoOrLicenceTextField: UITextField!
-    @IBOutlet weak var resourceTypeTextField: UITextField!
     @IBOutlet weak var termsAndPrivacyLabel: UILabel!
     
     var isPassTap = false
@@ -34,32 +33,27 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        
         topCorner(bgView: mainView, maskToBounds: true)
         phoneCodeTextField.delegate = self
         setupMultipleTapLabel()
         numberPickerSetup()
-        // Do any additional setup after loading the view.
     }
     
     //MARK: - Selectors -
     
-    @IBAction func backButtonAction(_ sender: UIButton) {
-        self.view.endEditing(true)
-        //BAck Button
-        self.navigationController?.popViewController(animated: true)
-    }
-    
+    // Password Toggle Button Action
     @IBAction func passwordButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        // login password
         isPassTap = !isPassTap
         passwordTextField.isSecureTextEntry = !isPassTap
         sender.setImage(UIImage(named: isPassTap ? "hide" : "show"), for: .normal)
     }
     
+    // Country Code Button Action
     @IBAction func phoneCodeButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        //Phone Code Button
         if let delegate = phoneCodeTextField.phonePickerDelegate {
             let countriesVC = CountriesViewController.standardController()
             countriesVC.delegate = self as CountriesViewControllerDelegate
@@ -68,9 +62,9 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    // Remember Me Button Action
     @IBAction func rememberMeButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        // remember Me
         isRememberMeTap = !isRememberMeTap
         if #available(iOS 13.0, *) {
             sender.setImage(UIImage(systemName: isRememberMeTap ? "checkmark" : ""), for: .normal)
@@ -80,9 +74,9 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    // SignUp Button Action
     @IBAction func signUpButtonAction(_ sender: UIButton) {
-       //Signup Button Action
-        /// Signup Validation
+        // Signup Validation
         if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
             self.alertViewController(message: "Please Enter an email address.")
             return
@@ -115,28 +109,88 @@ class SignUpViewController: UIViewController {
             self.alertViewController(message: "Please Enter a shop act number or licence.")
             return
         }
-        if resourceTypeTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a Resource Type.")
-            return
-        }
         if !isRememberMeTap{
             self.alertViewController(message: "Please accept terms and privacy policy.")
             return
         }
         
-        /*
-         "email": "jugal16@yopmail.com",
-         "extensionNumber": "+93",
-         "contactNumber": "2323423",
-         "password": "1234",
-         "firstName": "jugal",
-         "shopAddress": "test",
-         "fullAddress": "test",
-         "businessName": "tert",
-         "licenceNumber": "tetrer",
-         "fcmToken":"dIeFaHzvRq-mAbFYGAouJp:APA91bE295F20WN5OvqWlPCwsqiOqtneADq0KCXFUbdPsr14sF_Z5XXd7Py2lLdxr14MxC85sqL8RD6VU-yGYgJzpdPZ9HWHi40m2Fn-XJ7Riv_gxRZWwUkN7VcQCbL0t89GTEqIjlEm"
-         */
+        self.signUpApi()
+    }
+    
+    // Login Button Action
+    @IBAction func loginButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    // Terms and privacy Tab Label Action
+    @objc func tapLabel(gesture: UITapGestureRecognizer) {
+        if gesture.didTapAttributedTextInLabel(label: termsAndPrivacyLabel, targetText: "Terms of Use") {
+            print("Terms of Use")
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+            newVC.titleLabel = "Terms of Use"
+            self.navigationController?.pushViewController(newVC, animated: true)
+        } else if gesture.didTapAttributedTextInLabel(label: termsAndPrivacyLabel, targetText: "Privacy Policy") {
+            print("Privacy Policy")
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+            newVC.titleLabel = "Privacy Policy"
+            self.navigationController?.pushViewController(newVC, animated: true)
+        }
+    }
+    
+    //MARK: - helper Functions -
+    
+    // Country Code Picker SetUp
+    func numberPickerSetup() {
+        phoneCodeTextField.phonePickerDelegate = self
+        phoneCodeTextField.countryPickerDelegate = self
+        phoneCodeTextField.flagSize = CGSize(width: 20, height: 10)
+        phoneCodeTextField.flagInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        phoneCodeTextField.shouldScrollToSelectedCountry = false
+        phoneCodeTextField.enablePlusPrefix = false
         
+        if ((UserDefaults.standard.string(forKey: "countryCode")) != nil) {
+            let code = (UserDefaults.standard.string(forKey: "countryCode") ?? Locale.current.regionCode) ?? ""
+            let country = Country.country(for: NKVSource(countryCode: code))
+            phoneCodeTextField.country = country
+            phoneCodeTextField.text = country?.phoneExtension
+            phoneCodeTextField.setCode(source: NKVSource(country: country!))
+            mobileCode = country?.phoneExtension ?? ""
+            UserDefaults.standard.synchronize()
+        } else {
+            let code = "in"
+            let country = Country.country(for: NKVSource(countryCode: code))
+            phoneCodeTextField.country = country
+            phoneCodeTextField.text = country?.phoneExtension
+            phoneCodeTextField.setCode(source: NKVSource(country: country!))
+            mobileCode = country?.phoneExtension ?? ""
+        }
+    }
+    
+    // Setup Terms and Privacy Tap Label
+    func setupMultipleTapLabel() {
+        termsAndPrivacyLabel.text = "By Signing up you are agreeing to our Terms of Use and Privacy Policy"
+        termsAndPrivacyLabel.textAlignment = .left
+        let text = (termsAndPrivacyLabel.text)!
+        let underlineAttriString = NSMutableAttributedString(string: text)
+        let termsRange = (text as NSString).range(of: "Terms of Use")
+        let privacyRange = (text as NSString).range(of: "Privacy Policy")
+        underlineAttriString.addAttribute(.foregroundColor, value: UIColor.init(hexFromString: "#009EEF"), range: termsRange)
+        underlineAttriString.addAttribute(.foregroundColor, value: UIColor.init(hexFromString: "#009EEF"), range: privacyRange)
+        termsAndPrivacyLabel.attributedText = underlineAttriString
+        let tapAction = UITapGestureRecognizer(target: self, action: #selector(self.tapLabel(gesture:)))
+        termsAndPrivacyLabel.isUserInteractionEnabled = true
+        termsAndPrivacyLabel.addGestureRecognizer(tapAction)
+    }
+}
+
+//MARK:- Extensions -
+
+//MARK: Api Call
+extension SignUpViewController {
+    
+    // SignUp Api
+    func signUpApi(){
         let params: Parameters = [
             "email":"\(emailTextField.text ?? "")",
             "extensionNumber":"+\(phoneCodeTextField.text ?? "")",
@@ -155,9 +209,8 @@ class SignUpViewController: UIViewController {
                 "deviceData":"\(UIDevice.modelName)"
             ]
         ]
-        /*b49115b3-1d75-4e1a-962c-1a0febc7b8e0*/
         print(params)
-        startAnimationLoader()
+        showLoading()
         APIHelper.registerUser(params: params) { (success,response)  in
             if !success {
                 dissmissLoader()
@@ -165,82 +218,17 @@ class SignUpViewController: UIViewController {
                 self.view.makeToast(message)
             }else {
                 dissmissLoader()
+                let newVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginNav") as! UINavigationController
+                myApp.window?.rootViewController = newVC
                 self.view.makeToast(response.message)
             }
         }
     }
-    
-    @IBAction func loginButtonAction(_ sender: UIButton) {
-        self.view.endEditing(true)
-        //Login Button
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func tapLabel(gesture: UITapGestureRecognizer) {
-        // Terms and privacy Action
-        if gesture.didTapAttributedTextInLabel(label: termsAndPrivacyLabel, targetText: "Terms of Use") {
-            print("Terms of Use")
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
-            newVC.titleLabel = "Terms of Use"
-            self.navigationController?.pushViewController(newVC, animated: true)
-        } else if gesture.didTapAttributedTextInLabel(label: termsAndPrivacyLabel, targetText: "Privacy Policy") {
-            print("Privacy Policy")
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
-            newVC.titleLabel = "Privacy Policy"
-            self.navigationController?.pushViewController(newVC, animated: true)
-        }
-    }
-    
-    //MARK: - helper Functions -
-    
-    func numberPickerSetup() {
-        phoneCodeTextField.phonePickerDelegate = self
-        phoneCodeTextField.countryPickerDelegate = self
-        phoneCodeTextField.flagSize = CGSize(width: 20, height: 10)
-        phoneCodeTextField.flagInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        phoneCodeTextField.shouldScrollToSelectedCountry = false
-        phoneCodeTextField.enablePlusPrefix = false
-        
-        if ((UserDefaults.standard.string(forKey: "countryCode")) != nil) {
-            let code = (UserDefaults.standard.string(forKey: "countryCode") ?? Locale.current.regionCode) ?? ""
-            let country = Country.country(for: NKVSource(countryCode: code))
-            phoneCodeTextField.country = country
-            phoneCodeTextField.text = country?.phoneExtension
-            //            phoneCodeButton.setAttributedTitle(attributedString(countryCode: "+\(country?.phoneExtension ?? "")", arrow: " ▾"), for: .normal)
-            phoneCodeTextField.setCode(source: NKVSource(country: country!))
-            mobileCode = country?.phoneExtension ?? ""
-            UserDefaults.standard.synchronize()
-        } else {
-            let code = "it"
-            let country = Country.country(for: NKVSource(countryCode: code))
-            phoneCodeTextField.country = country
-            phoneCodeTextField.text = country?.phoneExtension
-            //            phoneCodeButton.setAttributedTitle(attributedString(countryCode: "+\(country?.phoneExtension ?? "")", arrow: " ▾"), for: .normal)
-            phoneCodeTextField.setCode(source: NKVSource(country: country!))
-            mobileCode = country?.phoneExtension ?? ""
-        }
-    }
-    
-    func setupMultipleTapLabel() {
-        /// Setup Terms and Privacy Label
-        termsAndPrivacyLabel.text = "By Signing up you are agreeing to our Terms of Use and Privacy Policy"
-        termsAndPrivacyLabel.textAlignment = .left
-        let text = (termsAndPrivacyLabel.text)!
-        let underlineAttriString = NSMutableAttributedString(string: text)
-        let termsRange = (text as NSString).range(of: "Terms of Use")
-        let privacyRange = (text as NSString).range(of: "Privacy Policy")
-        underlineAttriString.addAttribute(.foregroundColor, value: UIColor.init(hexFromString: "#009EEF"), range: termsRange)
-        underlineAttriString.addAttribute(.foregroundColor, value: UIColor.init(hexFromString: "#009EEF"), range: privacyRange)
-        termsAndPrivacyLabel.attributedText = underlineAttriString
-        let tapAction = UITapGestureRecognizer(target: self, action: #selector(self.tapLabel(gesture:)))
-        termsAndPrivacyLabel.isUserInteractionEnabled = true
-        termsAndPrivacyLabel.addGestureRecognizer(tapAction)
-    }
 }
 
-//MARK:- Extensions -
-
+//MARK: SetUp TapGesture Recognizer
 extension UITapGestureRecognizer {
+    
     func didTapAttributedTextInLabel(label: UILabel, targetText: String) -> Bool {
         guard let attributedString = label.attributedText, let lblText = label.text else { return false }
         let targetRange = (lblText as NSString).range(of: targetText)
@@ -279,7 +267,9 @@ extension UITapGestureRecognizer {
     }
 }
 
-extension SignUpViewController: CountriesViewControllerDelegate, UITextFieldDelegate {
+//MARK: Country Picker Delegate Methods
+extension SignUpViewController: CountriesViewControllerDelegate {
+    
     func countriesViewController(_ sender: CountriesViewController, didSelectCountry country: Country) {
         print("✳️ Did select country: \(country.countryCode)")
         UserDefaults.standard.set(country.countryCode, forKey: "countryCode")
@@ -290,6 +280,10 @@ extension SignUpViewController: CountriesViewControllerDelegate, UITextFieldDele
     func countriesViewControllerDidCancel(_ sender: CountriesViewController) {
         print("😕")
     }
+}
+
+//MARK: TextField Delegate Methods
+extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)

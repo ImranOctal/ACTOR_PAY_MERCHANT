@@ -16,10 +16,17 @@
 		8807882E277C2B9B00F9FF85 /* Merchant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8807882D277C2B9B00F9FF85 /* Merchant.swift */; };
 		88078833277C2E6700F9FF85 /* ProductList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88078832277C2E6700F9FF85 /* ProductList.swift */; };
 		88078838277C2E7200F9FF85 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88078837277C2E7200F9FF85 /* Items.swift */; };
+		8812A5942780430300B8782A /* TaxList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8812A5932780430300B8782A /* TaxList.swift */; };
 		881DD7F0276740FC00B48A1F /* NewSubAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD7EF276740FC00B48A1F /* NewSubAdminViewController.swift */; };
 		881DD7FC27674F1800B48A1F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD7FA27674F1800B48A1F /* ChangePasswordViewController.swift */; };
 		881DD7FD27674F1800B48A1F /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD7FB27674F1800B48A1F /* ForgotPasswordViewController.swift */; };
 		881DD8042767535700B48A1F /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD8032767535700B48A1F /* ProductDetailsViewController.swift */; };
+		8848D67C27856ADE0081911E /* LogOutAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8848D67B27856ADE0081911E /* LogOutAlertViewController.swift */; };
+		88984F7F277F00FD00E76111 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F7E277F00FD00E76111 /* CategoryList.swift */; };
+		88984F85277F019500E76111 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F84277F019500E76111 /* CategoryItem.swift */; };
+		88984F8C277F021E00E76111 /* SubCategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F8A277F021E00E76111 /* SubCategoryItem.swift */; };
+		88984F8D277F021E00E76111 /* SubCategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F8B277F021E00E76111 /* SubCategoryList.swift */; };
+		88B90270277EC67700506783 /* MerchantDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9026F277EC67700506783 /* MerchantDetails.swift */; };
 		88D08D0B27621A2F001D5282 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D0A27621A2F001D5282 /* AppDelegate.swift */; };
 		88D08D0D27621A2F001D5282 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D0C27621A2F001D5282 /* SceneDelegate.swift */; };
 		88D08D0F27621A2F001D5282 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D08D0E27621A2F001D5282 /* LoginViewController.swift */; };
@@ -82,10 +89,17 @@
 		8807882D277C2B9B00F9FF85 /* Merchant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchant.swift; sourceTree = "<group>"; };
 		88078832277C2E6700F9FF85 /* ProductList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductList.swift; sourceTree = "<group>"; };
 		88078837277C2E7200F9FF85 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		8812A5932780430300B8782A /* TaxList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaxList.swift; sourceTree = "<group>"; };
 		881DD7EF276740FC00B48A1F /* NewSubAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSubAdminViewController.swift; sourceTree = "<group>"; };
 		881DD7FA27674F1800B48A1F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		881DD7FB27674F1800B48A1F /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		881DD8032767535700B48A1F /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
+		8848D67B27856ADE0081911E /* LogOutAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogOutAlertViewController.swift; sourceTree = "<group>"; };
+		88984F7E277F00FD00E76111 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
+		88984F84277F019500E76111 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
+		88984F8A277F021E00E76111 /* SubCategoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategoryItem.swift; sourceTree = "<group>"; };
+		88984F8B277F021E00E76111 /* SubCategoryList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategoryList.swift; sourceTree = "<group>"; };
+		88B9026F277EC67700506783 /* MerchantDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetails.swift; sourceTree = "<group>"; };
 		88D08D0727621A2F001D5282 /* Actorpay Merchant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Actorpay Merchant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D08D0A27621A2F001D5282 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88D08D0C27621A2F001D5282 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,9 +193,13 @@
 		8807882C277C2B7200F9FF85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				88984F89277F01E700E76111 /* SubCategory */,
+				88984F83277F010400E76111 /* Category */,
+				8812A5932780430300B8782A /* TaxList.swift */,
 				8807882D277C2B9B00F9FF85 /* Merchant.swift */,
 				88078832277C2E6700F9FF85 /* ProductList.swift */,
 				88078837277C2E7200F9FF85 /* Items.swift */,
+				88B9026F277EC67700506783 /* MerchantDetails.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,6 +218,32 @@
 				881DD8032767535700B48A1F /* ProductDetailsViewController.swift */,
 			);
 			path = ProductDetails;
+			sourceTree = "<group>";
+		};
+		8848D67A27856ADE0081911E /* LogOut */ = {
+			isa = PBXGroup;
+			children = (
+				8848D67B27856ADE0081911E /* LogOutAlertViewController.swift */,
+			);
+			path = LogOut;
+			sourceTree = "<group>";
+		};
+		88984F83277F010400E76111 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				88984F7E277F00FD00E76111 /* CategoryList.swift */,
+				88984F84277F019500E76111 /* CategoryItem.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		88984F89277F01E700E76111 /* SubCategory */ = {
+			isa = PBXGroup;
+			children = (
+				88984F8B277F021E00E76111 /* SubCategoryList.swift */,
+				88984F8A277F021E00E76111 /* SubCategoryItem.swift */,
+			);
+			path = SubCategory;
 			sourceTree = "<group>";
 		};
 		88D08CFE27621A2F001D5282 = {
@@ -296,6 +340,7 @@
 		88D08D5D276220CA001D5282 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8848D67A27856ADE0081911E /* LogOut */,
 				881DD7EE276740D300B48A1F /* SubAdmin */,
 				88FBDE632767140800EB9BCE /* Payroll */,
 				88FBDE482767026D00EB9BCE /* ManageOrders */,
@@ -644,12 +689,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88984F8C277F021E00E76111 /* SubCategoryItem.swift in Sources */,
+				88B90270277EC67700506783 /* MerchantDetails.swift in Sources */,
 				881DD7F0276740FC00B48A1F /* NewSubAdminViewController.swift in Sources */,
 				88FBDE5C27670C9600EB9BCE /* ManageOrderTableViewCell.swift in Sources */,
 				88D08D6327622841001D5282 /* SignUpViewController.swift in Sources */,
 				88078833277C2E6700F9FF85 /* ProductList.swift in Sources */,
 				88E261992764774F00BC84B2 /* AddProductViewController.swift in Sources */,
+				8812A5942780430300B8782A /* TaxList.swift in Sources */,
 				88078800277C17B000F9FF85 /* APIHelper.swift in Sources */,
+				88984F7F277F00FD00E76111 /* CategoryList.swift in Sources */,
 				88D08D5327621DE9001D5282 /* Extensions.swift in Sources */,
 				88D08D5227621DE9001D5282 /* Global.swift in Sources */,
 				88DC152D27636DC200627F17 /* SideMenuCell.swift in Sources */,
@@ -662,9 +711,11 @@
 				88DC1523276368C700627F17 /* SideMenuViewController.swift in Sources */,
 				88078838277C2E7200F9FF85 /* Items.swift in Sources */,
 				8807882E277C2B9B00F9FF85 /* Merchant.swift in Sources */,
+				88984F8D277F021E00E76111 /* SubCategoryList.swift in Sources */,
 				881DD8042767535700B48A1F /* ProductDetailsViewController.swift in Sources */,
 				88078801277C17B000F9FF85 /* AppManager.swift in Sources */,
 				88D08D7127623357001D5282 /* WebViewController.swift in Sources */,
+				8848D67C27856ADE0081911E /* LogOutAlertViewController.swift in Sources */,
 				88078802277C17B000F9FF85 /* Constant.swift in Sources */,
 				881DD7FC27674F1800B48A1F /* ChangePasswordViewController.swift in Sources */,
 				88E2616027645D2700BC84B2 /* ProfileViewController.swift in Sources */,
@@ -673,6 +724,7 @@
 				88078808277C17E000F9FF85 /* Dictionary+Extension.swift in Sources */,
 				88FBDE4A276702C100EB9BCE /* ManageOrdersViewController.swift in Sources */,
 				88FBDE652767142B00EB9BCE /* PayRollViewController.swift in Sources */,
+				88984F85277F019500E76111 /* CategoryItem.swift in Sources */,
 				88D08D0D27621A2F001D5282 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -851,7 +903,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W8NLTEFLJ2;
 				INFOPLIST_FILE = "Actorpay Merchant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -872,7 +923,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W8NLTEFLJ2;
 				INFOPLIST_FILE = "Actorpay Merchant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

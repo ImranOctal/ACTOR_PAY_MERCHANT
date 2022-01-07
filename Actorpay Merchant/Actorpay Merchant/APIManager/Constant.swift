@@ -14,14 +14,22 @@ enum APIBaseUrlPoint: String {
 enum APIEndPoint: String {
     case login = "merchant-service/auth/login"
     case register = "merchant-service/merchant/signup"
-    case merchantUpdate = "merchant-service/merchant/update"
     case changePassword = "merchant-service/merchant/user/change/password"
     case forgetPassword = "merchant-service/merchant/forget/password"
     case resetPassword = "merchant-service/merchant/reset/password"
-    case get_merchant_details_by_id = "merchant-service/merchant/by/id/"
+    case merchantDetailsById = "merchant-service/merchant/by/id/"
+    case merchantDetailsUpdate = "merchant-service/merchant/update"
     case productList = "merchant-service/products/active/true"
+    case getProductDetailsById = "merchant-service/products/"
+    case removeProductById = "merchant-service/products/remove"
+    case changeProductStatus = "merchant-service/products/change/status"
+    case addNewAndUpdateProductApi = "merchant-service/products"    
     case getAllCategories = "merchant-service/get/all/categories/paged"
-    case getSubCategories = "merchant-service/get/all/subcategories/by/category"
+    case getSubCategoriesByCategory = "merchant-service/get/all/subcategories/by/category"
+    case getSubCategories = "merchant-service/get/all/subcategories/paged?"
+    case getAllActiveTax = "merchant-service/taxes/active"
+    case getTaxDataByHSNCode = "merchant-service/taxes/hsncode/"
+    case viewActiveTaxDataByID = "merchant-service/taxes/"
 }
 
 struct MessageConstant {
