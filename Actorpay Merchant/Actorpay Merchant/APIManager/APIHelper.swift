@@ -122,21 +122,9 @@ final class APIHelper {
         }
     }
     
-    //MARK: Get Product List Api
-    static func getProductListApi(params: Parameters , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.request2(method: .post, url: APIEndPoint.productList.rawValue, parameters: params) { (response) in
-            let status = response.response["status"]
-            if status == "200" {
-                success(true, response)
-            }else {
-                success(false, response)
-            }
-        }
-    }
-    
-    //MARK: View All Active Product List Api
-    static func viewAllActiveProductListApi(parameters: Parameters ,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.getMethod(method: .get, url: APIEndPoint.activProductList.rawValue, parameters: parameters) { (response) in
+    //MARK: Product List Api
+    static func getProductList(parameters: Parameters ,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.getMethod(method: .get, url: APIEndPoint.productList.rawValue, parameters: parameters) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -246,30 +234,6 @@ final class APIHelper {
     //MARK: View Active Tax Data By ID
     static func viewActiveTaxDataByIDApi(parameters: Parameters, taxID:String, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
         APIManager.shared.getMethod(method: .get, url: APIEndPoint.viewActiveTaxDataByID.rawValue + "\(taxID)", parameters: parameters) { (response) in
-            let status = response.response["status"]
-            if status == "200" {
-                success(true, response)
-            }else {
-                success(false, response)
-            }
-        }
-    }
-    
-    //MARK: Get Order List Api
-    static func getOrderListApi(params: Parameters , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.request2(method: .post, url: APIEndPoint.orderList.rawValue, parameters: params) { (response) in
-            let status = response.response["status"]
-            if status == "200" {
-                success(true, response)
-            }else {
-                success(false, response)
-            }
-        }
-    }
-    
-    //MARK:  Get Country List Api
-    static func getCountryListApi(parameters: Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.getMethodWithoutAuth(method: .get, url: APIEndPoint.contryApi.rawValue, parameters: parameters) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)

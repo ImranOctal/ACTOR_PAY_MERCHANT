@@ -44,7 +44,7 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
     var totalCount = 10
     var productList: ProductList?
     var filteredArray: [Items]?
-    var activeProductList: ProductList?
+    
     var getTaxDataByHSNCode: TaxList?
     var viewActiveTaxDataById: TaxList?
     
@@ -209,28 +209,31 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                self.view.makeToast(message)
+                print(message)
             }else {
                 dissmissLoader()
-                let data = response.response["data"]
+                let data = response.response
                 merchantDetails = MerchantDetails.init(json: data)
                 AppManager.shared.merchantId = merchantDetails?.merchantId ?? ""
                 print(AppManager.shared.merchantId)
-                NotificationCenter.default.post(name:Notification.Name("setProfileData"), object: self)
-                
             }
         }
     }
     
-    // Get Product List Api
-    func getProductListAPI() {
+    //Product List Api
+    func getProductListAPI(){
+        let params: Parameters = [
+            "pageNo":page,
+            "pageSize":10
+        ]
+        print(params)
         showLoading()
-        APIHelper.getProductListApi(params: [:]) { (success, response) in
+        APIHelper.getProductList(parameters: params) { (success, response) in
             self.tableView.pullToRefreshView?.stopAnimating()
             if !success {
                 dissmissLoader()
                 let message = response.message
-                self.view.makeToast(message)
+                print(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
@@ -240,30 +243,6 @@ extension HomeViewController {
                 let message = response.message
                 print(message)
                 self.tableView.reloadData()
-            }
-        }
-    }
-    
-    // View All Active Product Api
-    func viewAllActiveProductListApi(){
-        let params: Parameters = [
-            "pageNo":page,
-            "pageSize":10
-        ]
-        print(params)
-        showLoading()
-        APIHelper.viewAllActiveProductListApi(parameters: params) { (success, response) in
-            self.tableView.pullToRefreshView?.stopAnimating()
-            if !success {
-                dissmissLoader()
-                let message = response.message
-                self.view.makeToast(message)
-            }else {
-                dissmissLoader()
-                let data = response.response["data"]
-                self.activeProductList = ProductList.init(json: data)
-                let message = response.message
-                print(message)
             }
         }
     }
@@ -278,7 +257,7 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                self.view.makeToast(message)
+                print(message)
             }else {
                 dissmissLoader()
                 let message = response.message
@@ -299,7 +278,7 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                self.view.makeToast(message)
+                print(message)
             }else {
                 dissmissLoader()
                 let message = response.message
@@ -316,7 +295,7 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                self.view.makeToast(message)
+                print(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
@@ -334,7 +313,7 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                self.view.makeToast(message)
+                print(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
@@ -352,7 +331,7 @@ extension HomeViewController {
 extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (filteredArray?.count == 0) || (filteredArray == nil) {
+        if filteredArray?.count == 0{
             tableView.setEmptyMessage("No Product Found")
         } else {
             tableView.restore()

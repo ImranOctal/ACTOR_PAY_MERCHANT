@@ -66,7 +66,7 @@ extension ProductDetailsViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                self.view.makeToast(message)
+                print(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]

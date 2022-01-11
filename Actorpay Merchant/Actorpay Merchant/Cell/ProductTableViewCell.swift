@@ -21,9 +21,11 @@ class ProductTableViewCell: UITableViewCell {
     
     var item: Items? {
         didSet {
+            let totalGst = (item?.cgst ?? 0) + (item?.sgst ?? 0)
+            let totalPrice = totalGst + (item?.dealPrice ?? 0)
             if let item = self.item {
                 titleLabel.text = item.name
-                dealPricLabel.text = "\(item.dealPrice ?? 0)"
+                dealPricLabel.text = "$\(totalPrice)"
                 itemPriceLabel.text = "\(item.actualPrice ?? 0)"
                 dateLabel.text = item.createdAt?.toFormatedDate(from: "yyyy-MM-dd HH:mm", to: "HH:mm a, dd MMM yyyy")
                 imgView.sd_setImage(with: URL(string: item.image ?? ""), placeholderImage: UIImage(named: "logo"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)

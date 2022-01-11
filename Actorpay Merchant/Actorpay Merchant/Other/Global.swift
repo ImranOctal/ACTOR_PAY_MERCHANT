@@ -117,18 +117,6 @@ func isValidEmail(email: String) -> Bool {
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
     let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
     emailPred.evaluate(with: email)
+    
     return false
-}
-
-func isValidPassword(mypassword : String) -> Bool
-{
-    let passwordreg =  ("(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[@#$%^&*]).{8,}")
-    let passwordtesting = NSPredicate(format: "SELF MATCHES %@", passwordreg)
-    return passwordtesting.evaluate(with: mypassword)
-}
-
-func isValidMobileNumber(mobileNumber: String) -> Bool {
-    let mobileregex = ("^[0-9]{10}$")
-    let mobilePred = NSPredicate(format: "SELF MATCHES %@", mobileregex)
-    return mobilePred.evaluate(with: mobileNumber)
 }

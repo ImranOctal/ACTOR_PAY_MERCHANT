@@ -101,14 +101,11 @@ class LoginViewController: UIViewController {
     // Login Button Action
     @IBAction func loginButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        if self.loginValidation() {
-            if isRememberMeTap {
-                AppManager.shared.rememberMeEmail = emailTextField.text ?? ""
-                AppManager.shared.rememberMePassword = passwordTextField.text ?? ""
-            }
-            validationLabelManage()
-            loginApi()
+        if isRememberMeTap {
+            AppManager.shared.rememberMeEmail = emailTextField.text ?? ""
+            AppManager.shared.rememberMePassword = passwordTextField.text ?? ""
         }
+        self.loginValidation()
     }
     
     //Facial Recognaition Button Action
@@ -152,36 +149,30 @@ class LoginViewController: UIViewController {
     }
     
     // Login Validation Func
-    func loginValidation() -> Bool
+    func loginValidation()
     {
-        var isValidate = true
-        
         if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
             emailValidationLbl.isHidden = false
             emailValidationLbl.text = ValidationManager.shared.emptyEmail
-            isValidate = false
+            return
         }
         else if !isValidEmail(emailTextField.text ?? "") {
             emailValidationLbl.isHidden = false
             emailValidationLbl.text = ValidationManager.shared.validEmail
-            isValidate = false
+            return
         } else {
             emailValidationLbl.isHidden = true
         }
-        
         if passwordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
             passwordValidationLbl.isHidden = false
             passwordValidationLbl.text = ValidationManager.shared.emptyPassword
-            isValidate = false
-        } else if !isValidPassword(mypassword: passwordTextField.text ?? "") {
-            passwordValidationLbl.isHidden = false
-            passwordValidationLbl.text = ValidationManager.shared.containPassword
-            isValidate = false
+            return
         } else {
             passwordValidationLbl.isHidden = true
         }
-        
-        return isValidate
+        validationLabelManage()
+        loginApi()
+        return
     }
     
     // Validation Label Manage
@@ -215,7 +206,7 @@ extension LoginViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                self.view.makeToast(message)
+                  myApp.window?.rootViewController?.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]

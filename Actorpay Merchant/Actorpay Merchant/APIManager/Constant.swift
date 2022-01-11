@@ -19,8 +19,7 @@ enum APIEndPoint: String {
     case resetPassword = "merchant-service/merchant/reset/password"
     case merchantDetailsById = "merchant-service/merchant/by/id/"
     case merchantDetailsUpdate = "merchant-service/merchant/update"
-    case productList = "merchant-service/products/list/paged"
-    case activProductList = "merchant-service/products/active/true"
+    case productList = "merchant-service/products/active/true"
     case getProductDetailsById = "merchant-service/products/"
     case removeProductById = "merchant-service/products/remove"
     case changeProductStatus = "merchant-service/products/change/status"
@@ -31,8 +30,6 @@ enum APIEndPoint: String {
     case getAllActiveTax = "merchant-service/taxes/active"
     case getTaxDataByHSNCode = "merchant-service/taxes/hsncode/"
     case viewActiveTaxDataByID = "merchant-service/taxes/"
-    case orderList = "merchant-service/orders/list/paged"
-    case contryApi = "global-service/v1/country/get/all"
 }
 
 struct MessageConstant {
