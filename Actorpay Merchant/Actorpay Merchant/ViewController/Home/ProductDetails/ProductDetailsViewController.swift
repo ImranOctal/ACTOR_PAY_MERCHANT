@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProductDetailsViewController: UIViewController {
     
@@ -25,6 +26,7 @@ class ProductDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     //MARK:- Selector -
@@ -36,8 +38,18 @@ class ProductDetailsViewController: UIViewController {
     
     //MARK: - Helper Functions -
     
+    // Reload Function
     func reloadFunction() {
         self.getProductDetailsByIdApi(id: productId ?? "")
+    }
+    
+    // Set Product Details Data
+    func setProductDetailsData() {
+        productImageView.sd_setImage(with: URL(string: productDetails?.image ?? ""), placeholderImage: UIImage(named: "logo"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+        productTitleLabel.text = productDetails?.name ?? ""
+        priceLabel.text = "\(productDetails?.dealPrice ?? 0)"
+        discountPriceLabel.text = "\(productDetails?.actualPrice ?? 0)"
+        descriptionLabel.text = productDetails?.description
     }
     
 }
@@ -54,13 +66,14 @@ extension ProductDetailsViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
                 self.productDetails = Items.init(json: data)
+                self.setProductDetailsData()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                print(message)
             }
         }
     }

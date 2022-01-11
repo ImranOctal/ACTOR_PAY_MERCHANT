@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import NKVPhonePicker
 import Alamofire
 import SDWebImage
 
@@ -20,25 +19,34 @@ class ProfileViewController: UIViewController {
         }
     }
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var phoneCodeTextField: NKVPhonePickerTextField!
     @IBOutlet weak var businessNameTextField: UITextField!
     @IBOutlet weak var mobileNumberTextField: UITextField!
     @IBOutlet weak var shopAddressTextField: UITextField!
     @IBOutlet weak var fullAddressTextField: UITextField!
     @IBOutlet weak var shopActNoOrLicenceTextField: UITextField!
     @IBOutlet weak var profileImgView: UIImageView!
+    @IBOutlet weak var businessNameLabel: UILabel!
+    @IBOutlet weak var emailValidationLbl: UILabel!
+    @IBOutlet weak var businessNameValidationLbl: UILabel!
+    @IBOutlet weak var mobileValidationLbl: UILabel!
+    @IBOutlet weak var shopAddressValidationLbl: UILabel!
+    @IBOutlet weak var fullAddressValidationLbl: UILabel!
+    @IBOutlet weak var shopLicenceValidationLbl: UILabel!
+    @IBOutlet weak var countryCodeLbl: UILabel!
+    @IBOutlet weak var countryFlagImgView: UIImageView!
     
-    var mobileCode: String?
-    
+    var countryList : CountryList?
+    var countryCode = "+91"
+    var countryFlag = ""
     
     //MARK: - Life Cycle Function -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        phoneCodeTextField.delegate = self
-        numberPickerSetup()
-        setMerchantDetailsData()
+        self.setUpCountryCodeData()
+        self.validationLabelManage()
+        self.setMerchantDetailsData()
     }
     
     //MARK: - Selectors -
@@ -51,93 +59,132 @@ class ProfileViewController: UIViewController {
     
     // Save Button Action
     @IBAction func saveButtonAction(_ sender: UIButton) {
-        // save Validation
-        if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter an email address.")
-            return
+        if self.profileValidation() {
+            self.validationLabelManage()
+            self.updateMerchantProfile()
         }
-        if !isValidEmail(emailTextField.text ?? ""){
-            self.alertViewController(message: "Please Enter an email address.")
-            return
-        }
-        if businessNameTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter an business Name.")
-            return
-        }
-        if phoneCodeTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Select Country Code.")
-            return
-        }
-        if mobileNumberTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a phone number.")
-            return
-        }
-        if shopAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a shop address.")
-            return
-        }
-        if fullAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a Full address.")
-            return
-        }
-        if shopActNoOrLicenceTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a shop act number or licence.")
-            return
-        }
-        
-        self.updateMerchantProfile()
     }
     
     //Country Code Button Action
     @IBAction func phoneCodeButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        if let delegate = phoneCodeTextField.phonePickerDelegate {
-            let countriesVC = CountriesViewController.standardController()
-            countriesVC.delegate = self as CountriesViewControllerDelegate
-            let navC = UINavigationController.init(rootViewController: countriesVC)
-            delegate.present(navC, animated: true, completion: nil)
+        let newVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryPickerViewController") as! CountryPickerViewController
+        newVC.comp = { countryList in
+            self.countryList = countryList
+            UserDefaults.standard.set(self.countryList?.countryCode, forKey: "countryCode")
+            UserDefaults.standard.set(self.countryList?.countryFlag, forKey: "countryFlag")
+            self.countryFlagImgView.sd_setImage(with: URL(string: self.countryList?.countryFlag ?? ""), placeholderImage: UIImage(named: "IN.png"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+            self.countryCodeLbl.text = self.countryList?.countryCode
         }
+        self.present(newVC, animated: true, completion: nil)
     }
     
     //MARK: - Helper Functions -
     
+    // Profile Validation
+    func profileValidation() -> Bool {
+        var isValidate = true
+        if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            emailValidationLbl.isHidden = false
+            emailValidationLbl.text = ValidationManager.shared.emptyEmail
+            isValidate = false
+        } else if !isValidEmail(emailTextField.text ?? ""){
+            emailValidationLbl.isHidden = false
+            emailValidationLbl.text = ValidationManager.shared.validEmail
+            isValidate = false
+        } else {
+            emailValidationLbl.isHidden = true
+        }
+        
+        if businessNameTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            businessNameValidationLbl.isHidden = false
+            businessNameValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            businessNameValidationLbl.isHidden = true
+        }
+        
+        if countryCodeLbl.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            self.alertViewController(message: "Please Select Country Code.")
+            isValidate = false
+        }
+        
+        if mobileNumberTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            mobileValidationLbl.isHidden = false
+            mobileValidationLbl.text = ValidationManager.shared.emptyPhone
+            isValidate = false
+        } else if !isValidMobileNumber(mobileNumber: mobileNumberTextField.text ?? "") {
+            mobileValidationLbl.isHidden = false
+            mobileValidationLbl.text = ValidationManager.shared.validPhone
+            isValidate = false
+        } else {
+            mobileValidationLbl.isHidden = true
+        }
+        
+        if shopAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            shopAddressValidationLbl.isHidden = false
+            shopAddressValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            shopAddressValidationLbl.isHidden = true
+        }
+        
+        if fullAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            fullAddressValidationLbl.isHidden = false
+            fullAddressValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            fullAddressValidationLbl.isHidden = true
+        }
+        
+        if shopActNoOrLicenceTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            shopLicenceValidationLbl.isHidden = false
+            shopLicenceValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            shopLicenceValidationLbl.isHidden = true
+        }
+        
+        return isValidate
+        
+    }
+    
+    // Validation Label Manage
+    func validationLabelManage() {
+        emailValidationLbl.isHidden = true
+        businessNameValidationLbl.isHidden = true
+        mobileValidationLbl.isHidden = true
+        shopAddressValidationLbl.isHidden = true
+        fullAddressValidationLbl.isHidden = true
+        shopLicenceValidationLbl.isHidden = true
+    }
+    
     //Set Merchant Details Data
-    func setMerchantDetailsData() {
+    @objc func setMerchantDetailsData() {
+        businessNameLabel.text = merchantDetails?.businessName
         emailTextField.text = merchantDetails?.email
         businessNameTextField.text = merchantDetails?.businessName
         mobileNumberTextField.text = merchantDetails?.contactNumber
         shopAddressTextField.text = merchantDetails?.shopAddress
         fullAddressTextField.text = merchantDetails?.fullAddress
         shopActNoOrLicenceTextField.text = merchantDetails?.licenceNumber
-        profileImgView.sd_setImage(with: URL(string: merchantDetails?.profilePicture ?? ""), placeholderImage: UIImage(named: "men_fashion"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+        profileImgView.sd_setImage(with: URL(string: merchantDetails?.profilePicture ?? ""), placeholderImage: UIImage(named: "profile"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
     }
     
-    //Country Code Picker SetUp
-    func numberPickerSetup() {
-        phoneCodeTextField.phonePickerDelegate = self
-        phoneCodeTextField.countryPickerDelegate = self
-        phoneCodeTextField.flagSize = CGSize(width: 20, height: 10)
-        phoneCodeTextField.flagInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        phoneCodeTextField.shouldScrollToSelectedCountry = false
-        phoneCodeTextField.enablePlusPrefix = false
-        
+    // Country Code Data SetUp
+    func setUpCountryCodeData() {
         if ((UserDefaults.standard.string(forKey: "countryCode")) != nil) {
-            let code = (UserDefaults.standard.string(forKey: "countryCode") ?? Locale.current.regionCode) ?? ""
-            let country = Country.country(for: NKVSource(countryCode: code))
-            phoneCodeTextField.country = country
-            phoneCodeTextField.text = country?.phoneExtension
-            phoneCodeTextField.setCode(source: NKVSource(country: country!))
-            mobileCode = country?.phoneExtension ?? ""
+            countryCode = (UserDefaults.standard.string(forKey: "countryCode") ?? "")
+            countryFlag = (UserDefaults.standard.string(forKey: "countryFlag") ?? "")
+            countryFlagImgView.sd_setImage(with: URL(string: countryFlag), placeholderImage: UIImage(named: "IN.png"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+            self.countryCodeLbl.text = countryCode
             UserDefaults.standard.synchronize()
         } else {
-            let code = "it"
-            let country = Country.country(for: NKVSource(countryCode: code))
-            phoneCodeTextField.country = country
-            phoneCodeTextField.text = country?.phoneExtension
-            phoneCodeTextField.setCode(source: NKVSource(country: country!))
-            mobileCode = country?.phoneExtension ?? ""
+            countryFlagImgView.sd_setImage(with: URL(string: countryFlag), placeholderImage: UIImage(named: "IN.png"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+            self.countryCodeLbl.text = countryCode
         }
     }
+    
 }
 
 //MARK:- Extensions -
@@ -147,11 +194,10 @@ extension ProfileViewController {
     
     // Update Profile Api
     func updateMerchantProfile() {
-        
         let params: Parameters = [
             "id":AppManager.shared.merchantUserId,
             "email":emailTextField.text ?? "",
-            "extensionNumber":"+91",
+            "extensionNumber":countryCode,
             "contactNumber":mobileNumberTextField.text ?? "",
             "shopAddress":shopAddressTextField.text ?? "",
             "fullAddress":fullAddressTextField.text ?? "",
@@ -163,31 +209,18 @@ extension ProfileViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let message = response.message
                 myApp.window?.rootViewController?.view.makeToast(message)
                 NotificationCenter.default.post(name:Notification.Name("getMerchantDetailsByIdApi"), object: self)
+                
             }
         } 
     }
 }
 
-//MARK: Country Code Picker Delegate Methods
-extension ProfileViewController: CountriesViewControllerDelegate {
-    
-    func countriesViewController(_ sender: CountriesViewController, didSelectCountry country: Country) {
-        print("✳️ Did select country: \(country.countryCode)")
-        UserDefaults.standard.set(country.countryCode, forKey: "countryCode")
-        mobileCode = country.phoneExtension
-        phoneCodeTextField.country = country
-    }
-    
-    func countriesViewControllerDidCancel(_ sender: CountriesViewController) {
-        print("😕")
-    }
-}
 
 //MARK: TextField Delegate Methods
 extension ProfileViewController: UITextFieldDelegate {

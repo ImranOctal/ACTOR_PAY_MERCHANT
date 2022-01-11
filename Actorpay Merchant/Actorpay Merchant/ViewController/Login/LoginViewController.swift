@@ -21,6 +21,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var remberMeBtn: UIButton!
+    @IBOutlet weak var emailValidationLbl: UILabel!
+    @IBOutlet weak var passwordValidationLbl: UILabel!
 
     var isPassTap = false
     var isRememberMeTap = false
@@ -31,6 +33,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         if AppManager.shared.rememberMeEmail != "" {
             emailTextField.text = AppManager.shared.rememberMeEmail
             passwordTextField.text = AppManager.shared.rememberMePassword
@@ -49,6 +52,7 @@ class LoginViewController: UIViewController {
                 remberMeBtn.borderColor = .systemGray5
             }
         }
+        self.validationLabelManage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,26 +101,14 @@ class LoginViewController: UIViewController {
     // Login Button Action
     @IBAction func loginButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        //  Login Validation
-        if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter an email address.")
-            return
+        if self.loginValidation() {
+            if isRememberMeTap {
+                AppManager.shared.rememberMeEmail = emailTextField.text ?? ""
+                AppManager.shared.rememberMePassword = passwordTextField.text ?? ""
+            }
+            validationLabelManage()
+            loginApi()
         }
-        if !isValidEmail(emailTextField.text ?? ""){
-            self.alertViewController(message: "Please Enter an email address.")
-            return
-        }
-        if passwordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter an Password.")
-            return
-        }
-        if isRememberMeTap {
-            AppManager.shared.rememberMeEmail = emailTextField.text ?? ""
-            AppManager.shared.rememberMePassword = passwordTextField.text ?? ""
-        }
-        
-        self.loginApi()
-        
     }
     
     //Facial Recognaition Button Action
@@ -158,6 +150,47 @@ class LoginViewController: UIViewController {
         alertView.addAction(okAction)
         present(alertView, animated: true)
     }
+    
+    // Login Validation Func
+    func loginValidation() -> Bool
+    {
+        var isValidate = true
+        
+        if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            emailValidationLbl.isHidden = false
+            emailValidationLbl.text = ValidationManager.shared.emptyEmail
+            isValidate = false
+        }
+        else if !isValidEmail(emailTextField.text ?? "") {
+            emailValidationLbl.isHidden = false
+            emailValidationLbl.text = ValidationManager.shared.validEmail
+            isValidate = false
+        } else {
+            emailValidationLbl.isHidden = true
+        }
+        
+        if passwordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            passwordValidationLbl.isHidden = false
+            passwordValidationLbl.text = ValidationManager.shared.emptyPassword
+            isValidate = false
+        } else if !isValidPassword(mypassword: passwordTextField.text ?? "") {
+            passwordValidationLbl.isHidden = false
+            passwordValidationLbl.text = ValidationManager.shared.containPassword
+            isValidate = false
+        } else {
+            passwordValidationLbl.isHidden = true
+        }
+        
+        return isValidate
+    }
+    
+    // Validation Label Manage
+    func validationLabelManage() {
+        emailValidationLbl.isHidden = true
+        passwordValidationLbl.isHidden = true
+    }
+    
+    
 }
 
 //MARK: - Extensions -
@@ -182,7 +215,7 @@ extension LoginViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]

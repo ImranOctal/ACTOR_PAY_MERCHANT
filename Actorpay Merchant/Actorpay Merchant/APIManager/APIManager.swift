@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 
 typealias APICompletionBlock = (_ respone:APIResponse) -> Void
-//
+
 struct APIResponse {
     var success = false
     var message = ""
@@ -191,6 +191,42 @@ class APIManager {
         print(absoluteUrl)
         let headers: HTTPHeaders = [.authorization(bearerToken: AppManager.shared.token)]
         manager.request(absoluteUrl, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let retrivedResult):
+                    let responseJSON = JSON(retrivedResult)
+                    let message = responseJSON["message"].stringValue
+                    success(APIResponse.createSuccessAPIResponse(message, responseJSON))
+                    break
+                case .failure(let errorGiven):
+                    dissmissLoader()
+                    print(errorGiven.errorDescription ?? "")
+                    break
+                }
+            })
+    }
+    
+    func getMethodWithoutAuth(method : HTTPMethod = .get, url:String, parameters:Parameters = [:], success:@escaping APICompletionBlock){
+        absoluteUrl = APIBaseUrlPoint.localHostBaseURL.rawValue + url
+        
+        var param:Parameters? = parameters
+        if method == .get {
+            if let urlParameters = param {
+                if !(urlParameters.isEmpty) {
+                    absoluteUrl.append("?")
+                    var array:[String] = []
+                    let _ = urlParameters.map { (key, value) -> Bool in
+                        let str = key + "=" +  String(describing: value)
+                        array.append(str)
+                        return true
+                    }
+                    absoluteUrl.append(array.joined(separator: "&"))
+                }
+            }
+            param = nil
+        }
+        print(absoluteUrl)
+        manager.request(absoluteUrl, method: method)
             .responseJSON(completionHandler: { (response) in
                 switch response.result {
                 case .success(let retrivedResult):

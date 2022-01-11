@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "73F76FC4-9E6C-4AD0-A9DC-FC21F88FD0F3"
+            uuid = "7D2F6A7E-70EA-4073-9987-4D54D1F86A60"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Actorpay Merchant/ViewController/Home/AddProduct/AddProductViewController.swift"
+            filePath = "Actorpay Merchant/ViewController/Home/ProductDetails/ProductDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "435"
-            endingLineNumber = "435"
-            landmarkName = "addNewProductApi()"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "getProductDetailsByIdApi(id:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

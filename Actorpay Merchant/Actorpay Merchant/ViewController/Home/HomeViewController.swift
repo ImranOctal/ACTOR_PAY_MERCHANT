@@ -34,6 +34,7 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
         }
     }
     @IBOutlet weak var backViewForHamburger: UIView!
+    @IBOutlet weak var searchTextField: UITextField!
     
     private var isHamburgerMenuShown:Bool = false
     private var beginPoint:CGFloat = 0.0
@@ -42,7 +43,8 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
     var page = 0
     var totalCount = 10
     var productList: ProductList?
-    
+    var filteredArray: [Items]?
+    var activeProductList: ProductList?
     var getTaxDataByHSNCode: TaxList?
     var viewActiveTaxDataById: TaxList?
     
@@ -53,11 +55,11 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
         // Do any additional setup after loading the view.
         
         self.backViewForHamburger.isHidden = true
+        self.searchTextField.delegate = self
         self.getMerchantDetailsByIdApi()
         NotificationCenter.default.removeObserver(self, name: Notification.Name("getMerchantDetailsByIdApi"), object: nil)
         NotificationCenter.default.addObserver(self,selector: #selector(self.getMerchantDetailsByIdApi),name:Notification.Name("getMerchantDetailsByIdApi"), object: nil)
         self.getProductListAPI()
-       
         self.getAllTaxDataByHSNCode(HSNCode: "0007")
         self.viewActiveTaxDataByIDApi(taxID: "16111609-bff3-477a-b4cf-603592597721")
         tableView.addPullToRefresh {
@@ -207,39 +209,61 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
-                let data = response.response
+                let data = response.response["data"]
                 merchantDetails = MerchantDetails.init(json: data)
                 AppManager.shared.merchantId = merchantDetails?.merchantId ?? ""
                 print(AppManager.shared.merchantId)
+                NotificationCenter.default.post(name:Notification.Name("setProfileData"), object: self)
+                
             }
         }
     }
     
-    //Product List Api
-    func getProductListAPI(){
+    // Get Product List Api
+    func getProductListAPI() {
+        showLoading()
+        APIHelper.getProductListApi(params: [:]) { (success, response) in
+            self.tableView.pullToRefreshView?.stopAnimating()
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                self.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let data = response.response["data"]
+                self.productList = ProductList.init(json: data)
+                self.filteredArray = self.productList?.items
+                self.totalCount = self.productList?.totalItems ?? 0
+                let message = response.message
+                print(message)
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    // View All Active Product Api
+    func viewAllActiveProductListApi(){
         let params: Parameters = [
             "pageNo":page,
             "pageSize":10
         ]
         print(params)
         showLoading()
-        APIHelper.getProductList(parameters: params) { (success, response) in
+        APIHelper.viewAllActiveProductListApi(parameters: params) { (success, response) in
             self.tableView.pullToRefreshView?.stopAnimating()
             if !success {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
-                self.productList = ProductList.init(json: data)
-                self.totalCount = self.productList?.totalItems ?? 0
+                self.activeProductList = ProductList.init(json: data)
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
-                self.tableView.reloadData()
+                print(message)
             }
         }
     }
@@ -254,11 +278,11 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                print(message)
                 self.getProductListAPI()
             }
         }
@@ -275,18 +299,16 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                print(message)
                 self.getProductListAPI()
             }
         }
     }
-    
-    
-    
+        
     // Get All Tax Data By HSN Code Api
     func getAllTaxDataByHSNCode(HSNCode: String) {
         showLoading()
@@ -294,13 +316,13 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
                 self.getTaxDataByHSNCode = TaxList.init(json: data)
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                print(message)
             }
         }
     }
@@ -312,13 +334,13 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
                 self.viewActiveTaxDataById = TaxList.init(json: data)
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                print(message)
             }
         }
     }
@@ -330,19 +352,23 @@ extension HomeViewController {
 extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.productList?.items?.count ?? 0
+        if (filteredArray?.count == 0) || (filteredArray == nil) {
+            tableView.setEmptyMessage("No Product Found")
+        } else {
+            tableView.restore()
+        }
+        return filteredArray?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell", for: indexPath) as! ProductTableViewCell
-        let item = self.productList?.items?[indexPath.row]
+        let item = self.filteredArray?[indexPath.row]
         cell.item = item
-        
         cell.editButtonHandler = {
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "AddProductViewController") as! AddProductViewController
             newVC.titleLabel = "UPDATE PRODUCT"
             newVC.isUpdate = true
-            newVC.productItem = self.productList?.items?[indexPath.row]
+            newVC.productItem = self.filteredArray?[indexPath.row]
             self.navigationController?.pushViewController(newVC, animated: true)
 //            self.changeProductStatusApi(productId: item?.productId ?? "", status: "true")
         }
@@ -355,7 +381,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let item = self.productList?.items?[indexPath.row]
+        let item = self.filteredArray?[indexPath.row]
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
         newVC.productId = item?.productId
         newVC.reloadFunction()
@@ -371,10 +397,31 @@ extension HomeViewController: UIScrollViewDelegate{
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
         let totalRecords = self.productList?.items?.count ?? 0
         // Change 10.0 to adjust the distance from bottom
-        if maximumOffset - currentOffset <= 10.0 && totalRecords < totalCount {
-            page += 1
-            self.getProductListAPI()
+        if maximumOffset - currentOffset <= 10.0 && totalRecords >= 10 {
+            if page < self.productList?.totalPages ?? 0 {
+                page += 1
+                self.getProductListAPI()
+            }
         }
     }
     
+}
+
+//MARK: TextField Delegate Methods
+extension HomeViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
+        var finalString = ""
+        if string.isEmpty {
+            finalString = String(finalString.dropLast())
+            filteredArray = productList?.items
+        } else {
+            finalString = textField.text! + string
+            self.filteredArray = self.productList?.items?.filter({
+                ($0.name ?? "").localizedCaseInsensitiveContains(finalString)
+            })
+        }
+        self.tableView.reloadData()
+        return true
+    }
 }
