@@ -44,7 +44,7 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
     var totalCount = 10
     var productList: ProductList?
     var filteredArray: [Items]?
-    
+    var activeProductList: ProductList?
     var getTaxDataByHSNCode: TaxList?
     var viewActiveTaxDataById: TaxList?
     
@@ -216,19 +216,16 @@ extension HomeViewController {
                 merchantDetails = MerchantDetails.init(json: data)
                 AppManager.shared.merchantId = merchantDetails?.merchantId ?? ""
                 print(AppManager.shared.merchantId)
+                NotificationCenter.default.post(name:Notification.Name("setProfileData"), object: self)
+                
             }
         }
     }
     
-    //Product List Api
-    func getProductListAPI(){
-        let params: Parameters = [
-            "pageNo":page,
-            "pageSize":10
-        ]
-        print(params)
+    // Get Product List Api
+    func getProductListAPI() {
         showLoading()
-        APIHelper.getProductList(parameters: params) { (success, response) in
+        APIHelper.getProductListApi(params: [:]) { (success, response) in
             self.tableView.pullToRefreshView?.stopAnimating()
             if !success {
                 dissmissLoader()
@@ -243,6 +240,30 @@ extension HomeViewController {
                 let message = response.message
                 print(message)
                 self.tableView.reloadData()
+            }
+        }
+    }
+    
+    // View All Active Product Api
+    func viewAllActiveProductListApi(){
+        let params: Parameters = [
+            "pageNo":page,
+            "pageSize":10
+        ]
+        print(params)
+        showLoading()
+        APIHelper.viewAllActiveProductListApi(parameters: params) { (success, response) in
+            self.tableView.pullToRefreshView?.stopAnimating()
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                print(message)
+            }else {
+                dissmissLoader()
+                let data = response.response["data"]
+                self.activeProductList = ProductList.init(json: data)
+                let message = response.message
+                print(message)
             }
         }
     }

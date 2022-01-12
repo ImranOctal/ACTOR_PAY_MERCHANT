@@ -101,11 +101,14 @@ class LoginViewController: UIViewController {
     // Login Button Action
     @IBAction func loginButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        if isRememberMeTap {
-            AppManager.shared.rememberMeEmail = emailTextField.text ?? ""
-            AppManager.shared.rememberMePassword = passwordTextField.text ?? ""
+        if self.loginValidation() {
+            if isRememberMeTap {
+                AppManager.shared.rememberMeEmail = emailTextField.text ?? ""
+                AppManager.shared.rememberMePassword = passwordTextField.text ?? ""
+            }
+            validationLabelManage()
+            loginApi()
         }
-        self.loginValidation()
     }
     
     //Facial Recognaition Button Action
@@ -149,30 +152,36 @@ class LoginViewController: UIViewController {
     }
     
     // Login Validation Func
-    func loginValidation()
+    func loginValidation() -> Bool
     {
+        var isValidate = true
+        
         if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
             emailValidationLbl.isHidden = false
             emailValidationLbl.text = ValidationManager.shared.emptyEmail
-            return
+            isValidate = false
         }
         else if !isValidEmail(emailTextField.text ?? "") {
             emailValidationLbl.isHidden = false
             emailValidationLbl.text = ValidationManager.shared.validEmail
-            return
+            isValidate = false
         } else {
             emailValidationLbl.isHidden = true
         }
+        
         if passwordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
             passwordValidationLbl.isHidden = false
             passwordValidationLbl.text = ValidationManager.shared.emptyPassword
-            return
+            isValidate = false
+        } else if !isValidPassword(mypassword: passwordTextField.text ?? "") {
+            passwordValidationLbl.isHidden = false
+            passwordValidationLbl.text = ValidationManager.shared.containPassword
+            isValidate = false
         } else {
             passwordValidationLbl.isHidden = true
         }
-        validationLabelManage()
-        loginApi()
-        return
+        
+        return isValidate
     }
     
     // Validation Label Manage

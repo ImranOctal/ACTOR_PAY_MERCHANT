@@ -33,8 +33,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var fullAddressValidationLbl: UILabel!
     @IBOutlet weak var shopLicenceValidationLbl: UILabel!
     
-    
-    
     var isPassTap = false
     var isRememberMeTap = false
     var mobileCode: String?
@@ -44,7 +42,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        self.validationLabelManage()
         topCorner(bgView: mainView, maskToBounds: true)
         phoneCodeTextField.delegate = self
         setupMultipleTapLabel()
@@ -86,49 +84,10 @@ class SignUpViewController: UIViewController {
     
     // SignUp Button Action
     @IBAction func signUpButtonAction(_ sender: UIButton) {
-        // Signup Validation
-        if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter an email address.")
-            return
+        if self.signUpValidation() {
+            self.validationLabelManage()
+            self.signUpApi()
         }
-        if !isValidEmail(emailTextField.text ?? ""){
-            self.alertViewController(message: "Please Enter an email address.")
-            return
-        }
-        if passwordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter an Password.")
-            return
-        }
-        if businessNameTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter an business Name.")
-            return
-        }
-        if phoneCodeTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Select Country Code.")
-            return
-        }
-        if mobileNumberTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a phone number.")
-            return
-        }
-        if !(mobileNumberTextField.text ?? "").validPhoneNumber {
-            self.alertViewController(message: "Please Enter valid Phone Number")
-            return
-        }
-        if shopAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a shop address.")
-            return
-        }
-        if shopActNoOrLicenceTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a shop act number or licence.")
-            return
-        }
-        if !isRememberMeTap{
-            self.alertViewController(message: "Please accept terms and privacy policy.")
-            return
-        }
-        
-        self.signUpApi()
     }
     
     // Login Button Action
@@ -154,6 +113,113 @@ class SignUpViewController: UIViewController {
     
     //MARK: - helper Functions -
     
+    // SignUp Validation
+    func signUpValidation() -> Bool {
+        var isValidate = true
+        if firstNameTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            firstNameValidationLbl.isHidden = false
+            firstNameValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            firstNameValidationLbl.isHidden = true
+        }
+        
+        if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            emailValidationLbl.isHidden = false
+            emailValidationLbl.text = ValidationManager.shared.emptyEmail
+            isValidate = false
+        } else if !isValidEmail(emailTextField.text ?? "") {
+            emailValidationLbl.isHidden = false
+            emailValidationLbl.text = ValidationManager.shared.validEmail
+            isValidate = false
+        } else {
+            emailValidationLbl.isHidden = true
+        }
+        
+        if passwordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            passwordValidationLbl.isHidden = false
+            passwordValidationLbl.text = ValidationManager.shared.emptyPassword
+            isValidate = false
+        }
+        else if !isValidPassword(mypassword: passwordTextField.text ?? "") {
+            passwordValidationLbl.isHidden = false
+            passwordValidationLbl.text = ValidationManager.shared.containPassword
+            isValidate = false
+        } else {
+            passwordValidationLbl.isHidden = true
+        }
+        
+        if businessNameTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            businessNameValidationLbl.isHidden = false
+            businessNameValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            businessNameValidationLbl.isHidden = true
+        }
+        
+        if phoneCodeTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            self.alertViewController(message: "Please Select Country Code.")
+            isValidate = false
+        }
+        
+        if mobileNumberTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            phoneValidationLbl.isHidden = false
+            phoneValidationLbl.text = ValidationManager.shared.emptyPhone
+            isValidate = false
+        } else if !isValidMobileNumber(mobileNumber: mobileNumberTextField.text ?? "") {
+            phoneValidationLbl.isHidden = false
+            phoneValidationLbl.text = ValidationManager.shared.validPhone
+            isValidate = false
+        } else {
+            phoneValidationLbl.isHidden = true
+        }
+        
+        if shopAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            shopAddressValidationLbl.isHidden = false
+            shopAddressValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            shopAddressValidationLbl.isHidden = true
+        }
+        
+        if fullAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            fullAddressValidationLbl.isHidden = false
+            fullAddressValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            fullAddressValidationLbl.isHidden = true
+        }
+        
+        if shopActNoOrLicenceTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            shopLicenceValidationLbl.isHidden = false
+            shopLicenceValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            shopLicenceValidationLbl.isHidden = true
+        }
+        
+        if !isRememberMeTap {
+            self.alertViewController(message: "Please agree to our terms to sign up")
+            isValidate = false
+        }
+        
+        return isValidate
+        
+    }
+    
+    // Validation Label Manage
+    func validationLabelManage() {
+        emailValidationLbl.isHidden = true
+        phoneValidationLbl.isHidden = true
+        passwordValidationLbl.isHidden = true
+        firstNameValidationLbl.isHidden = true
+        shopAddressValidationLbl.isHidden = true
+        fullAddressValidationLbl.isHidden = true
+        shopLicenceValidationLbl.isHidden = true
+        businessNameValidationLbl.isHidden = true
+    }
+    
+    
     // Country Code Picker SetUp
     func numberPickerSetup() {
         phoneCodeTextField.phonePickerDelegate = self
@@ -161,7 +227,7 @@ class SignUpViewController: UIViewController {
         phoneCodeTextField.flagSize = CGSize(width: 20, height: 10)
         phoneCodeTextField.flagInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         phoneCodeTextField.shouldScrollToSelectedCountry = false
-        phoneCodeTextField.enablePlusPrefix = true
+        phoneCodeTextField.enablePlusPrefix = false
         
         if ((UserDefaults.standard.string(forKey: "countryCode")) != nil) {
             let code = (UserDefaults.standard.string(forKey: "countryCode") ?? Locale.current.regionCode) ?? ""

@@ -122,9 +122,21 @@ final class APIHelper {
         }
     }
     
-    //MARK: Product List Api
-    static func getProductList(parameters: Parameters ,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.getMethod(method: .get, url: APIEndPoint.productList.rawValue, parameters: parameters) { (response) in
+    //MARK: Get Product List Api
+    static func getProductListApi(params: Parameters , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.request2(method: .post, url: APIEndPoint.productList.rawValue, parameters: params) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: View All Active Product List Api
+    static func viewAllActiveProductListApi(parameters: Parameters ,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.getMethod(method: .get, url: APIEndPoint.activProductList.rawValue, parameters: parameters) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)

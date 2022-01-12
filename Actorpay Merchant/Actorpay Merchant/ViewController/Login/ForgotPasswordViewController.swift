@@ -38,22 +38,24 @@ class ForgotPasswordViewController: UIViewController {
     
     // Ok Button Action
     @IBAction func okButtonAction(_ sender: UIButton){
-        
-        // Validations
-        if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.view.makeToast("Please Enter an Email Address.")
-            return
-        }
-        
-        if !isValidEmail(emailTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""){
-            self.alertViewController(message: "Please enter a valid Email ID.")
-            return
-        }
-        
-        self.forgotPasswordApi()
+        self.forgotPasswordValidation()
     }
     
     //MARK: - Helper Functions -
+    
+    // Forgot Password Validation
+    func forgotPasswordValidation() {
+        if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            emailTextField.setError("  "+ValidationManager.shared.emptyEmail+"  ", show: true, triagleConst: -22)
+            return
+        } else if !isValidEmail(emailTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""){
+            emailTextField.setError("  "+ValidationManager.shared.validEmail+"  ", show: true, triagleConst: -22)
+            return
+        } else {
+            emailTextField.setError()
+        }
+        self.forgotPasswordApi()
+    }
     
     // Show View With Animation
     func showAnimate(){
@@ -67,6 +69,7 @@ class ForgotPasswordViewController: UIViewController {
     
     // Remove View With Animation
     func removeAnimate(){
+        emailTextField.setError()
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0;

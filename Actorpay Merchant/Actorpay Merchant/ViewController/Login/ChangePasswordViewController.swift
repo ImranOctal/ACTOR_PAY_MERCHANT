@@ -19,6 +19,8 @@ class ChangePasswordViewController: UIViewController {
     @IBOutlet weak var newPasswordTextField: UITextField!
     @IBOutlet weak var confirmNewPasswordTextField: UITextField!
     
+    var isPassTap = false
+    
     //MARK: - Life Cycles -
 
     override func viewDidLoad() {
@@ -40,32 +42,63 @@ class ChangePasswordViewController: UIViewController {
     
     //Ok Button Action
     @IBAction func okButtonAction(_ sender: UIButton){
-        // Validation
-        if currentPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.view.makeToast("Please Enter a current Password.")
-            return
+        self.changePasswordValidation()
+    }
+    
+    // Password Toggle Button Action
+    @IBAction func passwordToggleButton(_ sender: UIButton) {
+        self.view.endEditing(true)
+        if sender.tag == 1001{
+            isPassTap = !isPassTap
+            currentPasswordTextField.isSecureTextEntry = !isPassTap
+            sender.setImage(UIImage(named: isPassTap ? "hide" : "show"), for: .normal)
+        } else if sender.tag == 1002{
+            isPassTap = !isPassTap
+            newPasswordTextField.isSecureTextEntry = !isPassTap
+            sender.setImage(UIImage(named: isPassTap ? "hide" : "show"), for: .normal)
+        }else{
+            isPassTap = !isPassTap
+            confirmNewPasswordTextField.isSecureTextEntry = !isPassTap
+            sender.setImage(UIImage(named: isPassTap ? "hide" : "show"), for: .normal)
         }
-        
-        if newPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.view.makeToast("Please Enter a current Password.")
-            return
-        }
-        
-        if confirmNewPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.view.makeToast("Please Enter a current Password.")
-            return
-        }
-        
-        if newPasswordTextField.text != confirmNewPasswordTextField.text {
-            self.view.makeToast("New password and confirm password does not match.")
-            return
-        }
-        
-        self.changePasswordApi()
-        
     }
     
     //MARK: - Helper Functions -
+    
+    // Change Password Validation
+    func changePasswordValidation() {
+        if currentPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            currentPasswordTextField.setError("  "+ValidationManager.shared.emptyPassword+"  ", show: true, triagleConst: -49)
+            
+            return
+        }  else if !isValidPassword(mypassword: currentPasswordTextField.text ?? "") {
+            currentPasswordTextField.setError("  "+ValidationManager.shared.containPassword+"  ", show: true,triagleConst: -49,labelHeight: 60)
+            return
+        } else {
+            currentPasswordTextField.setError()
+        }
+        
+        if newPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            newPasswordTextField.setError("  "+ValidationManager.shared.emptyPassword+"  ", show: true,triagleConst: -49)
+            return
+        } else if !isValidPassword(mypassword: newPasswordTextField.text ?? "") {
+            newPasswordTextField.setError("  "+ValidationManager.shared.containPassword+"  ", show: true,triagleConst: -49,labelHeight: 60)
+            return
+        } else {
+            newPasswordTextField.setError()
+        }
+        
+        if confirmNewPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            confirmNewPasswordTextField.setError("  "+ValidationManager.shared.emptyPassword, show: true,triagleConst: -49)
+            return
+        } else if newPasswordTextField.text != confirmNewPasswordTextField.text {
+            confirmNewPasswordTextField.setError("  "+ValidationManager.shared.misMatchPassword+"  ", show: true,triagleConst: -49)
+            return
+        } else {
+            confirmNewPasswordTextField.setError()
+        }
+        self.changePasswordApi()
+    }
     
     // Show View With Animation
     func showAnimate(){
@@ -79,6 +112,9 @@ class ChangePasswordViewController: UIViewController {
     
     //Remove View With Animation
     func removeAnimate(){
+        currentPasswordTextField.setError()
+        newPasswordTextField.setError()
+        confirmNewPasswordTextField.setError()
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0;
@@ -93,6 +129,7 @@ class ChangePasswordViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if(touches.first?.view != changePasswordView){
             removeAnimate()
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -115,11 +152,11 @@ extension ChangePasswordViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                print(message)
             }else {
                 dissmissLoader()
                 let message = response.message
-                 // myApp.window?.rootViewController?.view.makeToast(message)
+                 print(message)
                 self.removeAnimate()
                 self.dismiss(animated: true, completion: nil)
             }

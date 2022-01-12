@@ -37,12 +37,13 @@ class SideMenuViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
     var menu: [SideMenuModel] = [
-        SideMenuModel(icon: UIImage(named: "home"), title: "My Profile"),
-        SideMenuModel(icon: UIImage(named: "file"), title: "Reports"),
-        SideMenuModel(icon: UIImage(named: "cancel"), title: "Cancel/Raise Dispute"),
-        SideMenuModel(icon: UIImage(named: "cancel"), title: "My Orders"),
-        SideMenuModel(icon: UIImage(named: "clerk"), title: "Merchant & sub Merchant"),
-        SideMenuModel(icon: UIImage(named: "cancel"), title: "Change Password")
+        SideMenuModel(icon: UIImage(named: "my_profile"), title: "My Profile"),
+        SideMenuModel(icon: UIImage(named: "change_password"), title: "Change Password"),
+        SideMenuModel(icon: UIImage(named: "sub_merchant"), title: "Merchant & sub Merchant"),
+        SideMenuModel(icon: UIImage(named: "manage_orders"), title: "Manage Products"),
+        SideMenuModel(icon: UIImage(named: "manage_orders"), title: "Manage Orders"),
+        SideMenuModel(icon: UIImage(named: "cancel_dispute"), title: "Cancelled/Raised Dispute"),
+        SideMenuModel(icon: UIImage(named: "file_reports"), title: "Reports"),
     ]    
     var delegate : SideMenuViewControllerDelegate?
     
@@ -50,7 +51,12 @@ class SideMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.post(name:Notification.Name("getMerchantDetailsByIdApi"), object: self)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("setProfileData"), object: nil)
+        NotificationCenter.default.addObserver(self,selector: #selector(self.setProfileData),name:Notification.Name("setProfileData"), object: nil)
+        self.setProfileData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.setProfileData()
     }
     
@@ -77,9 +83,9 @@ class SideMenuViewController: UIViewController {
     //MARK: - Helper Functions -
     
     // Set Profile Data
-    func setProfileData() {
+    @objc func setProfileData() {
         profilePictureImage.sd_setImage(with: URL(string: merchantDetails?.profilePicture ?? ""), placeholderImage: UIImage(named: "profile"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
-        nameLabel.text = merchantDetails?.businessName
+        nameLabel.text = merchantDetails?.businessName ?? ""
     }
 }
 
@@ -106,31 +112,29 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
             self.navigationController?.pushViewController(newVC, animated: true)
         case 1:
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "PayRollViewController") as! PayRollViewController
-            self.navigationController?.pushViewController(newVC, animated: true)
+            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordViewController") as? ChangePasswordViewController)!
+            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            self.definesPresentationContext = true
+            self.providesPresentationContextTransitionStyle = true
+            newVC.modalPresentationStyle = .overCurrentContext
+            self.navigationController?.present(newVC, animated: true, completion: nil)
         case 2:
-            obj_AppDelegate.window?.rootViewController?.view.makeToast("Coming Soon")
-        case 3:
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ManageOrdersViewController") as! ManageOrdersViewController
-            self.navigationController?.pushViewController(newVC, animated: true)
-        case 4:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "NewSubAdminViewController") as! NewSubAdminViewController
             self.navigationController?.pushViewController(newVC, animated: true)
+        case 3:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+        case 4:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ManageOrdersViewController") as! ManageOrdersViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
         case 5:
-            if let obje = obj_AppDelegate.window?.rootViewController {
-                let popOverConfirmVC = self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordViewController") as! ChangePasswordViewController
-                obj_AppDelegate.window?.rootViewController?.addChild(popOverConfirmVC)
-                popOverConfirmVC.view.frame = obje.view.frame
-                obje.view.center = popOverConfirmVC.view.center
-                obje.view.addSubview(popOverConfirmVC.view)
-                popOverConfirmVC.didMove(toParent: self)
-            }
+            obj_AppDelegate.window?.rootViewController?.view.makeToast("Coming Soon")
+            return
+        case 6:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "PayRollViewController") as! PayRollViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
         default:
             break
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
     }
 }

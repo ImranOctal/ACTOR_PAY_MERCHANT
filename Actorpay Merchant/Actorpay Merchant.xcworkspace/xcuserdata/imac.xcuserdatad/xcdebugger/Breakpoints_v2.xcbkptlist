@@ -3,4 +3,70 @@
    uuid = "8A20C8E3-7A5E-4BAC-BE8F-7B895D60BD50"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "79B15CBF-6247-496E-B607-24FBAD6FCCCA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Actorpay Merchant/ViewController/Profile/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "updateMerchantProfile()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "370D050B-84C2-4A2B-B9C8-51AD362E751C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Actorpay Merchant/ViewController/Profile/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
+            landmarkName = "updateMerchantProfile()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "370D050B-84C2-4A2B-B9C8-51AD362E751C - 67935f614a084234"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Actorpay_Merchant.ProfileViewController.updateMerchantProfile() -&gt; ()"
+                  moduleName = "Actorpay Merchant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Data/iOS/ActorPayMerchant/Actorpay%20Merchant/Actorpay%20Merchant/ViewController/Profile/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "219"
+                  endingLineNumber = "219"
+                  offsetFromSymbolStart = "3397">
+               </Location>
+               <Location
+                  uuid = "370D050B-84C2-4A2B-B9C8-51AD362E751C - 1d64f4af1d17443d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Actorpay_Merchant.APIResponse) -&gt; () in Actorpay_Merchant.ProfileViewController.updateMerchantProfile() -&gt; ()"
+                  moduleName = "Actorpay Merchant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Data/iOS/ActorPayMerchant/Actorpay%20Merchant/Actorpay%20Merchant/ViewController/Profile/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "220"
+                  endingLineNumber = "220"
+                  offsetFromSymbolStart = "186">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

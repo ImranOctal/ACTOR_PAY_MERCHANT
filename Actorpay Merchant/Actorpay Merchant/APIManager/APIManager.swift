@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 
 typealias APICompletionBlock = (_ respone:APIResponse) -> Void
-//
+
 struct APIResponse {
     var success = false
     var message = ""

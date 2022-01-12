@@ -28,6 +28,12 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var shopActNoOrLicenceTextField: UITextField!
     @IBOutlet weak var profileImgView: UIImageView!
     @IBOutlet weak var businessNameLabel: UILabel!
+    @IBOutlet weak var emailValidationLbl: UILabel!
+    @IBOutlet weak var businessNameValidationLbl: UILabel!
+    @IBOutlet weak var mobileValidationLbl: UILabel!
+    @IBOutlet weak var shopAddressValidationLbl: UILabel!
+    @IBOutlet weak var fullAddressValidationLbl: UILabel!
+    @IBOutlet weak var shopLicenceValidationLbl: UILabel!
     
     var mobileCode: String?
     
@@ -36,6 +42,8 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.validationLabelManage()
         
         phoneCodeTextField.delegate = self
         numberPickerSetup()
@@ -52,41 +60,10 @@ class ProfileViewController: UIViewController {
     
     // Save Button Action
     @IBAction func saveButtonAction(_ sender: UIButton) {
-        // save Validation
-        if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter an email address.")
-            return
+        if self.profileValidation() {
+            self.validationLabelManage()
+            self.updateMerchantProfile()
         }
-        if !isValidEmail(emailTextField.text ?? ""){
-            self.alertViewController(message: "Please Enter an email address.")
-            return
-        }
-        if businessNameTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter an business Name.")
-            return
-        }
-        if phoneCodeTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Select Country Code.")
-            return
-        }
-        if mobileNumberTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a phone number.")
-            return
-        }
-        if shopAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a shop address.")
-            return
-        }
-        if fullAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a Full address.")
-            return
-        }
-        if shopActNoOrLicenceTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            self.alertViewController(message: "Please Enter a shop act number or licence.")
-            return
-        }
-        
-        self.updateMerchantProfile()
     }
     
     //Country Code Button Action
@@ -102,8 +79,86 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Helper Functions -
     
+    // Profile Validation
+    func profileValidation() -> Bool {
+        var isValidate = true
+        if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            emailValidationLbl.isHidden = false
+            emailValidationLbl.text = ValidationManager.shared.emptyEmail
+            isValidate = false
+        } else if !isValidEmail(emailTextField.text ?? ""){
+            emailValidationLbl.isHidden = false
+            emailValidationLbl.text = ValidationManager.shared.validEmail
+            isValidate = false
+        } else {
+            emailValidationLbl.isHidden = true
+        }
+        
+        if businessNameTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            businessNameValidationLbl.isHidden = false
+            businessNameValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            businessNameValidationLbl.isHidden = true
+        }
+        
+        if phoneCodeTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            self.alertViewController(message: "Please Select Country Code.")
+            isValidate = false
+        }
+        
+        if mobileNumberTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            mobileValidationLbl.isHidden = false
+            mobileValidationLbl.text = ValidationManager.shared.emptyPhone
+            isValidate = false
+        } else if !isValidMobileNumber(mobileNumber: mobileNumberTextField.text ?? "") {
+            mobileValidationLbl.isHidden = false
+            mobileValidationLbl.text = ValidationManager.shared.validPhone
+            isValidate = false
+        } else {
+            mobileValidationLbl.isHidden = true
+        }
+        
+        if shopAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+            shopAddressValidationLbl.isHidden = false
+            shopAddressValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            shopAddressValidationLbl.isHidden = true
+        }
+        
+        if fullAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            fullAddressValidationLbl.isHidden = false
+            fullAddressValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            fullAddressValidationLbl.isHidden = true
+        }
+        
+        if shopActNoOrLicenceTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            shopLicenceValidationLbl.isHidden = false
+            shopLicenceValidationLbl.text = ValidationManager.shared.emptyField
+            isValidate = false
+        } else {
+            shopLicenceValidationLbl.isHidden = true
+        }
+        
+        return isValidate
+        
+    }
+    
+    // Validation Label Manage
+    func validationLabelManage() {
+        emailValidationLbl.isHidden = true
+        businessNameValidationLbl.isHidden = true
+        mobileValidationLbl.isHidden = true
+        shopAddressValidationLbl.isHidden = true
+        fullAddressValidationLbl.isHidden = true
+        shopLicenceValidationLbl.isHidden = true
+    }
+    
     //Set Merchant Details Data
-    func setMerchantDetailsData() {
+    @objc func setMerchantDetailsData() {
         businessNameLabel.text = merchantDetails?.businessName
         emailTextField.text = merchantDetails?.email
         businessNameTextField.text = merchantDetails?.businessName
@@ -149,7 +204,6 @@ extension ProfileViewController {
     
     // Update Profile Api
     func updateMerchantProfile() {
-        
         let params: Parameters = [
             "id":AppManager.shared.merchantUserId,
             "email":emailTextField.text ?? "",
@@ -171,6 +225,7 @@ extension ProfileViewController {
                 let message = response.message
                 myApp.window?.rootViewController?.view.makeToast(message)
                 NotificationCenter.default.post(name:Notification.Name("getMerchantDetailsByIdApi"), object: self)
+                
             }
         } 
     }
