@@ -6,9 +6,9 @@
 //
 
 import UIKit
-import DropDown
 import Alamofire
 import SDWebImage
+
 
 class AddProductViewController: UIViewController {
     
@@ -21,15 +21,32 @@ class AddProductViewController: UIViewController {
     }
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var productImageView: UIImageView!
-    @IBOutlet weak var productNameTextField: UITextField!
-    @IBOutlet weak var chooseProductCategoryTextField: UITextField!
-    @IBOutlet weak var chooseProductSubCategoryTextField: UITextField!
-    @IBOutlet weak var actualPriceTextField: UITextField!
-    @IBOutlet weak var dealPriceTextField: UITextField!
-    @IBOutlet weak var quantityTextField: UITextField!
+    @IBOutlet weak var productNameTextField: UITextField! {
+        didSet {
+            productNameTextField.delegate = self
+            productNameTextField.becomeFirstResponder()
+        }
+    }
+    @IBOutlet weak var categoryDropDownTextField: CustomDropDown!
+    @IBOutlet weak var subCategoryDropDownTextField: CustomDropDown!
+    @IBOutlet weak var actualPriceTextField: UITextField! {
+        didSet{
+            actualPriceTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var dealPriceTextField: UITextField! {
+        didSet{
+            dealPriceTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var quantityTextField: UITextField! {
+        didSet{
+            quantityTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var taxDropDownTextField: CustomDropDown!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var addAndUpdateProductBtn: UIButton!
-    @IBOutlet weak var taxationTextField: UITextField!
     @IBOutlet weak var productNameValidationLbl: UILabel!
     @IBOutlet weak var categoryValidationLbl: UILabel!
     @IBOutlet weak var subcategoryValidationLbl: UILabel!
@@ -39,12 +56,11 @@ class AddProductViewController: UIViewController {
     @IBOutlet weak var quantityValidationLbl: UILabel!
     @IBOutlet weak var descriptionValidationLbl: UILabel!
     
+    
     var imagePicker = UIImagePickerController()
-    var categoryDropDown = DropDown()
-    var subCategoryDropDown = DropDown()
-    var taxDropDown = DropDown()
     var titleLabel = ""
     var categoryList: CategoryList?
+    var categoryListItems: [CategoryItems]?
     var subCategoryList : SubCategoryList?
     var categoryData:[String] = []
     var subCategoryData:[String] = []
@@ -70,11 +86,17 @@ class AddProductViewController: UIViewController {
         placeHolder = "Type Here"
         descriptionTextView.delegate = self
         descriptionTextView.text = placeHolder
-        descriptionTextView.textColor = descriptionTextView.text == placeHolder ? .lightGray : .black
+        if descriptionTextView.text == placeHolder {
+            descriptionTextView.textColor = .lightGray
+        } else {
+            descriptionTextView.textColor = .black
+        }
         self.addAndUpdateProductBtn.setTitle(isUpdate == true ? "UPDATE PRODUCT" : "ADD PRODUCT", for: .normal)
         imagePicker.delegate = self
-        self.getAllActiveTaxApi()
-        getAllCategories(pageSize: pageSize)
+//        self.getAllActiveTaxApi()
+//        getAllCategories(pageSize: pageSize)
+        self.getInTaxDropDownApi()
+        self.getInCategoryDropdownApi()
         getSubCategories()
         if isUpdate {
             setProductData()
@@ -87,21 +109,6 @@ class AddProductViewController: UIViewController {
     @IBAction func backButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    //Product Category DropDown
-    @IBAction func productCategoryDropDown(_ sender: UIButton) {
-        self.view.endEditing(true)
-        if sender.tag == 1001 {
-            categoryDropDown.show()
-        }else {
-            subCategoryDropDown.show()
-        }
-    }
-    
-    @IBAction func taxDataDropDown(_ sender: UIButton) {
-        self.view.endEditing(true)
-        taxDropDown.show()
     }
     
     //Upload Image Button Action
@@ -155,7 +162,7 @@ class AddProductViewController: UIViewController {
             productNameValidationLbl.isHidden = true
         }
         
-        if chooseProductCategoryTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+        if categoryDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
             categoryValidationLbl.isHidden = false
             categoryValidationLbl.text = ValidationManager.shared.selectCategory
             isValidate = false
@@ -163,7 +170,7 @@ class AddProductViewController: UIViewController {
             categoryValidationLbl.isHidden = true
         }
         
-        if chooseProductSubCategoryTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+        if subCategoryDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
             subcategoryValidationLbl.isHidden = false
             subcategoryValidationLbl.text = ValidationManager.shared.selectSubCategory
             isValidate = false
@@ -187,7 +194,7 @@ class AddProductViewController: UIViewController {
             dealPriceValidationLbl.isHidden = true
         }
         
-        if taxationTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+        if taxDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
             taxationValidationLbl.isHidden = false
             taxationValidationLbl.text = ValidationManager.shared.chooseTax
             isValidate = false
@@ -227,69 +234,6 @@ class AddProductViewController: UIViewController {
         descriptionValidationLbl.isHidden = true
     }
     
-    // SetUp Category Drop Down
-    func setupCategoryDropDown() {
-        categoryDropDown.anchorView = chooseProductCategoryTextField
-        categoryDropDown.dataSource = categoryData
-        categoryDropDown.backgroundColor = .white
-        categoryDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.chooseProductCategoryTextField.text = item
-            self.chooseProductSubCategoryTextField.text = nil
-            for i in self.categoryList?.items ?? [] {
-                if i.name == item {
-                    categoryId = i.id
-                    getSubcategoryByCategoryApi(i.id ?? "")
-                }
-            }
-            self.view.endEditing(true)
-            self.categoryDropDown.hide()
-        }
-        categoryDropDown.bottomOffset = CGPoint(x: -10, y: 50)
-        categoryDropDown.width = chooseProductCategoryTextField.frame.width + 60
-        categoryDropDown.direction = .bottom
-    }
-    
-    // Setup Tax Data Drop Down
-    func setUpTaxDataDropDown() {
-        taxDropDown.anchorView = taxationTextField
-        taxDropDown.dataSource = taxData
-        taxDropDown.backgroundColor = .white
-        taxDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.taxationTextField.text = item
-            for i in self.taxList ?? [] {
-                if "\(i.taxPercentage ?? 0.0)" == item {
-                    taxID = i.id
-                    return
-                }
-            }
-            self.view.endEditing(true)
-            self.taxDropDown.hide()
-        }
-        taxDropDown.bottomOffset = CGPoint(x: -10, y: 50)
-        taxDropDown.width = taxationTextField.frame.width + 20
-        taxDropDown.direction = .bottom
-    }
-    
-    // SetUp Sub Category Drop Down
-    func subCategoryDropDownSetup() {
-        subCategoryDropDown.anchorView = chooseProductSubCategoryTextField
-        subCategoryDropDown.dataSource = self.subCategoryData
-        subCategoryDropDown.backgroundColor = .white
-        subCategoryDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.chooseProductSubCategoryTextField.text = item
-            for i in self.subCategoryList?.items ?? [] {
-                if i.name == item {
-                    subCategoryId = i.id
-                }
-            }
-            self.view.endEditing(true)
-            self.subCategoryDropDown.hide()
-        }
-        subCategoryDropDown.bottomOffset = CGPoint(x: -10, y: 50)
-        subCategoryDropDown.width = chooseProductSubCategoryTextField.frame.width + 60
-        subCategoryDropDown.direction = .bottom
-    }
-    
     //Set Product Data
     func setProductData() {
         productImageView.sd_setImage(with: URL(string: productItem?.image ?? ""), placeholderImage: UIImage(named: "logo"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
@@ -298,6 +242,85 @@ class AddProductViewController: UIViewController {
         quantityTextField.text = "\(productItem?.stockCount ?? 0)"
         dealPriceTextField.text = "\(productItem?.dealPrice ?? 0.0)"
         descriptionTextView.text = productItem?.description
+        if descriptionTextView.text == placeHolder {
+            descriptionTextView.textColor = .lightGray
+        } else {
+            descriptionTextView.textColor = .black
+        }
+    }
+    
+    // SetUp Category Drop Down
+    func setUpCategoryDropDown() {
+        categoryDropDownTextField.optionArray = categoryData
+        categoryDropDownTextField.checkMarkEnabled = false
+        categoryDropDownTextField.didSelect{(selectedText , index , id) in
+            for i in self.categoryListItems ?? [] {
+                if i.name == selectedText {
+                    self.categoryId = i.id
+                    self.getSubcategoryByCategoryApi(i.id ?? "")
+                }
+            }
+        }
+        categoryDropDownTextField.isSearchEnable = true
+        categoryDropDownTextField.arrow.isHidden = true
+        categoryDropDownTextField.arrowSize = 0
+        categoryDropDownTextField.listDidDisappear {
+            if self.categoryDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                self.categoryValidationLbl.isHidden = false
+                self.categoryValidationLbl.text = ValidationManager.shared.selectCategory
+            } else {
+                self.categoryValidationLbl.isHidden = true
+            }
+        }
+    }
+    
+    // SetUp SubCategory Drop Down
+    func setUpSubCategoryDropDown() {
+        subCategoryDropDownTextField.optionArray = subCategoryData
+        subCategoryDropDownTextField.checkMarkEnabled = false
+        subCategoryDropDownTextField.didSelect{(selectedText , index , id) in
+            for i in self.subCategoryList?.items ?? [] {
+                if i.name == selectedText {
+                    self.subCategoryId = i.id
+                }
+            }
+        }
+        subCategoryDropDownTextField.arrowSize = 0
+        subCategoryDropDownTextField.isSearchEnable = true
+        subCategoryDropDownTextField.arrow.isHidden = true
+        subCategoryDropDownTextField.listDidDisappear {
+            if self.subCategoryDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                self.subcategoryValidationLbl.isHidden = false
+                self.subcategoryValidationLbl.text = ValidationManager.shared.selectSubCategory
+            } else {
+                self.subcategoryValidationLbl.isHidden = true
+            }
+        }
+    }
+    
+    // SetUp Tax Drop Down
+    func setUpTaxDropDown() {
+        taxDropDownTextField.optionArray = taxData
+        taxDropDownTextField.checkMarkEnabled = false
+        taxDropDownTextField.didSelect{(selectedText , index , id) in
+            for i in self.taxList ?? [] {
+                if "\(i.taxPercentage ?? 0.0)" == selectedText {
+                    self.taxID = i.id
+                    return
+                }
+            }
+        }
+        taxDropDownTextField.arrowSize = 0
+        taxDropDownTextField.isSearchEnable = true
+        taxDropDownTextField.arrow.isHidden = true
+        taxDropDownTextField.listDidDisappear {
+            if self.taxDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                self.taxationValidationLbl.isHidden = false
+                self.taxationValidationLbl.text = ValidationManager.shared.chooseTax
+            } else {
+                self.taxationValidationLbl.isHidden = true
+            }
+        }
     }
     
     //Open Camera
@@ -333,22 +356,61 @@ extension AddProductViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response.data
                 self.taxList = data.arrayValue.map({(TaxList(json: $0))})
                 self.taxData.removeAll()
                 for item in self.taxList ?? [] {
-                    self.taxData.append("\(item.taxPercentage ?? 0.0)")
+                    self.taxData.append("\(item.hsnCode ?? "") - \(item.taxPercentage ?? 0.0)%")
                 }
                 print(self.taxData)
-                self.setUpTaxDataDropDown()
+                self.setUpTaxDropDown()
                 if self.isUpdate {
                     self.taxID = self.productItem?.taxId
                     for(_, item) in (self.taxList ?? []).enumerated() {
                         if item.id == self.productItem?.taxId {
-                            self.taxationTextField.text = "\(item.taxPercentage ?? 0.0)"
+                            self.taxDropDownTextField.text = "\(item.hsnCode ?? "") - \(item.taxPercentage ?? 0.0)%"
+                        }
+                    }
+                }
+                let message = response.message
+                print(message)
+            }
+        }
+    }
+    
+    
+    // Get In Tax Drop Down Api
+    func getInTaxDropDownApi() {
+        let params: Parameters = [
+            "asc":"true",
+            "sortBy":"hsnCode",
+            "isActive":"true"
+        ]
+        showLoading()
+        APIHelper.getInTaxDropDownApi(parameters: params) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                self.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                print(response)
+                let data = response.response.data
+                self.taxList = data.arrayValue.map({(TaxList(json: $0))})
+                self.taxData.removeAll()
+                for item in self.taxList ?? [] {
+                    self.taxData.append("\(item.hsnCode ?? "") - \(item.taxPercentage ?? 0.0)%")
+                }
+                print(self.taxData)
+                self.setUpTaxDropDown()
+                if self.isUpdate {
+                    self.taxID = self.productItem?.taxId
+                    for(_, item) in (self.taxList ?? []).enumerated() {
+                        if item.id == self.productItem?.taxId {
+                            self.taxDropDownTextField.text = "\(item.hsnCode ?? "") - \(item.taxPercentage ?? 0.0)%"
                         }
                     }
                 }
@@ -363,13 +425,16 @@ extension AddProductViewController {
         showLoading()
         let params: Parameters = [
             "pageSize":pageSize,
-            "filterByIsActive":true
+            "filterByIsActive":true,
+            "sortBy":"name",
+            "asc":true
+            
         ]
         APIHelper.getAllCategoriesAPI(parameters: params) { (success, response) in
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
@@ -380,12 +445,50 @@ extension AddProductViewController {
                 }
                 print(self.categoryData)
                 self.pageSize = self.categoryList?.totalItems ?? 0
-                self.setupCategoryDropDown()
+                self.setUpCategoryDropDown()
                 if self.isUpdate {
                     self.categoryId = self.productItem?.categoryId
                     for (_, item) in (self.categoryList?.items ?? []).enumerated() {
                         if item.id == self.productItem?.categoryId {
-                            self.chooseProductCategoryTextField.text = item.name
+                            self.categoryDropDownTextField.text = item.name
+                        }
+                    }
+                }
+                let message = response.message
+                print(message)
+            }
+        }
+    }
+    
+    // Get All Category Api
+    func getInCategoryDropdownApi() {
+        showLoading()
+        let params: Parameters = [
+            "isActive":true,
+            "sortBy":"name",
+            "asc":true
+        ]
+        APIHelper.getInCategoryDropdownApi(parameters: params) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                self.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let data = response.response.data
+                self.categoryListItems = data.arrayValue.map({(CategoryItems(json: $0))})
+                self.categoryData.removeAll()
+                for item in self.categoryListItems ?? [] {
+                    self.categoryData.append(item.name ?? "")
+                }
+                print(self.categoryData)
+                
+                self.setUpCategoryDropDown()
+                if self.isUpdate {
+                    self.categoryId = self.productItem?.categoryId
+                    for (_, item) in (self.categoryListItems ?? []).enumerated() {
+                        if item.id == self.productItem?.categoryId {
+                            self.categoryDropDownTextField.text = item.name
                         }
                     }
                 }
@@ -399,14 +502,16 @@ extension AddProductViewController {
     func getSubCategories() {
         let params: Parameters = [
             "pageSize":pageSize,
-            "filterByIsActive":true
+            "filterByIsActive":true,
+            "sortBy":"name",
+            "asc":true
         ]
         showLoading()
         APIHelper.getSubCategoriesApi(parameters: params) { (success, response) in
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
@@ -416,12 +521,12 @@ extension AddProductViewController {
                     self.subCategoryData.append(item.name ?? "")
                 }
                 print(self.subCategoryData)
-                self.subCategoryDropDownSetup()
+                self.setUpSubCategoryDropDown()
                 if self.isUpdate {
                     self.subCategoryId = self.productItem?.subCategoryId
                     for (_, item) in (self.subCategoryList?.items ?? []).enumerated() {
                         if item.id == self.productItem?.subCategoryId {
-                            self.chooseProductSubCategoryTextField.text = item.name
+                            self.subCategoryDropDownTextField.text = item.name
                         }
                     }
                 }
@@ -434,14 +539,17 @@ extension AddProductViewController {
     // Get SubCategory By Category
     func getSubcategoryByCategoryApi(_ id: String) {
         let params: Parameters = [
-            "categoryId":id
+            "categoryId":id,
+            "filterByIsActive":true,
+            "sortBy":"name",
+            "asc":true
         ]
         showLoading()
         APIHelper.getSubCategoriesByCategoryApi(parameters:params) { (success, response) in
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response.data
@@ -451,7 +559,7 @@ extension AddProductViewController {
                     self.subCategoryData.append(item.name ?? "")
                 }
                 print(self.subCategoryData)
-                self.subCategoryDropDownSetup()
+                self.setUpSubCategoryDropDown()
                 let message = response.message
                 print(message)
             }
@@ -485,7 +593,7 @@ extension AddProductViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                  myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let message = response.message
@@ -519,11 +627,12 @@ extension AddProductViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                  myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let message = response.message
                   myApp.window?.rootViewController?.view.makeToast(message)
+                NotificationCenter.default.post(name:Notification.Name("reloadGetProductListApi"), object: nil)
                 self.navigationController?.popViewController(animated: true)
             }
         }
@@ -561,7 +670,9 @@ extension AddProductViewController : UITextViewDelegate{
             textView.isSelectable = true
         }
         
-        return true
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        let numberOfChars = newText.count
+        return numberOfChars <= 500
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -601,9 +712,74 @@ extension AddProductViewController : UITextViewDelegate{
         
         if textView.text == placeHolder {
             textView.isSelectable = false
+            descriptionValidationLbl.isHidden = false
+            descriptionValidationLbl.text = ValidationManager.shared.emptyProductDescription
         } else {
             textView.isSelectable = true
+            descriptionValidationLbl.isHidden = true
         }
     }
     
+}
+
+//MARK: UITextField Delegate Methods
+extension AddProductViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        switch textField {
+        case productNameTextField:
+            if productNameTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                productNameValidationLbl.isHidden = false
+                productNameValidationLbl.text =  ValidationManager.shared.emptyProductName
+            } else if productNameTextField.text?.trimmingCharacters(in: .whitespaces).count ?? 0 < 3 {
+                productNameValidationLbl.isHidden = false
+                productNameValidationLbl.text =  ValidationManager.shared.productNameLength
+            } else {
+                productNameValidationLbl.isHidden = true
+            }
+        case categoryDropDownTextField:
+            if categoryDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                categoryValidationLbl.isHidden = false
+                categoryValidationLbl.text = ValidationManager.shared.selectCategory
+            } else {
+                categoryValidationLbl.isHidden = true
+            }
+        case subCategoryDropDownTextField:
+            if subCategoryDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                subcategoryValidationLbl.isHidden = false
+                subcategoryValidationLbl.text = ValidationManager.shared.selectSubCategory
+            } else {
+                subcategoryValidationLbl.isHidden = true
+            }
+        case actualPriceTextField:
+            if actualPriceTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 || actualPriceTextField.text == "0" {
+                actualPriceValidationLbl.isHidden = false
+                actualPriceValidationLbl.text = ValidationManager.shared.emptyActualPrice
+            } else {
+                actualPriceValidationLbl.isHidden = true
+            }
+        case dealPriceTextField:
+            if dealPriceTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 || dealPriceTextField.text == "0" {
+                dealPriceValidationLbl.isHidden = false
+                dealPriceValidationLbl.text = ValidationManager.shared.emptyDealprice
+            } else {
+                dealPriceValidationLbl.isHidden = true
+            }
+        case taxDropDownTextField:
+            if taxDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                taxationValidationLbl.isHidden = false
+                taxationValidationLbl.text = ValidationManager.shared.chooseTax
+            } else {
+                taxationValidationLbl.isHidden = true
+            }
+        case quantityTextField:
+            if quantityTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 || quantityTextField.text == "0"{
+                quantityValidationLbl.isHidden = false
+                quantityValidationLbl.text = ValidationManager.shared.emptyQuantity
+            } else {
+                quantityValidationLbl.isHidden = true
+            }
+        default:
+            break
+        }
+    }
 }

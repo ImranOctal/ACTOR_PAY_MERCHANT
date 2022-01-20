@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DropDown
 
 class ManageOrderTableViewCell: UITableViewCell {
     
@@ -21,18 +22,23 @@ class ManageOrderTableViewCell: UITableViewCell {
     }
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusView: UIView!
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var itemPriceLabel: UILabel!
-    @IBOutlet weak var idLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     var editButtonHandler: (() -> ())!
     var deleteButtonHandler: (() -> ())!
+    var statusButtonHandler: (() -> ())!
+    var orderStatusDropDown =  DropDown()
+    var statusData: [String] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        statusData = ["SUCCESS","PENDING","CANCELLED","COMPLETED","FAILED","RETURNED"]
+        setupOrderStatusDropDown()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -46,6 +52,24 @@ class ManageOrderTableViewCell: UITableViewCell {
     }
     @IBAction func deleteButtonAction(_ sender: UIButton) {
         deleteButtonHandler()
+    }
+    
+    @IBAction func statusButtonAction(_ sender: UIButton) {
+        statusButtonHandler()
+    }
+    
+    // Setup order Status Drop Down
+    func setupOrderStatusDropDown() {
+        orderStatusDropDown.anchorView = statusButton
+        orderStatusDropDown.dataSource = statusData
+        orderStatusDropDown.backgroundColor = .white
+        orderStatusDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            statusButton.setTitle(item, for: .normal)
+            self.orderStatusDropDown.hide()
+            orderStatusDropDown.bottomOffset = CGPoint(x: -30, y: 10)
+            orderStatusDropDown.width = statusButton.frame.width + 60
+            orderStatusDropDown.direction = .bottom
+        }
     }
 
 }

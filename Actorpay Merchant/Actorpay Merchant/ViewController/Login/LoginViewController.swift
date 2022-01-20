@@ -13,13 +13,22 @@ class LoginViewController: UIViewController {
     
     //MARK: - Properties -
     
-    @IBOutlet weak var mainView: UIView!{
+    @IBOutlet weak var mainView: UIView! {
         didSet {
             topCorner(bgView: mainView, maskToBounds: true)
         }
     }
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField! {
+        didSet {
+            emailTextField.delegate = self
+            emailTextField.becomeFirstResponder()
+        }
+    }
+    @IBOutlet weak var passwordTextField: UITextField! {
+        didSet {
+            passwordTextField.delegate = self
+        }
+    }
     @IBOutlet weak var remberMeBtn: UIButton!
     @IBOutlet weak var emailValidationLbl: UILabel!
     @IBOutlet weak var passwordValidationLbl: UILabel!
@@ -215,7 +224,7 @@ extension LoginViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                  myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
@@ -230,3 +239,38 @@ extension LoginViewController {
     }
 }
 
+//MARK: UITextField Delegate Methods
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        switch textField {
+        case emailTextField:
+            if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                emailValidationLbl.isHidden = false
+                emailValidationLbl.text = ValidationManager.shared.emptyEmail
+                return
+            }
+            else if !isValidEmail(emailTextField.text ?? "") {
+                emailValidationLbl.isHidden = false
+                emailValidationLbl.text = ValidationManager.shared.validEmail
+                return
+            } else {
+                emailValidationLbl.isHidden = true
+            }
+        case passwordTextField:
+            if passwordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                passwordValidationLbl.isHidden = false
+                passwordValidationLbl.text = ValidationManager.shared.emptyPassword
+                return
+            } else if !isValidPassword(mypassword: passwordTextField.text ?? "") {
+                passwordValidationLbl.isHidden = false
+                passwordValidationLbl.text = ValidationManager.shared.containPassword
+                return
+            } else {
+                passwordValidationLbl.isHidden = true
+            }
+
+        default:
+            break
+        }
+    }
+}

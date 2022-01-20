@@ -29,4 +29,5 @@ class ValidationManager {
     let chooseTax = "Please Choose Tax Details"
     let emptyQuantity = "Oops! Product Quantity is Empty or 0"
     let emptyProductDescription = "Oops! Your Product Description is Empty"
+    let acceptTerms = "Please agree to our terms to sign up"
 }

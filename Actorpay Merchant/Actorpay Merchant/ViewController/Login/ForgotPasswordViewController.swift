@@ -15,12 +15,21 @@ class ForgotPasswordViewController: UIViewController {
     @IBOutlet weak var forgotPasswordView: UIView!
     @IBOutlet weak var forgotPasswordLabelView: UIView!
     @IBOutlet weak var buttonView: UIView!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField! {
+        didSet {
+            emailTextField.delegate = self
+            emailTextField.becomeFirstResponder()
+        }
+    }
+    @IBOutlet weak var emailErrorView: UIView!
+    @IBOutlet weak var emailValidationLbl: UILabel!
     
     //MARK: - Life Cycles -
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        emailErrorView.isHidden = true
         topCorners(bgView: forgotPasswordLabelView, cornerRadius: 10, maskToBounds: true)
         bottomCorner(bgView: buttonView, cornerRadius: 10, maskToBounds: true)
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -38,23 +47,33 @@ class ForgotPasswordViewController: UIViewController {
     
     // Ok Button Action
     @IBAction func okButtonAction(_ sender: UIButton){
-        self.forgotPasswordValidation()
+        if self.forgotPasswordValidation() {
+            emailErrorView.isHidden = true
+            self.forgotPasswordApi()
+        }
     }
     
     //MARK: - Helper Functions -
     
     // Forgot Password Validation
-    func forgotPasswordValidation() {
+    func forgotPasswordValidation() -> Bool {
+        
+        var isValidate = true
+        
         if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            emailTextField.setError("  "+ValidationManager.shared.emptyEmail+"  ", show: true, triagleConst: -22)
-            return
+            emailErrorView.isHidden = false
+            emailValidationLbl.text = ValidationManager.shared.emptyEmail
+            isValidate = false
         } else if !isValidEmail(emailTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""){
-            emailTextField.setError("  "+ValidationManager.shared.validEmail+"  ", show: true, triagleConst: -22)
-            return
+            emailErrorView.isHidden = false
+            emailValidationLbl.text = ValidationManager.shared.validEmail
+            isValidate = false
         } else {
-            emailTextField.setError()
+            emailErrorView.isHidden = true
         }
-        self.forgotPasswordApi()
+        
+        return isValidate
+        
     }
     
     // Show View With Animation
@@ -69,7 +88,6 @@ class ForgotPasswordViewController: UIViewController {
     
     // Remove View With Animation
     func removeAnimate(){
-        emailTextField.setError()
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0;
@@ -104,7 +122,7 @@ extension ForgotPasswordViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let message = response.message
@@ -115,4 +133,27 @@ extension ForgotPasswordViewController {
         }
 
     }
+}
+
+//MARK: UITextFieldDelegate Methods
+
+extension ForgotPasswordViewController: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        switch textField {
+        case emailTextField:
+            if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                emailErrorView.isHidden = false
+                emailValidationLbl.text = ValidationManager.shared.emptyEmail
+            } else if !isValidEmail(emailTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""){
+                emailErrorView.isHidden = false
+                emailValidationLbl.text = ValidationManager.shared.validEmail
+            } else {
+                emailErrorView.isHidden = true
+            }
+        default:
+            break
+        }
+    }
+    
 }

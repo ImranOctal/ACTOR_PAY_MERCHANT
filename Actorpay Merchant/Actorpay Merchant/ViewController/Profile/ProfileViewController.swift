@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import NKVPhonePicker
 import Alamofire
 import SDWebImage
 
@@ -19,13 +18,36 @@ class ProfileViewController: UIViewController {
             topCorner(bgView: mainView, maskToBounds: true)
         }
     }
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var phoneCodeTextField: NKVPhonePickerTextField!
-    @IBOutlet weak var businessNameTextField: UITextField!
-    @IBOutlet weak var mobileNumberTextField: UITextField!
-    @IBOutlet weak var shopAddressTextField: UITextField!
-    @IBOutlet weak var fullAddressTextField: UITextField!
-    @IBOutlet weak var shopActNoOrLicenceTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField! {
+        didSet {
+            emailTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var businessNameTextField: UITextField! {
+        didSet {
+            businessNameTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var mobileNumberTextField: UITextField!  {
+        didSet {
+            mobileNumberTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var shopAddressTextField: UITextField!  {
+        didSet {
+            shopAddressTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var fullAddressTextField: UITextField!  {
+        didSet {
+            fullAddressTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var shopActNoOrLicenceTextField: UITextField!  {
+        didSet {
+            shopActNoOrLicenceTextField.delegate = self
+        }
+    }
     @IBOutlet weak var profileImgView: UIImageView!
     @IBOutlet weak var businessNameLabel: UILabel!
     @IBOutlet weak var emailValidationLbl: UILabel!
@@ -34,27 +56,35 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var shopAddressValidationLbl: UILabel!
     @IBOutlet weak var fullAddressValidationLbl: UILabel!
     @IBOutlet weak var shopLicenceValidationLbl: UILabel!
+    @IBOutlet weak var countryCodeLbl: UILabel!
+    @IBOutlet weak var countryFlagImgView: UIImageView!
+    @IBOutlet weak var emailVerifyBtn: UIButton!
+    @IBOutlet weak var mobileVerifyBtn: UIButton!
     
-    var mobileCode: String?
-    
+    var countryList : CountryList?
+    var countryCode = "+91"
+    var countryFlag = ""
+    var isEmailVarified = true
+    var isMobileVarified = false
     
     //MARK: - Life Cycle Function -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.emailVarifyFlow()
+        self.mobileVerifyButtonFlow()
+        self.setUpCountryCodeData()
         self.validationLabelManage()
-        
-        phoneCodeTextField.delegate = self
-        numberPickerSetup()
-        setMerchantDetailsData()
+        self.setMerchantDetailsData()
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("setMerchantDetailsData"), object: nil)
+        NotificationCenter.default.addObserver(self,selector: #selector(self.setMerchantDetailsData),name:Notification.Name("setMerchantDetailsData"), object: nil)
     }
     
     //MARK: - Selectors -
     
     //Back Button Action
     @IBAction func backButttonAction(_ sender: UIButton) {
-        self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -69,11 +99,42 @@ class ProfileViewController: UIViewController {
     //Country Code Button Action
     @IBAction func phoneCodeButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        if let delegate = phoneCodeTextField.phonePickerDelegate {
-            let countriesVC = CountriesViewController.standardController()
-            countriesVC.delegate = self as CountriesViewControllerDelegate
-            let navC = UINavigationController.init(rootViewController: countriesVC)
-            delegate.present(navC, animated: true, completion: nil)
+        let newVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryPickerViewController") as! CountryPickerViewController
+        newVC.comp = { countryList in
+            self.countryList = countryList
+            UserDefaults.standard.set(self.countryList?.countryCode, forKey: "countryCode")
+            UserDefaults.standard.set(self.countryList?.countryFlag, forKey: "countryFlag")
+            self.countryFlagImgView.sd_setImage(with: URL(string: self.countryList?.countryFlag ?? ""), placeholderImage: UIImage(named: "IN.png"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+            self.countryCodeLbl.text = self.countryList?.countryCode
+        }
+        self.present(newVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func emailVerifyButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        isEmailVarified = !isEmailVarified
+        emailVarifyFlow()
+        if isEmailVarified {
+            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "VerifyOtpViewController") as? VerifyOtpViewController)!
+            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            self.definesPresentationContext = true
+            self.providesPresentationContextTransitionStyle = true
+            newVC.modalPresentationStyle = .overCurrentContext
+            self.navigationController?.present(newVC, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func mobileVerifyButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        isMobileVarified = !isMobileVarified
+        mobileVerifyButtonFlow()
+        if isMobileVarified {
+            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "VerifyOtpViewController") as? VerifyOtpViewController)!
+            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            self.definesPresentationContext = true
+            self.providesPresentationContextTransitionStyle = true
+            newVC.modalPresentationStyle = .overCurrentContext
+            self.navigationController?.present(newVC, animated: true, completion: nil)
         }
     }
     
@@ -83,15 +144,15 @@ class ProfileViewController: UIViewController {
     func profileValidation() -> Bool {
         var isValidate = true
         if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            emailValidationLbl.isHidden = false
+            emailValidationLbl.textColor = UIColor.red
             emailValidationLbl.text = ValidationManager.shared.emptyEmail
             isValidate = false
         } else if !isValidEmail(emailTextField.text ?? ""){
-            emailValidationLbl.isHidden = false
+            emailValidationLbl.textColor = UIColor.red
             emailValidationLbl.text = ValidationManager.shared.validEmail
             isValidate = false
         } else {
-            emailValidationLbl.isHidden = true
+            emailVarifyFlow()
         }
         
         if businessNameTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
@@ -102,21 +163,21 @@ class ProfileViewController: UIViewController {
             businessNameValidationLbl.isHidden = true
         }
         
-        if phoneCodeTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+        if countryCodeLbl.text?.trimmingCharacters(in: .whitespaces).count == 0{
             self.alertViewController(message: "Please Select Country Code.")
             isValidate = false
         }
         
         if mobileNumberTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            mobileValidationLbl.isHidden = false
+            mobileValidationLbl.textColor = UIColor.red
             mobileValidationLbl.text = ValidationManager.shared.emptyPhone
             isValidate = false
         } else if !isValidMobileNumber(mobileNumber: mobileNumberTextField.text ?? "") {
-            mobileValidationLbl.isHidden = false
+            mobileValidationLbl.textColor = UIColor.red
             mobileValidationLbl.text = ValidationManager.shared.validPhone
             isValidate = false
         } else {
-            mobileValidationLbl.isHidden = true
+            mobileVerifyButtonFlow()
         }
         
         if shopAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
@@ -149,12 +210,42 @@ class ProfileViewController: UIViewController {
     
     // Validation Label Manage
     func validationLabelManage() {
-        emailValidationLbl.isHidden = true
         businessNameValidationLbl.isHidden = true
-        mobileValidationLbl.isHidden = true
         shopAddressValidationLbl.isHidden = true
         fullAddressValidationLbl.isHidden = true
         shopLicenceValidationLbl.isHidden = true
+    }
+    
+    func emailVarifyFlow() {
+        if isEmailVarified {
+            emailTextField.isUserInteractionEnabled = false
+            emailTextField.textColor = UIColor.darkGray
+            emailValidationLbl.text = "Verified"
+            emailValidationLbl.textColor = UIColor.init(hexFromString: "2878B6")
+            emailVerifyBtn.setTitle("UPDATE", for: .normal)
+        } else {
+            emailTextField.isUserInteractionEnabled = true
+            emailTextField.textColor = UIColor.black
+            emailValidationLbl.textColor = UIColor.orange
+            emailValidationLbl.text = "Verification Pending"
+            emailVerifyBtn.setTitle("Verify", for: .normal)
+        }
+    }
+    
+    func mobileVerifyButtonFlow() {
+        if isMobileVarified {
+            mobileNumberTextField.isUserInteractionEnabled = false
+            mobileNumberTextField.textColor = UIColor .darkGray
+            mobileValidationLbl.text = "Verified"
+            mobileValidationLbl.textColor = UIColor.init(hexFromString: "2878B6")
+            mobileVerifyBtn.setTitle("UPDATE", for: .normal)
+        } else {
+            mobileNumberTextField.isUserInteractionEnabled = true
+            mobileNumberTextField.textColor = UIColor .black
+            mobileValidationLbl.text = "Verification Pending"
+            mobileValidationLbl.textColor = UIColor.orange
+            mobileVerifyBtn.setTitle("Verify", for: .normal)
+        }
     }
     
     //Set Merchant Details Data
@@ -169,32 +260,20 @@ class ProfileViewController: UIViewController {
         profileImgView.sd_setImage(with: URL(string: merchantDetails?.profilePicture ?? ""), placeholderImage: UIImage(named: "profile"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
     }
     
-    //Country Code Picker SetUp
-    func numberPickerSetup() {
-        phoneCodeTextField.phonePickerDelegate = self
-        phoneCodeTextField.countryPickerDelegate = self
-        phoneCodeTextField.flagSize = CGSize(width: 20, height: 10)
-        phoneCodeTextField.flagInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        phoneCodeTextField.shouldScrollToSelectedCountry = false
-        phoneCodeTextField.enablePlusPrefix = false
-        
+    // Country Code Data SetUp
+    func setUpCountryCodeData() {
         if ((UserDefaults.standard.string(forKey: "countryCode")) != nil) {
-            let code = (UserDefaults.standard.string(forKey: "countryCode") ?? Locale.current.regionCode) ?? ""
-            let country = Country.country(for: NKVSource(countryCode: code))
-            phoneCodeTextField.country = country
-            phoneCodeTextField.text = country?.phoneExtension
-            phoneCodeTextField.setCode(source: NKVSource(country: country!))
-            mobileCode = country?.phoneExtension ?? ""
+            countryCode = (UserDefaults.standard.string(forKey: "countryCode") ?? "")
+            countryFlag = (UserDefaults.standard.string(forKey: "countryFlag") ?? "")
+            countryFlagImgView.sd_setImage(with: URL(string: countryFlag), placeholderImage: UIImage(named: "IN.png"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+            self.countryCodeLbl.text = countryCode
             UserDefaults.standard.synchronize()
         } else {
-            let code = "in"
-            let country = Country.country(for: NKVSource(countryCode: code))
-            phoneCodeTextField.country = country
-            phoneCodeTextField.text = country?.phoneExtension
-            phoneCodeTextField.setCode(source: NKVSource(country: country!))
-            mobileCode = country?.phoneExtension ?? ""
+            countryFlagImgView.sd_setImage(with: URL(string: countryFlag), placeholderImage: UIImage(named: "IN.png"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+            self.countryCodeLbl.text = countryCode
         }
     }
+    
 }
 
 //MARK:- Extensions -
@@ -207,47 +286,91 @@ extension ProfileViewController {
         let params: Parameters = [
             "id":AppManager.shared.merchantUserId,
             "email":emailTextField.text ?? "",
-            "extensionNumber":"+91",
+            "extensionNumber":countryCode,
             "contactNumber":mobileNumberTextField.text ?? "",
             "shopAddress":shopAddressTextField.text ?? "",
             "fullAddress":fullAddressTextField.text ?? "",
             "businessName":businessNameTextField.text ?? "",
-            "password":"Test@111"
+            "licenceNumber":shopActNoOrLicenceTextField.text ?? ""
         ]
         showLoading()
         APIHelper.updateMerchantDetails(params: params) { (success,response)  in
             if !success {
                 dissmissLoader()
                 let message = response.message
-                myApp.window?.rootViewController?.view.makeToast(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let message = response.message
                 myApp.window?.rootViewController?.view.makeToast(message)
                 NotificationCenter.default.post(name:Notification.Name("getMerchantDetailsByIdApi"), object: self)
-                
             }
         } 
     }
 }
 
-//MARK: Country Code Picker Delegate Methods
-extension ProfileViewController: CountriesViewControllerDelegate {
-    
-    func countriesViewController(_ sender: CountriesViewController, didSelectCountry country: Country) {
-        print("✳️ Did select country: \(country.countryCode)")
-        UserDefaults.standard.set(country.countryCode, forKey: "countryCode")
-        mobileCode = country.phoneExtension
-        phoneCodeTextField.country = country
-    }
-    
-    func countriesViewControllerDidCancel(_ sender: CountriesViewController) {
-        print("😕")
-    }
-}
 
 //MARK: TextField Delegate Methods
 extension ProfileViewController: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        switch textField {
+        case emailTextField:
+            if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                emailValidationLbl.textColor = UIColor.red
+                emailValidationLbl.text = ValidationManager.shared.emptyEmail
+            } else if !isValidEmail(emailTextField.text ?? ""){
+                emailValidationLbl.textColor = UIColor.red
+                emailValidationLbl.text = ValidationManager.shared.validEmail
+            } else {
+                emailValidationLbl.textColor = UIColor.orange
+                emailValidationLbl.text = "Varification Pending"
+            }
+        case businessNameTextField:
+            if businessNameTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                businessNameValidationLbl.isHidden = false
+                businessNameValidationLbl.text = ValidationManager.shared.emptyField
+            } else {
+                businessNameValidationLbl.isHidden = true
+            }
+        
+        case mobileNumberTextField:
+            if mobileNumberTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                mobileValidationLbl.textColor = UIColor.red
+                mobileValidationLbl.text = ValidationManager.shared.emptyPhone
+            } else if !isValidMobileNumber(mobileNumber: mobileNumberTextField.text ?? "") {
+                mobileValidationLbl.textColor = UIColor.red
+                mobileValidationLbl.text = ValidationManager.shared.validPhone
+            } else {
+                mobileValidationLbl.textColor = UIColor.orange
+                mobileValidationLbl.text = "Varification Pending"
+
+            }
+        case shopAddressTextField:
+            if shopAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                shopAddressValidationLbl.isHidden = false
+                shopAddressValidationLbl.text = ValidationManager.shared.emptyField
+            } else {
+                shopAddressValidationLbl.isHidden = true
+            }
+        case fullAddressTextField:
+            if fullAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                fullAddressValidationLbl.isHidden = false
+                fullAddressValidationLbl.text = ValidationManager.shared.emptyField
+            } else {
+                fullAddressValidationLbl.isHidden = true
+            }
+        case shopActNoOrLicenceTextField:
+            if shopActNoOrLicenceTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                shopLicenceValidationLbl.isHidden = false
+                shopLicenceValidationLbl.text = ValidationManager.shared.emptyField
+            } else {
+                shopLicenceValidationLbl.isHidden = true
+            }
+        default:
+            break
+        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)

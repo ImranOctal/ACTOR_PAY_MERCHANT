@@ -47,6 +47,8 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
     var activeProductList: ProductList?
     var getTaxDataByHSNCode: TaxList?
     var viewActiveTaxDataById: TaxList?
+    var productId: String?
+    var filterparm: Parameters?
     
     //MARK:- Life Cycle Function -
     
@@ -60,22 +62,14 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
         NotificationCenter.default.removeObserver(self, name: Notification.Name("getMerchantDetailsByIdApi"), object: nil)
         NotificationCenter.default.addObserver(self,selector: #selector(self.getMerchantDetailsByIdApi),name:Notification.Name("getMerchantDetailsByIdApi"), object: nil)
         self.getProductListAPI()
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("reloadGetProductListApi"), object: nil)
+        NotificationCenter.default.addObserver(self,selector: #selector(self.reloadGetProductListApi),name:Notification.Name("reloadGetProductListApi"), object: nil)
         self.getAllTaxDataByHSNCode(HSNCode: "0007")
         self.viewActiveTaxDataByIDApi(taxID: "16111609-bff3-477a-b4cf-603592597721")
         tableView.addPullToRefresh {
+            self.page = 0
             self.getProductListAPI()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getProductListAPI()
-        print("reload")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print("hello")
     }
     
     //MARK:- Selector -
@@ -114,7 +108,29 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
         
     }
     
+    // Filter Button Action
+    @IBAction func filterButtonAction(_ sender: UIButton) {
+        let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "FilterProductViewController") as? FilterProductViewController)!
+        newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        self.definesPresentationContext = true
+        self.providesPresentationContextTransitionStyle = true
+        newVC.modalPresentationStyle = .overCurrentContext
+        newVC.filterparm = filterparm
+        newVC.setFilterData()
+        newVC.completion = { param in
+            print(param)
+            self.filterparm = param
+            self.getProductListAPI()
+        }
+        self.navigationController?.present(newVC, animated: true, completion: nil)
+    }
+    
     //MARK:- helper Functions -
+    
+    // Get Product List Api reload function
+    @objc func reloadGetProductListApi() {
+        self.getProductListAPI()
+    }
     
     // Hide Humburger Menu
     func hideHamburgerMenu() {
@@ -209,28 +225,56 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
+//                self.view.makeToast(message)
                 print(message)
+                let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as? CustomAlertViewController)!
+                newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+                newVC.setUpCustomAlert(titleStr: "Logout", descriptionStr: "Session Expire", isShowCancelBtn: true)
+                newVC.okBtn.tag = 1
+                newVC.customAlertDelegate = self
+                self.definesPresentationContext = true
+                self.providesPresentationContextTransitionStyle = true
+                newVC.modalPresentationStyle = .overCurrentContext
+                self.navigationController?.present(newVC, animated: true, completion: nil)
             }else {
                 dissmissLoader()
-                let data = response.response
+                let data = response.response["data"]
                 merchantDetails = MerchantDetails.init(json: data)
                 AppManager.shared.merchantId = merchantDetails?.merchantId ?? ""
                 print(AppManager.shared.merchantId)
                 NotificationCenter.default.post(name:Notification.Name("setProfileData"), object: self)
+                NotificationCenter.default.post(name:Notification.Name("setMerchantDetailsData"), object: self)
                 
             }
         }
     }
     
     // Get Product List Api
-    func getProductListAPI() {
+    func getProductListAPI(parameter: Parameters? = nil) {
+        var parameters = Parameters()
+        
+        if parameter == nil {
+            if let parameter = filterparm {
+                parameters = parameter
+            }
+            parameters["pageNo"] = page
+            parameters["pageSize"] = 10
+        } else{
+            page = 0
+            if let parameter = parameter {
+                parameters = parameter
+            }
+            parameters["pageNo"] = page
+            parameters["pageSize"] = 10
+        }
+        
         showLoading()
-        APIHelper.getProductListApi(params: [:]) { (success, response) in
+        APIHelper.getProductListApi(params: parameters) { (success, response) in
             self.tableView.pullToRefreshView?.stopAnimating()
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
@@ -257,7 +301,7 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
@@ -278,7 +322,7 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let message = response.message
@@ -299,7 +343,7 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let message = response.message
@@ -316,7 +360,7 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
@@ -334,7 +378,7 @@ extension HomeViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
@@ -352,7 +396,7 @@ extension HomeViewController {
 extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if filteredArray?.count == 0{
+        if (filteredArray?.count == 0) || (filteredArray == nil) {
             tableView.setEmptyMessage("No Product Found")
         } else {
             tableView.restore()
@@ -373,7 +417,17 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
 //            self.changeProductStatusApi(productId: item?.productId ?? "", status: "true")
         }
         cell.deleteButtonHandler = {
-            self.removeProductByIdApi(productId: item?.productId ?? "")
+            self.view.endEditing(true)
+            self.productId = item?.productId
+            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as? CustomAlertViewController)!
+            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            newVC.setUpCustomAlert(titleStr: "Delete Resource", descriptionStr: "Are you sure want to delete?", isShowCancelBtn: false)
+            newVC.okBtn.tag = 2
+            newVC.customAlertDelegate = self
+            self.definesPresentationContext = true
+            self.providesPresentationContextTransitionStyle = true
+            newVC.modalPresentationStyle = .overCurrentContext
+            self.navigationController?.present(newVC, animated: true, completion: nil)
         }
         cell.selectionStyle = .none
         return cell
@@ -424,4 +478,42 @@ extension HomeViewController: UITextFieldDelegate {
         self.tableView.reloadData()
         return true
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case searchTextField:
+            print("search")
+            var filterParam = Parameters()
+            if let parameter = filterparm {
+                filterParam = parameter
+            }
+            filterParam["name"] = searchTextField.text ?? ""
+            self.getProductListAPI(parameter: filterParam)
+        default:
+            break
+        }
+        return true
+    }
+}
+
+//MARK: Custom Alert Delegate Methods
+extension HomeViewController: CustomAlertDelegate {
+    
+    func okButtonclick(tag: Int) {
+        print(tag)
+        if tag == 1 {
+            AppManager.shared.token = ""
+            AppManager.shared.merchantUserId = ""
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginNav") as! UINavigationController
+            myApp.window?.rootViewController = newVC
+        } else if tag == 2 {
+            self.removeProductByIdApi(productId: self.productId ?? "")
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func cancelButtonClick() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }

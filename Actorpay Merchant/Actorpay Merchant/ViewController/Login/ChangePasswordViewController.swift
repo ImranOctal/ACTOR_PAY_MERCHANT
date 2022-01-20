@@ -15,9 +15,28 @@ class ChangePasswordViewController: UIViewController {
     @IBOutlet weak var changePasswordView: UIView!
     @IBOutlet weak var changePasswordLabelView: UIView!
     @IBOutlet weak var buttonView: UIView!
-    @IBOutlet weak var currentPasswordTextField: UITextField!
-    @IBOutlet weak var newPasswordTextField: UITextField!
-    @IBOutlet weak var confirmNewPasswordTextField: UITextField!
+    @IBOutlet weak var currentPasswordTextField: UITextField! {
+        didSet {
+            currentPasswordTextField.delegate = self
+            currentPasswordTextField.becomeFirstResponder()
+        }
+    }
+    @IBOutlet weak var newPasswordTextField: UITextField! {
+        didSet {
+            newPasswordTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var confirmNewPasswordTextField: UITextField! {
+        didSet {
+            confirmNewPasswordTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var currentPasswordErrorView: UIView!
+    @IBOutlet weak var newPasswordErrorView: UIView!
+    @IBOutlet weak var confirmNewPasswordErrorView: UIView!
+    @IBOutlet weak var currentPasswordValidationLbl: UILabel!
+    @IBOutlet weak var newPasswordValidationLbl: UILabel!
+    @IBOutlet weak var confirmNewPasswordValidationLbl: UILabel!
     
     var isPassTap = false
     
@@ -25,6 +44,7 @@ class ChangePasswordViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.manageErrorView()
         topCorners(bgView: changePasswordLabelView, cornerRadius: 10, maskToBounds: true)
         bottomCorner(bgView: buttonView, cornerRadius: 10, maskToBounds: true)
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -42,7 +62,10 @@ class ChangePasswordViewController: UIViewController {
     
     //Ok Button Action
     @IBAction func okButtonAction(_ sender: UIButton){
-        self.changePasswordValidation()
+        if self.changePasswordValidation() {
+            self.manageErrorView()
+            self.changePasswordApi()
+        }
     }
     
     // Password Toggle Button Action
@@ -65,39 +88,54 @@ class ChangePasswordViewController: UIViewController {
     
     //MARK: - Helper Functions -
     
+    // Error View Manage
+    func manageErrorView() {
+        currentPasswordErrorView.isHidden = true
+        newPasswordErrorView.isHidden = true
+        confirmNewPasswordErrorView.isHidden = true
+    }
+    
     // Change Password Validation
-    func changePasswordValidation() {
+    func changePasswordValidation() -> Bool {
+        var isValidate = true
+        
         if currentPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            currentPasswordTextField.setError("  "+ValidationManager.shared.emptyPassword+"  ", show: true, triagleConst: -49)
-            
-            return
+            currentPasswordErrorView.isHidden = false
+            currentPasswordValidationLbl.text = ValidationManager.shared.emptyPassword
+            isValidate = false
         }  else if !isValidPassword(mypassword: currentPasswordTextField.text ?? "") {
-            currentPasswordTextField.setError("  "+ValidationManager.shared.containPassword+"  ", show: true,triagleConst: -49,labelHeight: 60)
-            return
+            currentPasswordErrorView.isHidden = false
+            currentPasswordValidationLbl.text = ValidationManager.shared.containPassword
+            isValidate = false
         } else {
-            currentPasswordTextField.setError()
+            currentPasswordErrorView.isHidden = true
         }
         
         if newPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            newPasswordTextField.setError("  "+ValidationManager.shared.emptyPassword+"  ", show: true,triagleConst: -49)
-            return
+            newPasswordErrorView.isHidden = false
+            newPasswordValidationLbl.text = ValidationManager.shared.emptyPassword
+            isValidate = false
         } else if !isValidPassword(mypassword: newPasswordTextField.text ?? "") {
-            newPasswordTextField.setError("  "+ValidationManager.shared.containPassword+"  ", show: true,triagleConst: -49,labelHeight: 60)
-            return
+            newPasswordErrorView.isHidden = false
+            newPasswordValidationLbl.text = ValidationManager.shared.containPassword
+            isValidate = false
         } else {
-            newPasswordTextField.setError()
+            newPasswordErrorView.isHidden = true
         }
         
         if confirmNewPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
-            confirmNewPasswordTextField.setError("  "+ValidationManager.shared.emptyPassword, show: true,triagleConst: -49)
-            return
+            confirmNewPasswordErrorView.isHidden = false
+            confirmNewPasswordValidationLbl.text = ValidationManager.shared.emptyPassword
+            isValidate = false
         } else if newPasswordTextField.text != confirmNewPasswordTextField.text {
-            confirmNewPasswordTextField.setError("  "+ValidationManager.shared.misMatchPassword+"  ", show: true,triagleConst: -49)
-            return
+            confirmNewPasswordErrorView.isHidden = false
+            confirmNewPasswordValidationLbl.text = ValidationManager.shared.misMatchPassword
+            isValidate = false
         } else {
-            confirmNewPasswordTextField.setError()
+            confirmNewPasswordErrorView.isHidden = true
         }
-        self.changePasswordApi()
+        
+        return isValidate
     }
     
     // Show View With Animation
@@ -112,9 +150,6 @@ class ChangePasswordViewController: UIViewController {
     
     //Remove View With Animation
     func removeAnimate(){
-        currentPasswordTextField.setError()
-        newPasswordTextField.setError()
-        confirmNewPasswordTextField.setError()
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0;
@@ -127,12 +162,15 @@ class ChangePasswordViewController: UIViewController {
     
     // View End Editing
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if(touches.first?.view != changePasswordView){
-            removeAnimate()
-            self.dismiss(animated: true, completion: nil)
+        if let touch = touches.first {
+            let currentPoint = touch.location(in: self.view)
+            if !(changePasswordView.frame.contains(currentPoint)) {
+                removeAnimate()
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
-    
+        
 }
 
 //MARK: - Extensions -
@@ -152,14 +190,56 @@ extension ChangePasswordViewController {
             if !success {
                 dissmissLoader()
                 let message = response.message
-                print(message)
+                self.view.makeToast(message)
             }else {
                 dissmissLoader()
                 let message = response.message
                  print(message)
                 self.removeAnimate()
                 self.dismiss(animated: true, completion: nil)
+                myApp.window?.rootViewController?.view.makeToast(message)
             }
+        }
+    }
+}
+
+//MARK: UITextField Delegate Methods
+extension ChangePasswordViewController: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        switch textField {
+        case currentPasswordTextField:
+            if currentPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                currentPasswordErrorView.isHidden = false
+                currentPasswordValidationLbl.text = ValidationManager.shared.emptyPassword
+            }  else if !isValidPassword(mypassword: currentPasswordTextField.text ?? "") {
+                currentPasswordErrorView.isHidden = false
+                currentPasswordValidationLbl.text = ValidationManager.shared.containPassword
+            } else {
+                currentPasswordErrorView.isHidden = true
+            }
+        case newPasswordTextField:
+            if newPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                newPasswordErrorView.isHidden = false
+                newPasswordValidationLbl.text = ValidationManager.shared.emptyPassword
+            } else if !isValidPassword(mypassword: newPasswordTextField.text ?? "") {
+                newPasswordErrorView.isHidden = false
+                newPasswordValidationLbl.text = ValidationManager.shared.containPassword
+            } else {
+                newPasswordErrorView.isHidden = true
+            }
+        case confirmNewPasswordTextField:
+            if confirmNewPasswordTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                confirmNewPasswordErrorView.isHidden = false
+                confirmNewPasswordValidationLbl.text = ValidationManager.shared.emptyPassword
+            } else if newPasswordTextField.text != confirmNewPasswordTextField.text {
+                confirmNewPasswordErrorView.isHidden = false
+                confirmNewPasswordValidationLbl.text = ValidationManager.shared.misMatchPassword
+            } else {
+                confirmNewPasswordErrorView.isHidden = true
+            }
+        default:
+            break
         }
     }
 }

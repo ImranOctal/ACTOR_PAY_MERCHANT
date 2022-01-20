@@ -9,13 +9,12 @@ target 'Actorpay Merchant' do
 
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'IQKeyboardManagerSwift'
-  pod 'NKVPhonePicker'
-  pod 'DropDown'
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'SDWebImage', '~> 5.0'
   pod 'MBProgressHUD', '~> 1.1.0'
   pod 'SVPullToRefresh'
+  pod 'DropDown'
 
 
   target 'Actorpay MerchantTests' do

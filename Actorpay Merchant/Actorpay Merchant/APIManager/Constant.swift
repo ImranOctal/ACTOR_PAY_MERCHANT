@@ -28,9 +28,17 @@ enum APIEndPoint: String {
     case getAllCategories = "merchant-service/get/all/categories/paged"
     case getSubCategoriesByCategory = "merchant-service/get/all/subcategories/by/category"
     case getSubCategories = "merchant-service/get/all/subcategories/paged?"
+    case getInCategoryDropDown = "merchant-service/get/all/categories"
     case getAllActiveTax = "merchant-service/taxes/active"
+    case getInTaxDropDownApi = "merchant-service/taxes/get/all"
     case getTaxDataByHSNCode = "merchant-service/taxes/hsncode/"
     case viewActiveTaxDataByID = "merchant-service/taxes/"
+    case orderList = "merchant-service/orders/list/paged"
+    case updateOrderStatusApi = "merchant-service/orders/status"
+    case cancelOrReturnOrderApi = "merchant-service/orders/cancel/"
+    case contryApi = "global-service/v1/country/get/all"
+    case staticContentApi = "cms-service/get/static/data/by/cms"
+    
 }
 
 struct MessageConstant {

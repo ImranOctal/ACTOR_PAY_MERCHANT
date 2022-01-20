@@ -41,7 +41,7 @@ class SideMenuViewController: UIViewController {
         SideMenuModel(icon: UIImage(named: "change_password"), title: "Change Password"),
         SideMenuModel(icon: UIImage(named: "sub_merchant"), title: "Merchant & sub Merchant"),
         SideMenuModel(icon: UIImage(named: "manage_orders"), title: "Manage Products"),
-        SideMenuModel(icon: UIImage(named: "manage_orders"), title: "Manage Orders"),
+        SideMenuModel(icon: UIImage(named: "myOrder"), title: "Manage Orders"),
         SideMenuModel(icon: UIImage(named: "cancel_dispute"), title: "Cancelled/Raised Dispute"),
         SideMenuModel(icon: UIImage(named: "file_reports"), title: "Reports"),
     ]    
@@ -69,15 +69,14 @@ class SideMenuViewController: UIViewController {
     // LogOut Button Action
     @IBAction func logoutButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        if let opo = obj_AppDelegate.window?.rootViewController {
-            let popOverConfirmVC = self.storyboard?.instantiateViewController(withIdentifier: "LogOutAlertViewController") as! LogOutAlertViewController
-            popOverConfirmVC.isSideMenu = true
-            obj_AppDelegate.window?.rootViewController?.addChild(popOverConfirmVC)
-            popOverConfirmVC.view.frame = opo.view.frame
-            opo.view.center = popOverConfirmVC.view.center
-            opo.view.addSubview(popOverConfirmVC.view)
-            popOverConfirmVC.didMove(toParent: self)
-        }
+        let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as? CustomAlertViewController)!
+        newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        newVC.setUpCustomAlert(titleStr: "Logout", descriptionStr: "Are you sure you want to Logout?", isShowCancelBtn: false)
+        newVC.customAlertDelegate = self
+        self.definesPresentationContext = true
+        self.providesPresentationContextTransitionStyle = true
+        newVC.modalPresentationStyle = .overCurrentContext
+        self.navigationController?.present(newVC, animated: true, completion: nil)
     }
     
     //MARK: - Helper Functions -
@@ -136,5 +135,23 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             break
         }
+    }
+}
+
+//MARK: - Extensions -
+
+//MARK: CustomAlert Delegate Methods
+extension SideMenuViewController: CustomAlertDelegate {
+    
+    func okButtonclick(tag: Int) {
+        AppManager.shared.token = ""
+        AppManager.shared.merchantUserId = ""
+        let newVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginNav") as! UINavigationController
+        myApp.window?.rootViewController = newVC
+
+    }
+    
+    func cancelButtonClick() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

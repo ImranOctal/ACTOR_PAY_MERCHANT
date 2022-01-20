@@ -194,6 +194,18 @@ final class APIHelper {
         }
     }
     
+    //MARK: Get In Category Dropdown Api
+    static func getInCategoryDropdownApi(parameters: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.getMethod(url: APIEndPoint.getInCategoryDropDown.rawValue, parameters: parameters) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
     //MARK: Get All Subcategory Api
     static func getSubCategoriesApi(parameters: Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
         APIManager.shared.getMethod(url: APIEndPoint.getSubCategories.rawValue ,parameters: parameters) { (response) in
@@ -231,6 +243,18 @@ final class APIHelper {
         }
     }
     
+    //MARK: Get In Tax Drop Down Api
+    static func getInTaxDropDownApi(parameters: Parameters ,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.getMethod(method: .get, url: APIEndPoint.getInTaxDropDownApi.rawValue, parameters: parameters) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
     //MARK: Get All Tax Data By HSN Code
     static func getAllTaxDataByHSNCodeApi(parameters: Parameters, HSNCode:String, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
         APIManager.shared.getMethod(method: .get, url: APIEndPoint.getTaxDataByHSNCode.rawValue + "\(HSNCode)", parameters: parameters) { (response) in
@@ -246,6 +270,66 @@ final class APIHelper {
     //MARK: View Active Tax Data By ID
     static func viewActiveTaxDataByIDApi(parameters: Parameters, taxID:String, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
         APIManager.shared.getMethod(method: .get, url: APIEndPoint.viewActiveTaxDataByID.rawValue + "\(taxID)", parameters: parameters) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Get Order List Api
+    static func getOrderListApi(params: Parameters , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.request2(method: .post, url: APIEndPoint.orderList.rawValue, parameters: params) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Change Order Status
+    static func updateOrderStatusApi(params: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
+        APIManager.shared.request2(method: .put, url: APIEndPoint.updateOrderStatusApi.rawValue, parameters: params) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Cancel Or Return Order Api
+    static func cancelOrReturnOrderApi(params: Parameters ,orderNo:String, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.request2(method: .post, url: APIEndPoint.cancelOrReturnOrderApi.rawValue+"\(orderNo)", parameters: params) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK:  Get Country List Api
+    static func getCountryListApi(parameters: Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.getMethodWithoutAuth(method: .get, url: APIEndPoint.contryApi.rawValue, parameters: parameters) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Static Content Api With Type
+    static func staticContentApi(parameters: Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
+        APIManager.shared.getMethodWithoutAuth(method: .get, url: APIEndPoint.staticContentApi.rawValue, parameters: parameters) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
