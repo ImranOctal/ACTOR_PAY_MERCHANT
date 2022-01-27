@@ -32,6 +32,8 @@
 		884E1910278EDE6B00A9E5A8 /* StaticContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E190F278EDE6B00A9E5A8 /* StaticContent.swift */; };
 		884E191F278EEBFE00A9E5A8 /* StaticContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E191E278EEBFE00A9E5A8 /* StaticContentViewController.swift */; };
 		884E194E278F073E00A9E5A8 /* FilterProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E194D278F073E00A9E5A8 /* FilterProductViewController.swift */; };
+		88722968279FCCF20066DA64 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88722966279FCCF20066DA64 /* RoleList.swift */; };
+		88722969279FCCF20066DA64 /* RoleItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88722967279FCCF20066DA64 /* RoleItems.swift */; };
 		88984F7F277F00FD00E76111 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F7E277F00FD00E76111 /* CategoryList.swift */; };
 		88984F85277F019500E76111 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F84277F019500E76111 /* CategoryItem.swift */; };
 		88984F8C277F021E00E76111 /* SubCategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F8A277F021E00E76111 /* SubCategoryItem.swift */; };
@@ -122,6 +124,8 @@
 		884E190F278EDE6B00A9E5A8 /* StaticContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticContent.swift; sourceTree = "<group>"; };
 		884E191E278EEBFE00A9E5A8 /* StaticContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticContentViewController.swift; sourceTree = "<group>"; };
 		884E194D278F073E00A9E5A8 /* FilterProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterProductViewController.swift; sourceTree = "<group>"; };
+		88722966279FCCF20066DA64 /* RoleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
+		88722967279FCCF20066DA64 /* RoleItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleItems.swift; sourceTree = "<group>"; };
 		88984F7E277F00FD00E76111 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
 		88984F84277F019500E76111 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		88984F8A277F021E00E76111 /* SubCategoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategoryItem.swift; sourceTree = "<group>"; };
@@ -227,6 +231,7 @@
 		8807882C277C2B7200F9FF85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				88722965279FCCDF0066DA64 /* Role */,
 				884E190E278EDE4400A9E5A8 /* StaticContent */,
 				88D560A82788219B003A8D33 /* CountryList.swift */,
 				88AD1FB6278809E2007F0148 /* Order */,
@@ -313,6 +318,15 @@
 				884E191E278EEBFE00A9E5A8 /* StaticContentViewController.swift */,
 			);
 			path = StaticContent;
+			sourceTree = "<group>";
+		};
+		88722965279FCCDF0066DA64 /* Role */ = {
+			isa = PBXGroup;
+			children = (
+				88722966279FCCF20066DA64 /* RoleList.swift */,
+				88722967279FCCF20066DA64 /* RoleItems.swift */,
+			);
+			path = Role;
 			sourceTree = "<group>";
 		};
 		88984F83277F010400E76111 /* Category */ = {
@@ -829,6 +843,7 @@
 				88D08D5327621DE9001D5282 /* Extensions.swift in Sources */,
 				88D08D5227621DE9001D5282 /* Global.swift in Sources */,
 				88DC152D27636DC200627F17 /* SideMenuCell.swift in Sources */,
+				88722969279FCCF20066DA64 /* RoleItems.swift in Sources */,
 				88D560A92788219B003A8D33 /* CountryList.swift in Sources */,
 				88E2615E27645D2700BC84B2 /* RaiseDisputeViewController.swift in Sources */,
 				881DD7FD27674F1800B48A1F /* ForgotPasswordViewController.swift in Sources */,
@@ -838,6 +853,7 @@
 				88D08D0F27621A2F001D5282 /* LoginViewController.swift in Sources */,
 				88DC1523276368C700627F17 /* SideMenuViewController.swift in Sources */,
 				8848D6902785BDA80081911E /* ValidationManager.swift in Sources */,
+				88722968279FCCF20066DA64 /* RoleList.swift in Sources */,
 				88078838277C2E7200F9FF85 /* Items.swift in Sources */,
 				8807882E277C2B9B00F9FF85 /* Merchant.swift in Sources */,
 				88984F8D277F021E00E76111 /* SubCategoryList.swift in Sources */,

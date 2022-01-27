@@ -42,7 +42,8 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
     var SideMenuViewController : SideMenuViewController?
     var page = 0
     var totalCount = 10
-    var productList: ProductList?
+    var product: ProductList?
+    var productList: [Items] = []
     var filteredArray: [Items]?
     var activeProductList: ProductList?
     var getTaxDataByHSNCode: TaxList?
@@ -250,7 +251,7 @@ extension HomeViewController {
     }
     
     // Get Product List Api
-    func getProductListAPI(parameter: Parameters? = nil) {
+    func getProductListAPI(parameter: Parameters? = nil, bodyParameter:Parameters? = nil) {
         var parameters = Parameters()
         
         if parameter == nil {
@@ -268,8 +269,17 @@ extension HomeViewController {
             parameters["pageSize"] = 10
         }
         
+        var bodyParam = Parameters()
+        if bodyParameter == nil {
+            bodyParam = [:]
+        } else {
+            if let bodyParameter = bodyParameter {
+                bodyParam = bodyParameter
+            }
+        }
+        
         showLoading()
-        APIHelper.getProductListApi(params: parameters) { (success, response) in
+        APIHelper.getProductListApi(params: parameters, bodyParameter: bodyParam) { (success, response) in
             self.tableView.pullToRefreshView?.stopAnimating()
             if !success {
                 dissmissLoader()
@@ -278,9 +288,14 @@ extension HomeViewController {
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
-                self.productList = ProductList.init(json: data)
-                self.filteredArray = self.productList?.items
-                self.totalCount = self.productList?.totalItems ?? 0
+                self.product = ProductList.init(json: data)
+                if self.page == 0 {
+                    self.productList = ProductList.init(json: data).items ?? []
+                } else{
+                    self.productList.append(contentsOf: ProductList.init(json: data).items ?? [])
+                }
+                self.filteredArray = self.productList
+                self.totalCount = self.product?.totalItems ?? 0
                 let message = response.message
                 print(message)
                 self.tableView.reloadData()
@@ -449,12 +464,12 @@ extension HomeViewController: UIScrollViewDelegate{
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentOffset = scrollView.contentOffset.y
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-        let totalRecords = self.productList?.items?.count ?? 0
+        let totalRecords = self.productList.count
         // Change 10.0 to adjust the distance from bottom
-        if maximumOffset - currentOffset <= 10.0 && totalRecords >= 10 {
-            if page < self.productList?.totalPages ?? 0 {
+        if maximumOffset - currentOffset <= 10.0 && totalRecords < totalCount {
+            if page < ((self.product?.totalPages ?? 0)-1) {
                 page += 1
-                self.getProductListAPI()
+                self.getProductListAPI(bodyParameter: filterparm)
             }
         }
     }
@@ -468,10 +483,10 @@ extension HomeViewController: UITextFieldDelegate {
         var finalString = ""
         if string.isEmpty {
             finalString = String(finalString.dropLast())
-            filteredArray = productList?.items
+            filteredArray = product?.items
         } else {
             finalString = textField.text! + string
-            self.filteredArray = self.productList?.items?.filter({
+            self.filteredArray = self.product?.items?.filter({
                 ($0.name ?? "").localizedCaseInsensitiveContains(finalString)
             })
         }

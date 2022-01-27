@@ -10,26 +10,22 @@ import DropDown
 
 class ManageOrderTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var switchButton: UISwitch!{
-        didSet{
-            switchButton.onTintColor = .green
-            switchButton.tintColor = UIColor(named: "BlueColor")
-            switchButton.subviews[0].subviews[0].backgroundColor = UIColor(named: "BlueColor")
-            if let thumb = switchButton.subviews[0].subviews[1].subviews[2] as? UIImageView {
-                thumb.transform = CGAffineTransform(scaleX:0.8, y: 0.8)
-            }
-        }
-    }
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusView: UIView!
-    @IBOutlet weak var statusButton: UIButton!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var statusLbl: UILabel!
     @IBOutlet weak var itemPriceLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    var editButtonHandler: (() -> ())!
-    var deleteButtonHandler: (() -> ())!
+    var item: OrderItems? {
+        didSet {
+            if let item = self.item {
+                titleLabel.text = item.orderNo
+                itemPriceLabel.text = "\(item.totalPrice ?? 0.0)"
+                statusLbl.text = item.orderStatus
+                dateLabel.text = item.createdAt?.toFormatedDate(from: "yyyy-MM-dd HH:mm", to: "dd MMM yyyy HH:MM")
+            }
+        }
+    }
     var statusButtonHandler: (() -> ())!
     var orderStatusDropDown =  DropDown()
     var statusData: [String] = []
@@ -47,27 +43,20 @@ class ManageOrderTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func editButtonAction(_ sender: UIButton) {
-        editButtonHandler()
-    }
-    @IBAction func deleteButtonAction(_ sender: UIButton) {
-        deleteButtonHandler()
-    }
-    
     @IBAction func statusButtonAction(_ sender: UIButton) {
         statusButtonHandler()
     }
     
     // Setup order Status Drop Down
     func setupOrderStatusDropDown() {
-        orderStatusDropDown.anchorView = statusButton
+        orderStatusDropDown.anchorView = statusView
         orderStatusDropDown.dataSource = statusData
         orderStatusDropDown.backgroundColor = .white
         orderStatusDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            statusButton.setTitle(item, for: .normal)
+            statusLbl.text = item
             self.orderStatusDropDown.hide()
-            orderStatusDropDown.bottomOffset = CGPoint(x: -30, y: 10)
-            orderStatusDropDown.width = statusButton.frame.width + 60
+            orderStatusDropDown.bottomOffset = CGPoint(x: 0, y: -10)
+            orderStatusDropDown.width = statusView.frame.width + 20
             orderStatusDropDown.direction = .bottom
         }
     }

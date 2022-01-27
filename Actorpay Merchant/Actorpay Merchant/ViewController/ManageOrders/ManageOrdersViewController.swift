@@ -30,12 +30,12 @@ class ManageOrdersViewController: UIViewController {
             searchTextField.delegate = self
         }
     }
-    var orderList: OrderList?
-    var filteredArray: [OrderItems]?
+    var order: OrderList?
+    var orderList: [OrderItems] = []
+    var filteredArray: [OrderItems] = []
     var page = 0
     var totalCount = 10
     var filterOrderParm: Parameters?
-    
     
     //MARK:- life Cycle Function -
 
@@ -43,13 +43,11 @@ class ManageOrdersViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        
         self.getOrderListApi()
         tableView.addPullToRefresh {
             self.page = 0
             self.getOrderListApi()
         }
-        
     }
 
     //MARK:- Selectors -
@@ -70,17 +68,13 @@ class ManageOrdersViewController: UIViewController {
         newVC.filterOrderParm = filterOrderParm
         newVC.setFilterData()
         newVC.completion = { param in
-            print(param)
+            print(param as Any)
             self.filterOrderParm = param
             self.getOrderListApi()
         }
         self.navigationController?.present(newVC, animated: true, completion: nil)
     }
     
-    //MARK:- Helper Function -
-    
-    
-
 }
 
 // MARK: - Extensions -
@@ -115,9 +109,14 @@ extension ManageOrdersViewController {
             }else {
                 dissmissLoader()
                 let data = response.response["data"]
-                self.orderList = OrderList.init(json: data)
-                self.filteredArray = self.orderList?.items
-                self.totalCount = self.orderList?.totalItems ?? 0
+                self.order = OrderList.init(json: data)
+                if self.page == 0 {
+                    self.orderList = OrderList.init(json: data).items ?? []
+                } else {
+                    self.orderList.append(contentsOf: OrderList.init(json: data).items ?? [])
+                }
+                self.filteredArray = self.order?.items ?? []
+                self.totalCount = self.order?.totalItems ?? 0
                 let message = response.message
                 print(message)
                 self.tableView.reloadData()
@@ -167,23 +166,20 @@ extension ManageOrdersViewController {
 //MARK: TableView SetUp
 extension ManageOrdersViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if filteredArray?.count == 0{
+        if filteredArray.count == 0{
             tableView.setEmptyMessage("No Order Availabel")
         } else {
             tableView.restore()
         }
-        return filteredArray?.count ?? 0
+        return filteredArray.count 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ManageOrderTableViewCell", for: indexPath) as! ManageOrderTableViewCell
-        cell.titleLabel.text = orderList?.items?[indexPath.row].orderNo
-        cell.itemPriceLabel.text = "\(orderList?.items?[indexPath.row].totalPrice ?? 0.0)"
-        cell.statusButton.setTitle(orderList?.items?[indexPath.row].orderStatus, for: .normal)
-        cell.dateLabel.text = orderList?.items?[indexPath.row].createdAt
+        let item = order?.items?[indexPath.row]
+        cell.item = item
         cell.statusButtonHandler = {
             cell.orderStatusDropDown.show()
-//            self. (orderNo: self.orderList?.items?[indexPath.row].orderNo ?? "")
         }
         return cell
     }
@@ -191,7 +187,7 @@ extension ManageOrdersViewController: UITableViewDelegate,UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "OrderSummaryViewController") as! OrderSummaryViewController
-        newVC.orderItems = orderList?.items?[indexPath.row]
+        newVC.orderItems = order?.items?[indexPath.row]
         self.navigationController?.pushViewController(newVC, animated: true)
     }
 }
@@ -202,10 +198,10 @@ extension ManageOrdersViewController: UIScrollViewDelegate{
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentOffset = scrollView.contentOffset.y
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-        let totalRecords = self.orderList?.items?.count ?? 0
+        let totalRecords = self.order?.items?.count ?? 0
         // Change 10.0 to adjust the distance from bottom
         if maximumOffset - currentOffset <= 10.0 && totalRecords >= 10 {
-            if page < self.orderList?.totalPages ?? 0 {
+            if page < self.order?.totalPages ?? 0 {
                 page += 1
                 self.getOrderListApi()
             }
@@ -221,12 +217,12 @@ extension ManageOrdersViewController: UITextFieldDelegate {
         var finalString = ""
         if string.isEmpty {
             finalString = String(finalString.dropLast())
-            filteredArray = orderList?.items
+            filteredArray = order?.items ?? []
         } else {
             finalString = textField.text! + string
-            self.filteredArray = self.orderList?.items?.filter({
+            self.filteredArray = self.order?.items?.filter({
                 ($0.orderNo ?? "").localizedCaseInsensitiveContains(finalString)
-            })
+            }) ?? []
         }
         self.tableView.reloadData()
         return true

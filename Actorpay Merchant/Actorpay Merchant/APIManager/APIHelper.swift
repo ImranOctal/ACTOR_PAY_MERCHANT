@@ -123,8 +123,8 @@ final class APIHelper {
     }
     
     //MARK: Get Product List Api
-    static func getProductListApi(params: Parameters , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.request2(method: .post, url: APIEndPoint.productList.rawValue, parameters: params) { (response) in
+    static func getProductListApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.requestWithParameters(method: .post, url: APIEndPoint.productList.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -330,6 +330,18 @@ final class APIHelper {
     //MARK: Static Content Api With Type
     static func staticContentApi(parameters: Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
         APIManager.shared.getMethodWithoutAuth(method: .get, url: APIEndPoint.staticContentApi.rawValue, parameters: parameters) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Get Role List Api
+    static func getRoleListApi(parameters: Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
+        APIManager.shared.postRequest(method: .post, url: APIEndPoint.getRoleListApi.rawValue, parameters: parameters) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)

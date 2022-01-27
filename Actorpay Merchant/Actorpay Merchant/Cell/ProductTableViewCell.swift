@@ -23,10 +23,10 @@ class ProductTableViewCell: UITableViewCell {
         didSet {
             if let item = self.item {
                 titleLabel.text = item.name
-                dealPricLabel.text = "\(item.dealPrice ?? 0)"
-                itemPriceLabel.text = "\(item.actualPrice ?? 0)"
+                dealPricLabel.text = doubleToStringWithComma(item.dealPrice ?? 0)
+                itemPriceLabel.text = doubleToStringWithComma(item.actualPrice ?? 0)
                 dateLabel.text = item.createdAt?.toFormatedDate(from: "yyyy-MM-dd HH:mm", to: "HH:mm a, dd MMM yyyy")
-                imgView.sd_setImage(with: URL(string: item.image ?? ""), placeholderImage: UIImage(named: "logo"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+                imgView.sd_setImage(with: URL(string: item.image ?? ""), placeholderImage: UIImage(named: "placeholder_img"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
             }
         }
     }

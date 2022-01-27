@@ -38,6 +38,7 @@ enum APIEndPoint: String {
     case cancelOrReturnOrderApi = "merchant-service/orders/cancel/"
     case contryApi = "global-service/v1/country/get/all"
     case staticContentApi = "cms-service/get/static/data/by/cms"
+    case getRoleListApi = "merchant-service/role/get/all/paged"
     
 }
 

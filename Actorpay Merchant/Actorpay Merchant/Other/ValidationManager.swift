@@ -30,4 +30,6 @@ class ValidationManager {
     let emptyQuantity = "Oops! Product Quantity is Empty or 0"
     let emptyProductDescription = "Oops! Your Product Description is Empty"
     let acceptTerms = "Please agree to our terms to sign up"
+    let sGender = "Please Select Gender"
+    let sDateOfBirth = "Please Select DOB"
 }

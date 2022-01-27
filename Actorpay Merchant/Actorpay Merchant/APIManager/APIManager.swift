@@ -39,7 +39,6 @@ class APIManager {
     func getMethod(method : HTTPMethod = .get, url:String, parameters:Parameters = [:], success:@escaping APICompletionBlock){
         absoluteUrl = APIBaseUrlPoint.localHostBaseURL.rawValue + url
         let headers: HTTPHeaders = [.authorization(bearerToken: AppManager.shared.token)]
-        print(headers)
         var param:Parameters? = parameters
         if method == .get {
             if let urlParameters = param {
@@ -239,6 +238,81 @@ class APIManager {
         }
         print(absoluteUrl)
         manager.request(absoluteUrl, method: method)
+            .responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let retrivedResult):
+                    let responseJSON = JSON(retrivedResult)
+                    let message = responseJSON["message"].stringValue
+                    success(APIResponse.createSuccessAPIResponse(message, responseJSON))
+                    break
+                case .failure(let errorGiven):
+                    dissmissLoader()
+                    let message = errorGiven.errorDescription ?? ""
+                    success(APIResponse.createFailureAPIResponse(message))
+                    print(errorGiven.errorDescription ?? "")
+                    break
+                }
+            })
+    }
+    
+    func requestWithParameters(method : HTTPMethod, url:String, parameters:Parameters, bodyParameter: Parameters ,success:@escaping APICompletionBlock){
+        absoluteUrl = APIBaseUrlPoint.localHostBaseURL.rawValue + url
+        let headers: HTTPHeaders = [.authorization(bearerToken: AppManager.shared.token)]
+        var param:Parameters? = parameters
+        //        if method == .post {
+        if let urlParameters = param {
+            if !(urlParameters.isEmpty) {
+                absoluteUrl.append("?")
+                var array:[String] = []
+                let _ = urlParameters.map { (key, value) -> Bool in
+                    let str = key + "=" +  String(describing: value)
+                    array.append(str)
+                    return true
+                }
+                absoluteUrl.append(array.joined(separator: "&"))
+            }
+        }
+        param = nil
+        //        }
+        print(absoluteUrl)
+        manager.request(absoluteUrl, method: method,parameters: bodyParameter , encoding: JSONEncoding.default, headers: headers)
+            .responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let retrivedResult):
+                    let responseJSON = JSON(retrivedResult)
+                    let message = responseJSON["message"].stringValue
+                    success(APIResponse.createSuccessAPIResponse(message, responseJSON))
+                    break
+                case .failure(let errorGiven):
+                    dissmissLoader()
+                    let message = errorGiven.errorDescription ?? ""
+                    success(APIResponse.createFailureAPIResponse(message))
+                    break
+                }
+            })
+    }
+    
+    func postRequest(method : HTTPMethod = .post, url:String, parameters:Parameters = [:], success:@escaping APICompletionBlock){
+        absoluteUrl = APIBaseUrlPoint.localHostBaseURL.rawValue + url
+        let headers: HTTPHeaders = [.authorization(bearerToken: AppManager.shared.token)]
+        var param:Parameters? = parameters
+        if method == .post {
+            if let urlParameters = param {
+                if !(urlParameters.isEmpty) {
+                    absoluteUrl.append("?")
+                    var array:[String] = []
+                    let _ = urlParameters.map { (key, value) -> Bool in
+                        let str = key + "=" +  String(describing: value)
+                        array.append(str)
+                        return true
+                    }
+                    absoluteUrl.append(array.joined(separator: "&"))
+                }
+            }
+            param = nil
+        }
+        print(absoluteUrl)
+        manager.request(absoluteUrl, method: method, /*parameters: parameters, encoding: JSONEncoding.default,*/ headers: headers)
             .responseJSON(completionHandler: { (response) in
                 switch response.result {
                 case .success(let retrivedResult):

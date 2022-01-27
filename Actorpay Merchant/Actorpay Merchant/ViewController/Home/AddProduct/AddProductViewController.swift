@@ -304,7 +304,7 @@ class AddProductViewController: UIViewController {
         taxDropDownTextField.checkMarkEnabled = false
         taxDropDownTextField.didSelect{(selectedText , index , id) in
             for i in self.taxList ?? [] {
-                if "\(i.taxPercentage ?? 0.0)" == selectedText {
+                if "\(i.hsnCode ?? "") - \(i.taxPercentage ?? 0.0)%" == selectedText {
                     self.taxID = i.id
                     return
                 }
@@ -363,7 +363,7 @@ extension AddProductViewController {
                 self.taxList = data.arrayValue.map({(TaxList(json: $0))})
                 self.taxData.removeAll()
                 for item in self.taxList ?? [] {
-                    self.taxData.append("\(item.hsnCode ?? "") - \(item.taxPercentage ?? 0.0)%")
+                    self.taxData.append("\(item.taxPercentage ?? 0.0)")
                 }
                 print(self.taxData)
                 self.setUpTaxDropDown()
@@ -371,7 +371,7 @@ extension AddProductViewController {
                     self.taxID = self.productItem?.taxId
                     for(_, item) in (self.taxList ?? []).enumerated() {
                         if item.id == self.productItem?.taxId {
-                            self.taxDropDownTextField.text = "\(item.hsnCode ?? "") - \(item.taxPercentage ?? 0.0)%"
+                            self.taxDropDownTextField.text = "\(item.taxPercentage ?? 0.0)"
                         }
                     }
                 }
@@ -397,7 +397,6 @@ extension AddProductViewController {
                 self.view.makeToast(message)
             }else {
                 dissmissLoader()
-                print(response)
                 let data = response.response.data
                 self.taxList = data.arrayValue.map({(TaxList(json: $0))})
                 self.taxData.removeAll()
