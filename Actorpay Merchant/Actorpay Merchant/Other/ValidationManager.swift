@@ -32,4 +32,19 @@ class ValidationManager {
     let acceptTerms = "Please agree to our terms to sign up"
     let sGender = "Please Select Gender"
     let sDateOfBirth = "Please Select DOB"
+    let emptyNotesDesc = "Add Note Description"
+    
+    // Outlet Validation Message
+    let outletTitleValidationMsg = "Oops! Your Title is Empty"
+    let outletResourcesValidationMsg = "Oops! Your Resources is Empty"
+    let outletLicenceValidationMsg = "Oops! Your Licence is Empty"
+    let outletMobileValidationMsg = "Oops! Your Phone Number Empty"
+    let outletValidMobileValidationMsg = "Oops! Your Phone is Not Correct"
+    let outletAddressValidationMsg = "Oops! Your Address is Empty"
+    let outletZipcodeValidationMsg = "Oops! Your Zip Code is Empty"
+    let outletCityValidationMsg = "Oops! Your City is Empty"
+    let outletStateValidationMsg = "Oops! Your State is Empty"
+    let outletCountryValidationMsg = "Oops! Your Country is Empty"
+    let outletDescValidationMsg = "Oops! Your Description is Empty"
+    
 }

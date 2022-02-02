@@ -35,12 +35,12 @@ class NewSubAdminViewController: UIViewController {
             dobTextField.delegate = self
         }
     }
-    @IBOutlet weak var genderTextField: UITextField!  {
+    @IBOutlet weak var genderTextField: UITextField! {
         didSet {
             genderTextField.delegate = self
         }
     }
-    @IBOutlet weak var emailTextField: UITextField!  {
+    @IBOutlet weak var emailTextField: UITextField! {
         didSet {
             emailTextField.delegate = self
         }
@@ -50,11 +50,12 @@ class NewSubAdminViewController: UIViewController {
             passwordTextField.delegate = self
         }
     }
-    @IBOutlet weak var phoneNumberTextField: UITextField!  {
+    @IBOutlet weak var phoneNumberTextField: UITextField! {
         didSet {
             phoneNumberTextField.delegate = self
         }
     }
+    @IBOutlet weak var  headerTitleLbl: UILabel!
     @IBOutlet weak var roleTextField: UITextField!
     @IBOutlet weak var firstNameValidationLbl: UILabel!
     @IBOutlet weak var lastNameValidationLbl: UILabel!
@@ -66,23 +67,36 @@ class NewSubAdminViewController: UIViewController {
     @IBOutlet weak var contactNoValidationLbl: UILabel!
     @IBOutlet weak var countryCodeLbl: UILabel!
     @IBOutlet weak var countryFlagImgView: UIImageView!
+    @IBOutlet weak var dobView: UIView!
+    @IBOutlet weak var passwordView: UIView!
     
     var isPassTap = false
     var countryList : CountryList?
     var countryCode = "+91"
     var countryFlag = ""
     let genderDropDown = DropDown()
-    var roleList: RoleList?
+    var dobDatePicker = UIDatePicker()
+    var roleData:[String] = []
+    let roleDropDown = DropDown()
+    var roleId: String?
+    var isEditSubMerchant = false
+    var subMerchantItem: SubMerchantItems?
+    var subMerchantId: String?
     
     //MARK:- life Cycle Function -
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        headerTitleLbl.text = isEditSubMerchant == true ? "UPDATE SUB MERCHANT" : "ADD NEW SUB MERCHANT"
         self.validationLabelManage()
+        self.setDOBDatePicker()
         self.setupGenderDropDown()
         self.setUpCountryCodeData()
-        self.getRoleListApi()
+        self.setUpRoleData()
+        if isEditSubMerchant {
+            self.getSubMerchantDetailsApi()
+        }
     }
     
     //MARK:- Selectors -
@@ -122,14 +136,21 @@ class NewSubAdminViewController: UIViewController {
     
     // Role Button Action
     @IBAction func roleButtonAction(_ sender: UIButton) {
-        
+        self.view.endEditing(true)
+        roleDropDown.show()
     }
         
     // Submit Button Action
     @IBAction func submitButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        if adminValidation() {
+        if isEditSubMerchant {
             self.validationLabelManage()
+            self.updateSubMerchantApi()
+        } else {
+            if adminValidation() {
+                self.validationLabelManage()
+                self.addSubMerchatApi()
+            }
         }
     }
     
@@ -227,6 +248,46 @@ class NewSubAdminViewController: UIViewController {
         contactNoValidationLbl.isHidden = true
     }
     
+    // Set Edit Sub Merchant Data
+    func setEditSubMerchantData() {
+        dobView.isHidden = true
+        passwordView.isHidden = true
+        firstNameTextField.text = subMerchantItem?.firstName
+        lastNameTextField.text = subMerchantItem?.lastName
+        emailTextField.text = subMerchantItem?.email
+        phoneNumberTextField.text = subMerchantItem?.contactNumber
+        countryCodeLbl.text = subMerchantItem?.extensionNumber
+    }
+    
+    // Set Date Picker To dobTextField
+    func setDOBDatePicker(){
+        dobDatePicker.datePickerMode = .date
+        if #available(iOS 13.4, *) {
+            dobDatePicker.preferredDatePickerStyle = .wheels
+        }
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Ok", style: .plain, target: self, action: #selector(dobTxtFieldDoneDatePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        dobTextField.inputAccessoryView = toolbar
+        dobTextField.inputView = dobDatePicker
+    }
+    
+    // dobTextField DatePicker Done Button Action
+    @objc func dobTxtFieldDoneDatePicker(){
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        dobTextField.text = formatter.string(from: dobDatePicker.date)
+        self.view.endEditing(true)
+    }
+    
+    // Date Picker Cancel Button Action
+    @objc func cancelDatePicker(){
+        self.view.endEditing(true)
+    }
+    
     // Country Code Data SetUp
     func setUpCountryCodeData() {
         if ((UserDefaults.standard.string(forKey: "countryCode")) != nil) {
@@ -251,8 +312,35 @@ class NewSubAdminViewController: UIViewController {
             self.genderDropDown.hide()
         }
         genderDropDown.bottomOffset = CGPoint(x: 0, y: 50)
-        genderDropDown.width = genderTextField.frame.width + 70
+        genderDropDown.width = genderTextField.frame.width + 40
         genderDropDown.direction = .bottom
+    }
+    
+    // SetUp Role Drop Down
+    func setupRoleDropDown()  {
+        roleDropDown.anchorView = roleTextField
+        roleDropDown.dataSource = roleData
+        roleDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.roleTextField.text = item
+            for i in roleList?.items ?? [] {
+                if i.name == item {
+                    self.roleId = i.id
+                }
+            }
+            self.view.endEditing(true)
+            self.roleDropDown.hide()
+        }
+        roleDropDown.bottomOffset = CGPoint(x: 0, y: 50)
+        roleDropDown.width = roleTextField.frame.width + 40
+        roleDropDown.direction = .bottom
+    }
+    
+    // SetUp Role Data
+    func setUpRoleData() {
+        for item in roleList?.items ?? [] {
+            self.roleData.append(item.name ?? "")
+        }
+        self.setupRoleDropDown()
     }
 
 }
@@ -262,27 +350,81 @@ class NewSubAdminViewController: UIViewController {
 //MARK: Api Call
 extension NewSubAdminViewController {
     
-    // Get Role List Api
-    func getRoleListApi() {
+    // Create Sub Merchant Api
+    func addSubMerchatApi() {
         let params: Parameters = [
-            "pageNo": 0,
-            "pageSize": 5,
-            "sortBy": "createdAt",
-            "asc":"true"
+            "email": emailTextField.text ?? "",
+            "extensionNumber": countryCode,
+            "contactNumber": phoneNumberTextField.text ?? "",
+            "gender": genderTextField.text ?? "",
+            "firstName": firstNameTextField.text ?? "",
+            "lastName": lastNameTextField.text ?? "",
+            "dateOfBirth": dobTextField.text ?? "",
+            "roleId": roleId ?? "",
+            "password": passwordTextField.text ?? "",
+            "isDefaultPassword": false
         ]
         showLoading()
-        APIHelper.getRoleListApi(parameters: params) { (success, response) in
+        APIHelper.createSubMerchantApi(params: params) { (success,response)  in
             if !success {
                 dissmissLoader()
                 let message = response.message
                 self.view.makeToast(message)
-            } else {
+            }else {
                 dissmissLoader()
-                let data = response.response["data"]
-                print(data)
-                self.roleList = RoleList.init(json: data)
                 let message = response.message
                 print(message)
+                NotificationCenter.default.post(name:  Notification.Name("reloadMerchantListApi"), object: self)
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    // Get Sub Merchant Details Api
+    func getSubMerchantDetailsApi() {
+        showLoading()
+        APIHelper.getSubMerchantDetailsApi(parameters: [:], subMerchantId: subMerchantId ?? "") { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                self.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let message = response.message
+                print(message)
+                let data = response.response["data"]
+                self.subMerchantItem = SubMerchantItems.init(json: data)
+                if self.isEditSubMerchant {
+                    self.setEditSubMerchantData()
+                }
+            }
+        }
+    }
+    
+    // Update Sub Merchant Api
+    func updateSubMerchantApi() {
+        let bodyParams: Parameters = [
+            "id": subMerchantId ?? "",
+            "extensionNumber": countryCodeLbl.text ?? "",
+            "contactNumber": phoneNumberTextField.text ?? "",
+            "gender": genderTextField.text ?? "",
+            "firstName": firstNameTextField.text ?? "",
+            "lastName": lastNameTextField.text ?? "",
+            "roleId": roleId ?? ""
+        ]
+        showLoading()
+        APIHelper.updateSubMerchantApi(params: [:], bodyParameter: bodyParams) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                self.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let message = response.message
+                print(message)
+                myApp.window?.rootViewController?.view.makeToast(message)
+                NotificationCenter.default.post(name:  Notification.Name("reloadMerchantListApi"), object: self)
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }

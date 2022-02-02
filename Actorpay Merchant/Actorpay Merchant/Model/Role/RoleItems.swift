@@ -15,7 +15,7 @@ struct RoleItems {
 	let name : String?
 	let description : String?
 	let active : Bool?
-	let screenAccessPermission : String?
+	let screenAccessPermission : [ScreenAccessPermission]?
 
     init(json: JSON) {
         createdAt = json["createdAt"].string
@@ -24,6 +24,6 @@ struct RoleItems {
         name = json["name"].string
         description = json["description"].string
         active = json["active"].bool
-        screenAccessPermission = json["screenAccessPermission"].string
+        screenAccessPermission = json["screenAccessPermission"].arrayValue.map{ ScreenAccessPermission(json: $0)}
 	}
 }

@@ -143,3 +143,38 @@ func doubleToStringWithComma(_ price: Double) -> String{
     numberFormatter.maximumFractionDigits = 2
     return numberFormatter.string(from: price as NSNumber)!
 }
+
+// Function For Get Status From Api
+func getStatus(stausString: String) -> (UIColor) {
+    switch stausString {
+    case "SUCCESS":
+        return UIColor.systemGreen
+    case "READY":
+        return UIColor.systemGreen
+    case "CANCELLED":
+        return UIColor.red
+    case "PARTIALLY_CANCELLED":
+        return UIColor.red
+    case "DISPATCHED":
+        return UIColor.systemGreen
+    case "RETURNING":
+        return UIColor.blue
+    case "PARTIALLY_RETURNING":
+        return UIColor.blue
+    case "RETURNED":
+        return UIColor.blue
+    case "PARTIALLY_RETURNED":
+        return UIColor.blue
+    case "DELIVERED":
+        return  UIColor.systemGreen
+    case "PENDING":
+        return  UIColor.blue
+    case "FAILURE":
+        return UIColor.red
+    case "FAILED":
+        return UIColor.red
+    default :
+        break
+    }
+    return UIColor.black
+}

@@ -8,6 +8,11 @@
 import Foundation
 import SwiftyJSON
 
+var roleList: RoleList?
+var roleItems: [RoleItems] = []
+var roleListPage = 0
+var roleListTotalCount = 5
+
 struct RoleList {
 	let totalPages : Int?
 	let totalItems : Int?

@@ -36,7 +36,7 @@ class FilterOrderViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        statusData = ["Success","Failed","Pending","Cancelled"]
+        statusData = ["ALL","SUCCESS","READY","CANCELLED","PARTIALLY_CANCELLED","DISPATCHED","RETURNING","PARTIALLY_RETURNING","RETURNED","PARTIALLY_RETURNED","DELIVERED","PENDING","FAILED"]
         topCorner(bgView: filterView, maskToBounds: true)
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         self.showAnimate()
@@ -82,7 +82,7 @@ class FilterOrderViewController: UIViewController {
             "priceRangeTo": priceToTextField.text ?? "",
             "orderNo":orderNoTextField.text ?? "",
             "orderId":"",
-            "orderStatus": statusTextField.text ?? ""
+            "orderStatus": statusTextField.text ?? "" == "ALL" ? "" : statusTextField.text ?? ""
         ]
         if let codeCompletion = completion {
             codeCompletion(param)
@@ -113,13 +113,11 @@ class FilterOrderViewController: UIViewController {
         orderStatusDropDown.anchorView = statusTextField
         orderStatusDropDown.dataSource = statusData
         orderStatusDropDown.backgroundColor = .white
+        orderStatusDropDown.width = statusTextField.frame.width + 60
         orderStatusDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.statusTextField.text = item
             self.view.endEditing(true)
             self.orderStatusDropDown.hide()
-            orderStatusDropDown.bottomOffset = CGPoint(x: -10, y: 50)
-            orderStatusDropDown.width = statusTextField.frame.width + 60
-            orderStatusDropDown.direction = .bottom
         }
     }
 

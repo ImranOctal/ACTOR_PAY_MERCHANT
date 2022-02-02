@@ -13,8 +13,10 @@ struct OrderItems {
 	let merchantId : String?
 	let orderStatus : String?
 	let orderItemDtos : [OrderItemDtos]?
+    let merchantDTO : MerchantDTO?
 	let createdAt : String?
     let shippingAddressDTO : ShippingAddressDTO?
+    let orderNotesDtos : [OrderNotesDtos]?
 	let totalTaxableValue : Double?
 
     init(json: JSON) {
@@ -29,8 +31,10 @@ struct OrderItems {
         merchantId = json["merchantId"].string
         orderStatus = json["orderStatus"].string
         orderItemDtos = json["orderItemDtos"].arrayValue.map{ OrderItemDtos(json: $0)}
+        merchantDTO = MerchantDTO(json: json["merchantDTO"])
         createdAt = json["createdAt"].string
         shippingAddressDTO = ShippingAddressDTO(json: json["shippingAddressDTO"])
+        orderNotesDtos = json["orderNotesDtos"].arrayValue.map{ OrderNotesDtos(json: $0)}
         totalTaxableValue = json["totalTaxableValue"].double
 	}
 

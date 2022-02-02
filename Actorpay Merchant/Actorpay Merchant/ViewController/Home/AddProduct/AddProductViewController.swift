@@ -114,14 +114,14 @@ class AddProductViewController: UIViewController {
     //Upload Image Button Action
     @IBAction func uploadImageButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        let alertController = UIAlertController(title:NSLocalizedString("title", comment: ""), message: "", preferredStyle: .actionSheet)
-        let okAction = UIAlertAction(title: NSLocalizedString("ChooseExisting", comment: ""), style: .default) { (action) in
+        let alertController = UIAlertController(title:"", message: "", preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title:"Choose Existing", style: .default) { (action) in
             self.openPhotos()
         }
-        let okAction2 = UIAlertAction(title: NSLocalizedString("TakePhoto", comment: ""), style: .default) { (action) in
+        let okAction2 = UIAlertAction(title:"Take Photo", style: .default) { (action) in
             self.openCamera()
         }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title:"Cancel", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         alertController.addAction(okAction2)
         alertController.addAction(cancelAction)

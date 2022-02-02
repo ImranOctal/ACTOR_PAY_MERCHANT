@@ -5,6 +5,7 @@ import SwiftyJSON
 struct OrderItemDtos {
     
 	let createdAt : String?
+    let orderItemId : String?
 	let deleted : Bool?
 	let productId : String?
     let productName : String?
@@ -21,11 +22,13 @@ struct OrderItemDtos {
 	let subcategoryId : String?
 	let image : String?
 	let merchantName : String?
+    let orderItemStatus : String?
 	let active : Bool?
 
     init(json: JSON) {
 
         createdAt = json["createdAt"].string
+        orderItemId = json["orderItemId"].string
         deleted = json["deleted"].bool
         productId = json["productId"].string
         productName = json["productName"].string
@@ -42,6 +45,7 @@ struct OrderItemDtos {
         subcategoryId = json["subcategoryId"].string
         image = json["image"].string
         merchantName = json["merchantName"].string
+        orderItemStatus = json["orderItemStatus"].string
         active = json["active"].bool
 	}
 

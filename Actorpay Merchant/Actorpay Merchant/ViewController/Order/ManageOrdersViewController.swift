@@ -46,8 +46,11 @@ class ManageOrdersViewController: UIViewController {
         self.getOrderListApi()
         tableView.addPullToRefresh {
             self.page = 0
+            self.searchTextField.text = ""
             self.getOrderListApi()
         }
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("reloadOrderListApi"), object: nil)
+        NotificationCenter.default.addObserver(self,selector: #selector(self.reloadOrderListApi),name:Notification.Name("reloadOrderListApi"), object: nil)
     }
 
     //MARK:- Selectors -
@@ -69,10 +72,18 @@ class ManageOrdersViewController: UIViewController {
         newVC.setFilterData()
         newVC.completion = { param in
             print(param as Any)
+            self.page = 0
             self.filterOrderParm = param
             self.getOrderListApi()
         }
         self.navigationController?.present(newVC, animated: true, completion: nil)
+    }
+    
+    //MARK: - Helper Functions -
+    
+    // Reload Order List Api
+    @objc func reloadOrderListApi() {
+        self.getOrderListApi()
     }
     
 }
@@ -83,12 +94,9 @@ class ManageOrdersViewController: UIViewController {
 extension ManageOrdersViewController {
     
     // Get Order List Api
-    func getOrderListApi(parameter: Parameters? = nil) {
+    func getOrderListApi(parameter: Parameters? = nil,bodyParameter:Parameters? = nil) {
         var parameters = Parameters()
         if parameter == nil {
-            if let parameter = filterOrderParm {
-                parameters = parameter
-            }
             parameters["pageNo"] = page
             parameters["pageSize"] = 10
         } else{
@@ -99,8 +107,20 @@ extension ManageOrdersViewController {
             parameters["pageNo"] = page
             parameters["pageSize"] = 10
         }
+        
+        var bodyParam = Parameters()
+        if bodyParameter == nil {
+            if let bodyParameter = filterOrderParm {
+                bodyParam = bodyParameter
+            }
+        } else {
+            if let bodyParameter = bodyParameter {
+                bodyParam = bodyParameter
+            }
+        }
+        
         showLoading()
-        APIHelper.getOrderListApi(params: parameters) { (success, response) in
+        APIHelper.getOrderListApi(params: parameters, bodyParameter: bodyParam) { (success, response) in
             self.tableView.pullToRefreshView?.stopAnimating()
             if !success {
                 dissmissLoader()
@@ -115,7 +135,7 @@ extension ManageOrdersViewController {
                 } else {
                     self.orderList.append(contentsOf: OrderList.init(json: data).items ?? [])
                 }
-                self.filteredArray = self.order?.items ?? []
+                self.filteredArray = self.orderList
                 self.totalCount = self.order?.totalItems ?? 0
                 let message = response.message
                 print(message)
@@ -123,44 +143,7 @@ extension ManageOrdersViewController {
             }
         }
     }
-    
-    // Update Order Status Api
-    func updateOrderStatusApi(orderNo: String, status: String) {
-        let params: Parameters = [
-            "orderNo" : orderNo,
-            "status" : status
-        ]
-        showLoading()
-        APIHelper.updateOrderStatusApi(params: params) { (success, response) in
-            if !success {
-                dissmissLoader()
-                let message = response.message
-                self.view.makeToast(message)
-            }else {
-                dissmissLoader()
-                let message = response.message
-                print(message)
-                self.getOrderListApi()
-            }
-        }
-    }
-    
-    // Cancel Or Return Order Api
-    func cancelOrReturnOrderApi(orderNo: String) {
-        showLoading()
-        APIHelper.cancelOrReturnOrderApi(params: [:], orderNo: orderNo) { (success, response) in
-            if !success {
-                dissmissLoader()
-                let message = response.message
-                self.view.makeToast(message)
-            }else {
-                dissmissLoader()
-                let message = response.message
-                print(message)
-                self.getOrderListApi()
-            }
-        }
-    }
+
 }
 
 //MARK: TableView SetUp
@@ -176,18 +159,14 @@ extension ManageOrdersViewController: UITableViewDelegate,UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ManageOrderTableViewCell", for: indexPath) as! ManageOrderTableViewCell
-        let item = order?.items?[indexPath.row]
+        let item = filteredArray[indexPath.row]
         cell.item = item
-        cell.statusButtonHandler = {
-            cell.orderStatusDropDown.show()
-        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "OrderSummaryViewController") as! OrderSummaryViewController
-        newVC.orderItems = order?.items?[indexPath.row]
+        newVC.orderNo = filteredArray[indexPath.row].orderNo ?? ""
         self.navigationController?.pushViewController(newVC, animated: true)
     }
 }
@@ -200,8 +179,8 @@ extension ManageOrdersViewController: UIScrollViewDelegate{
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
         let totalRecords = self.order?.items?.count ?? 0
         // Change 10.0 to adjust the distance from bottom
-        if maximumOffset - currentOffset <= 10.0 && totalRecords >= 10 {
-            if page < self.order?.totalPages ?? 0 {
+        if maximumOffset - currentOffset <= 10.0 && totalRecords < totalCount {
+            if page < ((self.order?.totalPages ?? 0)-1) {
                 page += 1
                 self.getOrderListApi()
             }
@@ -225,6 +204,22 @@ extension ManageOrdersViewController: UITextFieldDelegate {
             }) ?? []
         }
         self.tableView.reloadData()
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case searchTextField:
+            print("search")
+            var filterParam = Parameters()
+            if let parameter = filterOrderParm {
+                filterParam = parameter
+            }
+            filterParam["orderNo"] = searchTextField.text ?? ""
+            self.getOrderListApi(bodyParameter: filterParam)
+        default:
+            break
+        }
         return true
     }
 }

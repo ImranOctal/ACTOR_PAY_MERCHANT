@@ -280,8 +280,8 @@ final class APIHelper {
     }
     
     //MARK: Get Order List Api
-    static func getOrderListApi(params: Parameters , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.request2(method: .post, url: APIEndPoint.orderList.rawValue, parameters: params) { (response) in
+    static func getOrderListApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.requestWithParameters(method: .post, url: APIEndPoint.orderList.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -292,8 +292,8 @@ final class APIHelper {
     }
     
     //MARK: Change Order Status
-    static func updateOrderStatusApi(params: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
-        APIManager.shared.request2(method: .put, url: APIEndPoint.updateOrderStatusApi.rawValue, parameters: params) { (response) in
+    static func updateOrderStatusApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
+        APIManager.shared.requestWithParameters(method: .put, url: APIEndPoint.updateOrderStatusApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -304,8 +304,8 @@ final class APIHelper {
     }
     
     //MARK: Cancel Or Return Order Api
-    static func cancelOrReturnOrderApi(params: Parameters ,orderNo:String, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.request2(method: .post, url: APIEndPoint.cancelOrReturnOrderApi.rawValue+"\(orderNo)", parameters: params) { (response) in
+    static func cancelOrReturnOrderApi(params: Parameters, imgData: Data?, imageKey: String,orderNo: String, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.uploadData(method: .post, url: APIEndPoint.cancelOrReturnOrderApi.rawValue+"\(orderNo)", parameters: params, imgData: imgData, imageKey: imageKey) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -342,6 +342,222 @@ final class APIHelper {
     //MARK: Get Role List Api
     static func getRoleListApi(parameters: Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
         APIManager.shared.postRequest(method: .post, url: APIEndPoint.getRoleListApi.rawValue, parameters: parameters) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    // MARK: FAQ Api
+    static func getFAQAll(parameters: Parameters ,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
+        APIManager.shared.getMethodWithoutAuth(method: .get, url: APIEndPoint.faqAll.rawValue, parameters: parameters) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Get All Sub Merchant List Api
+    static func getAllSubMerchantListApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ) {
+        APIManager.shared.requestWithParameters(method: .post, url: APIEndPoint.getAllSubMerchantListApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Create Sub Merchant Api
+    static func createSubMerchantApi(params: Parameters , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
+        APIManager.shared.request2(method: .post, url: APIEndPoint.createSubMerchantApi.rawValue, parameters: params) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Get Sub Merchant Details Api
+    static func getSubMerchantDetailsApi(parameters: Parameters, subMerchantId:String, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.getMethod(method: .get, url: APIEndPoint.getSubMerchantDetailsApi.rawValue + "\(subMerchantId)", parameters: parameters) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Delete Sub Merchant by ID Api
+    static func deleteSubMerchentByIdApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ) {
+        APIManager.shared.requestWithParameters(method: .delete, url: APIEndPoint.deleteSubMerchentByIdApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Update Sub Merchant Api
+    static func updateSubMerchantApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
+        APIManager.shared.requestWithParameters(method: .put, url: APIEndPoint.updateSubMerchantApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Delete Sub Merchant by ID Api
+    static func deleteRoleByIdApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ) {
+        APIManager.shared.requestWithParameters(method: .delete, url: APIEndPoint.deleteRoleByIdApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Get All Screen Api
+    static func getAllScreenApi(parameters: Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.getMethod(method: .get, url: APIEndPoint.getAllScreenApi.rawValue, parameters: parameters) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Get Role Details By Id Api
+    static func getRoleDetailsByIdApi(parameters: Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.getMethod(method: .get, url: APIEndPoint.getRoleByIdApi.rawValue, parameters: parameters) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Create Role Api
+    static func createRoleApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ) {
+        APIManager.shared.requestWithParameters(method: .post, url: APIEndPoint.createRoleApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Update Role Api
+    static func updateRoleApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
+        APIManager.shared.requestWithParameters(method: .put, url: APIEndPoint.updateRoleApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Order Details Api
+    static func getOrderDetailsApi(orderNo: String ,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.getMethod(url: APIEndPoint.getOrderDetailsByOrderNo.rawValue + "\(orderNo)") { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Get Outlet List Api
+    static func getOutletListApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ) {
+        APIManager.shared.requestWithParameters(method: .post, url: APIEndPoint.getOutletListApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Delete Outlet by ID Api
+    static func deleteOutletByIdApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ) {
+        APIManager.shared.requestWithParameters(method: .delete, url: APIEndPoint.deleteOutletByIdApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Order Details Api
+    static func getOutletDetailsByIdApi(outletId: String ,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.getMethod(url: APIEndPoint.getOutletDetailsByIdApi.rawValue + "\(outletId)") { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Create Outlet Api
+    static func createOutletApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ) {
+        APIManager.shared.requestWithParameters(method: .post, url: APIEndPoint.createOutletApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Update Role Api
+    static func updateOutletApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
+        APIManager.shared.requestWithParameters(method: .put, url: APIEndPoint.updateOutletApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: Get Commission List Api
+    static func commissionListApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ) {
+        APIManager.shared.requestWithParameters(method: .post, url: APIEndPoint.commissionListApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)

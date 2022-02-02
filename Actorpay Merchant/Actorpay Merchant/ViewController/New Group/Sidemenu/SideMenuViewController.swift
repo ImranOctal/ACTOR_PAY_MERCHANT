@@ -40,10 +40,14 @@ class SideMenuViewController: UIViewController {
         SideMenuModel(icon: UIImage(named: "my_profile"), title: "My Profile"),
         SideMenuModel(icon: UIImage(named: "change_password"), title: "Change Password"),
         SideMenuModel(icon: UIImage(named: "sub_merchant"), title: "Merchant & sub Merchant"),
+        SideMenuModel(icon: UIImage(named: "Outlet"), title: "Outlet"),
+        SideMenuModel(icon: UIImage(named: "Role"), title: "Role"),
         SideMenuModel(icon: UIImage(named: "manage_orders"), title: "Manage Products"),
         SideMenuModel(icon: UIImage(named: "myOrder"), title: "Manage Orders"),
+        SideMenuModel(icon: UIImage(named: "commission"), title: "My Commission"),
         SideMenuModel(icon: UIImage(named: "cancel_dispute"), title: "Cancelled/Raised Dispute"),
         SideMenuModel(icon: UIImage(named: "file_reports"), title: "Reports"),
+        SideMenuModel(icon: UIImage(named: "more"), title: "More")
     ]    
     var delegate : SideMenuViewControllerDelegate?
     
@@ -118,19 +122,32 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
             newVC.modalPresentationStyle = .overCurrentContext
             self.navigationController?.present(newVC, animated: true, completion: nil)
         case 2:
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "NewSubAdminViewController") as! NewSubAdminViewController
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "SubMerchantViewController") as! SubMerchantViewController
             self.navigationController?.pushViewController(newVC, animated: true)
         case 3:
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "OutletsViewController") as! OutletsViewController
             self.navigationController?.pushViewController(newVC, animated: true)
+            return
         case 4:
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ManageOrdersViewController") as! ManageOrdersViewController
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "RoleViewController") as! RoleViewController
             self.navigationController?.pushViewController(newVC, animated: true)
         case 5:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+        case 6:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ManageOrdersViewController") as! ManageOrdersViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+        case 7:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "CommissionViewController") as! CommissionViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+        case 8:
             obj_AppDelegate.window?.rootViewController?.view.makeToast("Coming Soon")
             return
-        case 6:
+        case 9:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "PayRollViewController") as! PayRollViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+        case 10:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "MoreViewController") as! MoreViewController
             self.navigationController?.pushViewController(newVC, animated: true)
         default:
             break

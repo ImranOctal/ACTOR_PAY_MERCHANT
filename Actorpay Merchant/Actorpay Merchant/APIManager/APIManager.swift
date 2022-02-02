@@ -312,7 +312,7 @@ class APIManager {
             param = nil
         }
         print(absoluteUrl)
-        manager.request(absoluteUrl, method: method, /*parameters: parameters, encoding: JSONEncoding.default,*/ headers: headers)
+        manager.request(absoluteUrl, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseJSON(completionHandler: { (response) in
                 switch response.result {
                 case .success(let retrivedResult):
