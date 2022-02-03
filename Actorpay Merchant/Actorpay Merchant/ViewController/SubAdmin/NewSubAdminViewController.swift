@@ -9,6 +9,9 @@ import UIKit
 import SDWebImage
 import DropDown
 import Alamofire
+import GooglePlaces
+import GoogleMaps
+import CoreLocation
 
 class NewSubAdminViewController: UIViewController {
     
@@ -487,3 +490,4 @@ extension NewSubAdminViewController: UITextFieldDelegate {
     }
     
 }
+

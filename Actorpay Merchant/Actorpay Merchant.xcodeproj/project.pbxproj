@@ -50,6 +50,7 @@
 		88669C7C27A3E49500B9D99D /* SubMerchantItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88669C7A27A3E49500B9D99D /* SubMerchantItems.swift */; };
 		88722968279FCCF20066DA64 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88722966279FCCF20066DA64 /* RoleList.swift */; };
 		88722969279FCCF20066DA64 /* RoleItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88722967279FCCF20066DA64 /* RoleItems.swift */; };
+		8884E86B27AB92CA00E725A4 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8884E86A27AB92CA00E725A4 /* VerifyViewController.swift */; };
 		88984F7F277F00FD00E76111 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F7E277F00FD00E76111 /* CategoryList.swift */; };
 		88984F85277F019500E76111 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F84277F019500E76111 /* CategoryItem.swift */; };
 		88984F8C277F021E00E76111 /* SubCategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F8A277F021E00E76111 /* SubCategoryItem.swift */; };
@@ -172,6 +173,7 @@
 		88669C7A27A3E49500B9D99D /* SubMerchantItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubMerchantItems.swift; sourceTree = "<group>"; };
 		88722966279FCCF20066DA64 /* RoleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		88722967279FCCF20066DA64 /* RoleItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleItems.swift; sourceTree = "<group>"; };
+		8884E86A27AB92CA00E725A4 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		88984F7E277F00FD00E76111 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
 		88984F84277F019500E76111 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		88984F8A277F021E00E76111 /* SubCategoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategoryItem.swift; sourceTree = "<group>"; };
@@ -718,6 +720,7 @@
 			isa = PBXGroup;
 			children = (
 				88E2615C27645D2700BC84B2 /* ProfileViewController.swift */,
+				8884E86A27AB92CA00E725A4 /* VerifyViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -781,6 +784,7 @@
 				88D08D0427621A2F001D5282 /* Frameworks */,
 				88D08D0527621A2F001D5282 /* Resources */,
 				4F174104F73DC631C9047028 /* [CP] Embed Pods Frameworks */,
+				5FF04B98DAAE59854B060D6B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -819,6 +823,7 @@
 				88D08D2527621A31001D5282 /* Frameworks */,
 				88D08D2627621A31001D5282 /* Resources */,
 				C68A8565DCA33D2653C32D39 /* [CP] Embed Pods Frameworks */,
+				8D06911C2D7E4F3101981EEB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -967,6 +972,40 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5FF04B98DAAE59854B060D6B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant/Pods-Actorpay Merchant-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D06911C2D7E4F3101981EEB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Actorpay Merchant-Actorpay MerchantUITests/Pods-Actorpay Merchant-Actorpay MerchantUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		94D06D9448BDE65DB0782A0F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1062,6 +1101,7 @@
 				88A9137E27A27439001C73EB /* OrderAddNoteViewController.swift in Sources */,
 				88B9C6FF27A810FF008E9160 /* AddOutletViewController.swift in Sources */,
 				884E0F49278E9C840079139D /* FilterOrderViewController.swift in Sources */,
+				8884E86B27AB92CA00E725A4 /* VerifyViewController.swift in Sources */,
 				88078801277C17B000F9FF85 /* AppManager.swift in Sources */,
 				885707EC27A9070A008ACAB1 /* CommissionViewController.swift in Sources */,
 				88669C7127A3CB3800B9D99D /* SubMerchantDetailTableViewCell.swift in Sources */,

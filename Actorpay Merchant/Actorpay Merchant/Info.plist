@@ -29,6 +29,18 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App will use your location to get offers near by you</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>App will use your location to get offers near by you</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App will use your location to get offers near by you</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This will allow you to add photo for item and user profile photo.  </string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Require for the saving Images.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Require for the saving Images.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>

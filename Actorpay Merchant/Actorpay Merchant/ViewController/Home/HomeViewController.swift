@@ -247,7 +247,6 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
             newVC.isUpdate = true
             newVC.productItem = self.filteredArray?[indexPath.row]
             self.navigationController?.pushViewController(newVC, animated: true)
-//            self.changeProductStatusApi(productId: item?.productId ?? "", status: "true")
         }
         cell.deleteButtonHandler = {
             self.view.endEditing(true)
@@ -271,7 +270,6 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         let item = self.filteredArray?[indexPath.row]
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
         newVC.productId = item?.productId
-        newVC.reloadFunction()
         self.navigationController?.pushViewController(newVC, animated: true)
     }
     
@@ -297,36 +295,22 @@ extension HomeViewController: UIScrollViewDelegate{
 //MARK: TextField Delegate Methods
 extension HomeViewController: UITextFieldDelegate {
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
-        var finalString = ""
-        if string.isEmpty {
-            finalString = String(finalString.dropLast())
-            filteredArray = product?.items
-        } else {
-            finalString = textField.text! + string
-            self.filteredArray = self.product?.items?.filter({
-                ($0.name ?? "").localizedCaseInsensitiveContains(finalString)
-            })
-        }
-        self.tableView.reloadData()
-        return true
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         switch textField {
         case searchTextField:
-            print("search")
+            let finalString = searchTextField.text
             var filterParam = Parameters()
             if let parameter = filterparm {
                 filterParam = parameter
             }
-            filterParam["name"] = searchTextField.text ?? ""
+            filterParam["name"] = finalString
+            self.page = 0
             self.getProductListAPI(bodyParameter: filterParam)
         default:
             break
         }
-        return true
     }
+    
 }
 
 //MARK: Custom Alert Delegate Methods

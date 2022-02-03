@@ -17,7 +17,6 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var discountPriceLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var orderIdLabel: UILabel!
     
     var productDetails: Items?
     var productId: String?
@@ -27,10 +26,12 @@ class ProductDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.getProductDetailsByIdApi()
     }
     
     //MARK:- Selector -
     
+    // Back Button Action
     @IBAction func backButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
@@ -38,16 +39,11 @@ class ProductDetailsViewController: UIViewController {
     
     //MARK: - Helper Functions -
     
-    // Reload Function
-    func reloadFunction() {
-        self.getProductDetailsByIdApi(id: productId ?? "")
-    }
-    
     // Set Product Details Data
     func setProductDetailsData() {
         productImageView.sd_setImage(with: URL(string: productDetails?.image ?? ""), placeholderImage: UIImage(named: "logo"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
         productTitleLabel.text = productDetails?.name ?? ""
-        priceLabel.text = "\(productDetails?.dealPrice ?? 0)"
+        priceLabel.text = "\(doubleToStringWithComma(productDetails?.dealPrice ?? 0))"
         discountPriceLabel.text = "\(productDetails?.actualPrice ?? 0)"
         descriptionLabel.text = productDetails?.description
     }
@@ -60,20 +56,22 @@ class ProductDetailsViewController: UIViewController {
 extension ProductDetailsViewController {
     
     // Get Product Details By Id
-    func getProductDetailsByIdApi(id: String) {
+    func getProductDetailsByIdApi() {
         showLoading()
-        APIHelper.getProductDetails(id: id) { (success, response) in
+        APIHelper.getProductDetails(id: productId ?? "") { (success, response) in
             if !success {
                 dissmissLoader()
                 let message = response.message
+                print(message)
                 self.view.makeToast(message)
-            }else {
+            } else {
                 dissmissLoader()
+                let message = response.message
+                print(message)
+//                self.view.makeToast(message)
                 let data = response.response["data"]
                 self.productDetails = Items.init(json: data)
                 self.setProductDetailsData()
-                let message = response.message
-                print(message)
             }
         }
     }

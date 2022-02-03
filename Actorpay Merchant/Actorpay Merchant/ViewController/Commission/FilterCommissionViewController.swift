@@ -199,7 +199,7 @@ class FilterCommissionViewController: UIViewController {
     // FromTextField DatePicker Done Button Action
     @objc func startDateTextFieldDoneDatePicker(){
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "dd-MM-yyyy"
         startDateTextField.text = formatter.string(from: startDatePicker.date)
         self.view.endEditing(true)
     }
@@ -207,7 +207,7 @@ class FilterCommissionViewController: UIViewController {
     // ToTextField DatePicker Done Button Action
     @objc func endDateTextFieldDoneDatePicker() {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "dd-MM-yyyy"
         endDateTextField.text = formatter.string(from: endDatePicker.date)
         self.view.endEditing(true)
     }

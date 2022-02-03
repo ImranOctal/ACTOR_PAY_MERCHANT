@@ -25,8 +25,12 @@ class FilterProductViewController: UIViewController {
     var categoryData:[String] = []
     var subCategoryData:[String] = []
     var filterparm: Parameters?
+//    var categoryList: CategoryList?
+//    var subCategoryList : [SubCategoryItem] = []
     var categoryList: CategoryList?
+    var categoryListItems: [CategoryItems]?
     var subCategoryList : SubCategoryList?
+    var subCategoryByCategory: [SubCategoryItem]?
     var pageSize: Int = 10
     
     //MARK: - Life Cycles -
@@ -41,8 +45,10 @@ class FilterProductViewController: UIViewController {
         setStartDatePicker()
         setEndDatePicker()
         self.setFilterData()
-        getAllCategories(pageSize: pageSize)
+//        getAllCategories(pageSize: pageSize)
+        self.getInCategoryDropdownApi()
         getSubCategories()
+//        getSubCategories()
     }
     
     //MARK: - Selectors -
@@ -94,16 +100,58 @@ class FilterProductViewController: UIViewController {
     }
     
     // SetUp Category Drop Down
+//    func setUpCategoryDropDown() {
+//        categoryDropDownTextField.optionArray = categoryData
+//        categoryDropDownTextField.checkMarkEnabled = false
+//        categoryDropDownTextField.didSelect{(selectedText , index , id) in
+//            self.subCategoryDropDownTextField.text = nil
+//            for i in self.categoryList?.items ?? [] {
+//                if i.name == selectedText {
+////                    self.categoryId = i.id
+//                    self.getSubcategoryByCategoryApi(i.id ?? "")
+//                }
+//            }
+//        }
+//        categoryDropDownTextField.isSearchEnable = true
+//        categoryDropDownTextField.arrow.isHidden = true
+//        categoryDropDownTextField.arrowSize = 0
+//
+//    }
+//
+//    // SetUp SubCategory Drop Down
+//    func setUpSubCategoryDropDown() {
+//        subCategoryDropDownTextField.optionArray = subCategoryData
+//        subCategoryDropDownTextField.checkMarkEnabled = false
+//        subCategoryDropDownTextField.didSelect{(selectedText , index , id) in
+//        }
+//        subCategoryDropDownTextField.arrowSize = 0
+//        subCategoryDropDownTextField.isSearchEnable = true
+//        subCategoryDropDownTextField.arrow.isHidden = true
+//    }
+    
+    // SetUp Category Drop Down
     func setUpCategoryDropDown() {
         categoryDropDownTextField.optionArray = categoryData
         categoryDropDownTextField.checkMarkEnabled = false
         categoryDropDownTextField.didSelect{(selectedText , index , id) in
-
+            for i in self.categoryListItems ?? [] {
+                if i.name == selectedText {
+//                    self.categoryId = i.id
+                    self.getSubcategoryByCategoryApi(i.id ?? "")
+                }
+            }
         }
         categoryDropDownTextField.isSearchEnable = true
         categoryDropDownTextField.arrow.isHidden = true
         categoryDropDownTextField.arrowSize = 0
-        
+//        categoryDropDownTextField.listDidDisappear {
+//            if self.categoryDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+//                self.categoryValidationLbl.isHidden = false
+//                self.categoryValidationLbl.text = ValidationManager.shared.selectCategory
+//            } else {
+//                self.categoryValidationLbl.isHidden = true
+//            }
+//        }
     }
     
     // SetUp SubCategory Drop Down
@@ -111,10 +159,23 @@ class FilterProductViewController: UIViewController {
         subCategoryDropDownTextField.optionArray = subCategoryData
         subCategoryDropDownTextField.checkMarkEnabled = false
         subCategoryDropDownTextField.didSelect{(selectedText , index , id) in
+//            for i in self.subCategoryList?.items ?? [] {
+//                if i.name == selectedText {
+//                    self.subCategoryId = i.id
+//                }
+//            }
         }
         subCategoryDropDownTextField.arrowSize = 0
         subCategoryDropDownTextField.isSearchEnable = true
         subCategoryDropDownTextField.arrow.isHidden = true
+//        subCategoryDropDownTextField.listDidDisappear {
+//            if self.subCategoryDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+//                self.subcategoryValidationLbl.isHidden = false
+//                self.subcategoryValidationLbl.text = ValidationManager.shared.selectSubCategory
+//            } else {
+//                self.subcategoryValidationLbl.isHidden = true
+//            }
+//        }
     }
     
     // Set Date Picker To FromTextField
@@ -152,7 +213,7 @@ class FilterProductViewController: UIViewController {
     // FromTextField DatePicker Done Button Action
     @objc func fromTxtFieldDoneDatePicker(){
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "dd-MM-yyyy"
         startDateTextField.text = formatter.string(from: startDatePicker.date)
         self.view.endEditing(true)
     }
@@ -160,7 +221,7 @@ class FilterProductViewController: UIViewController {
     // ToTextField DatePicker Done Button Action
     @objc func toTxtFieldDoneDatePicker() {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "dd-MM-yyyy"
         endDateTextField.text = formatter.string(from: endDatePicker.date)
         self.view.endEditing(true)
     }
@@ -210,6 +271,98 @@ class FilterProductViewController: UIViewController {
 //MARK: Api Call
 extension FilterProductViewController {
     // Get All Category Api
+//    func getAllCategories(pageSize: Int) {
+//        showLoading()
+//        let params: Parameters = [
+//            "pageSize":pageSize,
+//            "filterByIsActive":true,
+//            "sortBy":"name",
+//            "asc":true
+//
+//        ]
+//        APIHelper.getAllCategoriesAPI(parameters: params) { (success, response) in
+//            if !success {
+//                dissmissLoader()
+//                let message = response.message
+//                self.view.makeToast(message)
+//            }else {
+//                dissmissLoader()
+//                let data = response.response["data"]
+//                self.categoryList = CategoryList.init(json: data)
+//                self.categoryData.removeAll()
+//                for item in self.categoryList?.items ?? [] {
+//                    self.categoryData.append(item.name ?? "")
+//                }
+//                print(self.categoryData)
+//                self.pageSize = self.categoryList?.totalItems ?? 0
+//                self.setUpCategoryDropDown()
+//                let message = response.message
+//                print(message)
+//            }
+//        }
+//    }
+//
+//    // Get All Sub Category Api
+////    func getSubCategories() {
+////        let params: Parameters = [
+////            "pageSize":pageSize,
+////            "filterByIsActive":true,
+////            "sortBy":"name",
+////            "asc":true
+////        ]
+////        showLoading()
+////        APIHelper.getSubCategoriesApi(parameters: params) { (success, response) in
+////            if !success {
+////                dissmissLoader()
+////                let message = response.message
+////                self.view.makeToast(message)
+////            }else {
+////                dissmissLoader()
+////                let data = response.response["data"]
+////                self.subCategoryList = SubCategoryList.init(json: data)
+////                self.subCategoryData.removeAll()
+////                for item in self.subCategoryList?.items ?? [] {
+////                    self.subCategoryData.append(item.name ?? "")
+////                }
+////                print(self.subCategoryData)
+////                self.setUpSubCategoryDropDown()
+////                let message = response.message
+////                print(message)
+////            }
+////        }
+////    }
+//
+//    // Get SubCategory By Category
+//    func getSubcategoryByCategoryApi(_ id: String) {
+//        let params: Parameters = [
+//            "categoryId":id,
+//            "filterByIsActive":true,
+//            "sortBy":"name",
+//            "asc":true
+//        ]
+//        showLoading()
+//        APIHelper.getSubCategoriesByCategoryApi(parameters:params) { (success, response) in
+//            if !success {
+//                dissmissLoader()
+//                let message = response.message
+//                self.view.makeToast(message)
+//            }else {
+//                dissmissLoader()
+//                let data = response.response.data
+//                self.subCategoryList = data.arrayValue.map({(SubCategoryItem(json: $0))})
+//                self.subCategoryData.removeAll()
+//                for item in self.subCategoryList {
+//                    self.subCategoryData.append(item.name ?? "")
+//                }
+//                print(self.subCategoryData)
+//                self.setUpSubCategoryDropDown()
+//                let message = response.message
+//                print(message)
+//            }
+//        }
+//    }
+
+    // Get All Category Api
     func getAllCategories(pageSize: Int) {
         showLoading()
         let params: Parameters = [
@@ -235,6 +388,52 @@ extension FilterProductViewController {
                 print(self.categoryData)
                 self.pageSize = self.categoryList?.totalItems ?? 0
                 self.setUpCategoryDropDown()
+//                if self.isUpdate {
+//                    self.categoryId = self.productItem?.categoryId
+//                    for (_, item) in (self.categoryList?.items ?? []).enumerated() {
+//                        if item.id == self.productItem?.categoryId {
+//                            self.categoryDropDownTextField.text = item.name
+//                        }
+//                    }
+//                }
+                let message = response.message
+                print(message)
+            }
+        }
+    }
+    
+    // Get All Category Api
+    func getInCategoryDropdownApi() {
+        showLoading()
+        let params: Parameters = [
+            "isActive":true,
+            "sortBy":"name",
+            "asc":true
+        ]
+        APIHelper.getInCategoryDropdownApi(parameters: params) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                self.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let data = response.response.data
+                self.categoryListItems = data.arrayValue.map({(CategoryItems(json: $0))})
+                self.categoryData.removeAll()
+                for item in self.categoryListItems ?? [] {
+                    self.categoryData.append(item.name ?? "")
+                }
+                print(self.categoryData)
+                
+                self.setUpCategoryDropDown()
+//                if self.isUpdate {
+//                    self.categoryId = self.productItem?.categoryId
+//                    for (_, item) in (self.categoryListItems ?? []).enumerated() {
+//                        if item.id == self.productItem?.categoryId {
+//                            self.categoryDropDownTextField.text = item.name
+//                        }
+//                    }
+//                }
                 let message = response.message
                 print(message)
             }
@@ -265,9 +464,48 @@ extension FilterProductViewController {
                 }
                 print(self.subCategoryData)
                 self.setUpSubCategoryDropDown()
+//                if self.isUpdate {
+//                    self.subCategoryId = self.productItem?.subCategoryId
+//                    for (_, item) in (self.subCategoryList?.items ?? []).enumerated() {
+//                        if item.id == self.productItem?.subCategoryId {
+//                            self.subCategoryDropDownTextField.text = item.name
+//                        }
+//                    }
+//                }
                 let message = response.message
                 print(message)
             }
         }
     }
+    
+    // Get SubCategory By Category
+    func getSubcategoryByCategoryApi(_ id: String) {
+        let params: Parameters = [
+            "categoryId":id,
+            "filterByIsActive":true,
+            "sortBy":"name",
+            "asc":true
+        ]
+        showLoading()
+        APIHelper.getSubCategoriesByCategoryApi(parameters:params) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                self.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let data = response.response.data
+                self.subCategoryByCategory = data.arrayValue.map({(SubCategoryItem(json: $0))})
+                self.subCategoryData.removeAll()
+                for item in self.subCategoryByCategory ?? [] {
+                    self.subCategoryData.append(item.name ?? "")
+                }
+                print(self.subCategoryData)
+                self.setUpSubCategoryDropDown()
+                let message = response.message
+                print(message)
+            }
+        }
+    }
+
 }

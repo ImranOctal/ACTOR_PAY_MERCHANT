@@ -36,6 +36,8 @@ class LoginViewController: UIViewController {
     var isPassTap = false
     var isRememberMeTap = false
     var merchant: Merchant?
+    var email: String?
+    var password: String?
     
     //MARK: - Life Cycle Function -
     
@@ -46,6 +48,8 @@ class LoginViewController: UIViewController {
         if AppManager.shared.rememberMeEmail != "" {
             emailTextField.text = AppManager.shared.rememberMeEmail
             passwordTextField.text = AppManager.shared.rememberMePassword
+            email = AppManager.shared.rememberMeEmail
+            password = AppManager.shared.rememberMePassword
             isRememberMeTap = true
             if #available(iOS 13.0, *) {
                 remberMeBtn.setImage(UIImage(systemName: "checkmark"), for: .normal)
@@ -120,10 +124,9 @@ class LoginViewController: UIViewController {
         }
     }
     
-    //Facial Recognaition Button Action
+    // Facial Recognaition Button Action
     @IBAction func faceLoginButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        // Face Login
         guard #available(iOS 8.0, *) else {
             return print("Not supported")
         }        
@@ -139,6 +142,23 @@ class LoginViewController: UIViewController {
                 return print(error as Any)
             }
             print("success")
+            if AppManager.shared.rememberMeEmail != ""{
+                DispatchQueue.main.async {
+                    self.loginApi()
+                }
+            }else{
+                DispatchQueue.main.async {
+                    let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as? CustomAlertViewController)!
+                    newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+                    newVC.setUpCustomAlert(titleStr: "Error", descriptionStr: "Please remember password to use this function", isShowCancelBtn: true)
+                    newVC.okBtn.tag = 1
+                    newVC.customAlertDelegate = self
+                    self.definesPresentationContext = true
+                    self.providesPresentationContextTransitionStyle = true
+                    newVC.modalPresentationStyle = .overCurrentContext
+                    self.navigationController?.present(newVC, animated: true, completion: nil)
+                }
+            }
         }
     }
     
@@ -150,15 +170,6 @@ class LoginViewController: UIViewController {
     }
     
     //MARK: - Helper Function -
-    
-    func alert(title: String, message: String, okActionTitle: String) {
-        let alertView = UIAlertController(title: title,
-                                          message: message,
-                                          preferredStyle: .alert)
-        let okAction = UIAlertAction(title: okActionTitle, style: .default)
-        alertView.addAction(okAction)
-        present(alertView, animated: true)
-    }
     
     // Login Validation Func
     func loginValidation() -> Bool
@@ -199,7 +210,6 @@ class LoginViewController: UIViewController {
         passwordValidationLbl.isHidden = true
     }
     
-    
 }
 
 //MARK: - Extensions -
@@ -207,11 +217,11 @@ class LoginViewController: UIViewController {
 //MARK: Api Call
 extension LoginViewController {
     
-    //Login Api
+    // Login Api
     func loginApi() {
         let params: Parameters = [
-            "email": "\(emailTextField.text ?? "")",
-            "password": "\(passwordTextField.text ?? "")",
+            "email": "\(email != "" ? (email ?? "") : (emailTextField.text ?? ""))",
+            "password": "\(password != "" ? (password ?? "") : (passwordTextField.text ?? ""))",
             "deviceInfo": [
                 "deviceType":"mobile" as String,
                 "appVersion":appVersion(),
@@ -237,10 +247,12 @@ extension LoginViewController {
             }
         }
     }
+    
 }
 
 //MARK: UITextField Delegate Methods
 extension LoginViewController: UITextFieldDelegate {
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         switch textField {
         case emailTextField:
@@ -268,9 +280,22 @@ extension LoginViewController: UITextFieldDelegate {
             } else {
                 passwordValidationLbl.isHidden = true
             }
-
         default:
             break
         }
     }
+    
+}
+
+//MARK: Custom Alert Delegate Methods
+extension LoginViewController: CustomAlertDelegate {
+    
+    func okButtonclick(tag: Int) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func cancelButtonClick() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }

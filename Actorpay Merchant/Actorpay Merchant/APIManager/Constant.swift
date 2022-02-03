@@ -57,6 +57,7 @@ enum APIEndPoint: String {
     case createOutletApi = "merchant-service/v1/merchant/outlet/create"
     case updateOutletApi = "merchant-service/v1/merchant/outlet/update"
     case commissionListApi = "merchant-service/productCommission/list/paged"
+    case postOrderNoteApi = "merchant-service/orderNotes/post"
 }
 
 struct MessageConstant {

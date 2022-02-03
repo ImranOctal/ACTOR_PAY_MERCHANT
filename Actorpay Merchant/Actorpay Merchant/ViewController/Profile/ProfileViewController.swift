@@ -66,12 +66,14 @@ class ProfileViewController: UIViewController {
     var countryFlag = ""
     var isEmailVarified = true
     var isMobileVarified = false
+    var imagePicker = UIImagePickerController()
     
     //MARK: - Life Cycle Function -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.imagePicker.delegate = self
         self.emailVarifyFlow()
         self.mobileVerifyButtonFlow()
         self.setUpCountryCodeData()
@@ -96,6 +98,23 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    // Edit Image Button Action
+    @IBAction func editImageButton(_ sender: UIButton) {
+        self.view.endEditing(true)
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: "ChooseExisting", style: .default) { (action) in
+            self.openPhotos()
+        }
+        let okAction2 = UIAlertAction(title: "TakePhoto", style: .default) { (action) in
+            self.openCamera()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        alertController.addAction(okAction2)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     //Country Code Button Action
     @IBAction func phoneCodeButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
@@ -110,6 +129,7 @@ class ProfileViewController: UIViewController {
         self.present(newVC, animated: true, completion: nil)
     }
     
+    // Email Verify And Update Button Action
     @IBAction func emailVerifyButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         isEmailVarified = !isEmailVarified
@@ -121,15 +141,31 @@ class ProfileViewController: UIViewController {
             self.providesPresentationContextTransitionStyle = true
             newVC.modalPresentationStyle = .overCurrentContext
             self.navigationController?.present(newVC, animated: true, completion: nil)
+        } else {
+            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "VerifyViewController") as? VerifyViewController)!
+            newVC.isEmailVerify = true
+            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            self.definesPresentationContext = true
+            self.providesPresentationContextTransitionStyle = true
+            newVC.modalPresentationStyle = .overCurrentContext
+            self.navigationController?.present(newVC, animated: true, completion: nil)
         }
     }
     
+    // Mobile Number Verify And Update Button Action
     @IBAction func mobileVerifyButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         isMobileVarified = !isMobileVarified
         mobileVerifyButtonFlow()
         if isMobileVarified {
             let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "VerifyOtpViewController") as? VerifyOtpViewController)!
+            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            self.definesPresentationContext = true
+            self.providesPresentationContextTransitionStyle = true
+            newVC.modalPresentationStyle = .overCurrentContext
+            self.navigationController?.present(newVC, animated: true, completion: nil)
+        } else {
+            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "VerifyViewController") as? VerifyViewController)!
             newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
             self.definesPresentationContext = true
             self.providesPresentationContextTransitionStyle = true
@@ -216,6 +252,7 @@ class ProfileViewController: UIViewController {
         shopLicenceValidationLbl.isHidden = true
     }
     
+    // Email Verify SetUp
     func emailVarifyFlow() {
         if isEmailVarified {
             emailTextField.isUserInteractionEnabled = false
@@ -224,14 +261,15 @@ class ProfileViewController: UIViewController {
             emailValidationLbl.textColor = UIColor.init(hexFromString: "2878B6")
             emailVerifyBtn.setTitle("UPDATE", for: .normal)
         } else {
-            emailTextField.isUserInteractionEnabled = true
-            emailTextField.textColor = UIColor.black
+            emailTextField.isUserInteractionEnabled = false
+            emailTextField.textColor = UIColor.darkGray
             emailValidationLbl.textColor = UIColor.orange
             emailValidationLbl.text = "Verification Pending"
             emailVerifyBtn.setTitle("Verify", for: .normal)
         }
     }
     
+    // Mobile Number Verify SetUp
     func mobileVerifyButtonFlow() {
         if isMobileVarified {
             mobileNumberTextField.isUserInteractionEnabled = false
@@ -240,8 +278,8 @@ class ProfileViewController: UIViewController {
             mobileValidationLbl.textColor = UIColor.init(hexFromString: "2878B6")
             mobileVerifyBtn.setTitle("UPDATE", for: .normal)
         } else {
-            mobileNumberTextField.isUserInteractionEnabled = true
-            mobileNumberTextField.textColor = UIColor .black
+            mobileNumberTextField.isUserInteractionEnabled = false
+            mobileNumberTextField.textColor = UIColor .darkGray
             mobileValidationLbl.text = "Verification Pending"
             mobileValidationLbl.textColor = UIColor.orange
             mobileVerifyBtn.setTitle("Verify", for: .normal)
@@ -271,6 +309,26 @@ class ProfileViewController: UIViewController {
         } else {
             countryFlagImgView.sd_setImage(with: URL(string: countryFlag), placeholderImage: UIImage(named: "IN.png"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
             self.countryCodeLbl.text = countryCode
+        }
+    }
+    
+    // Open Photo Gallary
+    func openPhotos(){
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        imagePicker.allowsEditing = false
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    // Open Camera
+    func openCamera(){
+        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera)){
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }else{
+            let alert  = UIAlertController(title: "Warning", message: "Camera Not Supported", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -307,8 +365,8 @@ extension ProfileViewController {
             }
         } 
     }
+    
 }
-
 
 //MARK: TextField Delegate Methods
 extension ProfileViewController: UITextFieldDelegate {
@@ -333,7 +391,6 @@ extension ProfileViewController: UITextFieldDelegate {
             } else {
                 businessNameValidationLbl.isHidden = true
             }
-        
         case mobileNumberTextField:
             if mobileNumberTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
                 mobileValidationLbl.textColor = UIColor.red
@@ -344,7 +401,6 @@ extension ProfileViewController: UITextFieldDelegate {
             } else {
                 mobileValidationLbl.textColor = UIColor.orange
                 mobileValidationLbl.text = "Varification Pending"
-
             }
         case shopAddressTextField:
             if shopAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
@@ -376,4 +432,21 @@ extension ProfileViewController: UITextFieldDelegate {
         self.view.endEditing(true)
         return true
     }
+    
+}
+
+//MARK: Image Picker Delegate Methods
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage{
+            profileImgView.image = image
+        }
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    
 }

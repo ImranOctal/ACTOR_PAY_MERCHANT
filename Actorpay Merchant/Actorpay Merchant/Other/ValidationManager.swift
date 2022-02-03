@@ -33,6 +33,7 @@ class ValidationManager {
     let sGender = "Please Select Gender"
     let sDateOfBirth = "Please Select DOB"
     let emptyNotesDesc = "Add Note Description"
+    let emptyPhoneCode = "Oops! Your Phone Code is Empty"
     
     // Outlet Validation Message
     let outletTitleValidationMsg = "Oops! Your Title is Empty"
