@@ -36,7 +36,13 @@ class OrderSummaryViewController: UIViewController {
     @IBOutlet weak var cityAndCountryNameLbl: UILabel!
     
     // Notes
-    @IBOutlet weak var noteDescLbl: UILabel!
+    @IBOutlet weak var notesTblView: UITableView! {
+        didSet {
+            self.notesTblView.delegate = self
+            self.notesTblView.dataSource = self
+        }
+    }
+    @IBOutlet weak var notesTblViewHeightConst: NSLayoutConstraint!
     
     var orderNo = ""
     var orderItems: OrderItems?
@@ -59,7 +65,21 @@ class OrderSummaryViewController: UIViewController {
     
     //Back Button Action
     @IBAction func backBtnAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    // Add Note Button Action
+    @IBAction func addNoteButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "OrderAddNoteViewController") as? OrderAddNoteViewController)!
+        newVC.orderItems = self.orderItems
+        newVC.isAddNoteBtn = true
+        newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        self.definesPresentationContext = true
+        self.providesPresentationContextTransitionStyle = true
+        newVC.modalPresentationStyle = .overCurrentContext
+        self.navigationController?.present(newVC, animated: true, completion: nil)
     }
     
     //MARK: - Helper Functions -
@@ -108,34 +128,6 @@ class OrderSummaryViewController: UIViewController {
 //MARK: Api Call
 extension OrderSummaryViewController {
     
-//    // Get Order List Api
-//    func getOrderListApi(parameter: Parameters? = nil) {
-//        let params: Parameters = [
-//            "pageNo": 0,
-//            "pageSize": 10,
-//
-//        ]
-//        let bodyParams: Parameters = [
-//            "orderNo": orderNo
-//        ]
-//        showLoading()
-//        APIHelper.getOrderListApi(params: params, bodyParameter: bodyParams) { (success, response) in
-//            if !success {
-//                dissmissLoader()
-//                let message = response.message
-//                self.view.makeToast(message)
-//            }else {
-//                dissmissLoader()
-//                let data = response.response["data"]
-//                self.orderItems =  OrderList.init(json: data).items?[0]
-//                let message = response.message
-//                print(message)
-//                self.setUpOrderDetailsData()
-//                self.tblView.reloadData()
-//            }
-//        }
-//    }
-    
     // get Order Details Api
     @objc func getOrderDetailsApi() {
         showLoading()
@@ -152,37 +144,63 @@ extension OrderSummaryViewController {
                 print(message)
                 self.setUpOrderDetailsData()
                 self.tblView.reloadData()
+                self.notesTblView.reloadData()
+                self.notesTblViewHeightConst.constant = CGFloat((self.orderItems?.orderNotesDtos?.count ?? 0) * 83)
             }
         }
     }
+    
 }
 
 //MARK: Table View SetUp
 extension OrderSummaryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderItems?.orderItemDtos?.count ?? 0
+        switch tableView {
+        case tblView:
+            return orderItems?.orderItemDtos?.count ?? 0
+        case notesTblView:
+            if self.orderItems?.orderNotesDtos?.count == 0 {
+                notesTblView.setEmptyMessage("No Data Found.")
+            }else {
+                notesTblView.restore()
+            }
+            return self.orderItems?.orderNotesDtos?.count ?? 0
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderItemTableViewCell", for: indexPath) as! OrderItemTableViewCell
-        let item = orderItems?.orderItemDtos?[indexPath.row]
-        cell.item = item
-        cell.menuButtonHandler = {
-            cell.setUpCancelOrderDropDown()
+        switch tableView {
+        case tblView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OrderItemTableViewCell", for: indexPath) as! OrderItemTableViewCell
+            let item = orderItems?.orderItemDtos?[indexPath.row]
+            cell.item = item
+            cell.menuButtonHandler = {
+                cell.setUpCancelOrderDropDown()
+            }
+            cell.cancelOrderHandler = { status in
+                let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "OrderAddNoteViewController") as? OrderAddNoteViewController)!
+                newVC.status = status
+                newVC.orderItems = self.orderItems
+                newVC.orderItemDtos = item
+                newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+                self.definesPresentationContext = true
+                self.providesPresentationContextTransitionStyle = true
+                newVC.modalPresentationStyle = .overCurrentContext
+                self.navigationController?.present(newVC, animated: true, completion: nil)
+            }
+            return cell
+        case notesTblView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OrderNoteTableViewCell", for: indexPath) as! OrderNoteTableViewCell
+            let item = orderItems?.orderNotesDtos?[indexPath.row]
+            cell.item = item
+            return cell
+        default:
+            return UITableViewCell()
         }
-        cell.cancelOrderHandler = { status in
-            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "OrderAddNoteViewController") as? OrderAddNoteViewController)!
-            newVC.status = status
-            newVC.orderItems = self.orderItems
-            newVC.orderItemDtos = item
-            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            self.definesPresentationContext = true
-            self.providesPresentationContextTransitionStyle = true
-            newVC.modalPresentationStyle = .overCurrentContext
-            self.navigationController?.present(newVC, animated: true, completion: nil)
-        }
-        return cell
+        
     }
     
 }

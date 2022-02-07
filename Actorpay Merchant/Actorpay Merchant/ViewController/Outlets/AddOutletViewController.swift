@@ -150,8 +150,11 @@ class AddOutletViewController: UIViewController {
                 self.userLat = "\(currentLoc!.coordinate.latitude)"
                 self.userLong = "\(currentLoc!.coordinate.longitude)"
             }
-        }                
-        self.setUpDropDown()
+        }
+        
+        GMSPlacesClient.provideAPIKey(GOOGLE_API_KEY)
+        GMSServices.provideAPIKey(GOOGLE_API_KEY)
+        setUpDropDown()
     }
     
     //MARK: - Selectors -
@@ -191,7 +194,9 @@ class AddOutletViewController: UIViewController {
     
     // Set Up Drop Down
     func setUpDropDown(){
+        
         let appearance = DropDown.appearance()
+        
         appearance.cellHeight = 50
         appearance.backgroundColor = UIColor(white: 1, alpha: 1)
         appearance.selectionBackgroundColor = UIColor(red: 0.6494, green: 0.8155, blue: 1.0, alpha: 0.2)
@@ -199,7 +204,9 @@ class AddOutletViewController: UIViewController {
         appearance.shadowOpacity = 0.9
         appearance.animationduration = 0.25
         appearance.textColor = .darkGray
+        
         self.addressDropDown.direction = .bottom
+        
         self.addressDropDown.anchorView = self.addressLine1TextField
         self.addressDropDown.bottomOffset = CGPoint(x: 0, y:10)
         self.addressDropDown.dataSource = self.arrAddressArray
@@ -227,13 +234,24 @@ class AddOutletViewController: UIViewController {
                     print("Lat: \(self.userLat), Lon: \(self.userLong)")
                 }
                 self.view.endEditing(true)
+                /*if self.arrAddressArray.count > 0 && self.arrayPlaceIDs.count > 0 {
+                 print(self.arrayPlaceIDs[index])
+                 let placeID = self.arrayPlaceIDs[index]
+                 //Get address parameters from google place API call
+                 self.APICallGooglePlaceDetails(placeID)
+                 
+                 //self.tableSerachResult.isHidden = true
+                 //print(self.selectedAddressString)
+                 }*/
             }
         }
     }
     
     // Get All Address Suggestions
     func getAllAddressSuggestions(_ searchString : String){
+        
         let placesClient = GMSPlacesClient()
+        
         placesClient.findAutocompletePredictions(fromQuery: searchString, filter: nil, sessionToken: nil) { (results, error) in
             self.arrAddressArray.removeAll()
             self.arrayPlaceIDs.removeAll()
@@ -635,19 +653,8 @@ extension AddOutletViewController: UITextFieldDelegate {
     
 }
 
-// MARK: Location Delegate Methods
+//MARK: CLLocationManagerDelegate Methods
 extension AddOutletViewController: CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(#function)
-        if let location = locations.first {
-            currentLoc = location
-            self.userLat = "\(location.coordinate.latitude)"
-            self.userLong = "\(location.coordinate.longitude)"
-            manager.stopUpdatingLocation()
-            
-        }
-    }
     
     func getAddressFromLatLon(pdblLatitude: String, withLongitude pdblLongitude: String) {
         var center : CLLocationCoordinate2D = CLLocationCoordinate2D()
@@ -660,6 +667,8 @@ extension AddOutletViewController: CLLocationManagerDelegate {
         center.longitude = lon
         
         let loc: CLLocation = CLLocation(latitude:center.latitude, longitude: center.longitude)
+        
+        
         ceo.reverseGeocodeLocation(loc, completionHandler:
                                     {(placemarks, error) in
                                         if (error != nil)
@@ -702,15 +711,14 @@ extension AddOutletViewController: CLLocationManagerDelegate {
         print("Error \(error)")
     }
     
-    func currentAddres(_ coordinate:CLLocationCoordinate2D) -> Void {
-        geoCoder.reverseGeocodeCoordinate(coordinate) { response, error in
-            guard let address = response?.firstResult(), let lines = address.lines else {
-                return
-            }
-            self.addressLine1TextField.text = lines.joined(separator: "\n")
-            UIView.animate(withDuration: 0.25) {
-                self.view.layoutIfNeeded()
-            }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print(#function)
+        if let location = locations.first {
+            currentLoc = location
+            self.userLat = "\(location.coordinate.latitude)"
+            self.userLong = "\(location.coordinate.longitude)"
+            manager.stopUpdatingLocation()
+            
         }
     }
     

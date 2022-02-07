@@ -21,6 +21,7 @@ class OrderAddNoteViewController: UIViewController {
     var orderItems: OrderItems?
     var orderItemDtos: OrderItemDtos?
     var productImage : UIImage?
+    var isAddNoteBtn = false
     
     //MARK: - Life Cycles -
 
@@ -45,12 +46,18 @@ class OrderAddNoteViewController: UIViewController {
     
     // Submit Button Action
     @IBAction func submitBtnAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         if addNoteValidation() {
-            notesTextViewValidationLbl.isHidden = true
-            if status == "READY" ||  status == "DISPATCHED" ||  status == "DELIVERED" || status == "RETURNED" {
-                updateOrderStatusApi()
+            if isAddNoteBtn {
+                self.notesTextViewValidationLbl.isHidden = true
+                self.postOrderNoteApi()
             } else {
-                cancelOrReturnOrderApi()
+                notesTextViewValidationLbl.isHidden = true
+                if status == "READY" ||  status == "DISPATCHED" ||  status == "DELIVERED" || status == "RETURNED" {
+                    updateOrderStatusApi()
+                } else {
+                    cancelOrReturnOrderApi()
+                }
             }
         }
     }
@@ -180,6 +187,32 @@ extension OrderAddNoteViewController {
                 myApp.window?.rootViewController?.view.makeToast(message)
                 self.navigationController?.popViewController(animated: true)
                 NotificationCenter.default.post(name:  Notification.Name("reloadOrderListApi"), object: self)
+                NotificationCenter.default.post(name:  Notification.Name("reloadOrderDetails"), object: self)
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
+    // Post Order Note Api
+    func postOrderNoteApi() {
+        let bodyParams: Parameters = [
+            "orderNo": orderItems?.orderNo ?? "",
+            "orderNoteDescription": noteDescTextView.text ?? ""
+        ]
+        showLoading()
+        APIHelper.postOrderNoteApi(params: [:], bodyParameter: bodyParams) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                print(message)
+                self.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let message = response.message
+                print(message)
+//                self.view.makeToast(message)
+                let data = response.response["data"]
+                print(data)
                 NotificationCenter.default.post(name:  Notification.Name("reloadOrderDetails"), object: self)
                 self.dismiss(animated: true, completion: nil)
             }

@@ -51,6 +51,7 @@
 		88722968279FCCF20066DA64 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88722966279FCCF20066DA64 /* RoleList.swift */; };
 		88722969279FCCF20066DA64 /* RoleItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88722967279FCCF20066DA64 /* RoleItems.swift */; };
 		8884E86B27AB92CA00E725A4 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8884E86A27AB92CA00E725A4 /* VerifyViewController.swift */; };
+		8884E8C627ABF2E700E725A4 /* OrderNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8884E8C527ABF2E700E725A4 /* OrderNoteTableViewCell.swift */; };
 		88984F7F277F00FD00E76111 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F7E277F00FD00E76111 /* CategoryList.swift */; };
 		88984F85277F019500E76111 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F84277F019500E76111 /* CategoryItem.swift */; };
 		88984F8C277F021E00E76111 /* SubCategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F8A277F021E00E76111 /* SubCategoryItem.swift */; };
@@ -174,6 +175,7 @@
 		88722966279FCCF20066DA64 /* RoleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		88722967279FCCF20066DA64 /* RoleItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleItems.swift; sourceTree = "<group>"; };
 		8884E86A27AB92CA00E725A4 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
+		8884E8C527ABF2E700E725A4 /* OrderNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNoteTableViewCell.swift; sourceTree = "<group>"; };
 		88984F7E277F00FD00E76111 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
 		88984F84277F019500E76111 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		88984F8A277F021E00E76111 /* SubCategoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategoryItem.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				8826D5BA27A25CF800B2B50C /* OrderImgCollectionViewCell.swift */,
 				88FBDE5B27670C9600EB9BCE /* ManageOrderTableViewCell.swift */,
 				8849B35F278BF393005D0285 /* OrderItemTableViewCell.swift */,
+				8884E8C527ABF2E700E725A4 /* OrderNoteTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1081,6 +1084,7 @@
 				88E2615E27645D2700BC84B2 /* RaiseDisputeViewController.swift in Sources */,
 				881DD7FD27674F1800B48A1F /* ForgotPasswordViewController.swift in Sources */,
 				88B8A96427A41637005CA047 /* HomeViewControllerApiCall.swift in Sources */,
+				8884E8C627ABF2E700E725A4 /* OrderNoteTableViewCell.swift in Sources */,
 				88078803277C17B000F9FF85 /* APIManager.swift in Sources */,
 				88DC15382763866900627F17 /* ProductTableViewCell.swift in Sources */,
 				88BB2A7D27A523C1003B669F /* AddNewRoleTableViewCell.swift in Sources */,

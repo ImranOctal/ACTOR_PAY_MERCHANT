@@ -567,4 +567,16 @@ final class APIHelper {
         }
     }
     
+    //MARK: Post Order Notes Api
+    static func postOrderNoteApi(params: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ) {
+        APIManager.shared.requestWithParameters(method: .post, url: APIEndPoint.postOrderNoteApi.rawValue, parameters: params, bodyParameter: bodyParameter) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
 }
