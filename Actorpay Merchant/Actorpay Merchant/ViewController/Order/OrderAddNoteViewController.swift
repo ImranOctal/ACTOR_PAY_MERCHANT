@@ -165,7 +165,7 @@ extension OrderAddNoteViewController {
     func cancelOrReturnOrderApi() {
         var imgData: Data?
         
-        let params: Parameters = [
+        let bodyParams: Parameters = [
             "cancelOrder": [
                 "cancellationRequest":"CANCELLED",
                 "cancelReason": noteDescTextView.text ?? "",
@@ -176,7 +176,7 @@ extension OrderAddNoteViewController {
             imgData = self.productImage?.jpegData(compressionQuality: 0.1)
         }
         showLoading()
-        APIHelper.cancelOrReturnOrderApi(params:params, imgData: imgData, imageKey: "file", orderNo: orderItems?.orderNo ?? "") { (success, response) in
+        APIHelper.cancelOrReturnOrderApi(urlParams:[:], bodyParams: bodyParams, imgData: imgData, imageKey: "file", orderNo: orderItems?.orderNo ?? "") { (success, response) in
             if !success {
                 dissmissLoader()
                 let message = response.message

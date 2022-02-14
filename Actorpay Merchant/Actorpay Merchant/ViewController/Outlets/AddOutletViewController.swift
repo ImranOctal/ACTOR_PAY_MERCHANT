@@ -205,10 +205,10 @@ class AddOutletViewController: UIViewController {
         appearance.animationduration = 0.25
         appearance.textColor = .darkGray
         
-        self.addressDropDown.direction = .bottom
+        self.addressDropDown.direction = .top
         
         self.addressDropDown.anchorView = self.addressLine1TextField
-        self.addressDropDown.bottomOffset = CGPoint(x: 0, y:10)
+        self.addressDropDown.topOffset = CGPoint(x: 0, y: -40)
         self.addressDropDown.dataSource = self.arrAddressArray
         
         dropDowns.forEach {
@@ -505,8 +505,8 @@ extension AddOutletViewController {
             "city": cityTextField.text ?? "",
             "state": stateTextField.text ?? "",
             "country": countryTextField.text ?? "",
-            "latitude": "23234343",
-            "longitude": "3333333"
+            "latitude": userLat,
+            "longitude": userLong
         ]
         showLoading()
         APIHelper.updateOutletApi(params: [:], bodyParameter: params) { (success, response) in

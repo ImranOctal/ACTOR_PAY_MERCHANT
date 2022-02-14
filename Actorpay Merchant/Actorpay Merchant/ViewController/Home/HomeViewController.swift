@@ -324,6 +324,7 @@ extension HomeViewController: CustomAlertDelegate {
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginNav") as! UINavigationController
             myApp.window?.rootViewController = newVC
         } else if tag == 2 {
+            self.page = 0
             self.removeProductByIdApi(productId: self.productId ?? "")
             self.dismiss(animated: true, completion: nil)
         }

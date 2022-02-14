@@ -230,7 +230,7 @@ extension LoginViewController {
             ]
         ]
         showLoading()
-        APIHelper.loginUser(params: params) { (success,response)  in
+        APIHelper.loginUser(bodyParams: params) { (success,response)  in
             if !success {
                 dissmissLoader()
                 let message = response.message

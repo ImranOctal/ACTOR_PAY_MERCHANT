@@ -12,8 +12,8 @@ import Alamofire
 final class APIHelper {
     
     //MARK: Login Api
-    static func loginUser(params: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
-        APIManager.shared.request(method: .post, url: APIEndPoint.login.rawValue, parameters: params) { (response) in
+    static func loginUser(bodyParams: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
+        APIManager.shared.mainRequest(method: .post, url: APIEndPoint.login.rawValue, bodyParameter: bodyParams, needUserToken: false) { (response) in
             if response.success {
                 let status = response.response["status"]
                 if status == "200" {
@@ -99,8 +99,8 @@ final class APIHelper {
     }
     
     //MARK: Add New Product Api
-    static func addNewProductApi(params: Parameters, imgData: Data?, imageKey: String , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.uploadData(method: .post, url: APIEndPoint.addNewAndUpdateProductApi.rawValue, parameters: params, imgData: imgData, imageKey: imageKey) { (response) in
+    static func addNewProductApi(urlParams: Parameters, bodyParams:Parameters, imgData: Data?, imageKey: String , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.uploadData(method: .post, url: APIEndPoint.addNewAndUpdateProductApi.rawValue, urlParameters: urlParams, bodyParameters: bodyParams, imgData: imgData, imageKey: imageKey) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -111,8 +111,8 @@ final class APIHelper {
     }
     
     //MARK: Update Product APi
-    static func updateProductDetails(params: Parameters, imgData: Data?, imageKey: String , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.uploadData(method: .post, url: APIEndPoint.addNewAndUpdateProductApi.rawValue, parameters: params, imgData: imgData, imageKey: imageKey) { (response) in
+    static func updateProductDetails(urlParams: Parameters, bodyParams:Parameters, imgData: Data?, imageKey: String , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.uploadData(method: .post, url: APIEndPoint.addNewAndUpdateProductApi.rawValue, urlParameters: urlParams, bodyParameters: bodyParams, imgData: imgData, imageKey: imageKey) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -304,8 +304,8 @@ final class APIHelper {
     }
     
     //MARK: Cancel Or Return Order Api
-    static func cancelOrReturnOrderApi(params: Parameters, imgData: Data?, imageKey: String,orderNo: String, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.uploadData(method: .post, url: APIEndPoint.cancelOrReturnOrderApi.rawValue+"\(orderNo)", parameters: params, imgData: imgData, imageKey: imageKey) { (response) in
+    static func cancelOrReturnOrderApi(urlParams: Parameters, bodyParams:Parameters, imgData: Data?, imageKey: String,orderNo: String, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.uploadData(method: .post, url: APIEndPoint.cancelOrReturnOrderApi.rawValue+"\(orderNo)", urlParameters: urlParams, bodyParameters: bodyParams, imgData: imgData, imageKey: imageKey) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)

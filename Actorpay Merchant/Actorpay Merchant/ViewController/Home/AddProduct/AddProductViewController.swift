@@ -568,7 +568,7 @@ extension AddProductViewController {
     // Update Product Api
     func updateProductApi() {
         var imgData: Data?
-        let params: Parameters = [
+        let bodyParams: Parameters = [
             "product": [
                 "productId":"\(productItem?.productId ?? "")",
                 "name": "\(productNameTextField.text ?? "")",
@@ -588,7 +588,7 @@ extension AddProductViewController {
         }
         
         showLoading()
-        APIHelper.updateProductDetails(params: params, imgData: imgData, imageKey: "file") { (success, response) in
+        APIHelper.updateProductDetails(urlParams: [:], bodyParams:bodyParams, imgData: imgData, imageKey: "file") { (success, response) in
             if !success {
                 dissmissLoader()
                 let message = response.message
@@ -597,6 +597,7 @@ extension AddProductViewController {
                 dissmissLoader()
                 let message = response.message
                 print(message)
+                NotificationCenter.default.post(name:Notification.Name("reloadGetProductListApi"), object: nil)
                 self.navigationController?.popViewController(animated: true)
             }
         }
@@ -605,7 +606,7 @@ extension AddProductViewController {
     // Add New Product Api
     func addNewProductApi() {
         var imgData: Data?
-        let params: Parameters = [
+        let bodyParams: Parameters = [
             "product": [
                 "name": productNameTextField.text ?? "",
                 "description": descriptionTextView.text ?? "",
@@ -622,7 +623,7 @@ extension AddProductViewController {
             imgData = self.productImage?.jpegData(compressionQuality: 0.1)
         }
         showLoading()
-        APIHelper.addNewProductApi(params: params, imgData: imgData, imageKey: "file") { (success, response) in
+        APIHelper.addNewProductApi(urlParams: [:], bodyParams: bodyParams, imgData: imgData, imageKey: "file") { (success, response) in
             if !success {
                 dissmissLoader()
                 let message = response.message
