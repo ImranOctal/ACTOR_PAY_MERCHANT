@@ -34,6 +34,7 @@ class ValidationManager {
     let sDateOfBirth = "Please Select DOB"
     let emptyNotesDesc = "Add Note Description"
     let emptyPhoneCode = "Oops! Your Phone Code is Empty"
+    let percentageValue = "Percentage should be between 1 to 99"
     
     // Outlet Validation Message
     let outletTitleValidationMsg = "Oops! Your Title is Empty"
@@ -47,5 +48,9 @@ class ValidationManager {
     let outletStateValidationMsg = "Oops! Your State is Empty"
     let outletCountryValidationMsg = "Oops! Your Country is Empty"
     let outletDescValidationMsg = "Oops! Your Description is Empty"
+    
+    
+    let emptyCancelOrderDescription = "Please write reason"
+    
     
 }

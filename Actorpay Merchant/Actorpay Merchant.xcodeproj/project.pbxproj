@@ -26,6 +26,13 @@
 		8826D5BB27A25CF800B2B50C /* OrderImgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826D5BA27A25CF800B2B50C /* OrderImgCollectionViewCell.swift */; };
 		8826D5C327A2672C00B2B50C /* MerchantDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826D5C227A2672C00B2B50C /* MerchantDTO.swift */; };
 		8826D5C827A2687F00B2B50C /* OrderNotesDtos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826D5C727A2687F00B2B50C /* OrderNotesDtos.swift */; };
+		8833EBD027BCCD2700AC5B12 /* DisputeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833EBCF27BCCD2700AC5B12 /* DisputeList.swift */; };
+		8833EBD827BCCD3300AC5B12 /* DisputeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833EBD727BCCD3300AC5B12 /* DisputeItem.swift */; };
+		8833EBDD27BCCD9E00AC5B12 /* DisputeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8833EBDC27BCCD9E00AC5B12 /* DisputeTableViewCell.swift */; };
+		883AD63227BD1A7600A10F0C /* MerchantMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AD63127BD1A7600A10F0C /* MerchantMessageCell.swift */; };
+		883AD63727BD1A8D00A10F0C /* CustomerMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AD63627BD1A8D00A10F0C /* CustomerMessageCell.swift */; };
+		883AD63C27BD1AC200A10F0C /* DisputeMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AD63B27BD1AC200A10F0C /* DisputeMessages.swift */; };
+		883AD64127BD1AF100A10F0C /* DisputeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883AD64027BD1AF100A10F0C /* DisputeDetailsViewController.swift */; };
 		8848D67C27856ADE0081911E /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8848D67B27856ADE0081911E /* CustomAlertViewController.swift */; };
 		8848D6902785BDA80081911E /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8848D68F2785BDA70081911E /* ValidationManager.swift */; };
 		8849B360278BF393005D0285 /* OrderSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8849B35D278BF393005D0285 /* OrderSummaryViewController.swift */; };
@@ -52,6 +59,7 @@
 		88722969279FCCF20066DA64 /* RoleItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88722967279FCCF20066DA64 /* RoleItems.swift */; };
 		8884E86B27AB92CA00E725A4 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8884E86A27AB92CA00E725A4 /* VerifyViewController.swift */; };
 		8884E8C627ABF2E700E725A4 /* OrderNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8884E8C527ABF2E700E725A4 /* OrderNoteTableViewCell.swift */; };
+		889097F027BE46AF000ECE8E /* FilterDisputesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889097EF27BE46AF000ECE8E /* FilterDisputesViewController.swift */; };
 		88984F7F277F00FD00E76111 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F7E277F00FD00E76111 /* CategoryList.swift */; };
 		88984F85277F019500E76111 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F84277F019500E76111 /* CategoryItem.swift */; };
 		88984F8C277F021E00E76111 /* SubCategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F8A277F021E00E76111 /* SubCategoryItem.swift */; };
@@ -95,10 +103,12 @@
 		88DC1524276368C700627F17 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC1521276368C700627F17 /* HomeViewController.swift */; };
 		88DC152D27636DC200627F17 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC152C27636DBF00627F17 /* SideMenuCell.swift */; };
 		88DC15382763866900627F17 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DC15372763866900627F17 /* ProductTableViewCell.swift */; };
+		88E10DD027BA6F2800E19B66 /* MerchantSettingsDTOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E10DCF27BA6F2700E19B66 /* MerchantSettingsDTOS.swift */; };
 		88E2615E27645D2700BC84B2 /* RaiseDisputeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E2615827645D2700BC84B2 /* RaiseDisputeViewController.swift */; };
 		88E2616027645D2700BC84B2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E2615C27645D2700BC84B2 /* ProfileViewController.swift */; };
 		88E261992764774F00BC84B2 /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E261982764774F00BC84B2 /* AddProductViewController.swift */; };
 		88E8FD3B27A51D8D00DCF547 /* AddNewRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E8FD3A27A51D8D00DCF547 /* AddNewRoleViewController.swift */; };
+		88F80C1727BCCC2700DBB1BD /* DisputesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F80C1627BCCC2700DBB1BD /* DisputesViewController.swift */; };
 		88F8214527A90BD900596C86 /* CommissionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F8214327A90BD800596C86 /* CommissionList.swift */; };
 		88F8214627A90BD900596C86 /* CommissionItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F8214427A90BD900596C86 /* CommissionItems.swift */; };
 		88F8215F27A918AA00596C86 /* FilterCommissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F8215E27A918AA00596C86 /* FilterCommissionViewController.swift */; };
@@ -150,6 +160,13 @@
 		8826D5BA27A25CF800B2B50C /* OrderImgCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderImgCollectionViewCell.swift; sourceTree = "<group>"; };
 		8826D5C227A2672C00B2B50C /* MerchantDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MerchantDTO.swift; sourceTree = "<group>"; };
 		8826D5C727A2687F00B2B50C /* OrderNotesDtos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderNotesDtos.swift; sourceTree = "<group>"; };
+		8833EBCF27BCCD2700AC5B12 /* DisputeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeList.swift; sourceTree = "<group>"; };
+		8833EBD727BCCD3300AC5B12 /* DisputeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeItem.swift; sourceTree = "<group>"; };
+		8833EBDC27BCCD9E00AC5B12 /* DisputeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeTableViewCell.swift; sourceTree = "<group>"; };
+		883AD63127BD1A7600A10F0C /* MerchantMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantMessageCell.swift; sourceTree = "<group>"; };
+		883AD63627BD1A8D00A10F0C /* CustomerMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMessageCell.swift; sourceTree = "<group>"; };
+		883AD63B27BD1AC200A10F0C /* DisputeMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeMessages.swift; sourceTree = "<group>"; };
+		883AD64027BD1AF100A10F0C /* DisputeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeDetailsViewController.swift; sourceTree = "<group>"; };
 		8848D67B27856ADE0081911E /* CustomAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		8848D68F2785BDA70081911E /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 		8849B35D278BF393005D0285 /* OrderSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderSummaryViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +193,7 @@
 		88722967279FCCF20066DA64 /* RoleItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleItems.swift; sourceTree = "<group>"; };
 		8884E86A27AB92CA00E725A4 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		8884E8C527ABF2E700E725A4 /* OrderNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNoteTableViewCell.swift; sourceTree = "<group>"; };
+		889097EF27BE46AF000ECE8E /* FilterDisputesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDisputesViewController.swift; sourceTree = "<group>"; };
 		88984F7E277F00FD00E76111 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
 		88984F84277F019500E76111 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		88984F8A277F021E00E76111 /* SubCategoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategoryItem.swift; sourceTree = "<group>"; };
@@ -225,10 +243,12 @@
 		88DC1521276368C700627F17 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		88DC152C27636DBF00627F17 /* SideMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		88DC15372763866900627F17 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		88E10DCF27BA6F2700E19B66 /* MerchantSettingsDTOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MerchantSettingsDTOS.swift; sourceTree = "<group>"; };
 		88E2615827645D2700BC84B2 /* RaiseDisputeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaiseDisputeViewController.swift; sourceTree = "<group>"; };
 		88E2615C27645D2700BC84B2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		88E261982764774F00BC84B2 /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		88E8FD3A27A51D8D00DCF547 /* AddNewRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRoleViewController.swift; sourceTree = "<group>"; };
+		88F80C1627BCCC2700DBB1BD /* DisputesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputesViewController.swift; sourceTree = "<group>"; };
 		88F8214327A90BD800596C86 /* CommissionList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommissionList.swift; sourceTree = "<group>"; };
 		88F8214427A90BD900596C86 /* CommissionItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommissionItems.swift; sourceTree = "<group>"; };
 		88F8215E27A918AA00596C86 /* FilterCommissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCommissionViewController.swift; sourceTree = "<group>"; };
@@ -295,6 +315,8 @@
 		8807882C277C2B7200F9FF85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8833EBCE27BCCD1000AC5B12 /* Disputes */,
+				88E10DCE27BA6F1C00E19B66 /* Merchant */,
 				88F8214227A90BBB00596C86 /* Commission */,
 				88B9C6E527A80754008E9160 /* Outlet */,
 				88BB2A8127A525E1003B669F /* Screen */,
@@ -306,10 +328,9 @@
 				88984F89277F01E700E76111 /* SubCategory */,
 				88984F83277F010400E76111 /* Category */,
 				8812A5932780430300B8782A /* TaxList.swift */,
-				8807882D277C2B9B00F9FF85 /* Merchant.swift */,
 				88078832277C2E6700F9FF85 /* ProductList.swift */,
 				88078837277C2E7200F9FF85 /* Items.swift */,
-				88B9026F277EC67700506783 /* MerchantDetails.swift */,
+				8807882D277C2B9B00F9FF85 /* Merchant.swift */,
 				88669BE027A3ACC800B9D99D /* FAQ.swift */,
 			);
 			path = Model;
@@ -349,6 +370,26 @@
 				881DD8032767535700B48A1F /* ProductDetailsViewController.swift */,
 			);
 			path = ProductDetails;
+			sourceTree = "<group>";
+		};
+		8833EBCE27BCCD1000AC5B12 /* Disputes */ = {
+			isa = PBXGroup;
+			children = (
+				8833EBCF27BCCD2700AC5B12 /* DisputeList.swift */,
+				883AD63B27BD1AC200A10F0C /* DisputeMessages.swift */,
+				8833EBD727BCCD3300AC5B12 /* DisputeItem.swift */,
+			);
+			path = Disputes;
+			sourceTree = "<group>";
+		};
+		883AD62D27BD1A5300A10F0C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8833EBDC27BCCD9E00AC5B12 /* DisputeTableViewCell.swift */,
+				883AD63127BD1A7600A10F0C /* MerchantMessageCell.swift */,
+				883AD63627BD1A8D00A10F0C /* CustomerMessageCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		8848D67A27856ADE0081911E /* CustomAlert */ = {
@@ -711,10 +752,23 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		88E10DCE27BA6F1C00E19B66 /* Merchant */ = {
+			isa = PBXGroup;
+			children = (
+				88B9026F277EC67700506783 /* MerchantDetails.swift */,
+				88E10DCF27BA6F2700E19B66 /* MerchantSettingsDTOS.swift */,
+			);
+			path = Merchant;
+			sourceTree = "<group>";
+		};
 		88E2615727645D2700BC84B2 /* RaiseDispute */ = {
 			isa = PBXGroup;
 			children = (
 				88E2615827645D2700BC84B2 /* RaiseDisputeViewController.swift */,
+				88F80C1627BCCC2700DBB1BD /* DisputesViewController.swift */,
+				883AD64027BD1AF100A10F0C /* DisputeDetailsViewController.swift */,
+				883AD62D27BD1A5300A10F0C /* Cell */,
+				889097EF27BE46AF000ECE8E /* FilterDisputesViewController.swift */,
 			);
 			path = RaiseDispute;
 			sourceTree = "<group>";
@@ -1057,6 +1111,7 @@
 			files = (
 				88669C7C27A3E49500B9D99D /* SubMerchantItems.swift in Sources */,
 				8826D5C827A2687F00B2B50C /* OrderNotesDtos.swift in Sources */,
+				8833EBD027BCCD2700AC5B12 /* DisputeList.swift in Sources */,
 				88984F8C277F021E00E76111 /* SubCategoryItem.swift in Sources */,
 				88B90270277EC67700506783 /* MerchantDetails.swift in Sources */,
 				88F8214627A90BD900596C86 /* CommissionItems.swift in Sources */,
@@ -1064,15 +1119,18 @@
 				88E8FD3B27A51D8D00DCF547 /* AddNewRoleViewController.swift in Sources */,
 				88AD1FC0278809F4007F0148 /* OrderItemDtos.swift in Sources */,
 				88FBDE5C27670C9600EB9BCE /* ManageOrderTableViewCell.swift in Sources */,
+				883AD63C27BD1AC200A10F0C /* DisputeMessages.swift in Sources */,
 				8849B361278BF393005D0285 /* OrderItemTableViewCell.swift in Sources */,
 				88AD1FBE278809F4007F0148 /* OrderItems.swift in Sources */,
 				88D08D6327622841001D5282 /* SignUpViewController.swift in Sources */,
+				889097F027BE46AF000ECE8E /* FilterDisputesViewController.swift in Sources */,
 				88BB2A8B27A52A14003B669F /* ScreenAccessPermission.swift in Sources */,
 				88078833277C2E6700F9FF85 /* ProductList.swift in Sources */,
 				88669C7B27A3E49500B9D99D /* SubMerchantList.swift in Sources */,
 				885707E427A906F0008ACAB1 /* CommissionDetailsTableViewCell.swift in Sources */,
 				8813783827A801FC0060D69A /* OutletDetailsTableViewCell.swift in Sources */,
 				88E261992764774F00BC84B2 /* AddProductViewController.swift in Sources */,
+				88F80C1727BCCC2700DBB1BD /* DisputesViewController.swift in Sources */,
 				8812A5942780430300B8782A /* TaxList.swift in Sources */,
 				88078800277C17B000F9FF85 /* APIHelper.swift in Sources */,
 				88984F7F277F00FD00E76111 /* CategoryList.swift in Sources */,
@@ -1086,9 +1144,12 @@
 				88B8A96427A41637005CA047 /* HomeViewControllerApiCall.swift in Sources */,
 				8884E8C627ABF2E700E725A4 /* OrderNoteTableViewCell.swift in Sources */,
 				88078803277C17B000F9FF85 /* APIManager.swift in Sources */,
+				883AD63727BD1A8D00A10F0C /* CustomerMessageCell.swift in Sources */,
+				883AD63227BD1A7600A10F0C /* MerchantMessageCell.swift in Sources */,
 				88DC15382763866900627F17 /* ProductTableViewCell.swift in Sources */,
 				88BB2A7D27A523C1003B669F /* AddNewRoleTableViewCell.swift in Sources */,
 				8826D5BB27A25CF800B2B50C /* OrderImgCollectionViewCell.swift in Sources */,
+				88E10DD027BA6F2800E19B66 /* MerchantSettingsDTOS.swift in Sources */,
 				88DC1524276368C700627F17 /* HomeViewController.swift in Sources */,
 				88D08D0F27621A2F001D5282 /* LoginViewController.swift in Sources */,
 				88669BD127A3AA6300B9D99D /* FAQViewController.swift in Sources */,
@@ -1113,13 +1174,16 @@
 				88078802277C17B000F9FF85 /* Constant.swift in Sources */,
 				881DD7FC27674F1800B48A1F /* ChangePasswordViewController.swift in Sources */,
 				88AD1FB227880466007F0148 /* VerifyOtpViewController.swift in Sources */,
+				883AD64127BD1AF100A10F0C /* DisputeDetailsViewController.swift in Sources */,
 				88AD1FBC278809F4007F0148 /* OrderList.swift in Sources */,
+				8833EBDD27BCCD9E00AC5B12 /* DisputeTableViewCell.swift in Sources */,
 				88D560B7278835B4003A8D33 /* CountryPickerTableViewCell.swift in Sources */,
 				8849B360278BF393005D0285 /* OrderSummaryViewController.swift in Sources */,
 				88669BCF27A3AA6300B9D99D /* MoreViewController.swift in Sources */,
 				88B9C6E927A8075E008E9160 /* OutletItems.swift in Sources */,
 				88B8A95327A41131005CA047 /* RoleViewController.swift in Sources */,
 				884E194E278F073E00A9E5A8 /* FilterProductViewController.swift in Sources */,
+				8833EBD827BCCD3300AC5B12 /* DisputeItem.swift in Sources */,
 				88D560BD27883775003A8D33 /* CountryPickerViewController.swift in Sources */,
 				88E2616027645D2700BC84B2 /* ProfileViewController.swift in Sources */,
 				8849B366278BF843005D0285 /* ShippingAddressDTO.swift in Sources */,

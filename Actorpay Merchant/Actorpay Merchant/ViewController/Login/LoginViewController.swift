@@ -8,6 +8,7 @@
 import UIKit
 import LocalAuthentication
 import Alamofire
+import PopupDialog
 
 class LoginViewController: UIViewController {
     
@@ -103,12 +104,9 @@ class LoginViewController: UIViewController {
     // Forgot Password Button Action
     @IBAction func forgotPasswordButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        let popOverConfirmVC = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
-        self.addChild(popOverConfirmVC)
-        popOverConfirmVC.view.frame = self.view.frame
-        self.view.center = popOverConfirmVC.view.center
-        self.view.addSubview(popOverConfirmVC.view)
-        popOverConfirmVC.didMove(toParent: self)
+        let customV = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as! ForgotPasswordViewController
+        let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
+        self.present(popup, animated: true, completion: nil)
     }
     
     // Login Button Action
@@ -148,15 +146,12 @@ class LoginViewController: UIViewController {
                 }
             }else{
                 DispatchQueue.main.async {
-                    let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as? CustomAlertViewController)!
-                    newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-                    newVC.setUpCustomAlert(titleStr: "Error", descriptionStr: "Please remember password to use this function", isShowCancelBtn: true)
-                    newVC.okBtn.tag = 1
-                    newVC.customAlertDelegate = self
-                    self.definesPresentationContext = true
-                    self.providesPresentationContextTransitionStyle = true
-                    newVC.modalPresentationStyle = .overCurrentContext
-                    self.navigationController?.present(newVC, animated: true, completion: nil)
+                    let customV = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as! CustomAlertViewController
+                    let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
+                    customV.setUpCustomAlert(titleStr: "Error", descriptionStr: "Please remember password to use this function", isShowCancelBtn: true)
+                    customV.okBtn.tag = 1
+                    customV.customAlertDelegate = self
+                    self.present(popup, animated: true, completion: nil)
                 }
             }
         }
@@ -220,8 +215,8 @@ extension LoginViewController {
     // Login Api
     func loginApi() {
         let params: Parameters = [
-            "email": "\(email != nil ? (email ?? "") : (emailTextField.text ?? ""))",
-            "password": "\(password != nil ? (password ?? "") : (passwordTextField.text ?? ""))",
+            "email": emailTextField.text ?? "",
+            "password": passwordTextField.text ?? "",
             "deviceInfo": [
                 "deviceType":"mobile" as String,
                 "appVersion":appVersion(),

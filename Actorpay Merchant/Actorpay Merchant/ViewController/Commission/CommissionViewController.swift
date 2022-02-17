@@ -47,6 +47,7 @@ class CommissionViewController: UIViewController {
     
     // Filter Commission Button Action
     @IBAction func filterBtnAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "FilterCommissionViewController") as? FilterCommissionViewController)!
         newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
         self.definesPresentationContext = true

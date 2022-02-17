@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import SVPullToRefresh
+import PopupDialog
 
 class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
     
@@ -114,6 +115,7 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
     
     // Filter Button Action
     @IBAction func filterButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "FilterProductViewController") as? FilterProductViewController)!
         newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
         self.definesPresentationContext = true
@@ -251,15 +253,12 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         cell.deleteButtonHandler = {
             self.view.endEditing(true)
             self.productId = item?.productId
-            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as? CustomAlertViewController)!
-            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            newVC.setUpCustomAlert(titleStr: "Delete Resource", descriptionStr: "Are you sure want to delete?", isShowCancelBtn: false)
-            newVC.okBtn.tag = 2
-            newVC.customAlertDelegate = self
-            self.definesPresentationContext = true
-            self.providesPresentationContextTransitionStyle = true
-            newVC.modalPresentationStyle = .overCurrentContext
-            self.navigationController?.present(newVC, animated: true, completion: nil)
+            let customV = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as! CustomAlertViewController
+            let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
+            customV.setUpCustomAlert(titleStr: "Delete Resource", descriptionStr: "Are you sure want to delete?", isShowCancelBtn: false)
+            customV.okBtn.tag = 2
+            customV.customAlertDelegate = self
+            self.present(popup, animated: true, completion: nil)
         }
         cell.selectionStyle = .none
         return cell

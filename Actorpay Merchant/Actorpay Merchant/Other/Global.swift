@@ -158,17 +158,19 @@ func getStatus(stausString: String) -> (UIColor) {
     case "DISPATCHED":
         return UIColor.systemGreen
     case "RETURNING":
-        return UIColor.blue
+        return .blue
     case "PARTIALLY_RETURNING":
-        return UIColor.blue
+        return .blue
     case "RETURNED":
-        return UIColor.blue
+        return  .blue
     case "PARTIALLY_RETURNED":
-        return UIColor.blue
+        return .blue
     case "DELIVERED":
         return  UIColor.systemGreen
+    case "RETURNING_DECLINED":
+        return .blue
     case "PENDING":
-        return  UIColor.blue
+        return .blue
     case "FAILURE":
         return UIColor.red
     case "FAILED":

@@ -40,6 +40,7 @@ class OrderAddNoteViewController: UIViewController {
     
     // Cancel Button Action
     @IBAction func cancelBtnAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         removeAnimate()
         self.dismiss(animated: true, completion: nil)
     }
@@ -53,7 +54,7 @@ class OrderAddNoteViewController: UIViewController {
                 self.postOrderNoteApi()
             } else {
                 notesTextViewValidationLbl.isHidden = true
-                if status == "READY" ||  status == "DISPATCHED" ||  status == "DELIVERED" || status == "RETURNED" {
+                if status == "READY" ||  status == "DISPATCHED" ||  status == "DELIVERED" || status == "RETURNING_ACCEPTED" || status == "RETURNING_DECLINED" || status == "RETURNED" {
                     updateOrderStatusApi()
                 } else {
                     cancelOrReturnOrderApi()

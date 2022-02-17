@@ -25,8 +25,6 @@ class FilterProductViewController: UIViewController {
     var categoryData:[String] = []
     var subCategoryData:[String] = []
     var filterparm: Parameters?
-//    var categoryList: CategoryList?
-//    var subCategoryList : [SubCategoryItem] = []
     var categoryList: CategoryList?
     var categoryListItems: [CategoryItems]?
     var subCategoryList : SubCategoryList?
@@ -37,24 +35,23 @@ class FilterProductViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        
         topCorner(bgView: filterView, maskToBounds: true)
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         self.showAnimate()
         setStartDatePicker()
         setEndDatePicker()
         self.setFilterData()
-//        getAllCategories(pageSize: pageSize)
         self.getInCategoryDropdownApi()
         getSubCategories()
-//        getSubCategories()
     }
     
     //MARK: - Selectors -
     
     // Close Button Action
     @IBAction func closeButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         removeAnimate()
         if let codeCompletion = completion {
             codeCompletion(filterparm)
@@ -64,6 +61,7 @@ class FilterProductViewController: UIViewController {
     
     // Apply Button Action
     @IBAction func applyButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         let param : Parameters = [
             "categoryName":categoryDropDownTextField.text ?? "",
             "status": true,
@@ -80,6 +78,7 @@ class FilterProductViewController: UIViewController {
     
     // Reset Button Action
     @IBAction func resetButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         categoryDropDownTextField.text = ""
         subCategoryDropDownTextField.text = ""
         startDateTextField.text = ""
@@ -90,7 +89,6 @@ class FilterProductViewController: UIViewController {
     
     //MARK: - Helper Functions -
     
-    
     // Set Filter Data
     func setFilterData() {
         categoryDropDownTextField.text = filterparm?["categoryName"] as? String
@@ -100,43 +98,12 @@ class FilterProductViewController: UIViewController {
     }
     
     // SetUp Category Drop Down
-//    func setUpCategoryDropDown() {
-//        categoryDropDownTextField.optionArray = categoryData
-//        categoryDropDownTextField.checkMarkEnabled = false
-//        categoryDropDownTextField.didSelect{(selectedText , index , id) in
-//            self.subCategoryDropDownTextField.text = nil
-//            for i in self.categoryList?.items ?? [] {
-//                if i.name == selectedText {
-////                    self.categoryId = i.id
-//                    self.getSubcategoryByCategoryApi(i.id ?? "")
-//                }
-//            }
-//        }
-//        categoryDropDownTextField.isSearchEnable = true
-//        categoryDropDownTextField.arrow.isHidden = true
-//        categoryDropDownTextField.arrowSize = 0
-//
-//    }
-//
-//    // SetUp SubCategory Drop Down
-//    func setUpSubCategoryDropDown() {
-//        subCategoryDropDownTextField.optionArray = subCategoryData
-//        subCategoryDropDownTextField.checkMarkEnabled = false
-//        subCategoryDropDownTextField.didSelect{(selectedText , index , id) in
-//        }
-//        subCategoryDropDownTextField.arrowSize = 0
-//        subCategoryDropDownTextField.isSearchEnable = true
-//        subCategoryDropDownTextField.arrow.isHidden = true
-//    }
-    
-    // SetUp Category Drop Down
     func setUpCategoryDropDown() {
         categoryDropDownTextField.optionArray = categoryData
         categoryDropDownTextField.checkMarkEnabled = false
         categoryDropDownTextField.didSelect{(selectedText , index , id) in
             for i in self.categoryListItems ?? [] {
                 if i.name == selectedText {
-//                    self.categoryId = i.id
                     self.getSubcategoryByCategoryApi(i.id ?? "")
                 }
             }
@@ -144,14 +111,6 @@ class FilterProductViewController: UIViewController {
         categoryDropDownTextField.isSearchEnable = true
         categoryDropDownTextField.arrow.isHidden = true
         categoryDropDownTextField.arrowSize = 0
-//        categoryDropDownTextField.listDidDisappear {
-//            if self.categoryDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
-//                self.categoryValidationLbl.isHidden = false
-//                self.categoryValidationLbl.text = ValidationManager.shared.selectCategory
-//            } else {
-//                self.categoryValidationLbl.isHidden = true
-//            }
-//        }
     }
     
     // SetUp SubCategory Drop Down
@@ -159,27 +118,14 @@ class FilterProductViewController: UIViewController {
         subCategoryDropDownTextField.optionArray = subCategoryData
         subCategoryDropDownTextField.checkMarkEnabled = false
         subCategoryDropDownTextField.didSelect{(selectedText , index , id) in
-//            for i in self.subCategoryList?.items ?? [] {
-//                if i.name == selectedText {
-//                    self.subCategoryId = i.id
-//                }
-//            }
         }
         subCategoryDropDownTextField.arrowSize = 0
         subCategoryDropDownTextField.isSearchEnable = true
         subCategoryDropDownTextField.arrow.isHidden = true
-//        subCategoryDropDownTextField.listDidDisappear {
-//            if self.subCategoryDropDownTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
-//                self.subcategoryValidationLbl.isHidden = false
-//                self.subcategoryValidationLbl.text = ValidationManager.shared.selectSubCategory
-//            } else {
-//                self.subcategoryValidationLbl.isHidden = true
-//            }
-//        }
     }
     
     // Set Date Picker To FromTextField
-    func setStartDatePicker(){
+    func setStartDatePicker() {
         startDatePicker.datePickerMode = .date
         if #available(iOS 13.4, *) {
             startDatePicker.preferredDatePickerStyle = .wheels
@@ -195,7 +141,7 @@ class FilterProductViewController: UIViewController {
     }
     
     // Set Date Picker To ToTextField
-    func setEndDatePicker(){
+    func setEndDatePicker() {
         endDatePicker.datePickerMode = .date
         if #available(iOS 13.4, *) {
             endDatePicker.preferredDatePickerStyle = .wheels
@@ -211,7 +157,7 @@ class FilterProductViewController: UIViewController {
     }
     
     // FromTextField DatePicker Done Button Action
-    @objc func fromTxtFieldDoneDatePicker(){
+    @objc func fromTxtFieldDoneDatePicker() {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy"
         startDateTextField.text = formatter.string(from: startDatePicker.date)
@@ -270,97 +216,6 @@ class FilterProductViewController: UIViewController {
 
 //MARK: Api Call
 extension FilterProductViewController {
-    // Get All Category Api
-//    func getAllCategories(pageSize: Int) {
-//        showLoading()
-//        let params: Parameters = [
-//            "pageSize":pageSize,
-//            "filterByIsActive":true,
-//            "sortBy":"name",
-//            "asc":true
-//
-//        ]
-//        APIHelper.getAllCategoriesAPI(parameters: params) { (success, response) in
-//            if !success {
-//                dissmissLoader()
-//                let message = response.message
-//                self.view.makeToast(message)
-//            }else {
-//                dissmissLoader()
-//                let data = response.response["data"]
-//                self.categoryList = CategoryList.init(json: data)
-//                self.categoryData.removeAll()
-//                for item in self.categoryList?.items ?? [] {
-//                    self.categoryData.append(item.name ?? "")
-//                }
-//                print(self.categoryData)
-//                self.pageSize = self.categoryList?.totalItems ?? 0
-//                self.setUpCategoryDropDown()
-//                let message = response.message
-//                print(message)
-//            }
-//        }
-//    }
-//
-//    // Get All Sub Category Api
-////    func getSubCategories() {
-////        let params: Parameters = [
-////            "pageSize":pageSize,
-////            "filterByIsActive":true,
-////            "sortBy":"name",
-////            "asc":true
-////        ]
-////        showLoading()
-////        APIHelper.getSubCategoriesApi(parameters: params) { (success, response) in
-////            if !success {
-////                dissmissLoader()
-////                let message = response.message
-////                self.view.makeToast(message)
-////            }else {
-////                dissmissLoader()
-////                let data = response.response["data"]
-////                self.subCategoryList = SubCategoryList.init(json: data)
-////                self.subCategoryData.removeAll()
-////                for item in self.subCategoryList?.items ?? [] {
-////                    self.subCategoryData.append(item.name ?? "")
-////                }
-////                print(self.subCategoryData)
-////                self.setUpSubCategoryDropDown()
-////                let message = response.message
-////                print(message)
-////            }
-////        }
-////    }
-//
-//    // Get SubCategory By Category
-//    func getSubcategoryByCategoryApi(_ id: String) {
-//        let params: Parameters = [
-//            "categoryId":id,
-//            "filterByIsActive":true,
-//            "sortBy":"name",
-//            "asc":true
-//        ]
-//        showLoading()
-//        APIHelper.getSubCategoriesByCategoryApi(parameters:params) { (success, response) in
-//            if !success {
-//                dissmissLoader()
-//                let message = response.message
-//                self.view.makeToast(message)
-//            }else {
-//                dissmissLoader()
-//                let data = response.response.data
-//                self.subCategoryList = data.arrayValue.map({(SubCategoryItem(json: $0))})
-//                self.subCategoryData.removeAll()
-//                for item in self.subCategoryList {
-//                    self.subCategoryData.append(item.name ?? "")
-//                }
-//                print(self.subCategoryData)
-//                self.setUpSubCategoryDropDown()
-//                let message = response.message
-//                print(message)
-//            }
-//        }
-//    }
 
     // Get All Category Api
     func getAllCategories(pageSize: Int) {
@@ -388,14 +243,6 @@ extension FilterProductViewController {
                 print(self.categoryData)
                 self.pageSize = self.categoryList?.totalItems ?? 0
                 self.setUpCategoryDropDown()
-//                if self.isUpdate {
-//                    self.categoryId = self.productItem?.categoryId
-//                    for (_, item) in (self.categoryList?.items ?? []).enumerated() {
-//                        if item.id == self.productItem?.categoryId {
-//                            self.categoryDropDownTextField.text = item.name
-//                        }
-//                    }
-//                }
                 let message = response.message
                 print(message)
             }
@@ -426,14 +273,6 @@ extension FilterProductViewController {
                 print(self.categoryData)
                 
                 self.setUpCategoryDropDown()
-//                if self.isUpdate {
-//                    self.categoryId = self.productItem?.categoryId
-//                    for (_, item) in (self.categoryListItems ?? []).enumerated() {
-//                        if item.id == self.productItem?.categoryId {
-//                            self.categoryDropDownTextField.text = item.name
-//                        }
-//                    }
-//                }
                 let message = response.message
                 print(message)
             }
@@ -464,14 +303,6 @@ extension FilterProductViewController {
                 }
                 print(self.subCategoryData)
                 self.setUpSubCategoryDropDown()
-//                if self.isUpdate {
-//                    self.subCategoryId = self.productItem?.subCategoryId
-//                    for (_, item) in (self.subCategoryList?.items ?? []).enumerated() {
-//                        if item.id == self.productItem?.subCategoryId {
-//                            self.subCategoryDropDownTextField.text = item.name
-//                        }
-//                    }
-//                }
                 let message = response.message
                 print(message)
             }

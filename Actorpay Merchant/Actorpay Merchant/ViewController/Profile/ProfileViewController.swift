@@ -12,6 +12,7 @@ import DropDown
 import GooglePlaces
 import GoogleMaps
 import CoreLocation
+import PopupDialog
 
 class ProfileViewController: UIViewController {
     
@@ -52,6 +53,17 @@ class ProfileViewController: UIViewController {
             shopActNoOrLicenceTextField.delegate = self
         }
     }
+    @IBOutlet weak var returnFeeTextField: UITextField! {
+        didSet {
+            self.returnFeeTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var cancellationFeeTextField: UITextField! {
+        didSet {
+            self.cancellationFeeTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var adminComissionTextField: UITextField!
     @IBOutlet weak var profileImgView: UIImageView!
     @IBOutlet weak var businessNameLabel: UILabel!
     @IBOutlet weak var emailValidationLbl: UILabel!
@@ -64,6 +76,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var countryFlagImgView: UIImageView!
     @IBOutlet weak var emailVerifyBtn: UIButton!
     @IBOutlet weak var mobileVerifyBtn: UIButton!
+    @IBOutlet weak var returnFeeValidationLbl: UILabel!
+    @IBOutlet weak var cancellationFeeValidationLbl: UILabel!
     
     var countryList : CountryList?
     var countryCode = "+91"
@@ -131,11 +145,13 @@ class ProfileViewController: UIViewController {
     
     //Back Button Action
     @IBAction func backButttonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
     }
     
     // Save Button Action
     @IBAction func saveButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         if self.profileValidation() {
             self.validationLabelManage()
             self.updateMerchantProfile()
@@ -179,20 +195,14 @@ class ProfileViewController: UIViewController {
         isEmailVarified = !isEmailVarified
         emailVarifyFlow()
         if isEmailVarified {
-            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "VerifyOtpViewController") as? VerifyOtpViewController)!
-            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            self.definesPresentationContext = true
-            self.providesPresentationContextTransitionStyle = true
-            newVC.modalPresentationStyle = .overCurrentContext
-            self.navigationController?.present(newVC, animated: true, completion: nil)
+            let customV = self.storyboard?.instantiateViewController(withIdentifier: "VerifyOtpViewController") as! VerifyOtpViewController
+            let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
+            self.present(popup, animated: true, completion: nil)
         } else {
-            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "VerifyViewController") as? VerifyViewController)!
-            newVC.isEmailVerify = true
-            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            self.definesPresentationContext = true
-            self.providesPresentationContextTransitionStyle = true
-            newVC.modalPresentationStyle = .overCurrentContext
-            self.navigationController?.present(newVC, animated: true, completion: nil)
+            let customV = self.storyboard?.instantiateViewController(withIdentifier: "VerifyViewController") as! VerifyViewController
+            let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
+            customV.isEmailVerify = true
+            self.present(popup, animated: true, completion: nil)
         }
     }
     
@@ -202,19 +212,13 @@ class ProfileViewController: UIViewController {
         isMobileVarified = !isMobileVarified
         mobileVerifyButtonFlow()
         if isMobileVarified {
-            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "VerifyOtpViewController") as? VerifyOtpViewController)!
-            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            self.definesPresentationContext = true
-            self.providesPresentationContextTransitionStyle = true
-            newVC.modalPresentationStyle = .overCurrentContext
-            self.navigationController?.present(newVC, animated: true, completion: nil)
+            let customV = self.storyboard?.instantiateViewController(withIdentifier: "VerifyOtpViewController") as! VerifyOtpViewController
+            let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
+            self.present(popup, animated: true, completion: nil)
         } else {
-            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "VerifyViewController") as? VerifyViewController)!
-            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            self.definesPresentationContext = true
-            self.providesPresentationContextTransitionStyle = true
-            newVC.modalPresentationStyle = .overCurrentContext
-            self.navigationController?.present(newVC, animated: true, completion: nil)
+            let customV = self.storyboard?.instantiateViewController(withIdentifier: "VerifyViewController") as! VerifyViewController
+            let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
+            self.present(popup, animated: true, completion: nil)
         }
     }
     
@@ -262,15 +266,6 @@ class ProfileViewController: UIViewController {
                     print("Lat: \(self.userLat), Lon: \(self.userLong)")
                 }
                 self.view.endEditing(true)
-                /*if self.arrAddressArray.count > 0 && self.arrayPlaceIDs.count > 0 {
-                 print(self.arrayPlaceIDs[index])
-                 let placeID = self.arrayPlaceIDs[index]
-                 //Get address parameters from google place API call
-                 self.APICallGooglePlaceDetails(placeID)
-                 
-                 //self.tableSerachResult.isHidden = true
-                 //print(self.selectedAddressString)
-                 }*/
             }
         }
     }
@@ -352,7 +347,7 @@ class ProfileViewController: UIViewController {
             shopAddressValidationLbl.isHidden = true
         }
         
-        if fullAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+        if fullAddressTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
             fullAddressValidationLbl.isHidden = false
             fullAddressValidationLbl.text = ValidationManager.shared.emptyField
             isValidate = false
@@ -360,12 +355,28 @@ class ProfileViewController: UIViewController {
             fullAddressValidationLbl.isHidden = true
         }
         
-        if shopActNoOrLicenceTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+        if shopActNoOrLicenceTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
             shopLicenceValidationLbl.isHidden = false
             shopLicenceValidationLbl.text = ValidationManager.shared.emptyField
             isValidate = false
         } else {
             shopLicenceValidationLbl.isHidden = true
+        }
+        
+        if returnFeeTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 || returnFeeTextField.text == "0" {
+            returnFeeValidationLbl.isHidden = false
+            returnFeeValidationLbl.text = ValidationManager.shared.percentageValue
+            isValidate = false
+        } else {
+            returnFeeValidationLbl.isHidden = true
+        }
+        
+        if cancellationFeeTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 || cancellationFeeTextField.text == "0" {
+            cancellationFeeValidationLbl.isHidden = false
+            cancellationFeeValidationLbl.text = ValidationManager.shared.percentageValue
+            isValidate = false
+        } else {
+            cancellationFeeValidationLbl.isHidden = true
         }
         
         return isValidate
@@ -378,6 +389,8 @@ class ProfileViewController: UIViewController {
         shopAddressValidationLbl.isHidden = true
         fullAddressValidationLbl.isHidden = true
         shopLicenceValidationLbl.isHidden = true
+        returnFeeValidationLbl.isHidden = true
+        cancellationFeeValidationLbl.isHidden = true
     }
     
     // Email Verify SetUp
@@ -424,6 +437,18 @@ class ProfileViewController: UIViewController {
         fullAddressTextField.text = merchantDetails?.fullAddress
         shopActNoOrLicenceTextField.text = merchantDetails?.licenceNumber
         profileImgView.sd_setImage(with: URL(string: merchantDetails?.profilePicture ?? ""), placeholderImage: UIImage(named: "profile"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+        for (i, val) in (merchantDetails?.merchantSettingsDTOS ?? []).enumerated() {
+            if val.paramName == "admin-commission" {
+                adminComissionTextField.text = val.paramValue
+            }
+            if val.paramName == "return-fee" {
+                returnFeeTextField.text = val.paramValue
+            }
+            if val.paramName == "cancellation-fee" {
+                cancellationFeeTextField.text = val.paramValue
+            }
+        }
+        
     }
     
     // Country Code Data SetUp
@@ -469,18 +494,43 @@ extension ProfileViewController {
     
     // Update Profile Api
     func updateMerchantProfile() {
-        let params: Parameters = [
+        for (i, val) in (merchantDetails?.merchantSettingsDTOS ?? []).enumerated() {
+            if val.paramName == "admin-commission" {
+                merchantDetails?.merchantSettingsDTOS?[i].paramValue = adminComissionTextField.text
+            }
+            if val.paramName == "return-fee" {
+                merchantDetails?.merchantSettingsDTOS?[i].paramValue = returnFeeTextField.text
+            }
+            if val.paramName == "cancellation-fee" {
+                merchantDetails?.merchantSettingsDTOS?[i].paramValue = cancellationFeeTextField.text
+            }
+        }
+        var merchantSettingsDTOSParam : [Parameters] = []
+        var param: Parameters = [:]
+        for (_, val) in (merchantDetails?.merchantSettingsDTOS ?? []).enumerated() {
+            param["id"] = val.id
+            param["paramName"] = val.paramName
+            param["paramValue"] = val.paramValue
+            param["paramDescription"] = val.paramDescription
+            if val.paramName != "admin-commission" {
+                merchantSettingsDTOSParam.append(param)
+            }
+        }
+        let bodyParams: Parameters = [
             "id":AppManager.shared.merchantUserId,
+            "merchantId": AppManager.shared.merchantId,
             "email":emailTextField.text ?? "",
             "extensionNumber":countryCode,
             "contactNumber":mobileNumberTextField.text ?? "",
             "shopAddress":shopAddressTextField.text ?? "",
             "fullAddress":fullAddressTextField.text ?? "",
             "businessName":businessNameTextField.text ?? "",
-            "licenceNumber":shopActNoOrLicenceTextField.text ?? ""
+            "licenceNumber":shopActNoOrLicenceTextField.text ?? "",
+            "active": true,
+            "merchantSettingsDTOS": merchantSettingsDTOSParam
         ]
         showLoading()
-        APIHelper.updateMerchantDetails(params: params) { (success,response)  in
+        APIHelper.updateMerchantDetails(bodyParams: bodyParams) { (success,response)  in
             if !success {
                 dissmissLoader()
                 let message = response.message
@@ -550,6 +600,20 @@ extension ProfileViewController: UITextFieldDelegate {
                 shopLicenceValidationLbl.text = ValidationManager.shared.emptyField
             } else {
                 shopLicenceValidationLbl.isHidden = true
+            }
+        case returnFeeTextField:
+            if returnFeeTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                returnFeeValidationLbl.isHidden = false
+                returnFeeValidationLbl.text = ValidationManager.shared.percentageValue
+            } else {
+                returnFeeValidationLbl.isHidden = true
+            }
+        case cancellationFeeTextField:
+            if cancellationFeeTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
+                cancellationFeeValidationLbl.isHidden = false
+                cancellationFeeValidationLbl.text = ValidationManager.shared.percentageValue
+            } else {
+                cancellationFeeValidationLbl.isHidden = true
             }
         default:
             break

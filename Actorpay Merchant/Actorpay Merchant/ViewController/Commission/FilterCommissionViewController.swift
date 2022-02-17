@@ -58,6 +58,7 @@ class FilterCommissionViewController: UIViewController {
     
     // Close Button Action
     @IBAction func closeButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         removeAnimate()
         if let codeCompletion = completion {
             codeCompletion(filterCommissionParm)
@@ -79,6 +80,7 @@ class FilterCommissionViewController: UIViewController {
     
     // Reset Button Action
     @IBAction func resetButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         self.orderNoTextField.text = ""
         self.merchantNameTextField.text = ""
         self.earningFromTextField.text = ""
@@ -94,6 +96,7 @@ class FilterCommissionViewController: UIViewController {
     
     // Apply Button Action
     @IBAction func applyButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         let param : Parameters = [
             "productName": "",
             "merchantName": merchantNameTextField.text ?? "",

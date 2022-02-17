@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import PopupDialog
 
 //MARK: Api Call
 extension HomeViewController {
@@ -20,15 +21,12 @@ extension HomeViewController {
                 let message = response.message
 //                self.view.makeToast(message)
                 print(message)
-                let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as? CustomAlertViewController)!
-                newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-                newVC.setUpCustomAlert(titleStr: "Logout", descriptionStr: "Session Expire", isShowCancelBtn: true)
-                newVC.okBtn.tag = 1
-                newVC.customAlertDelegate = self
-                self.definesPresentationContext = true
-                self.providesPresentationContextTransitionStyle = true
-                newVC.modalPresentationStyle = .overCurrentContext
-                self.navigationController?.present(newVC, animated: true, completion: nil)
+                let customV = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as! CustomAlertViewController
+                let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
+                customV.setUpCustomAlert(titleStr: "Logout", descriptionStr: "Session Expire", isShowCancelBtn: true)
+                customV.okBtn.tag = 1
+                customV.customAlertDelegate = self
+                self.present(popup, animated: true, completion: nil)
             }else {
                 dissmissLoader()
                 let data = response.response["data"]

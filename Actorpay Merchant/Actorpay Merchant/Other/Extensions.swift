@@ -29,6 +29,47 @@ func isValidEmail(_ email: String) -> Bool {
 
 extension UIView {
     
+    func roundCorners(radius: CGFloat = 10, corners: UIRectCorner = .allCorners) {
+        self.clipsToBounds = true
+        self.layer.cornerRadius = radius
+        if #available(iOS 11.0, *) {
+            var arr: CACornerMask = []
+            
+            let allCorners: [UIRectCorner] = [.topLeft, .topRight, .bottomLeft, .bottomRight, .allCorners]
+            
+            for corn in allCorners {
+                if(corners.contains(corn)){
+                    switch corn {
+                    case .topLeft:
+                        arr.insert(.layerMinXMinYCorner)
+                    case .topRight:
+                        arr.insert(.layerMaxXMinYCorner)
+                    case .bottomLeft:
+                        arr.insert(.layerMinXMaxYCorner)
+                    case .bottomRight:
+                        arr.insert(.layerMaxXMaxYCorner)
+                    case .allCorners:
+                        arr.insert(.layerMinXMinYCorner)
+                        arr.insert(.layerMaxXMinYCorner)
+                        arr.insert(.layerMinXMaxYCorner)
+                        arr.insert(.layerMaxXMaxYCorner)
+                    default: break
+                    }
+                }
+            }
+            self.layer.maskedCorners = arr
+        } else {
+            self.roundCornersBezierPath(corners: corners, radius: radius)
+        }
+    }
+    
+    private func roundCornersBezierPath(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
+    
     @IBInspectable
     var cornerRadius: CGFloat {
         get {
@@ -157,6 +198,13 @@ extension UIView {
 }
 
 extension String {
+    
+    var isNumeric: Bool {
+        guard self.count > 0 else { return false }
+        let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        return Set(self).isSubset(of: nums)
+    }
+    
     static func random(length: Int = 20) -> String {
         let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var randomString: String = ""
@@ -736,6 +784,20 @@ extension String {
         return date?.getFormattedDate(format: to)
 
     }
+}
+
+extension Double {
+    func doubleToStringWithComma() -> String{
+        let numberFormatter = NumberFormatter()
+        numberFormatter.groupingSeparator = ","
+        numberFormatter.groupingSize = 3
+        numberFormatter.usesGroupingSeparator = true
+        numberFormatter.decimalSeparator = "."
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 2
+        return numberFormatter.string(from: self as NSNumber)!
+    }
+
 }
 
 class BlurLoader: UIView {

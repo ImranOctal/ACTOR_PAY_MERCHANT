@@ -7,6 +7,7 @@
 import UIKit
 import Toast_Swift
 import SDWebImage
+import PopupDialog
 
 //MARK: - Sidemenu Model -
 struct SideMenuModel {
@@ -73,14 +74,11 @@ class SideMenuViewController: UIViewController {
     // LogOut Button Action
     @IBAction func logoutButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as? CustomAlertViewController)!
-        newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-        newVC.setUpCustomAlert(titleStr: "Logout", descriptionStr: "Are you sure you want to Logout?", isShowCancelBtn: false)
-        newVC.customAlertDelegate = self
-        self.definesPresentationContext = true
-        self.providesPresentationContextTransitionStyle = true
-        newVC.modalPresentationStyle = .overCurrentContext
-        self.navigationController?.present(newVC, animated: true, completion: nil)
+        let customV = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as! CustomAlertViewController
+        let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
+        customV.setUpCustomAlert(titleStr: "Logout", descriptionStr: "Are you sure you want to Logout?", isShowCancelBtn: false)
+        customV.customAlertDelegate = self
+        self.present(popup, animated: true, completion: nil)
     }
     
     //MARK: - Helper Functions -
@@ -109,18 +107,18 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.delegate?.hideHamburgerMenu()
+        if indexPath.row != 1 {
+            self.delegate?.hideHamburgerMenu()
+        }
         switch indexPath.row {
         case 0:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
             self.navigationController?.pushViewController(newVC, animated: true)
         case 1:
-            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordViewController") as? ChangePasswordViewController)!
-            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            self.definesPresentationContext = true
-            self.providesPresentationContextTransitionStyle = true
-            newVC.modalPresentationStyle = .overCurrentContext
-            self.navigationController?.present(newVC, animated: true, completion: nil)
+            self.view.endEditing(true)
+            let customV = self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordViewController") as! ChangePasswordViewController
+            let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
+            self.present(popup, animated: false, completion: nil)
         case 2:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "RoleViewController") as! RoleViewController
             self.navigationController?.pushViewController(newVC, animated: true)
@@ -141,7 +139,10 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "CommissionViewController") as! CommissionViewController
             self.navigationController?.pushViewController(newVC, animated: true)
         case 8:
-            obj_AppDelegate.window?.rootViewController?.view.makeToast("Coming Soon")
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "DisputesViewController") as! DisputesViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+            
+//            obj_AppDelegate.window?.rootViewController?.view.makeToast("Coming Soon")
             return
         case 9:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "PayRollViewController") as! PayRollViewController

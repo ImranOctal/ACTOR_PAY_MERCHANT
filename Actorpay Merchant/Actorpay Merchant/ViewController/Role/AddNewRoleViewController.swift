@@ -66,6 +66,7 @@ class AddNewRoleViewController: UIViewController {
     
     // Add New Role Button Action
     @IBAction func addNewRoleBtnAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         if validateRole() {
             self.manageValidationLbl()
             if isUpdateRole {

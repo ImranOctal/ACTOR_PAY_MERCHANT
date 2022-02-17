@@ -23,7 +23,7 @@ class ManageOrderTableViewCell: UITableViewCell {
             if let item = self.item {
                 orderNoLbl.text = item.orderNo
                 totalPriceLbl.text = "Price: ₹\(item.totalPrice ?? 0.0)"
-                statusLabel.text = item.orderStatus
+                statusLabel.text = item.orderStatus?.replacingOccurrences(of: "_", with: " ", options: .literal, range: nil)
                 orderDateLbl.text = "Order Date:\(item.createdAt?.toFormatedDate(from: "yyyy-MM-dd HH:mm", to: "dd MMM yyyy HH:MM") ?? "")"
                 orderStatusView.layer.borderColor = getStatus(stausString: item.orderStatus ?? "").cgColor
                 statusLabel.textColor = getStatus(stausString: item.orderStatus ?? "")

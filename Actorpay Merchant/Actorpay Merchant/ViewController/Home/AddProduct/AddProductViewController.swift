@@ -588,7 +588,7 @@ extension AddProductViewController {
         }
         
         showLoading()
-        APIHelper.updateProductDetails(urlParams: [:], bodyParams:bodyParams, imgData: imgData, imageKey: "file") { (success, response) in
+        APIHelper.updateProductDetails(productId: productItem?.productId ?? "",urlParams: [:], bodyParams:bodyParams, imgData: imgData, imageKey: "file") { (success, response) in
             if !success {
                 dissmissLoader()
                 let message = response.message

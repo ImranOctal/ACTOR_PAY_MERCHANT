@@ -63,6 +63,7 @@ class ManageOrdersViewController: UIViewController {
     
     //Filter Button Action
     @IBAction func filterButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "FilterOrderViewController") as? FilterOrderViewController)!
         newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
         self.definesPresentationContext = true
@@ -148,6 +149,7 @@ extension ManageOrdersViewController {
 
 //MARK: TableView SetUp
 extension ManageOrdersViewController: UITableViewDelegate,UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if filteredArray.count == 0{
             tableView.setEmptyMessage("No Order Availabel")
@@ -222,4 +224,5 @@ extension ManageOrdersViewController: UITextFieldDelegate {
         }
         return true
     }
+    
 }

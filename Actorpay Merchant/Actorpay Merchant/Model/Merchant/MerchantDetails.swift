@@ -11,6 +11,8 @@ import SwiftyJSON
 var merchantDetails: MerchantDetails?
 
 struct MerchantDetails {
+    let createdAt : String?
+    let updatedAt : String?
     let id : String?
     let email : String?
     let merchantId: String?
@@ -23,12 +25,14 @@ struct MerchantDetails {
     let fullAddress : String?
     let shopAddress : String?
     let licenceNumber : String?
-    let createdAt : String?
-    let updatedAt : String?
+    let merchantType : String?
+    var merchantSettingsDTOS : [MerchantSettingsDTOS]?
     let active : Bool?
     
     init(json: JSON) {
         
+        createdAt = json["createdAt"].string
+        updatedAt = json["updatedAt"].string
         id = json["id"].string
         email = json["email"].string
         merchantId = json["merchantId"].string
@@ -41,8 +45,8 @@ struct MerchantDetails {
         fullAddress = json["fullAddress"].string
         shopAddress = json["shopAddress"].string
         licenceNumber = json["licenceNumber"].string
-        createdAt = json["createdAt"].string
-        updatedAt = json["updatedAt"].string
+        merchantType = json["merchantType"].string
+        merchantSettingsDTOS = json["merchantSettingsDTOS"].arrayValue.map{ MerchantSettingsDTOS(json: $0)}
         active = json["active"].bool
     }
     

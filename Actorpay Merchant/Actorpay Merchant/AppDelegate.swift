@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let newVC = self.storyboard.instantiateViewController(withIdentifier: "LoginNav") as! UINavigationController
             myApp.window?.rootViewController = newVC
         }else{
+            print(AppManager.shared.token)
             let newVC = self.storyboard.instantiateViewController(withIdentifier: "HomeNav") as! UINavigationController
             myApp.window?.rootViewController = newVC
         }

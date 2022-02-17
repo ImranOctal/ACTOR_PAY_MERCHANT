@@ -29,6 +29,7 @@ class FilterOrderViewController: UIViewController {
     var orderStatusDropDown =  DropDown()
     var statusData: [String] = []
     var filterOrderParm: Parameters?
+    var orderStatus: String = ""
 
     //MARK: - Life Cycles -
 
@@ -42,7 +43,7 @@ class FilterOrderViewController: UIViewController {
         self.showAnimate()
         setStartDatePicker()
         setEndDatePicker()
-        setupCategoryDropDown()
+        setupOrderStatusDropDown()
         self.setFilterData()
     }
     
@@ -50,6 +51,7 @@ class FilterOrderViewController: UIViewController {
     
     // Close Button Action
     @IBAction func closeButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         removeAnimate()
         if let codeCompletion = completion {
             codeCompletion(filterOrderParm)
@@ -59,6 +61,7 @@ class FilterOrderViewController: UIViewController {
     
     // Reset Button Action
     @IBAction func resetButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         orderNoTextField.text = ""
         customerEmailTextField.text = ""
         priceFromTextField.text = ""
@@ -66,11 +69,13 @@ class FilterOrderViewController: UIViewController {
         startDateTextField.text = ""
         endDateTextField.text = ""
         statusTextField.text = ""
+        orderStatus = ""
         filterOrderParm = nil
     }
     
     // Apply Button Action
     @IBAction func applyButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         let param : Parameters = [
             "totalPrice":"",
             "merchantId":AppManager.shared.merchantId,
@@ -82,7 +87,8 @@ class FilterOrderViewController: UIViewController {
             "priceRangeTo": priceToTextField.text ?? "",
             "orderNo":orderNoTextField.text ?? "",
             "orderId":"",
-            "orderStatus": statusTextField.text ?? "" == "ALL" ? "" : statusTextField.text ?? ""
+//            "orderStatus": statusTextField.text ?? "" == "ALL" ? "" : statusTextField.text ?? ""
+            "orderStatus":orderStatus
         ]
         if let codeCompletion = completion {
             codeCompletion(param)
@@ -92,6 +98,7 @@ class FilterOrderViewController: UIViewController {
     
     // Status Button Acction
     @IBAction func statusButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         orderStatusDropDown.show()
     }
     
@@ -105,17 +112,19 @@ class FilterOrderViewController: UIViewController {
         priceToTextField.text = filterOrderParm?["priceRangeTo"] as? String
         startDateTextField.text = filterOrderParm?["startDate"] as? String
         endDateTextField.text = filterOrderParm?["endData"] as? String
-        statusTextField.text = filterOrderParm?["orderStatus"] as? String
+        orderStatus = (filterOrderParm?["orderStatus"] as? String) ?? ""
+        statusTextField.text = orderStatus.replacingOccurrences(of: "_", with: " ", options: .literal, range: nil)
     }
     
-    // SetUp Category Drop Down
-    func setupCategoryDropDown() {
+    // SetUp Order Status Drop Down
+    func setupOrderStatusDropDown() {
         orderStatusDropDown.anchorView = statusTextField
-        orderStatusDropDown.dataSource = statusData
+        orderStatusDropDown.dataSource = statusData.map({$0.replacingOccurrences(of: "_", with: " ", options: .literal, range: nil)})
         orderStatusDropDown.backgroundColor = .white
         orderStatusDropDown.width = statusTextField.frame.width + 60
         orderStatusDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.statusTextField.text = item
+            self.orderStatus = statusData[index]
             self.view.endEditing(true)
             self.orderStatusDropDown.hide()
         }

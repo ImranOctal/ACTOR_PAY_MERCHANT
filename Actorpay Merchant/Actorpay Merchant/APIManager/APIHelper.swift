@@ -86,9 +86,21 @@ final class APIHelper {
         }
     }
     
+//    //MARK: Update Merchant Details Api
+//    static func updateMerchantDetails(params: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
+//        APIManager.shared.putRequest(method: .put, url: APIEndPoint.merchantDetailsUpdate.rawValue, parameters: params) { (response) in
+//            let status = response.response["status"]
+//            if status == "200" {
+//                success(true, response)
+//            }else {
+//                success(false, response)
+//            }
+//        }
+//    }
+    
     //MARK: Update Merchant Details Api
-    static func updateMerchantDetails(params: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
-        APIManager.shared.putRequest(method: .put, url: APIEndPoint.merchantDetailsUpdate.rawValue, parameters: params) { (response) in
+    static func updateMerchantDetails(bodyParams: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
+        APIManager.shared.mainRequest(method: .put, url: APIEndPoint.merchantDetailsUpdate.rawValue, bodyParameter: bodyParams, needUserToken: true) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -111,8 +123,8 @@ final class APIHelper {
     }
     
     //MARK: Update Product APi
-    static func updateProductDetails(urlParams: Parameters, bodyParams:Parameters, imgData: Data?, imageKey: String , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.uploadData(method: .post, url: APIEndPoint.addNewAndUpdateProductApi.rawValue, urlParameters: urlParams, bodyParameters: bodyParams, imgData: imgData, imageKey: imageKey) { (response) in
+    static func updateProductDetails(productId : String, urlParams: Parameters, bodyParams:Parameters, imgData: Data?, imageKey: String , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
+        APIManager.shared.uploadData(method: .put, url: APIEndPoint.addNewAndUpdateProductApi.rawValue+"/\(productId)", urlParameters: urlParams, bodyParameters: bodyParams, imgData: imgData, imageKey: imageKey) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -579,4 +591,40 @@ final class APIHelper {
         }
     }
     
+    //MARK: Dispute List Api
+    static func disputeListApi(urlParameters: Parameters, bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
+        APIManager.shared.mainRequest(method: .post,url: APIEndPoint.disputeListApi.rawValue, urlParameters: urlParameters, bodyParameter: bodyParameter, needUserToken: true) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    
+    //MARK: - send message -
+    static func sendMessageAPI(urlParameters: Parameters = [:], bodyParameter:Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
+        APIManager.shared.mainRequest(method: .post,url: APIEndPoint.send_message.rawValue, urlParameters: urlParameters, bodyParameter: bodyParameter, needUserToken: true) { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
+    
+    //MARK: - Dispute Detail API -
+    static func disputeDetailsApi(id: String, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
+        APIManager.shared.getMethod(method: .get, url: APIEndPoint.disputeDetailsApi.rawValue+"/\(id)") { (response) in
+            let status = response.response["status"]
+            if status == "200" {
+                success(true, response)
+            }else {
+                success(false, response)
+            }
+        }
+    }
 }

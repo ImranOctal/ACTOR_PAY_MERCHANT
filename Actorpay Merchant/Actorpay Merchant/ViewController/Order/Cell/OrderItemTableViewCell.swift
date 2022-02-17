@@ -29,8 +29,21 @@ class OrderItemTableViewCell: UITableViewCell {
                 titleLbl.text = item.productName
                 qtyLbl.text = "Quantity: \(item.productQty ?? 0)"
                 priceLbl.text = "Price: \(item.totalPrice ?? 0.0)"
-                statusLbl.text = "Status: \(item.orderItemStatus ?? "")"
+                statusLbl.text = item.orderItemStatus
+                statusLbl.textColor = getStatus(stausString: item.orderItemStatus ?? "")
                 menuButton.isHidden = item.orderItemStatus == "CANCELLED" || item.orderItemStatus == "DELIVERED" || item.orderItemStatus == "RETURNED" ? true : false
+            }
+        }
+    }
+    
+    var cancelOrderItemDtos: OrderItemDtos? {
+        didSet {
+            if let item = self.cancelOrderItemDtos {
+                titleLbl.text = item.productName
+                qtyLbl.text = "Quantity: \(item.productQty ?? 0)"
+                priceLbl.text = "Price: ₹\((item.totalPrice ?? 0.0).doubleToStringWithComma())"
+                imgView.sd_setImage(with: URL(string: item.image ?? ""), placeholderImage: UIImage(named: "NewLogo"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+                statusLbl.text = "Status: \(item.orderItemStatus ?? "")"
             }
         }
     }
@@ -52,7 +65,8 @@ class OrderItemTableViewCell: UITableViewCell {
     }
     
     // Cancel Order DropDown SetUp
-    func setUpCancelOrderDropDown() {
+    func setUpCancelOrderDropDown()
+    {
         cancelOrderDropDown.show()
         cancelOrderDropDown.anchorView = menuButton
         if item?.orderItemStatus == "SUCCESS" {
@@ -62,6 +76,8 @@ class OrderItemTableViewCell: UITableViewCell {
         } else if item?.orderItemStatus == "DISPATCHED" {
             cancelOrderDropDown.dataSource = ["DELIVERED"]
         } else if item?.orderItemStatus == "RETURNING" {
+            cancelOrderDropDown.dataSource = ["RETURNING_ACCEPTED","RETURNING_DECLINED"]
+        } else if item?.orderItemStatus == "RETURNING_DECLINED" || item?.orderItemStatus == "RETURNING_ACCEPTED" {
             cancelOrderDropDown.dataSource = ["RETURNED"]
         }
         cancelOrderDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -69,8 +85,7 @@ class OrderItemTableViewCell: UITableViewCell {
             self.cancelOrderDropDown.hide()
         }
         cancelOrderDropDown.bottomOffset = CGPoint(x: -60, y: 25)
-        cancelOrderDropDown.width =  110
+        cancelOrderDropDown.width = item?.orderItemStatus == "RETURNING" ? 190 : 110
         cancelOrderDropDown.direction = .bottom
     }
-
 }

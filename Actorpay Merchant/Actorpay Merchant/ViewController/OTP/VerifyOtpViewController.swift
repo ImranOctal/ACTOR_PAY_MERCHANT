@@ -11,15 +11,36 @@ class VerifyOtpViewController: UIViewController {
     
     //MARK: - Properties -
     
-    @IBOutlet weak var firstCodeTextField: UITextField!
-    @IBOutlet weak var secondCodeTextField: UITextField!
-    @IBOutlet weak var thirdCodeTextField: UITextField!
-    @IBOutlet weak var fourthCodeTextField: UITextField!
-    @IBOutlet weak var fifthCodeTextField: UITextField!
-    @IBOutlet weak var sixthCodeTextField: UITextField!
-    @IBOutlet weak var buttonView: UIView!
-    @IBOutlet weak var titleView: UIView!
-    @IBOutlet weak var verifyOtpView: UIView!
+    @IBOutlet weak var firstCodeTextField: UITextField! {
+        didSet {
+            self.firstCodeTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var secondCodeTextField: UITextField! {
+        didSet {
+            self.secondCodeTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var thirdCodeTextField: UITextField! {
+        didSet {
+            self.thirdCodeTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var fourthCodeTextField: UITextField! {
+        didSet {
+            self.fourthCodeTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var fifthCodeTextField: UITextField! {
+        didSet {
+            self.fifthCodeTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var sixthCodeTextField: UITextField! {
+        didSet {
+            self.sixthCodeTextField.delegate = self
+        }
+    }
 
     //MARK: - Life Cycles -
     
@@ -28,23 +49,19 @@ class VerifyOtpViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.setUpTextField()
-        topCorners(bgView: titleView, cornerRadius: 10, maskToBounds: true)
-        bottomCorner(bgView: buttonView, cornerRadius: 10, maskToBounds: true)
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        self.showAnimate()
-        self.navigationController?.navigationBar.isHidden = true
     }
     
     //MARK: - Selectors -
     
     // OK Button Action
     @IBAction func okButtonAction(_ sender: UIButton) {
-        
+        self.view.endEditing(true)
+        print("Ok Button Tapped")
     }
     
     // Cancel Button Action
     @IBAction func cancelButtonAction(_ sender: UIButton) {
-        removeAnimate()
+        self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -58,37 +75,6 @@ class VerifyOtpViewController: UIViewController {
         fourthCodeTextField.delegate = self
         fifthCodeTextField.delegate = self
         sixthCodeTextField.delegate = self
-        
-    }
-    
-    // Show View With Animation
-    func showAnimate(){
-        self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        self.view.alpha = 0.0;
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.alpha = 1.0
-            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        });
-    }
-    
-    //Remove View With Animation
-    func removeAnimate(){
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-            self.view.alpha = 0.0;
-        }, completion:{(finished : Bool)  in
-            if (finished){
-                self.view.removeFromSuperview()
-            }
-        });
-    }
-    
-    // View End Editing
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if(touches.first?.view != verifyOtpView){
-            removeAnimate()
-            self.dismiss(animated: true, completion: nil)
-        }
     }
     
 }
@@ -97,6 +83,163 @@ class VerifyOtpViewController: UIViewController {
 
 //MARK: Text Field Delegate Methods
 extension VerifyOtpViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        switch textField {
+        case firstCodeTextField:
+            secondCodeTextField.becomeFirstResponder()
+            return true
+        case secondCodeTextField:
+            thirdCodeTextField.becomeFirstResponder()
+            return true
+        case thirdCodeTextField:
+            fourthCodeTextField.becomeFirstResponder()
+            return true
+        case fourthCodeTextField:
+            fifthCodeTextField.resignFirstResponder()
+            return true
+        case fifthCodeTextField:
+            sixthCodeTextField.resignFirstResponder()
+            return true
+        case sixthCodeTextField:
+            sixthCodeTextField.resignFirstResponder()
+            return true
+        default:
+            return true
+        }
+    }
     
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.becomeFirstResponder()
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let string = textField.text ?? ""
+        
+        if textField.text?.count == 0 && string.count == 0{
+            switch textField{
+            case firstCodeTextField:
+                firstCodeTextField.text = string
+                firstCodeTextField.becomeFirstResponder()
+            case secondCodeTextField:
+                secondCodeTextField.text = string
+                firstCodeTextField.becomeFirstResponder()
+            case thirdCodeTextField:
+                thirdCodeTextField.text = string
+                secondCodeTextField.becomeFirstResponder()
+            case fourthCodeTextField:
+                fourthCodeTextField.text = string
+                thirdCodeTextField.becomeFirstResponder()
+            case fifthCodeTextField:
+                fifthCodeTextField.text = string
+                fourthCodeTextField.becomeFirstResponder()
+            case sixthCodeTextField:
+                sixthCodeTextField.text = string
+                fifthCodeTextField.becomeFirstResponder()
+            default:
+                break
+            }
+        }
+        return
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let currentText = textField.text
+        guard let stringRange = Range(range, in: currentText!) else{
+            return false
+        }
+        let updatedString = currentText?.replacingCharacters(in: stringRange, with: string)
+        print(updatedString ?? "")
+        if (updatedString != "") {
+            if !(updatedString?.isNumeric ?? false) {
+                return false
+            }
+        }
+        
+        if (updatedString?.count ?? 0) > 1{
+            switch textField{
+            case firstCodeTextField:
+                secondCodeTextField.text = string
+                secondCodeTextField.becomeFirstResponder()
+            case secondCodeTextField:
+                thirdCodeTextField.text = string
+                thirdCodeTextField.becomeFirstResponder()
+            case thirdCodeTextField:
+                fourthCodeTextField.text = string
+                fourthCodeTextField.becomeFirstResponder()
+            case fourthCodeTextField:
+                fifthCodeTextField.text = string
+                fifthCodeTextField.becomeFirstResponder()
+            case fifthCodeTextField:
+                sixthCodeTextField.text = string
+                sixthCodeTextField.becomeFirstResponder()
+            case sixthCodeTextField:
+                sixthCodeTextField.text = string
+                sixthCodeTextField.becomeFirstResponder()
+            default:
+                break
+            }
+            return false
+        }
+        
+        if string.count > 0{
+            switch textField{
+            case firstCodeTextField:
+                firstCodeTextField.text = string
+                secondCodeTextField.becomeFirstResponder()
+            case secondCodeTextField:
+                secondCodeTextField.text = string
+                thirdCodeTextField.becomeFirstResponder()
+            case thirdCodeTextField:
+                thirdCodeTextField.text = string
+                fourthCodeTextField.becomeFirstResponder()
+            case fourthCodeTextField:
+                fourthCodeTextField.text = string
+                fifthCodeTextField.becomeFirstResponder()
+            case fifthCodeTextField:
+                fifthCodeTextField.text = string
+                sixthCodeTextField.becomeFirstResponder()
+            case sixthCodeTextField:
+                sixthCodeTextField.text = string
+                sixthCodeTextField.becomeFirstResponder()
+            default:
+                break
+            }
+            return false
+        }
+        
+        if textField.text?.count == 0 && string.count  == 0{
+            switch textField{
+            case firstCodeTextField:
+                firstCodeTextField.text = string
+                firstCodeTextField.becomeFirstResponder()
+            case secondCodeTextField:
+                secondCodeTextField.text = string
+                firstCodeTextField.becomeFirstResponder()
+            case thirdCodeTextField:
+                thirdCodeTextField.text = string
+                secondCodeTextField.becomeFirstResponder()
+            case fourthCodeTextField:
+                fourthCodeTextField.text = string
+                thirdCodeTextField.becomeFirstResponder()
+            case fifthCodeTextField:
+                fifthCodeTextField.text = string
+                fourthCodeTextField.becomeFirstResponder()
+            case sixthCodeTextField:
+                sixthCodeTextField.text = string
+                fifthCodeTextField.becomeFirstResponder()
+            default:
+                break
+            }
+            return false
+        }
+        else if textField.text!.count >= 1 && string.count == 0{
+            textField.text = string
+            return false
+        }else {
+            return false
+        }
+    }
 }
-

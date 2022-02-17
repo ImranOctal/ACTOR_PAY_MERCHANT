@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import PopupDialog
 
 class RoleViewController: UIViewController {
     
@@ -43,6 +44,7 @@ class RoleViewController: UIViewController {
     
     // Add New Role Button Action
     @IBAction func addNewRoleBtnAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewRoleViewController") as! AddNewRoleViewController
         self.navigationController?.pushViewController(newVC, animated: true)
     }
@@ -102,14 +104,11 @@ extension RoleViewController: UITableViewDelegate, UITableViewDataSource {
         cell.item = item
         cell.deleteButtonHandler = {
             self.roleId = item.id
-            let newVC = (self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as? CustomAlertViewController)!
-            newVC.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            newVC.setUpCustomAlert(titleStr: "Delete Resource", descriptionStr: "Are you sure want to delete?", isShowCancelBtn: false)
-            newVC.customAlertDelegate = self
-            self.definesPresentationContext = true
-            self.providesPresentationContextTransitionStyle = true
-            newVC.modalPresentationStyle = .overCurrentContext
-            self.navigationController?.present(newVC, animated: true, completion: nil)
+            let customV = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as! CustomAlertViewController
+            let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
+            customV.setUpCustomAlert(titleStr: "Delete Resource", descriptionStr: "Are you sure want to delete?", isShowCancelBtn: false)
+            customV.customAlertDelegate = self
+            self.present(popup, animated: true, completion: nil)
         }
         cell.editButtonHandler = {
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewRoleViewController") as! AddNewRoleViewController

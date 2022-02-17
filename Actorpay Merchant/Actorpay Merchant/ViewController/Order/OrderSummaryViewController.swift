@@ -16,6 +16,7 @@ class OrderSummaryViewController: UIViewController {
     @IBOutlet weak var tblView: UITableView!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var tblViewHeightConst: NSLayoutConstraint!
+    @IBOutlet weak var orderSummaryScrollView: UIScrollView!
     
     //Order Details
     @IBOutlet weak var orderDateAndTimeLbl: UILabel!
@@ -57,8 +58,18 @@ class OrderSummaryViewController: UIViewController {
         topCorner(bgView: bgView, maskToBounds: true)
         self.setUpTableView()
         self.getOrderDetailsApi()
+        self.orderSummaryScrollView.addPullToRefresh {
+            self.getOrderDetailsApi()
+        }
         NotificationCenter.default.removeObserver(self, name: Notification.Name("reloadOrderDetails"), object: nil)
         NotificationCenter.default.addObserver(self,selector: #selector(self.reloadOrderDetails),name:Notification.Name("reloadOrderDetails"), object: nil)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.updateViewConstraints()
+        DispatchQueue.main.async {
+            self.notesTblViewHeightConst.constant = self.notesTblView.contentSize.height
+        }
     }
     
     //MARK: - Selectors -
@@ -104,7 +115,7 @@ class OrderSummaryViewController: UIViewController {
         orderAmountLbl.text = "₹\(orderItems?.totalPrice ?? 0.0)"
         orderNumberLbl.text = orderItems?.orderNo ?? ""
         orderDateAndTimeLbl.text = "Order Date & Time: \(orderItems?.createdAt?.toFormatedDate(from: "yyyy-MM-dd HH:mm", to: "dd MMM yyyy HH:MM") ?? "")"
-        orderStatusLbl.text = orderItems?.orderStatus ?? ""
+        orderStatusLbl.text = (orderItems?.orderStatus ?? "").replacingOccurrences(of: "_", with: " ", options: .literal, range: nil)
         orderStatusView.layer.borderColor = getStatus(stausString: orderItems?.orderStatus ?? "").cgColor
         orderStatusLbl.textColor = getStatus(stausString: orderItems?.orderStatus ?? "")
         
@@ -132,6 +143,7 @@ extension OrderSummaryViewController {
     @objc func getOrderDetailsApi() {
         showLoading()
         APIHelper.getOrderDetailsApi(orderNo: orderNo) { (success, response) in
+            self.orderSummaryScrollView.pullToRefreshView?.stopAnimating()
             if !success {
                 dissmissLoader()
                 let message = response.message
@@ -145,7 +157,6 @@ extension OrderSummaryViewController {
                 self.setUpOrderDetailsData()
                 self.tblView.reloadData()
                 self.notesTblView.reloadData()
-                self.notesTblViewHeightConst.constant = CGFloat((self.orderItems?.orderNotesDtos?.count ?? 0) * 83)
             }
         }
     }
@@ -201,6 +212,15 @@ extension OrderSummaryViewController: UITableViewDelegate, UITableViewDataSource
             return UITableViewCell()
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        switch tableView {
+        case notesTblView:
+            self.viewWillLayoutSubviews()
+        default:
+            break
+        }
     }
     
 }

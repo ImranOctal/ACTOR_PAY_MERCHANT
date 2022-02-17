@@ -126,6 +126,7 @@ class NewSubAdminViewController: UIViewController {
     
     // Country Code Button Action
     @IBAction func phoneCodeButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryPickerViewController") as! CountryPickerViewController
         newVC.comp = { countryList in
             self.countryList = countryList

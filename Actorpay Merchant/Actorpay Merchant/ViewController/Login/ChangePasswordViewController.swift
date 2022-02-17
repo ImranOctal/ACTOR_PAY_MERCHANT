@@ -13,8 +13,6 @@ class ChangePasswordViewController: UIViewController {
     //MARK: - Properties -
 
     @IBOutlet weak var changePasswordView: UIView!
-    @IBOutlet weak var changePasswordLabelView: UIView!
-    @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var currentPasswordTextField: UITextField! {
         didSet {
             currentPasswordTextField.delegate = self
@@ -45,23 +43,19 @@ class ChangePasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.manageErrorView()
-        topCorners(bgView: changePasswordLabelView, cornerRadius: 10, maskToBounds: true)
-        bottomCorner(bgView: buttonView, cornerRadius: 10, maskToBounds: true)
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        self.showAnimate()
-        self.navigationController?.navigationBar.isHidden = true
     }
     
     //MARK: - Selectors -
     
-    //Cancel Button Action
-    @IBAction func cancelButtonAction(_ sender: UIButton){
-        removeAnimate()
+    // Cancel Button Action
+    @IBAction func cancelButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
     
-    //Ok Button Action
-    @IBAction func okButtonAction(_ sender: UIButton){
+    // Ok Button Action
+    @IBAction func okButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         if self.changePasswordValidation() {
             self.manageErrorView()
             self.changePasswordApi()
@@ -137,39 +131,6 @@ class ChangePasswordViewController: UIViewController {
         
         return isValidate
     }
-    
-    // Show View With Animation
-    func showAnimate(){
-        self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        self.view.alpha = 0.0;
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.alpha = 1.0
-            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        });
-    }
-    
-    //Remove View With Animation
-    func removeAnimate(){
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-            self.view.alpha = 0.0;
-        }, completion:{(finished : Bool)  in
-            if (finished){
-                self.view.removeFromSuperview()
-            }
-        });
-    }
-    
-    // View End Editing
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            let currentPoint = touch.location(in: self.view)
-            if !(changePasswordView.frame.contains(currentPoint)) {
-                removeAnimate()
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
-    }
         
 }
 
@@ -195,7 +156,6 @@ extension ChangePasswordViewController {
                 dissmissLoader()
                 let message = response.message
                  print(message)
-                self.removeAnimate()
                 self.dismiss(animated: true, completion: nil)
                 myApp.window?.rootViewController?.view.makeToast(message)
             }

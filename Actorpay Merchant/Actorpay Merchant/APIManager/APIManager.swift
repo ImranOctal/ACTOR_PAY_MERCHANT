@@ -344,7 +344,7 @@ class APIManager {
             })
     }
     
-    func mainRequest(method : HTTPMethod, url:String, urlParameters:Parameters = [:], bodyParameter: Parameters = [:], needUserToken:Bool = false, success:@escaping APICompletionBlock){
+    func mainRequest(method : HTTPMethod, url:String, urlParameters:Parameters = [:], bodyParameter: Parameters = [:], needUserToken:Bool = false, success:@escaping APICompletionBlock) {
         
         absoluteUrl = APIBaseUrlPoint.localHostBaseURL.rawValue + url
         let headers: HTTPHeaders =  needUserToken ? [.authorization(bearerToken: AppManager.shared.token)] : []
@@ -384,5 +384,3 @@ class APIManager {
 
     
 }
-    
-    

@@ -17,6 +17,7 @@ target 'Actorpay Merchant' do
   pod 'DropDown'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'PopupDialog'
 
   target 'Actorpay MerchantTests' do
     inherit! :search_paths

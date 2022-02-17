@@ -144,6 +144,7 @@ class SignUpViewController: UIViewController {
     
     // Country Code Button Action
     @IBAction func phoneCodeButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryPickerViewController") as! CountryPickerViewController
         newVC.comp = { countryList in
             self.countryList = countryList
@@ -175,6 +176,7 @@ class SignUpViewController: UIViewController {
     
     // SignUp Button Action
     @IBAction func signUpButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         if self.signUpValidation() {
             self.validationLabelManage()
             self.signUpApi()
