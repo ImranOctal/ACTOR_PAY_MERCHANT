@@ -56,6 +56,11 @@ class PayRollViewController: UIViewController {
 
 extension PayRollViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if payrollArray.count == 0{
+            tableView.setEmptyMessage("No Payroll Found")
+        } else {
+            tableView.restore()
+        }
         return payrollArray.count
     }
     

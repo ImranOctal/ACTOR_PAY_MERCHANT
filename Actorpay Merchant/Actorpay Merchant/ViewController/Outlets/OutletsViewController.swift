@@ -36,6 +36,10 @@ class OutletsViewController: UIViewController {
         
         topCorner(bgView: bgView, maskToBounds: true)
         self.getOutletListApi()
+        tblView.addPullToRefresh {
+            self.page = 0
+            self.getOutletListApi()
+        }
         NotificationCenter.default.removeObserver(self, name: Notification.Name("reloadOutletListApi"), object: nil)
         NotificationCenter.default.addObserver(self,selector: #selector(self.reloadOutletListApi),name:Notification.Name("reloadOutletListApi"), object: nil)
     }
@@ -153,7 +157,7 @@ extension OutletsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if outletItems.count == 0{
-            tableView.setEmptyMessage("No Data Found")
+            tableView.setEmptyMessage("No Outlet Found")
         } else {
             tableView.restore()
         }
@@ -168,7 +172,7 @@ extension OutletsViewController: UITableViewDelegate, UITableViewDataSource {
             self.outletId = item.id ?? ""
             let customV = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as! CustomAlertViewController
             let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
-            customV.setUpCustomAlert(titleStr: "Delete Resource", descriptionStr: "Are you sure want to delete?", isShowCancelBtn: false)
+            customV.setUpCustomAlert(titleStr: "Delete Outlet", descriptionStr: "Are you sure want to delete?", isShowCancelBtn: false)
             customV.customAlertDelegate = self
             self.present(popup, animated: true, completion: nil)
         }

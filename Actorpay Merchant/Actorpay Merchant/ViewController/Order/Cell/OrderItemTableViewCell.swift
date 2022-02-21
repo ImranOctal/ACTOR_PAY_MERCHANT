@@ -29,7 +29,7 @@ class OrderItemTableViewCell: UITableViewCell {
                 titleLbl.text = item.productName
                 qtyLbl.text = "Quantity: \(item.productQty ?? 0)"
                 priceLbl.text = "Price: \(item.totalPrice ?? 0.0)"
-                statusLbl.text = item.orderItemStatus
+                statusLbl.text = item.orderItemStatus?.replacingOccurrences(of: "_", with: " ", options: .literal, range: nil)
                 statusLbl.textColor = getStatus(stausString: item.orderItemStatus ?? "")
                 menuButton.isHidden = item.orderItemStatus == "CANCELLED" || item.orderItemStatus == "DELIVERED" || item.orderItemStatus == "RETURNED" ? true : false
             }
@@ -43,7 +43,7 @@ class OrderItemTableViewCell: UITableViewCell {
                 qtyLbl.text = "Quantity: \(item.productQty ?? 0)"
                 priceLbl.text = "Price: ₹\((item.totalPrice ?? 0.0).doubleToStringWithComma())"
                 imgView.sd_setImage(with: URL(string: item.image ?? ""), placeholderImage: UIImage(named: "NewLogo"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
-                statusLbl.text = "Status: \(item.orderItemStatus ?? "")"
+                statusLbl.text = "Status: \((item.orderItemStatus ?? "").replacingOccurrences(of: "_", with: " ", options: .literal, range: nil))"
             }
         }
     }
@@ -76,7 +76,7 @@ class OrderItemTableViewCell: UITableViewCell {
         } else if item?.orderItemStatus == "DISPATCHED" {
             cancelOrderDropDown.dataSource = ["DELIVERED"]
         } else if item?.orderItemStatus == "RETURNING" {
-            cancelOrderDropDown.dataSource = ["RETURNING_ACCEPTED","RETURNING_DECLINED"]
+            cancelOrderDropDown.dataSource = ["RETURNING ACCEPTED","RETURNING DECLINED"]
         } else if item?.orderItemStatus == "RETURNING_DECLINED" || item?.orderItemStatus == "RETURNING_ACCEPTED" {
             cancelOrderDropDown.dataSource = ["RETURNED"]
         }

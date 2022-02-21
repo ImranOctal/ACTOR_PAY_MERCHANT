@@ -28,7 +28,10 @@ class RoleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        tblView.addPullToRefresh {
+            roleListPage = 0
+            NotificationCenter.default.post(name: Notification.Name("reloadRoleListApi"), object: self)
+        }
         topCorner(bgView: bgView, maskToBounds: true)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("reloadRoleListTblView"), object: nil)
         NotificationCenter.default.addObserver(self,selector: #selector(self.reloadRoleListTblView),name:Notification.Name("reloadRoleListTblView"), object: nil)
@@ -95,6 +98,11 @@ extension RoleViewController {
 extension RoleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if roleItems.count == 0{
+            tableView.setEmptyMessage("No Role Found")
+        } else {
+            tableView.restore()
+        }
         return roleItems.count
     }
     
@@ -106,7 +114,7 @@ extension RoleViewController: UITableViewDelegate, UITableViewDataSource {
             self.roleId = item.id
             let customV = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as! CustomAlertViewController
             let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
-            customV.setUpCustomAlert(titleStr: "Delete Resource", descriptionStr: "Are you sure want to delete?", isShowCancelBtn: false)
+            customV.setUpCustomAlert(titleStr: "Delete Role", descriptionStr: "Are you sure want to delete?", isShowCancelBtn: false)
             customV.customAlertDelegate = self
             self.present(popup, animated: true, completion: nil)
         }

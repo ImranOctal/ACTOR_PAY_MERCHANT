@@ -34,6 +34,10 @@ class CommissionViewController: UIViewController {
         
         topCorner(bgView: bgView, maskToBounds: true)
         self.commissionListApi()
+        tblView.addPullToRefresh {
+            self.page = 0
+            self.commissionListApi()
+        }
         
     }
     
@@ -132,7 +136,7 @@ extension CommissionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if commissionList.count == 0{
-            tableView.setEmptyMessage("No Data Found")
+            tableView.setEmptyMessage("No Comission Found")
         } else {
             tableView.restore()
         }

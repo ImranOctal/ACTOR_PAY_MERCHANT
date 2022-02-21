@@ -141,7 +141,7 @@ extension DisputesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.disputeItems.count == 0 {
-            tableView.setEmptyMessage("No Data Found")
+            tableView.setEmptyMessage("No Dispute Found")
         }else{
             tableView.restore()
         }

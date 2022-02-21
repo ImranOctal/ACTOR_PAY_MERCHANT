@@ -38,17 +38,20 @@ class SideMenuViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
     var menu: [SideMenuModel] = [
+        SideMenuModel(icon: UIImage(named: "dashboard_icon"), title: "Dashboard"),
         SideMenuModel(icon: UIImage(named: "my_profile"), title: "My Profile"),
-        SideMenuModel(icon: UIImage(named: "change_password"), title: "Change Password"),
-        SideMenuModel(icon: UIImage(named: "Role"), title: "Manage Roles"),
-        SideMenuModel(icon: UIImage(named: "sub_merchant"), title: "Manage Sub Merchants"),
-        SideMenuModel(icon: UIImage(named: "Outlet"), title: "Manage Outlets"),
-        SideMenuModel(icon: UIImage(named: "manage_orders"), title: "Manage Products"),
-        SideMenuModel(icon: UIImage(named: "myOrder"), title: "Manage Orders"),
-        SideMenuModel(icon: UIImage(named: "commission"), title: "My Earnings"),
-        SideMenuModel(icon: UIImage(named: "cancel_dispute"), title: "Cancelled/Raised Dispute"),
+        SideMenuModel(icon: UIImage(named: "Role"), title: "Manage Role"),
+        SideMenuModel(icon: UIImage(named: "sub_merchant"), title: "Merchant & Sub Merchant"),
+        SideMenuModel(icon: UIImage(named: "Outlet"), title: "Manage Outlet"),
+        SideMenuModel(icon: UIImage(named: "manage_orders"), title: "Manage Product"),
+        SideMenuModel(icon: UIImage(named: "myOrder"), title: "My Orders"),
+//        SideMenuModel(icon: UIImage(named: "commission"), title: "My Commission"),
+        SideMenuModel(icon: UIImage(named: "earn-money"), title: "Earn Money"),
+        SideMenuModel(icon: UIImage(named: "cancel_dispute"), title: "Disputes"),
         SideMenuModel(icon: UIImage(named: "file_reports"), title: "Reports"),
-        SideMenuModel(icon: UIImage(named: "more"), title: "More")
+        SideMenuModel(icon: UIImage(named: "more"), title: "More"),
+        SideMenuModel(icon: UIImage(named: "settings-1"), title: "Settings")
+        
     ]
     var delegate : SideMenuViewControllerDelegate?
     
@@ -107,18 +110,16 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row != 1 {
+        if indexPath.row != 8 {
             self.delegate?.hideHamburgerMenu()
         }
         switch indexPath.row {
         case 0:
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
             self.navigationController?.pushViewController(newVC, animated: true)
         case 1:
-            self.view.endEditing(true)
-            let customV = self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordViewController") as! ChangePasswordViewController
-            let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
-            self.present(popup, animated: false, completion: nil)
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
         case 2:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "RoleViewController") as! RoleViewController
             self.navigationController?.pushViewController(newVC, animated: true)
@@ -135,20 +136,26 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
         case 6:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ManageOrdersViewController") as! ManageOrdersViewController
             self.navigationController?.pushViewController(newVC, animated: true)
+//        case 7:
+//            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "CommissionViewController") as! CommissionViewController
+//            self.navigationController?.pushViewController(newVC, animated: true)
         case 7:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "CommissionViewController") as! CommissionViewController
             self.navigationController?.pushViewController(newVC, animated: true)
+//            self.view.makeToast("Coming Soon")
+//            return
         case 8:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "DisputesViewController") as! DisputesViewController
-            self.navigationController?.pushViewController(newVC, animated: true)
-            
-//            obj_AppDelegate.window?.rootViewController?.view.makeToast("Coming Soon")
+            self.navigationController?.pushViewController(newVC, animated: true)            
             return
         case 9:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "PayRollViewController") as! PayRollViewController
             self.navigationController?.pushViewController(newVC, animated: true)
         case 10:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "MoreViewController") as! MoreViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+        case 11:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
             self.navigationController?.pushViewController(newVC, animated: true)
         default:
             break
@@ -172,4 +179,5 @@ extension SideMenuViewController: CustomAlertDelegate {
     func cancelButtonClick() {
         self.dismiss(animated: true, completion: nil)
     }
+    
 }

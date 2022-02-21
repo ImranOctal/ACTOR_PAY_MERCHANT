@@ -199,7 +199,7 @@ extension HomeViewController {
             "pageNo": roleListPage,
             "pageSize": 5,
             "sortBy": "createdAt",
-            "asc":"true"
+            "asc": true
         ]
         showLoading()
         APIHelper.getRoleListApi(parameters: params) { (success, response) in

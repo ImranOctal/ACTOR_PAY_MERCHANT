@@ -24,7 +24,9 @@ class FAQViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        tblView.addPullToRefresh {
+            self.getFAQData()
+        }
         topCorner(bgView: bgView, maskToBounds: true)
         self.setUpTableView()
         self.getFAQData()

@@ -58,8 +58,12 @@ class NewSubAdminViewController: UIViewController {
             phoneNumberTextField.delegate = self
         }
     }
-    @IBOutlet weak var  headerTitleLbl: UILabel!
-    @IBOutlet weak var roleTextField: UITextField!
+    @IBOutlet weak var roleTextField: UITextField! {
+        didSet {
+            roleTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var headerTitleLbl: UILabel!
     @IBOutlet weak var firstNameValidationLbl: UILabel!
     @IBOutlet weak var lastNameValidationLbl: UILabel!
     @IBOutlet weak var genderValidationLbl: UILabel!
@@ -87,7 +91,7 @@ class NewSubAdminViewController: UIViewController {
     var subMerchantId: String?
     
     //MARK:- life Cycle Function -
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,7 +107,7 @@ class NewSubAdminViewController: UIViewController {
     }
     
     //MARK:- Selectors -
-
+    
     // Back Button Action
     @IBAction func backButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
@@ -143,7 +147,7 @@ class NewSubAdminViewController: UIViewController {
         self.view.endEditing(true)
         roleDropDown.show()
     }
-        
+    
     // Submit Button Action
     @IBAction func submitButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
@@ -193,6 +197,14 @@ class NewSubAdminViewController: UIViewController {
             isValidate = false
         } else {
             dobValidationLbl.isHidden = true
+        }
+        
+        if roleTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+            roleValidationLbl.isHidden = false
+            roleValidationLbl.text = ValidationManager.shared.sRole
+            isValidate = false
+        } else {
+            roleValidationLbl.isHidden = true
         }
         
         if emailTextField.text?.trimmingCharacters(in: .whitespaces).count == 0 {
@@ -312,6 +324,12 @@ class NewSubAdminViewController: UIViewController {
         genderDropDown.dataSource = ["Female","Male","Other"]
         genderDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.genderTextField.text = item
+            if genderTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                genderValidationLbl.isHidden = false
+                genderValidationLbl.text = ValidationManager.shared.sGender
+            } else {
+                genderValidationLbl.isHidden = true
+            }
             self.view.endEditing(true)
             self.genderDropDown.hide()
         }
@@ -326,6 +344,12 @@ class NewSubAdminViewController: UIViewController {
         roleDropDown.dataSource = roleData
         roleDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.roleTextField.text = item
+            if roleTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                roleValidationLbl.isHidden = false
+                roleValidationLbl.text = ValidationManager.shared.sRole
+            } else {
+                roleValidationLbl.isHidden = true
+            }
             for i in roleList?.items ?? [] {
                 if i.name == item {
                     self.roleId = i.id
@@ -346,7 +370,7 @@ class NewSubAdminViewController: UIViewController {
         }
         self.setupRoleDropDown()
     }
-
+    
 }
 
 //MARK: - Extensions -
@@ -485,10 +509,34 @@ extension NewSubAdminViewController: UITextFieldDelegate {
             } else {
                 contactNoValidationLbl.isHidden = true
             }
+        case dobTextField:
+            if dobTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                dobValidationLbl.isHidden = false
+                dobValidationLbl.text = ValidationManager.shared.sDateOfBirth
+                //                isValidate = false
+            } else {
+                dobValidationLbl.isHidden = true
+            }
+        case genderTextField:
+            if genderTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                genderValidationLbl.isHidden = false
+                genderValidationLbl.text = ValidationManager.shared.sGender
+                //                isValidate = false
+            } else {
+                genderValidationLbl.isHidden = true
+            }
+        case roleTextField:
+            if roleTextField.text?.trimmingCharacters(in: .whitespaces).count == 0{
+                roleValidationLbl.isHidden = false
+                roleValidationLbl.text = ValidationManager.shared.sRole
+//                isValidate = false
+            } else {
+                roleValidationLbl.isHidden = true
+            }
+            
         default:
             break
         }
     }
-    
 }
 

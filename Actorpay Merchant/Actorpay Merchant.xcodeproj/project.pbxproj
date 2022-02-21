@@ -60,6 +60,11 @@
 		8884E86B27AB92CA00E725A4 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8884E86A27AB92CA00E725A4 /* VerifyViewController.swift */; };
 		8884E8C627ABF2E700E725A4 /* OrderNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8884E8C527ABF2E700E725A4 /* OrderNoteTableViewCell.swift */; };
 		889097F027BE46AF000ECE8E /* FilterDisputesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889097EF27BE46AF000ECE8E /* FilterDisputesViewController.swift */; };
+		8890980527BE6402000ECE8E /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8890980427BE6402000ECE8E /* DashboardViewController.swift */; };
+		8890981427BE6D16000ECE8E /* DashboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8890981327BE6D16000ECE8E /* DashboardCollectionViewCell.swift */; };
+		8890981D27BE7573000ECE8E /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8890981C27BE7573000ECE8E /* NotificationViewController.swift */; };
+		8890982327BE78EB000ECE8E /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8890982227BE78EB000ECE8E /* NotificationTableViewCell.swift */; };
+		8890982927BE79EE000ECE8E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8890982827BE79EE000ECE8E /* SettingsViewController.swift */; };
 		88984F7F277F00FD00E76111 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F7E277F00FD00E76111 /* CategoryList.swift */; };
 		88984F85277F019500E76111 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F84277F019500E76111 /* CategoryItem.swift */; };
 		88984F8C277F021E00E76111 /* SubCategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88984F8A277F021E00E76111 /* SubCategoryItem.swift */; };
@@ -194,6 +199,11 @@
 		8884E86A27AB92CA00E725A4 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		8884E8C527ABF2E700E725A4 /* OrderNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNoteTableViewCell.swift; sourceTree = "<group>"; };
 		889097EF27BE46AF000ECE8E /* FilterDisputesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDisputesViewController.swift; sourceTree = "<group>"; };
+		8890980427BE6402000ECE8E /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		8890981327BE6D16000ECE8E /* DashboardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCollectionViewCell.swift; sourceTree = "<group>"; };
+		8890981C27BE7573000ECE8E /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		8890982227BE78EB000ECE8E /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		8890982827BE79EE000ECE8E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		88984F7E277F00FD00E76111 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
 		88984F84277F019500E76111 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		88984F8A277F021E00E76111 /* SubCategoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategoryItem.swift; sourceTree = "<group>"; };
@@ -519,6 +529,48 @@
 			path = Role;
 			sourceTree = "<group>";
 		};
+		8890980927BE6C86000ECE8E /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				8890980A27BE6C8F000ECE8E /* Cell */,
+				8890980427BE6402000ECE8E /* DashboardViewController.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		8890980A27BE6C8F000ECE8E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8890981327BE6D16000ECE8E /* DashboardCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		8890981B27BE7546000ECE8E /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				8890982127BE78E2000ECE8E /* Cell */,
+				8890981C27BE7573000ECE8E /* NotificationViewController.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		8890982127BE78E2000ECE8E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8890982227BE78EB000ECE8E /* NotificationTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		8890982727BE79E4000ECE8E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8890982827BE79EE000ECE8E /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		88984F83277F010400E76111 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -692,6 +744,9 @@
 		88D08D5D276220CA001D5282 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8890982727BE79E4000ECE8E /* Settings */,
+				8890981B27BE7546000ECE8E /* Notification */,
+				8890980927BE6C86000ECE8E /* Dashboard */,
 				885707E127A906C1008ACAB1 /* Commission */,
 				8813783627A801DD0060D69A /* Outlets */,
 				88B8A95127A4111C005CA047 /* Role */,
@@ -1119,6 +1174,7 @@
 				88E8FD3B27A51D8D00DCF547 /* AddNewRoleViewController.swift in Sources */,
 				88AD1FC0278809F4007F0148 /* OrderItemDtos.swift in Sources */,
 				88FBDE5C27670C9600EB9BCE /* ManageOrderTableViewCell.swift in Sources */,
+				8890981D27BE7573000ECE8E /* NotificationViewController.swift in Sources */,
 				883AD63C27BD1AC200A10F0C /* DisputeMessages.swift in Sources */,
 				8849B361278BF393005D0285 /* OrderItemTableViewCell.swift in Sources */,
 				88AD1FBE278809F4007F0148 /* OrderItems.swift in Sources */,
@@ -1137,10 +1193,14 @@
 				88D08D5327621DE9001D5282 /* Extensions.swift in Sources */,
 				88D08D5227621DE9001D5282 /* Global.swift in Sources */,
 				88DC152D27636DC200627F17 /* SideMenuCell.swift in Sources */,
+				8890982927BE79EE000ECE8E /* SettingsViewController.swift in Sources */,
 				88722969279FCCF20066DA64 /* RoleItems.swift in Sources */,
+				8890980527BE6402000ECE8E /* DashboardViewController.swift in Sources */,
 				88D560A92788219B003A8D33 /* CountryList.swift in Sources */,
+				8890982327BE78EB000ECE8E /* NotificationTableViewCell.swift in Sources */,
 				88E2615E27645D2700BC84B2 /* RaiseDisputeViewController.swift in Sources */,
 				881DD7FD27674F1800B48A1F /* ForgotPasswordViewController.swift in Sources */,
+				8890981427BE6D16000ECE8E /* DashboardCollectionViewCell.swift in Sources */,
 				88B8A96427A41637005CA047 /* HomeViewControllerApiCall.swift in Sources */,
 				8884E8C627ABF2E700E725A4 /* OrderNoteTableViewCell.swift in Sources */,
 				88078803277C17B000F9FF85 /* APIManager.swift in Sources */,

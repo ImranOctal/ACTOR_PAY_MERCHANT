@@ -207,10 +207,10 @@ class AddOutletViewController: UIViewController {
         appearance.animationduration = 0.25
         appearance.textColor = .darkGray
         
-        self.addressDropDown.direction = .top
+        self.addressDropDown.direction = .bottom
         
         self.addressDropDown.anchorView = self.addressLine1TextField
-        self.addressDropDown.topOffset = CGPoint(x: 0, y: -40)
+        self.addressDropDown.bottomOffset = CGPoint(x: 0, y: -40)
         self.addressDropDown.dataSource = self.arrAddressArray
         
         dropDowns.forEach {
@@ -231,9 +231,15 @@ class AddOutletViewController: UIViewController {
                 geocoder.geocodeAddressString(self.arrAddressArray[index]) {
                     placemarks, error in
                     let placemark = placemarks?.first
+                    self.countryTextField.text = placemark?.country
+                    self.cityTextField.text = placemark?.locality
+                    self.countryTextField.text = placemark?.country
                     self.userLat = "\(placemark?.location?.coordinate.latitude ?? 0)"
                     self.userLong = "\(placemark?.location?.coordinate.longitude ?? 0)"
                     print("Lat: \(self.userLat), Lon: \(self.userLong)")
+                    if let latitude = placemark?.location?.coordinate.latitude, let longitude = placemark?.location?.coordinate.longitude {
+                        self.convertLatLongToAddress(latitude: latitude, longitude: longitude)
+                    }
                 }
                 self.view.endEditing(true)
                 /*if self.arrAddressArray.count > 0 && self.arrayPlaceIDs.count > 0 {
@@ -247,6 +253,49 @@ class AddOutletViewController: UIViewController {
                  }*/
             }
         }
+    }
+    
+    func convertLatLongToAddress(latitude:Double,longitude:Double){
+        
+        let geoCoder = CLGeocoder()
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+            
+            // Place details
+            var placeMark: CLPlacemark!
+            placeMark = placemarks?[0]
+            // Location name
+            if let subLocality = placeMark.subLocality {
+                print(subLocality)
+//                self.addressLine2TextField.text = subLocality
+            }
+            // Street address
+            if let street = placeMark.thoroughfare {
+                self.addressLine2TextField.text = street
+                print(street)
+            }
+            // City
+            if let city = placeMark.locality {
+                self.cityTextField.text = city
+                print(city)
+            }
+            // State
+            if let state = placeMark.administrativeArea {
+                self.stateTextField.text = state
+                print(state)
+            }
+            // Zip code
+            if let zipCode = placeMark.postalCode {
+                self.zipCodeTextField.text = zipCode
+                print(zipCode)
+            }
+            // Country
+            if let country = placeMark.country {
+                self.countryTextField.text = country
+                print(country)
+            }
+        })
+        
     }
     
     // Get All Address Suggestions

@@ -121,6 +121,9 @@ class FilterOrderViewController: UIViewController {
         orderStatusDropDown.anchorView = statusTextField
         orderStatusDropDown.dataSource = statusData.map({$0.replacingOccurrences(of: "_", with: " ", options: .literal, range: nil)})
         orderStatusDropDown.backgroundColor = .white
+//        orderStatusDropDown.bottomOffset =
+        self.orderStatusDropDown.direction = .top
+//        self.orderStatusDropDown.bottomOffset = CGPoint(x: 0, y: 0)
         orderStatusDropDown.width = statusTextField.frame.width + 60
         orderStatusDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.statusTextField.text = item

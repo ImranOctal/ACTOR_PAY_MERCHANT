@@ -215,6 +215,8 @@ extension LoginViewController {
     // Login Api
     func loginApi() {
         let params: Parameters = [
+//            "email": "\(email != nil ? (email ?? "") : (emailTextField.text ?? ""))",
+//            "password": "\(password != nil ? (password ?? "") : (passwordTextField.text ?? ""))",
             "email": emailTextField.text ?? "",
             "password": passwordTextField.text ?? "",
             "deviceInfo": [

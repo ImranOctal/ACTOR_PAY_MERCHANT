@@ -716,6 +716,10 @@ extension UITextField{
 
 extension String {
     
+    func toDouble() -> Double? {
+        return NumberFormatter().number(from: self)?.doubleValue
+    }
+    
     var url:URL?{
         return URL(string: self)
     }
@@ -737,7 +741,7 @@ extension String {
             } else if theURL.absoluteString.contains("www.youtube.com/embed") {
                 result = theURL.pathComponents[2]
             } else if theURL.host == "youtube.googleapis.com" ||
-                theURL.pathComponents.first == "www.youtube.com" {
+                        theURL.pathComponents.first == "www.youtube.com" {
                 result = theURL.pathComponents[2]
             }
             else {
@@ -746,7 +750,7 @@ extension String {
                 } else{
                     let urlComponents = URLComponents(url: theURL, resolvingAgainstBaseURL: false)
                     if ((urlComponents?.path.contains("/v/")) == true) {
-                         result = urlComponents?.path.replacingOccurrences(of: "/v/", with: "")
+                        result = urlComponents?.path.replacingOccurrences(of: "/v/", with: "")
                     }
                 }
                 //let _res = theURL.dictionaryForQueryString("v")
@@ -764,10 +768,10 @@ extension String {
     }
     
     func addBaseURL(_ theURL:String) -> String {
-    if self.isValidURL { return self }
-    
-    // No check for now, just prepending the base url as passed
-    return theURL + self
+        if self.isValidURL { return self }
+        
+        // No check for now, just prepending the base url as passed
+        return theURL + self
     }
     
     var stringByDecodingURL:String {
@@ -782,7 +786,7 @@ extension String {
         dateFormatter.dateFormat = from
         let date = dateFormatter.date(from: self)
         return date?.getFormattedDate(format: to)
-
+        
     }
 }
 

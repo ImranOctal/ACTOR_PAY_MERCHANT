@@ -41,7 +41,7 @@ class AddNewRoleViewController: UIViewController {
     var screenAccessPermission: [ScreenAccessPermission] = []
     
     //MARK: - Life Cycles -
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -121,7 +121,7 @@ class AddNewRoleViewController: UIViewController {
         
         return isValidate
     }
-
+    
 }
 
 //MARK: - Extensions -
@@ -242,6 +242,11 @@ extension AddNewRoleViewController {
 extension AddNewRoleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if screenList.count == 0{
+            tableView.setEmptyMessage("No Screen Found")
+        } else {
+            tableView.restore()
+        }
         return screenList.count
     }
     
@@ -249,6 +254,7 @@ extension AddNewRoleViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddNewRoleTableViewCell", for: indexPath) as! AddNewRoleTableViewCell
         let item = screenList[indexPath.row]
         cell.item = item
+        cell.readBtn.isEnabled = !(item.isWriteSelected ?? false)
         cell.readBtn.setImage(UIImage(named:(item.isReadSelected ?? false ? "fill_check_box" : "unfill_check_box")), for: .normal)
         cell.writeBtn.setImage(UIImage(named:(item.isWriteSelected ?? false ? "fill_check_box" : "unfill_check_box") ), for: .normal)
         cell.checkBoxBtnHandler = { tag in
@@ -260,22 +266,28 @@ extension AddNewRoleViewController: UITableViewDelegate, UITableViewDataSource {
             }
             if tag == 1001 {
                 if item.isReadSelected == true {
+                    //                    if item.isWriteSelected == true {
+                    //                        self.screenAccessPermission.append(ScreenAccessPermission.init(screenId: item.id ?? "", read: self.screenList[indexPath.row].isReadSelected ?? true, write: self.screenList[indexPath.row].isWriteSelected ?? false, screenName: item.screenName ?? ""))
+                    //                    }else{
                     self.screenList[indexPath.row].isReadSelected = false
-                    if item.isWriteSelected == true {
-                        self.screenAccessPermission.append(ScreenAccessPermission.init(screenId: item.id ?? "", read: self.screenList[indexPath.row].isReadSelected ?? true, write: self.screenList[indexPath.row].isWriteSelected ?? false, screenName: item.screenName ?? ""))
-                    }
+                    //                    }
                 } else {
                     self.screenList[indexPath.row].isReadSelected = true
                     self.screenAccessPermission.append(ScreenAccessPermission.init(screenId: item.id ?? "", read: self.screenList[indexPath.row].isReadSelected ?? true, write: self.screenList[indexPath.row].isWriteSelected ?? false, screenName: item.screenName ?? ""))
                 }
             } else {
                 if (item.isWriteSelected == true) {
+                    //                    if item.isReadSelected == true {
+                    //                            cell.readBtn.isEnabled = true
+                    ////                        self.screenAccessPermission.append(ScreenAccessPermission.init(screenId: item.id ?? "", read: self.screenList[indexPath.row].isReadSelected ?? false, write: self.screenList[indexPath.row].isWriteSelected ?? true, screenName: item.screenName ?? ""))
+                    //                    }else{
+                    //                        cell.readBtn.isEnabled = true
                     self.screenList[indexPath.row].isWriteSelected = false
-                    if item.isReadSelected == true {
-                        self.screenAccessPermission.append(ScreenAccessPermission.init(screenId: item.id ?? "", read: self.screenList[indexPath.row].isReadSelected ?? false, write: self.screenList[indexPath.row].isWriteSelected ?? true, screenName: item.screenName ?? ""))
-                    }
+                    self.screenList[indexPath.row].isReadSelected = false
+                    //                    }
                 } else {
                     self.screenList[indexPath.row].isWriteSelected = true
+                    self.screenList[indexPath.row].isReadSelected = true
                     self.screenAccessPermission.append(ScreenAccessPermission.init(screenId: item.id ?? "", read: self.screenList[indexPath.row].isReadSelected ?? false, write: self.screenList[indexPath.row].isWriteSelected ?? true, screenName: item.screenName ?? ""))
                 }
             }

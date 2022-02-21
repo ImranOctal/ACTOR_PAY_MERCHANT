@@ -32,6 +32,7 @@ class ValidationManager {
     let acceptTerms = "Please agree to our terms to sign up"
     let sGender = "Please Select Gender"
     let sDateOfBirth = "Please Select DOB"
+    let sRole = "Please Select Role"
     let emptyNotesDesc = "Add Note Description"
     let emptyPhoneCode = "Oops! Your Phone Code is Empty"
     let percentageValue = "Percentage should be between 1 to 99"

@@ -136,7 +136,7 @@ class FilterCommissionViewController: UIViewController {
     // SetUp Order Status Drop Down
     func setupOrderStatusDropDown() {
         orderStatusDropDown.anchorView = orderStatusTextField
-        orderStatusDropDown.dataSource = orderStatusData
+        orderStatusDropDown.dataSource = orderStatusData.map({$0.replacingOccurrences(of: "_", with: " ", options: .literal, range: nil)})
         orderStatusDropDown.backgroundColor = .white
         orderStatusDropDown.width = orderStatusTextField.frame.width + 60
         orderStatusDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -153,7 +153,7 @@ class FilterCommissionViewController: UIViewController {
     // SetUp Commission Status Drop Down
     func setupCommissionStatusDropDown() {
         commissionStatusDropDown.anchorView = commissionStatusTextField
-        commissionStatusDropDown.dataSource = commissionStatusData
+        commissionStatusDropDown.dataSource = commissionStatusData.map({$0.replacingOccurrences(of: "_", with: " ", options: .literal, range: nil)})
         commissionStatusDropDown.backgroundColor = .white
         commissionStatusDropDown.width = commissionStatusTextField.frame.width + 60
         commissionStatusDropDown.selectionAction = { [unowned self] (index: Int, item: String) in

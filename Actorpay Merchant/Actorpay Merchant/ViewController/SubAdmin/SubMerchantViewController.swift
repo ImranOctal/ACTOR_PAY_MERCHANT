@@ -158,7 +158,7 @@ extension SubMerchantViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if subMerchantList.count == 0{
-            tableView.setEmptyMessage("No Data Found")
+            tableView.setEmptyMessage("No Sub Merchant Found")
         } else {
             tableView.restore()
         }
@@ -173,7 +173,7 @@ extension SubMerchantViewController: UITableViewDelegate, UITableViewDataSource 
             self.subMerchantId = item.id
             let customV = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlertViewController") as! CustomAlertViewController
             let popup = PopupDialog(viewController: customV, buttonAlignment: .horizontal, transitionStyle: .bounceUp, tapGestureDismissal: true)
-            customV.setUpCustomAlert(titleStr: "Delete Resource", descriptionStr: "Are you sure want to delete?", isShowCancelBtn: false)
+            customV.setUpCustomAlert(titleStr: "Delete Sub Merchant", descriptionStr: "Are you sure want to delete?", isShowCancelBtn: false)
             customV.customAlertDelegate = self
             self.present(popup, animated: true, completion: nil)
         }
