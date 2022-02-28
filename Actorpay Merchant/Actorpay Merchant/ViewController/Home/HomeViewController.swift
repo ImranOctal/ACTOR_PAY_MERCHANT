@@ -10,17 +10,10 @@ import Alamofire
 import SVPullToRefresh
 import PopupDialog
 
-class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
+class HomeViewController: UIViewController {
     
     //MARK:- Properties -
     
-    @IBOutlet weak var mainBackView: UIView!
-    @IBOutlet weak var hamburgerView: UIView!{
-        didSet {
-            rightCorners(bgView: hamburgerView, maskToBounds: true)
-        }
-    }
-    @IBOutlet weak var leadingConstraintForHamburgerView: NSLayoutConstraint!
     @IBOutlet weak var mainView: UIView!{
         didSet{
             topCorner(bgView: mainView, maskToBounds: true)
@@ -34,21 +27,15 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
             self.tableView.separatorStyle = .none
         }
     }
-    @IBOutlet weak var backViewForHamburger: UIView!
     @IBOutlet weak var searchTextField: UITextField!
     
-    private var isHamburgerMenuShown:Bool = false
-    private var beginPoint:CGFloat = 0.0
-    private var difference:CGFloat = 0.0
-    var SideMenuViewController : SideMenuViewController?
     var page = 0
     var totalCount = 10
     var product: ProductList?
     var productList: [Items] = []
     var filteredArray: [Items]?
     var activeProductList: ProductList?
-    var getTaxDataByHSNCode: TaxList?
-    var viewActiveTaxDataById: TaxList?
+    
     var productId: String?
     var filterparm: Parameters?
     
@@ -58,59 +45,32 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        self.backViewForHamburger.isHidden = true
         self.searchTextField.delegate = self
-        self.getMerchantDetailsByIdApi()
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("getMerchantDetailsByIdApi"), object: nil)
-        NotificationCenter.default.addObserver(self,selector: #selector(self.getMerchantDetailsByIdApi),name:Notification.Name("getMerchantDetailsByIdApi"), object: nil)
+        
         self.getProductListAPI()
         NotificationCenter.default.removeObserver(self, name: Notification.Name("reloadGetProductListApi"), object: nil)
         NotificationCenter.default.addObserver(self,selector: #selector(self.reloadGetProductListApi),name:Notification.Name("reloadGetProductListApi"), object: nil)
-        self.getAllTaxDataByHSNCode(HSNCode: "0007")
-        self.viewActiveTaxDataByIDApi(taxID: "16111609-bff3-477a-b4cf-603592597721")
         tableView.addPullToRefresh {
             self.page = 0
             self.getProductListAPI()
         }
-        self.getRoleListApi()
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("reloadRoleListApi"), object: nil)
-        NotificationCenter.default.addObserver(self,selector: #selector(self.reloadRoleListApi),name:Notification.Name("reloadRoleListApi"), object: nil)
+        
     }
     
     //MARK:- Selector -
     
-    // Humburger Back View Action
-    @IBAction func tappedOnHamburgerbackView(_ sender: Any) {
+    // Back Button Action
+    @IBAction func backButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        self.hideHamburgerView()
+        self.navigationController?.popViewController(animated: true)
     }
-    
+        
     //Add Product Button Action
     @IBAction func addProductButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "AddProductViewController") as! AddProductViewController
         newVC.titleLabel = "ADD NEW PRODUCT"
         self.navigationController?.pushViewController(newVC, animated: true)        
-    }
-    
-    // humburgerMenu Button Action
-    @IBAction func showHamburgerMenu(_ sender: Any) {
-        self.view.endEditing(true)
-        UIView.animate(withDuration: 0.1) {
-            self.leadingConstraintForHamburgerView.constant = 10
-            self.view.layoutIfNeeded()
-        } completion: { (status) in
-            self.backViewForHamburger.alpha = 0.75
-            self.backViewForHamburger.isHidden = false
-            UIView.animate(withDuration: 0.1) {
-                self.leadingConstraintForHamburgerView.constant = 0
-                self.view.layoutIfNeeded()
-            } completion: { (status) in
-                self.isHamburgerMenuShown = true
-            }
-        }
-        self.backViewForHamburger.isHidden = false
-        
     }
     
     // Filter Button Action
@@ -124,7 +84,7 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
         newVC.filterparm = filterparm
         newVC.setFilterData()
         newVC.completion = { param in
-            print(param)
+            print(param as Any)
             self.page = 0
             self.filterparm = param
             self.getProductListAPI()
@@ -134,98 +94,91 @@ class HomeViewController: UIViewController, SideMenuViewControllerDelegate {
     
     //MARK:- helper Functions -
     
-    // Reload Role List Api
-    @objc func reloadRoleListApi() {
-        self.getRoleListApi()
-    }
-    
     // Get Product List Api reload function
     @objc func reloadGetProductListApi() {
         self.getProductListAPI()
     }
-    
-    // Hide Humburger Menu
-    func hideHamburgerMenu() {
-        self.hideHamburgerView()
-    }
-    
-    //Hide Humburger View
-    private func hideHamburgerView(){
-        UIView.animate(withDuration: 0.1) {
-            self.leadingConstraintForHamburgerView.constant = 10
-            self.view.layoutIfNeeded()
-        } completion: { (status) in
-            self.backViewForHamburger.alpha = 0.0
-            UIView.animate(withDuration: 0.1) {
-                self.leadingConstraintForHamburgerView.constant = -320
-                self.view.layoutIfNeeded()
-            } completion: { (status) in
-                self.backViewForHamburger.isHidden = true
-                self.isHamburgerMenuShown = false
-            }
-        }
-    }
-    
-    // Side Menu Segue Action
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "hamburgerSegue"){
-            if let controller = segue.destination as? SideMenuViewController{
-                self.SideMenuViewController = controller
-                self.SideMenuViewController?.delegate = self
-            }
-        }
-    }
-    
-    // SetTouch For Humburger Back View
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (isHamburgerMenuShown)
-        {
-            if let touch = touches.first
-            {
-                let location = touch.location(in: backViewForHamburger)
-                beginPoint = location.x
-            }
-        }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (isHamburgerMenuShown){
-            if let touch = touches.first{
-                let location = touch.location(in: backViewForHamburger)
-                let differenceFromBeginPoint = beginPoint - location.x
-                if (differenceFromBeginPoint>0 || differenceFromBeginPoint<320){
-                    difference = differenceFromBeginPoint
-                    self.leadingConstraintForHamburgerView.constant = 0
-                    self.backViewForHamburger.alpha = 0.75
-                }
-            }
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (isHamburgerMenuShown){
-            if (difference>140){
-                UIView.animate(withDuration: 0.1) {
-                    self.leadingConstraintForHamburgerView.constant = -320
-                } completion: { (status) in
-                    self.backViewForHamburger.alpha = 0.0
-                    self.isHamburgerMenuShown = false
-                    self.backViewForHamburger.isHidden = true
-                }
-            }else{
-                UIView.animate(withDuration: 0.1) {
-                    self.leadingConstraintForHamburgerView.constant = 0
-                } completion: { (status) in
-                    self.backViewForHamburger.alpha = 0.75
-                    self.isHamburgerMenuShown = true
-                    self.backViewForHamburger.isHidden = false
-                }
-            }
-        }
-    }
+
 }
 
 // MARK: - Extensions -
+
+//MARK: Api Call
+extension HomeViewController {
+    
+    // Get Product List Api
+    func getProductListAPI(parameter: Parameters? = nil, bodyParameter:Parameters? = nil) {
+        var parameters = Parameters()
+        
+        if parameter == nil {
+            parameters["pageNo"] = page
+            parameters["pageSize"] = 10
+        } else{
+            page = 0
+            if let parameter = parameter {
+                parameters = parameter
+            }
+            parameters["pageNo"] = page
+            parameters["pageSize"] = 10
+        }
+        
+        var bodyParam = Parameters()
+        if bodyParameter == nil {
+            if let bodyParameter = filterparm {
+                bodyParam = bodyParameter
+            }
+        } else {
+            if let bodyParameter = bodyParameter {
+                bodyParam = bodyParameter
+            }
+        }
+        
+        showLoading()
+        APIHelper.getProductListApi(params: parameters, bodyParameter: bodyParam) { (success, response) in
+            self.tableView.pullToRefreshView?.stopAnimating()
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                self.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let data = response.response["data"]
+                self.product = ProductList.init(json: data)
+                if self.page == 0 {
+                    self.productList = ProductList.init(json: data).items ?? []
+                } else{
+                    self.productList.append(contentsOf: ProductList.init(json: data).items ?? [])
+                }
+                self.filteredArray = self.productList
+                self.totalCount = self.product?.totalItems ?? 0
+                let message = response.message
+                print(message)
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    // Remove Product By Id
+    func removeProductByIdApi(productId: String) {
+        let params: Parameters = [
+            "productId" : productId
+        ]
+        showLoading()
+        APIHelper.removeProductById(params: params) { (success, response) in
+            if !success {
+                dissmissLoader()
+                let message = response.message
+                self.view.makeToast(message)
+            }else {
+                dissmissLoader()
+                let message = response.message
+                print(message)
+                self.getProductListAPI()
+            }
+        }
+    }
+    
+}
 
 //MARK: TableView SetUp
 extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
@@ -273,6 +226,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
 }
+
 // MARK: ScrollView Setup
 extension HomeViewController: UIScrollViewDelegate{
     
@@ -317,12 +271,7 @@ extension HomeViewController: CustomAlertDelegate {
     
     func okButtonclick(tag: Int) {
         print(tag)
-        if tag == 1 {
-            AppManager.shared.token = ""
-            AppManager.shared.merchantUserId = ""
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginNav") as! UINavigationController
-            myApp.window?.rootViewController = newVC
-        } else if tag == 2 {
+     if tag == 2 {
             self.page = 0
             self.removeProductByIdApi(productId: self.productId ?? "")
             self.dismiss(animated: true, completion: nil)

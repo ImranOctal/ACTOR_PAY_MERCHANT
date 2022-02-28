@@ -44,6 +44,8 @@ class OrderSummaryViewController: UIViewController {
         }
     }
     @IBOutlet weak var notesTblViewHeightConst: NSLayoutConstraint!
+    @IBOutlet weak var paymentMethodLbl: UILabel!
+    @IBOutlet weak var paymentMethodView: UIView!
     
     var orderNo = ""
     var orderItems: OrderItems?
@@ -129,6 +131,11 @@ class OrderSummaryViewController: UIViewController {
         addressLine1Lbl.text = orderItems?.shippingAddressDTO?.addressLine1 ?? ""
         addressLine2Lbl.text = orderItems?.shippingAddressDTO?.addressLine2 ?? ""
         cityAndCountryNameLbl.text = "\(orderItems?.shippingAddressDTO?.city ?? "")\n\(orderItems?.shippingAddressDTO?.country ?? "")"
+        if orderItems?.paymentMethod != nil {
+            paymentMethodLbl.text = orderItems?.paymentMethod
+        } else {
+            paymentMethodView.isHidden = true
+        }
         
     }
     

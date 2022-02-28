@@ -136,7 +136,7 @@ extension CommissionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if commissionList.count == 0{
-            tableView.setEmptyMessage("No Comission Found")
+            tableView.setEmptyMessage("No Commission Found")
         } else {
             tableView.restore()
         }

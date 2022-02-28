@@ -77,7 +77,6 @@
 		88AD1FC0278809F4007F0148 /* OrderItemDtos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AD1FBB278809F4007F0148 /* OrderItemDtos.swift */; };
 		88B8A95327A41131005CA047 /* RoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8A95227A41131005CA047 /* RoleViewController.swift */; };
 		88B8A95C27A414E4005CA047 /* RoleDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8A95B27A414E4005CA047 /* RoleDetailsTableViewCell.swift */; };
-		88B8A96427A41637005CA047 /* HomeViewControllerApiCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B8A96327A41637005CA047 /* HomeViewControllerApiCall.swift */; };
 		88B90270277EC67700506783 /* MerchantDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9026F277EC67700506783 /* MerchantDetails.swift */; };
 		88B9C6E827A8075E008E9160 /* OutletList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9C6E627A8075E008E9160 /* OutletList.swift */; };
 		88B9C6E927A8075E008E9160 /* OutletItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B9C6E727A8075E008E9160 /* OutletItems.swift */; };
@@ -113,6 +112,7 @@
 		88E2616027645D2700BC84B2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E2615C27645D2700BC84B2 /* ProfileViewController.swift */; };
 		88E261992764774F00BC84B2 /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E261982764774F00BC84B2 /* AddProductViewController.swift */; };
 		88E8FD3B27A51D8D00DCF547 /* AddNewRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E8FD3A27A51D8D00DCF547 /* AddNewRoleViewController.swift */; };
+		88F260EE27C3499A00A19258 /* DashboardViewControllerApiCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F260ED27C3499A00A19258 /* DashboardViewControllerApiCall.swift */; };
 		88F80C1727BCCC2700DBB1BD /* DisputesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F80C1627BCCC2700DBB1BD /* DisputesViewController.swift */; };
 		88F8214527A90BD900596C86 /* CommissionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F8214327A90BD800596C86 /* CommissionList.swift */; };
 		88F8214627A90BD900596C86 /* CommissionItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F8214427A90BD900596C86 /* CommissionItems.swift */; };
@@ -216,7 +216,6 @@
 		88AD1FBB278809F4007F0148 /* OrderItemDtos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderItemDtos.swift; sourceTree = "<group>"; };
 		88B8A95227A41131005CA047 /* RoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleViewController.swift; sourceTree = "<group>"; };
 		88B8A95B27A414E4005CA047 /* RoleDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleDetailsTableViewCell.swift; sourceTree = "<group>"; };
-		88B8A96327A41637005CA047 /* HomeViewControllerApiCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerApiCall.swift; sourceTree = "<group>"; };
 		88B9026F277EC67700506783 /* MerchantDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantDetails.swift; sourceTree = "<group>"; };
 		88B9C6E627A8075E008E9160 /* OutletList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutletList.swift; sourceTree = "<group>"; };
 		88B9C6E727A8075E008E9160 /* OutletItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutletItems.swift; sourceTree = "<group>"; };
@@ -258,6 +257,7 @@
 		88E2615C27645D2700BC84B2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		88E261982764774F00BC84B2 /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		88E8FD3A27A51D8D00DCF547 /* AddNewRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRoleViewController.swift; sourceTree = "<group>"; };
+		88F260ED27C3499A00A19258 /* DashboardViewControllerApiCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewControllerApiCall.swift; sourceTree = "<group>"; };
 		88F80C1627BCCC2700DBB1BD /* DisputesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputesViewController.swift; sourceTree = "<group>"; };
 		88F8214327A90BD800596C86 /* CommissionList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommissionList.swift; sourceTree = "<group>"; };
 		88F8214427A90BD900596C86 /* CommissionItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommissionItems.swift; sourceTree = "<group>"; };
@@ -534,6 +534,7 @@
 			children = (
 				8890980A27BE6C8F000ECE8E /* Cell */,
 				8890980427BE6402000ECE8E /* DashboardViewController.swift */,
+				88F260ED27C3499A00A19258 /* DashboardViewControllerApiCall.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -791,7 +792,6 @@
 				88E261972764773A00BC84B2 /* AddProduct */,
 				88DC1521276368C700627F17 /* HomeViewController.swift */,
 				884E194D278F073E00A9E5A8 /* FilterProductViewController.swift */,
-				88B8A96327A41637005CA047 /* HomeViewControllerApiCall.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1199,9 +1199,9 @@
 				88D560A92788219B003A8D33 /* CountryList.swift in Sources */,
 				8890982327BE78EB000ECE8E /* NotificationTableViewCell.swift in Sources */,
 				88E2615E27645D2700BC84B2 /* RaiseDisputeViewController.swift in Sources */,
+				88F260EE27C3499A00A19258 /* DashboardViewControllerApiCall.swift in Sources */,
 				881DD7FD27674F1800B48A1F /* ForgotPasswordViewController.swift in Sources */,
 				8890981427BE6D16000ECE8E /* DashboardCollectionViewCell.swift in Sources */,
-				88B8A96427A41637005CA047 /* HomeViewControllerApiCall.swift in Sources */,
 				8884E8C627ABF2E700E725A4 /* OrderNoteTableViewCell.swift in Sources */,
 				88078803277C17B000F9FF85 /* APIManager.swift in Sources */,
 				883AD63727BD1A8D00A10F0C /* CustomerMessageCell.swift in Sources */,

@@ -28,8 +28,8 @@ final class APIHelper {
     }
     
     //MARK: SignUp Api
-    static func registerUser(params: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
-        APIManager.shared.request(method: .post, url: APIEndPoint.register.rawValue, parameters: params) { (response) in
+    static func registerUser(bodyParameter: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
+        APIManager.shared.mainRequest(method: .post, url: APIEndPoint.register.rawValue, bodyParameter: bodyParameter, needUserToken: false) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -52,8 +52,8 @@ final class APIHelper {
     }
     
     //MARK: Forgot Password Api
-    static func forgotPassword(params: Parameters , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void){
-        APIManager.shared.request(method: .post, url: APIEndPoint.forgetPassword.rawValue, parameters: params) { (response) in
+    static func forgotPassword(bodyParameter: Parameters , success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
+        APIManager.shared.mainRequest(method: .post, url: APIEndPoint.forgetPassword.rawValue, bodyParameter: bodyParameter, needUserToken: false) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -85,18 +85,6 @@ final class APIHelper {
             }
         }
     }
-    
-//    //MARK: Update Merchant Details Api
-//    static func updateMerchantDetails(params: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
-//        APIManager.shared.putRequest(method: .put, url: APIEndPoint.merchantDetailsUpdate.rawValue, parameters: params) { (response) in
-//            let status = response.response["status"]
-//            if status == "200" {
-//                success(true, response)
-//            }else {
-//                success(false, response)
-//            }
-//        }
-//    }
     
     //MARK: Update Merchant Details Api
     static func updateMerchantDetails(bodyParams: Parameters,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void ){
@@ -352,8 +340,8 @@ final class APIHelper {
     }
     
     //MARK: Get Role List Api
-    static func getRoleListApi(parameters: Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
-        APIManager.shared.postRequest(method: .post, url: APIEndPoint.getRoleListApi.rawValue, parameters: parameters) { (response) in
+    static func getRoleListApi(urlParameters: Parameters, success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {
+        APIManager.shared.mainRequest(method: .post, url: APIEndPoint.getRoleListApi.rawValue, urlParameters: urlParameters, needUserToken: true) { (response) in
             let status = response.response["status"]
             if status == "200" {
                 success(true, response)
@@ -362,6 +350,7 @@ final class APIHelper {
             }
         }
     }
+    
     
     // MARK: FAQ Api
     static func getFAQAll(parameters: Parameters ,success:@escaping (_ success: Bool,_ response: APIResponse) -> Void) {

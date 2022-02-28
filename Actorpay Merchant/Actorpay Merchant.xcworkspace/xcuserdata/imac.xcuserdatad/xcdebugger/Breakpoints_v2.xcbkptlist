@@ -7,97 +7,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C454F01D-29E5-4448-9E73-406D777C61C2"
+            uuid = "9FB741D1-CC04-4F36-B350-6DDE65A48068"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Actorpay Merchant/ViewController/Home/HomeViewControllerApiCall.swift"
+            filePath = "Actorpay Merchant/ViewController/Dashboard/DashboardViewControllerApiCall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "viewActiveTaxDataByIDApi(taxID:)"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "getRoleListApi()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5C404DDE-6974-412C-818A-0BBFCB9BCDB8"
+            uuid = "1B90D85E-D15F-49EA-B7E4-261ACC4495B2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Actorpay Merchant/ViewController/Home/HomeViewControllerApiCall.swift"
+            filePath = "Actorpay Merchant/APIManager/APIManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "getAllTaxDataByHSNCode(HSNCode:)"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "getMethod(method:url:parameters:success:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2C732FE3-23F6-4C11-AB31-F47DEF7577B5"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Actorpay Merchant/ViewController/Home/HomeViewControllerApiCall.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "changeProductStatusApi(productId:status:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B5182BB3-4119-48CA-85D2-921A84D482F3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Actorpay Merchant/ViewController/Home/HomeViewControllerApiCall.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "removeProductByIdApi(productId:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "737D5D9D-E8CB-49FF-8F35-33993592540F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Actorpay Merchant/ViewController/Home/HomeViewControllerApiCall.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "viewAllActiveProductListApi()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "27EE4075-D87D-4F44-9776-9FA09855E424"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Actorpay Merchant/ViewController/Home/HomeViewControllerApiCall.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "getProductListAPI(parameter:bodyParameter:)"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1B90D85E-D15F-49EA-B7E4-261ACC4495B2 - 3a10734b37366254"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Alamofire.DataResponse&lt;Any, Alamofire.AFError&gt;) -&gt; () in Actorpay_Merchant.APIManager.getMethod(method: Alamofire.HTTPMethod, url: Swift.String, parameters: Swift.Dictionary&lt;Swift.String, Any&gt;, success: (Actorpay_Merchant.APIResponse) -&gt; ()) -&gt; ()"
+                  moduleName = "Actorpay Merchant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Data/iOS/ActorPayMerchant/Actorpay%20Merchant/Actorpay%20Merchant/APIManager/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "320">
+               </Location>
+               <Location
+                  uuid = "1B90D85E-D15F-49EA-B7E4-261ACC4495B2 - 3a10734b37366254"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Alamofire.DataResponse&lt;Any, Alamofire.AFError&gt;) -&gt; () in Actorpay_Merchant.APIManager.getMethod(method: Alamofire.HTTPMethod, url: Swift.String, parameters: Swift.Dictionary&lt;Swift.String, Any&gt;, success: (Actorpay_Merchant.APIResponse) -&gt; ()) -&gt; ()"
+                  moduleName = "Actorpay Merchant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Data/iOS/ActorPayMerchant/Actorpay%20Merchant/Actorpay%20Merchant/APIManager/APIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "358">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

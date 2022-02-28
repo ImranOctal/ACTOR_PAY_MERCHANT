@@ -12,6 +12,13 @@ class DashboardViewController: UIViewController {
     //MARK: - Properties -
     
     @IBOutlet weak var bgView: UIView!
+    @IBOutlet weak var hamburgerView: UIView!{
+        didSet {
+            rightCorners(bgView: hamburgerView, maskToBounds: true)
+        }
+    }
+    @IBOutlet weak var backViewForHamburger: UIView!
+    @IBOutlet weak var leadingConstraintForHamburgerView: NSLayoutConstraint!
     @IBOutlet weak var dashboardCollectionView: UICollectionView! {
         didSet {
             self.dashboardCollectionView.delegate = self
@@ -23,6 +30,13 @@ class DashboardViewController: UIViewController {
     var dashBoardTitleArr = ["MANAGE","Reporting","Payroll","MANAGE"]
     var dashBoarDescArr = ["Product","Manager","Manager","Sub Merchant"]
     
+    private var isHamburgerMenuShown:Bool = false
+    var SideMenuViewController : SideMenuViewController?
+    private var beginPoint:CGFloat = 0.0
+    private var difference:CGFloat = 0.0
+    var getTaxDataByHSNCode: TaxList?
+    var viewActiveTaxDataById: TaxList?
+    
     //MARK: - Life Cycles -
     
     override func viewDidLoad() {
@@ -30,16 +44,17 @@ class DashboardViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         topCorner(bgView: bgView, maskToBounds: true)
+        self.backViewForHamburger.isHidden = true
         
+        self.getRoleListApi()
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("reloadRoleListApi"), object: nil)
+        NotificationCenter.default.addObserver(self,selector: #selector(self.reloadRoleListApi),name:Notification.Name("reloadRoleListApi"), object: nil)
+        self.getMerchantDetailsByIdApi()
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("getMerchantDetailsByIdApi"), object: nil)
+        NotificationCenter.default.addObserver(self,selector: #selector(self.getMerchantDetailsByIdApi),name:Notification.Name("getMerchantDetailsByIdApi"), object: nil)
     }
     
     //MARK: - Selectors -
-
-    // Menu Button Action
-    @IBAction func menuButtonAction(_ sender: UIButton) {
-        self.view.endEditing(true)
-        self.navigationController?.popViewController(animated: true)
-    }
     
     // Notification Button Action
     @IBAction func notificationButtonAction(_ sender: UIButton) {
@@ -48,6 +63,113 @@ class DashboardViewController: UIViewController {
         self.navigationController?.pushViewController(newVC, animated: true)
     }
     
+    // Humburger Back View Action
+    @IBAction func tappedOnHamburgerbackView(_ sender: Any) {
+        self.view.endEditing(true)
+        self.hideHamburgerView()
+    }
+    
+    // humburgerMenu Button Action
+    @IBAction func showHamburgerMenu(_ sender: Any) {
+        self.view.endEditing(true)
+        UIView.animate(withDuration: 0.1) {
+            self.leadingConstraintForHamburgerView.constant = 10
+            self.view.layoutIfNeeded()
+        } completion: { (status) in
+            self.backViewForHamburger.alpha = 0.75
+            self.backViewForHamburger.isHidden = false
+            UIView.animate(withDuration: 0.1) {
+                self.leadingConstraintForHamburgerView.constant = 0
+                self.view.layoutIfNeeded()
+            } completion: { (status) in
+                self.isHamburgerMenuShown = true
+            }
+        }
+        self.backViewForHamburger.isHidden = false
+        
+    }
+    
+    //MARK: - Helper Functions -
+    
+    // Reload Role List Api
+    @objc func reloadRoleListApi() {
+        self.getRoleListApi()
+    }
+    
+    //Hide Humburger View
+    private func hideHamburgerView(){
+        UIView.animate(withDuration: 0.1) {
+            self.leadingConstraintForHamburgerView.constant = 10
+            self.view.layoutIfNeeded()
+        } completion: { (status) in
+            self.backViewForHamburger.alpha = 0.0
+            UIView.animate(withDuration: 0.1) {
+                self.leadingConstraintForHamburgerView.constant = -320
+                self.view.layoutIfNeeded()
+            } completion: { (status) in
+                self.backViewForHamburger.isHidden = true
+                self.isHamburgerMenuShown = false
+            }
+        }
+    }
+    
+    // Side Menu Segue Action
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "hamburgerSegue"){
+            if let controller = segue.destination as? SideMenuViewController{
+                self.SideMenuViewController = controller
+                self.SideMenuViewController?.delegate = self
+            }
+        }
+    }
+    
+    // SetTouch For Humburger Back View
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (isHamburgerMenuShown)
+        {
+            if let touch = touches.first
+            {
+                let location = touch.location(in: backViewForHamburger)
+                beginPoint = location.x
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (isHamburgerMenuShown){
+            if let touch = touches.first{
+                let location = touch.location(in: backViewForHamburger)
+                let differenceFromBeginPoint = beginPoint - location.x
+                if (differenceFromBeginPoint>0 || differenceFromBeginPoint<320){
+                    difference = differenceFromBeginPoint
+                    self.leadingConstraintForHamburgerView.constant = 0
+                    self.backViewForHamburger.alpha = 0.75
+                }
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (isHamburgerMenuShown){
+            if (difference>140){
+                UIView.animate(withDuration: 0.1) {
+                    self.leadingConstraintForHamburgerView.constant = -320
+                } completion: { (status) in
+                    self.backViewForHamburger.alpha = 0.0
+                    self.isHamburgerMenuShown = false
+                    self.backViewForHamburger.isHidden = true
+                }
+            }else{
+                UIView.animate(withDuration: 0.1) {
+                    self.leadingConstraintForHamburgerView.constant = 0
+                } completion: { (status) in
+                    self.backViewForHamburger.alpha = 0.75
+                    self.isHamburgerMenuShown = true
+                    self.backViewForHamburger.isHidden = false
+                }
+            }
+        }
+    }
 }
 
 //MARK: - Extensions -
@@ -87,6 +209,35 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width / 2, height: 162)
+    }
+    
+}
+
+//MARK: SideMenuViewController Delegate Methods
+extension DashboardViewController: SideMenuViewControllerDelegate {
+    
+    func hideHamburgerMenu() {
+        self.hideHamburgerView()
+    }
+    
+}
+
+//MARK: Custom Alert Delegate Methods
+extension DashboardViewController: CustomAlertDelegate {
+    
+    func okButtonclick(tag: Int) {
+        print(tag)
+        if tag == 1 {
+            AppManager.shared.token = ""
+            AppManager.shared.merchantUserId = ""
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginNav") as! UINavigationController
+            myApp.window?.rootViewController = newVC
+        }
+        
+    }
+    
+    func cancelButtonClick() {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

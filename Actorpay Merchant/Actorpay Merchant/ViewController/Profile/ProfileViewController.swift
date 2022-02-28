@@ -91,7 +91,7 @@ class ProfileViewController: UIViewController {
     var userLat = ""
     var userLong = ""
     var currentLoc: CLLocation?
-    private let GOOGLE_API_KEY = "AIzaSyBeoznMh_ffRxbTLA_bsWxZf35NDCaXhC0"
+    private let GOOGLE_API_KEY = "AIzaSyDhMau_8Eah9KaloP_NWaBhDjvryMlzcD0"
     let addressDropDown = DropDown()
     var arrAddressArray = [String]()
     lazy var dropDowns: [DropDown] = {

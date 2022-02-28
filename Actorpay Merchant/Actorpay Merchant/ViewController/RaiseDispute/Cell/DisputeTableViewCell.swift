@@ -23,6 +23,7 @@ class DisputeTableViewCell: UITableViewCell {
                 disputeDescLbl.text = item.description
                 disputeStatusLbl.text = item.status
                 disputeDateLbl.text = (item.createdAt ?? "").toFormatedDate(from: "yyyy-MM-dd hh:mm", to: "dd MMM yyyy HH:MM")
+                disputeStatusLbl.textColor = getStatus(stausString: item.status ?? "")
             }
         }
     }

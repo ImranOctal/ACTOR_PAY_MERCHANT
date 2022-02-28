@@ -216,38 +216,6 @@ class FilterProductViewController: UIViewController {
 
 //MARK: Api Call
 extension FilterProductViewController {
-
-    // Get All Category Api
-    func getAllCategories(pageSize: Int) {
-        showLoading()
-        let params: Parameters = [
-            "pageSize":pageSize,
-            "filterByIsActive":true,
-            "sortBy":"name",
-            "asc":true
-            
-        ]
-        APIHelper.getAllCategoriesAPI(parameters: params) { (success, response) in
-            if !success {
-                dissmissLoader()
-                let message = response.message
-                self.view.makeToast(message)
-            }else {
-                dissmissLoader()
-                let data = response.response["data"]
-                self.categoryList = CategoryList.init(json: data)
-                self.categoryData.removeAll()
-                for item in self.categoryList?.items ?? [] {
-                    self.categoryData.append(item.name ?? "")
-                }
-                print(self.categoryData)
-                self.pageSize = self.categoryList?.totalItems ?? 0
-                self.setUpCategoryDropDown()
-                let message = response.message
-                print(message)
-            }
-        }
-    }
     
     // Get All Category Api
     func getInCategoryDropdownApi() {

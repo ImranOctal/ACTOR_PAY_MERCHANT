@@ -82,7 +82,7 @@ extension ForgotPasswordViewController {
             "emailId": "\(emailTextField.text ?? "")"
         ]
         showLoading()
-        APIHelper.forgotPassword(params: params) { (success,response)  in
+        APIHelper.forgotPassword(bodyParameter: params) { (success,response)  in
             if !success {
                 dissmissLoader()
                 let message = response.message

@@ -22,9 +22,10 @@ class CommissionDetailsTableViewCell: UITableViewCell {
                 nameLbl.text = item.orderNo
                 orderStatusLbl.text = item.orderStatus
                 earningsLbl.text = "₹\(doubleToStringWithComma(item.merchantEarnings ?? 0.0))"
-                commissionPercentageLbl.text = "\(item.commissionPercentage ?? 0.0)"
+                commissionPercentageLbl.text = "\(item.commissionPercentage ?? 0.0) %"
                 commissionAmtLbl.text = "₹\(doubleToStringWithComma(item.actorCommissionAmt ?? 0.0))"
                 settlementStatusLbl.text = item.settlementStatus
+                settlementStatusLbl.textColor = getStatus(stausString: item.settlementStatus ?? "")
                 
             }
         }

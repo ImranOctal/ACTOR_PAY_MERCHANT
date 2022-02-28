@@ -86,6 +86,7 @@ class DisputeDetailsViewController: UIViewController {
             disputeDescLbl.text = disputeDetails.description
             disputeStatusLbl.text = disputeDetails.status
             disputeDateLbl.text = (disputeDetails.createdAt ?? "").toFormatedDate(from: "yyyy-MM-dd hh:mm", to: "dd MMM yyyy HH:MM")
+            disputeStatusLbl.textColor = getStatus(stausString: disputeDetails.status ?? "")
         }
     }
     

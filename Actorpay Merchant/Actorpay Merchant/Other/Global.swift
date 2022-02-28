@@ -175,6 +175,8 @@ func getStatus(stausString: String) -> (UIColor) {
         return UIColor.red
     case "FAILED":
         return UIColor.red
+    case "OPEN":
+        return UIColor(hexFromString: "2878B6")
     default :
         break
     }
