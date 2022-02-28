@@ -26,9 +26,9 @@ class DashboardViewController: UIViewController {
         }
     }
     
-    var dashBoardImgArr = ["package","clipboard","salary","manager"]
-    var dashBoardTitleArr = ["MANAGE","Reporting","Payroll","MANAGE"]
-    var dashBoarDescArr = ["Product","Manager","Manager","Sub Merchant"]
+    var dashBoardImgArr = ["ic_order_color","ic_earn_money_color","ic_manage_product","ic_outlet_color","ic_merchant","ic_role_color","ic_profile","ic_reporting"]
+    var dashBoardTitleArr = ["Orders","Earn Money","Product","Outlet","Sub Merchant","Role","My Profile","Reporting"]
+    var dashBoarDescArr = ["Manage","Manage","Manage","Manage","Manage","Manage","Manage","Manage"]
     
     private var isHamburgerMenuShown:Bool = false
     var SideMenuViewController : SideMenuViewController?
@@ -192,15 +192,30 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ManageOrdersViewController") as! ManageOrdersViewController
             self.navigationController?.pushViewController(newVC, animated: true)
         case 1:
-            self.view.makeToast("Comming Soon")
-        case 2:
-            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "PayRollViewController") as! PayRollViewController
+            //self.view.makeToast("Comming Soon")
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "CommissionViewController") as! CommissionViewController
             self.navigationController?.pushViewController(newVC, animated: true)
+        case 2:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+            
         case 3:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "OutletsViewController") as! OutletsViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+        case 4:
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "SubMerchantViewController") as! SubMerchantViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+        case 5:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "RoleViewController") as! RoleViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+        case 6:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+            self.navigationController?.pushViewController(newVC, animated: true)
+        case 7:
+            let newVC = self.storyboard?.instantiateViewController(withIdentifier: "PayRollViewController") as! PayRollViewController
             self.navigationController?.pushViewController(newVC, animated: true)
         default:
             break
