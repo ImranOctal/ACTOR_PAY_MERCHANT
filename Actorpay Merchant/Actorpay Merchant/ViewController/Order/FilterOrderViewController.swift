@@ -37,7 +37,7 @@ class FilterOrderViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        statusData = ["ALL","SUCCESS","READY","CANCELLED","PARTIALLY_CANCELLED","DISPATCHED","RETURNING","PARTIALLY_RETURNING","RETURNED","PARTIALLY_RETURNED","DELIVERED","PENDING","FAILED"]
+        statusData = ["Select Status","SUCCESS","READY","CANCELLED","PARTIALLY_CANCELLED","DISPATCHED","RETURNING","PARTIALLY_RETURNING","RETURNED","PARTIALLY_RETURNED","DELIVERED","PENDING","FAILED"]
         topCorner(bgView: filterView, maskToBounds: true)
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         self.showAnimate()
@@ -82,12 +82,11 @@ class FilterOrderViewController: UIViewController {
             "customeremail":customerEmailTextField.text ?? "",
             "status":"true",
             "startDate":startDateTextField.text ?? "",
-            "endData":endDateTextField.text ?? "",
+            "endDate":endDateTextField.text ?? "",
             "priceRangeFrom": priceFromTextField.text ?? "",
             "priceRangeTo": priceToTextField.text ?? "",
             "orderNo":orderNoTextField.text ?? "",
             "orderId":"",
-//            "orderStatus": statusTextField.text ?? "" == "ALL" ? "" : statusTextField.text ?? ""
             "orderStatus":orderStatus
         ]
         if let codeCompletion = completion {
@@ -111,7 +110,7 @@ class FilterOrderViewController: UIViewController {
         priceFromTextField.text = filterOrderParm?["priceRangeFrom"] as? String
         priceToTextField.text = filterOrderParm?["priceRangeTo"] as? String
         startDateTextField.text = filterOrderParm?["startDate"] as? String
-        endDateTextField.text = filterOrderParm?["endData"] as? String
+        endDateTextField.text = filterOrderParm?["endDate"] as? String
         orderStatus = (filterOrderParm?["orderStatus"] as? String) ?? ""
         statusTextField.text = orderStatus.replacingOccurrences(of: "_", with: " ", options: .literal, range: nil)
     }
@@ -121,11 +120,14 @@ class FilterOrderViewController: UIViewController {
         orderStatusDropDown.anchorView = statusTextField
         orderStatusDropDown.dataSource = statusData.map({$0.replacingOccurrences(of: "_", with: " ", options: .literal, range: nil)})
         orderStatusDropDown.backgroundColor = .white
-//        orderStatusDropDown.bottomOffset =
         self.orderStatusDropDown.direction = .top
-//        self.orderStatusDropDown.bottomOffset = CGPoint(x: 0, y: 0)
         orderStatusDropDown.width = statusTextField.frame.width + 60
         orderStatusDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            if item == "Select Status" {
+                self.statusTextField.text = ""
+                self.orderStatus = ""
+                return
+            }
             self.statusTextField.text = item
             self.orderStatus = statusData[index]
             self.view.endEditing(true)
@@ -169,7 +171,7 @@ class FilterOrderViewController: UIViewController {
     // FromTextField DatePicker Done Button Action
     @objc func fromTxtFieldDoneDatePicker(){
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.dateFormat = "yyyy-MM-dd"
         startDateTextField.text = formatter.string(from: startDatePicker.date)
         self.view.endEditing(true)
     }
@@ -177,7 +179,7 @@ class FilterOrderViewController: UIViewController {
     // ToTextField DatePicker Done Button Action
     @objc func toTxtFieldDoneDatePicker() {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.dateFormat = "yyyy-MM-dd"
         endDateTextField.text = formatter.string(from: endDatePicker.date)
         self.view.endEditing(true)
     }

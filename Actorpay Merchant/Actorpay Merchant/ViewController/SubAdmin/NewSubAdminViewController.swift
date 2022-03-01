@@ -95,7 +95,7 @@ class NewSubAdminViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        headerTitleLbl.text = isEditSubMerchant == true ? "UPDATE SUB MERCHANT" : "ADD NEW SUB MERCHANT"
+        headerTitleLbl.text = isEditSubMerchant == true ? "Update Sub Merchant" : "Add New Sub Merchant"
         self.validationLabelManage()
         self.setDOBDatePicker()
         self.setupGenderDropDown()

@@ -159,7 +159,7 @@ class FilterProductViewController: UIViewController {
     // FromTextField DatePicker Done Button Action
     @objc func fromTxtFieldDoneDatePicker() {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.dateFormat = "yyyy-MM-dd"
         startDateTextField.text = formatter.string(from: startDatePicker.date)
         self.view.endEditing(true)
     }
@@ -167,7 +167,7 @@ class FilterProductViewController: UIViewController {
     // ToTextField DatePicker Done Button Action
     @objc func toTxtFieldDoneDatePicker() {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.dateFormat = "yyyy-MM-dd"
         endDateTextField.text = formatter.string(from: endDatePicker.date)
         self.view.endEditing(true)
     }

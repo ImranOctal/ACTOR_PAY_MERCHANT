@@ -91,7 +91,7 @@ class AddProductViewController: UIViewController {
         } else {
             descriptionTextView.textColor = .black
         }
-        self.addAndUpdateProductBtn.setTitle(isUpdate == true ? "UPDATE PRODUCT" : "ADD PRODUCT", for: .normal)
+        self.addAndUpdateProductBtn.setTitle(isUpdate == true ? "Update Product" : "Add Product", for: .normal)
         imagePicker.delegate = self
 //        self.getAllActiveTaxApi()
 //        getAllCategories(pageSize: pageSize)

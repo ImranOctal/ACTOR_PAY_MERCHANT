@@ -54,7 +54,7 @@ class OrderAddNoteViewController: UIViewController {
                 self.postOrderNoteApi()
             } else {
                 notesTextViewValidationLbl.isHidden = true
-                if status == "READY" ||  status == "DISPATCHED" ||  status == "DELIVERED" || status == "RETURNING_ACCEPTED" || status == "RETURNING_DECLINED" || status == "RETURNED" {
+                if status == "READY" ||  status == "DISPATCHED" ||  status == "DELIVERED" || status == "RETURNING ACCEPTED" || status == "RETURNING DECLINED" || status == "RETURNED" {
                     updateOrderStatusApi()
                 } else {
                     cancelOrReturnOrderApi()
@@ -138,7 +138,7 @@ extension OrderAddNoteViewController {
     func updateOrderStatusApi() {
         let params: Parameters = [
             "orderNo" : orderItems?.orderNo ?? "",
-            "status" : status
+            "status" : status.replacingOccurrences(of: " ", with: "_")
         ]
         let bodyParams: Parameters = [
             "orderNoteDescription": noteDescTextView.text ?? "",

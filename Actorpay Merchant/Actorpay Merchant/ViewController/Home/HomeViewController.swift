@@ -69,7 +69,7 @@ class HomeViewController: UIViewController {
     @IBAction func addProductButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
         let newVC = self.storyboard?.instantiateViewController(withIdentifier: "AddProductViewController") as! AddProductViewController
-        newVC.titleLabel = "ADD NEW PRODUCT"
+        newVC.titleLabel = "Add New Product"
         self.navigationController?.pushViewController(newVC, animated: true)        
     }
     
@@ -198,7 +198,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         cell.item = item
         cell.editButtonHandler = {
             let newVC = self.storyboard?.instantiateViewController(withIdentifier: "AddProductViewController") as! AddProductViewController
-            newVC.titleLabel = "UPDATE PRODUCT"
+            newVC.titleLabel = "Update Product"
             newVC.isUpdate = true
             newVC.productItem = self.filteredArray?[indexPath.row]
             self.navigationController?.pushViewController(newVC, animated: true)
@@ -253,9 +253,9 @@ extension HomeViewController: UITextFieldDelegate {
         case searchTextField:
             let finalString = searchTextField.text
             var filterParam = Parameters()
-            if let parameter = filterparm {
-                filterParam = parameter
-            }
+//            if let parameter = filterparm {
+//                filterParam = parameter
+//            }
             filterParam["name"] = finalString
             self.page = 0
             self.getProductListAPI(bodyParameter: filterParam)

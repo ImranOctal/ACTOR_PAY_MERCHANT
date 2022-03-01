@@ -48,7 +48,7 @@ class AddNewRoleViewController: UIViewController {
         
         topCorner(bgView: bgView, maskToBounds: true)
         self.getAllScreenApi()
-        self.headerTitleLbl.text = isUpdateRole ? "UPDATE ROLE" : "ADD NEW ROLE"
+        self.headerTitleLbl.text = isUpdateRole ? "Update Role" : "Add New Role"
         self.addNewRoleBtn.setTitle(isUpdateRole ? "Update Role" : "+ Add New Role", for: .normal)
         self.manageValidationLbl()
         if isUpdateRole {

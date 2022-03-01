@@ -125,10 +125,10 @@ class AddOutletViewController: UIViewController {
         self.setUpCountryCodeData()
         self.validationLabelManage()
         if isUpdateOutlet {
-            headerTitleLbl.text = "UPDATE OUTLET"
+            headerTitleLbl.text = "Update Outlet"
             self.getOutletDetailsByIdApi(outletId: outletId ?? "")
         } else {
-            headerTitleLbl.text = "ADD OUTLET"
+            headerTitleLbl.text = "Add Outlet"
         }
         
         locationManager.requestWhenInUseAuthorization()

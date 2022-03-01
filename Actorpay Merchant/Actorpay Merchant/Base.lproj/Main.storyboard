@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aj5-ZK-582">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aj5-ZK-582">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1117,26 +1117,26 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductTableViewCell" id="NGx-0B-5on" customClass="ProductTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="195.5"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="197"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NGx-0B-5on" id="bry-Kl-yZ9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="195.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTX-bG-GjC">
-                                                            <rect key="frame" x="10" y="5" width="355" height="185.5"/>
+                                                            <rect key="frame" x="10" y="5" width="355" height="186.5"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UkI-eC-g9R">
-                                                                    <rect key="frame" x="85" y="10" width="260" height="165.5"/>
+                                                                    <rect key="frame" x="95" y="10" width="250" height="166.5"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ar9-12-Hcs">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="124.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCy-vR-Wsa">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="124.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="170" height="50"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cool Men" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGL-yF-JRj">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="180" height="124.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="170" height="50"/>
                                                                                             <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="16"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1144,7 +1144,7 @@
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPM-6N-hSQ">
-                                                                                    <rect key="frame" x="225" y="50" width="25" height="25"/>
+                                                                                    <rect key="frame" x="215" y="12.5" width="25" height="25"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="TPM-6N-hSQ" secondAttribute="height" id="64f-xd-c97"/>
                                                                                         <constraint firstAttribute="height" constant="25" id="kQP-vP-xe8"/>
@@ -1157,7 +1157,7 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kid-El-6kV">
-                                                                                    <rect key="frame" x="190" y="50" width="25" height="25"/>
+                                                                                    <rect key="frame" x="180" y="12.5" width="25" height="25"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="kid-El-6kV" secondAttribute="height" id="553-Ci-wrj"/>
                                                                                         <constraint firstAttribute="height" constant="25" id="MYx-EW-2MU"/>
@@ -1183,28 +1183,28 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g1M-He-Ad9">
-                                                                            <rect key="frame" x="0.0" y="124.5" width="260" height="21"/>
+                                                                            <rect key="frame" x="0.0" y="50" width="250" height="50"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mh3-Vm-o1U">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="21"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Price:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dn6-hw-89a">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="67.5" height="21"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="67.5" height="50"/>
                                                                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                                                             <color key="textColor" name="BlackColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1hb-zJ-Ol7">
-                                                                                            <rect key="frame" x="67.5" y="0.0" width="39.5" height="21"/>
+                                                                                            <rect key="frame" x="67.5" y="0.0" width="39.5" height="50"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okl-Ah-fII">
-                                                                                                    <rect key="frame" x="4" y="0.0" width="35.5" height="21"/>
+                                                                                                    <rect key="frame" x="4" y="0.0" width="35.5" height="50"/>
                                                                                                     <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                     <color key="textColor" systemColor="systemRedColor"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L6J-80-gv5">
-                                                                                                    <rect key="frame" x="4" y="9" width="35.5" height="1"/>
+                                                                                                    <rect key="frame" x="4" y="23.5" width="35.5" height="1"/>
                                                                                                     <color key="backgroundColor" systemColor="systemRedColor"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="height" constant="1" id="cMj-vJ-44Z"/>
@@ -1223,33 +1223,11 @@
                                                                                                 <constraint firstItem="L6J-80-gv5" firstAttribute="leading" secondItem="okl-Ah-fII" secondAttribute="leading" id="aM5-vN-rzi"/>
                                                                                             </constraints>
                                                                                         </view>
-                                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="lZt-90-bqT">
-                                                                                            <rect key="frame" x="117" y="0.0" width="113" height="21"/>
-                                                                                            <subviews>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deal Price:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evS-M5-o6g">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="68" height="21"/>
-                                                                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
-                                                                                                    <color key="textColor" name="BlackColor"/>
-                                                                                                    <nil key="highlightedColor"/>
-                                                                                                </label>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$23.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzl-E5-Q6L">
-                                                                                                    <rect key="frame" x="70" y="0.0" width="43" height="21"/>
-                                                                                                    <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
-                                                                                                    <color key="textColor" name="BlueColor"/>
-                                                                                                    <nil key="highlightedColor"/>
-                                                                                                </label>
-                                                                                            </subviews>
-                                                                                        </stackView>
                                                                                     </subviews>
                                                                                     <constraints>
                                                                                         <constraint firstItem="1hb-zJ-Ol7" firstAttribute="top" secondItem="Mh3-Vm-o1U" secondAttribute="top" id="9o1-0R-jdK"/>
-                                                                                        <constraint firstItem="lZt-90-bqT" firstAttribute="top" secondItem="Mh3-Vm-o1U" secondAttribute="top" id="BKc-lf-i9A"/>
-                                                                                        <constraint firstAttribute="bottom" secondItem="lZt-90-bqT" secondAttribute="bottom" id="CoW-P7-DT6"/>
                                                                                         <constraint firstItem="Dn6-hw-89a" firstAttribute="leading" secondItem="Mh3-Vm-o1U" secondAttribute="leading" id="KqT-82-KPO"/>
-                                                                                        <constraint firstItem="lZt-90-bqT" firstAttribute="leading" secondItem="1hb-zJ-Ol7" secondAttribute="trailing" constant="10" id="Wmt-9C-AFe"/>
-                                                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lZt-90-bqT" secondAttribute="trailing" id="bZe-eC-6fg"/>
                                                                                         <constraint firstAttribute="bottom" secondItem="1hb-zJ-Ol7" secondAttribute="bottom" id="mf6-hd-dme"/>
-                                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="ohI-tG-iRv"/>
                                                                                         <constraint firstAttribute="bottom" secondItem="Dn6-hw-89a" secondAttribute="bottom" id="rV3-xP-LW4"/>
                                                                                         <constraint firstItem="Dn6-hw-89a" firstAttribute="top" secondItem="Mh3-Vm-o1U" secondAttribute="top" id="stJ-kn-iq4"/>
                                                                                         <constraint firstItem="1hb-zJ-Ol7" firstAttribute="leading" secondItem="Dn6-hw-89a" secondAttribute="trailing" id="xyD-9w-qUd"/>
@@ -1258,44 +1236,64 @@
                                                                             </subviews>
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="21" id="3ec-7Z-Ns1"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="Mh3-Vm-o1U" secondAttribute="bottom" id="Um0-KC-e9a"/>
                                                                                 <constraint firstItem="Mh3-Vm-o1U" firstAttribute="top" secondItem="g1M-He-Ad9" secondAttribute="top" id="dO2-KV-mVh"/>
                                                                                 <constraint firstItem="Mh3-Vm-o1U" firstAttribute="leading" secondItem="g1M-He-Ad9" secondAttribute="leading" id="rcr-yK-Hzn"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="Mh3-Vm-o1U" secondAttribute="trailing" id="tky-me-Stq"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCb-Bi-hh3">
-                                                                            <rect key="frame" x="0.0" y="145.5" width="260" height="20"/>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PU7-J5-xQ6">
+                                                                            <rect key="frame" x="0.0" y="100" width="250" height="50"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00 AM, 03 May 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djd-ji-KHD">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="20"/>
-                                                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
-                                                                                    <color key="textColor" name="BlackColor"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="lZt-90-bqT">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="113" height="50"/>
+                                                                                    <subviews>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deal Price:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evS-M5-o6g">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="68" height="50"/>
+                                                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                                                                            <color key="textColor" name="BlackColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$23.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzl-E5-Q6L">
+                                                                                            <rect key="frame" x="70" y="0.0" width="43" height="50"/>
+                                                                                            <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                                                                            <color key="textColor" name="BlueColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                    </subviews>
+                                                                                </stackView>
                                                                             </subviews>
+                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="20" id="7Fw-bo-oyI"/>
+                                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lZt-90-bqT" secondAttribute="trailing" id="6Oi-J2-oRG"/>
+                                                                                <constraint firstItem="lZt-90-bqT" firstAttribute="leading" secondItem="PU7-J5-xQ6" secondAttribute="leading" id="JT9-Fb-9mi"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="lZt-90-bqT" secondAttribute="bottom" id="cn2-tq-WuM"/>
+                                                                                <constraint firstItem="lZt-90-bqT" firstAttribute="top" secondItem="PU7-J5-xQ6" secondAttribute="top" id="rUS-bP-RJX"/>
                                                                             </constraints>
-                                                                        </stackView>
+                                                                        </view>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00 AM, 03 May 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djd-ji-KHD">
+                                                                            <rect key="frame" x="0.0" y="150" width="250" height="16.5"/>
+                                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                                                            <color key="textColor" name="BlackColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
                                                                     </subviews>
                                                                 </stackView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rni-4M-pcg">
-                                                                    <rect key="frame" x="10" y="60.5" width="65" height="65"/>
+                                                                    <rect key="frame" x="10" y="56" width="75" height="75"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bsX-aO-Qa4">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
+                                                                            <rect key="frame" x="2" y="2" width="71" height="71"/>
                                                                         </imageView>
                                                                     </subviews>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="65" id="L2P-Nj-tz3"/>
+                                                                        <constraint firstAttribute="height" constant="75" id="L2P-Nj-tz3"/>
                                                                         <constraint firstAttribute="width" secondItem="Rni-4M-pcg" secondAttribute="height" id="dds-yF-cnK"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="bsX-aO-Qa4" secondAttribute="trailing" id="ftW-lI-De2"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="bsX-aO-Qa4" secondAttribute="bottom" id="vLT-k1-jnj"/>
-                                                                        <constraint firstItem="bsX-aO-Qa4" firstAttribute="leading" secondItem="Rni-4M-pcg" secondAttribute="leading" id="wFl-K6-c13"/>
-                                                                        <constraint firstItem="bsX-aO-Qa4" firstAttribute="top" secondItem="Rni-4M-pcg" secondAttribute="top" id="yzl-fo-Eb8"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="bsX-aO-Qa4" secondAttribute="trailing" constant="2" id="ftW-lI-De2"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="bsX-aO-Qa4" secondAttribute="bottom" constant="2" id="vLT-k1-jnj"/>
+                                                                        <constraint firstItem="bsX-aO-Qa4" firstAttribute="leading" secondItem="Rni-4M-pcg" secondAttribute="leading" constant="2" id="wFl-K6-c13"/>
+                                                                        <constraint firstItem="bsX-aO-Qa4" firstAttribute="top" secondItem="Rni-4M-pcg" secondAttribute="top" constant="2" id="yzl-fo-Eb8"/>
                                                                     </constraints>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1325,7 +1323,7 @@
                                                     <constraints>
                                                         <constraint firstItem="yTX-bG-GjC" firstAttribute="leading" secondItem="bry-Kl-yZ9" secondAttribute="leading" constant="10" id="4aU-HA-zwm"/>
                                                         <constraint firstItem="yTX-bG-GjC" firstAttribute="top" secondItem="bry-Kl-yZ9" secondAttribute="top" constant="5" id="Z3j-gX-m6n"/>
-                                                        <constraint firstAttribute="bottom" secondItem="yTX-bG-GjC" secondAttribute="bottom" constant="5" id="qUy-Gw-DDS"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yTX-bG-GjC" secondAttribute="bottom" constant="5" id="qUy-Gw-DDS"/>
                                                         <constraint firstAttribute="trailing" secondItem="yTX-bG-GjC" secondAttribute="trailing" constant="10" id="zQE-Kw-hT4"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
@@ -1555,7 +1553,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SideMenuCell" id="YPz-Lb-G8X" customClass="SideMenuCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="320" height="56"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="56"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YPz-Lb-G8X" id="cN7-k9-7th">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
@@ -2421,7 +2419,7 @@
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <prototypes>
                                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="OrderItemTableViewCell" id="8O4-gO-AZ5" customClass="OrderItemTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="44.5" width="305" height="120"/>
+                                                                                        <rect key="frame" x="0.0" y="28" width="305" height="120"/>
                                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8O4-gO-AZ5" id="pSR-1y-Dfn">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="305" height="120"/>
@@ -2456,25 +2454,25 @@
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jDV-hh-9RL">
                                                                                                             <rect key="frame" x="110" y="21" width="175" height="68.5"/>
                                                                                                             <subviews>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Salad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4py-SA-2hf">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Salad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4py-SA-2hf">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="175" height="19"/>
                                                                                                                     <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="16"/>
                                                                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                     <nil key="highlightedColor"/>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Quantity: 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klb-ZB-MnE">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity: 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klb-ZB-MnE">
                                                                                                                     <rect key="frame" x="0.0" y="19" width="175" height="16.5"/>
                                                                                                                     <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                                     <color key="textColor" name="BlueColor"/>
                                                                                                                     <nil key="highlightedColor"/>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Price: ₹1200.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezZ-lV-7AL">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price: ₹1200.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezZ-lV-7AL">
                                                                                                                     <rect key="frame" x="0.0" y="35.5" width="175" height="16.5"/>
                                                                                                                     <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                                     <color key="textColor" name="BlueColor"/>
                                                                                                                     <nil key="highlightedColor"/>
                                                                                                                 </label>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Status: CANCELLED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pl3-Mx-qGn">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status: CANCELLED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pl3-Mx-qGn">
                                                                                                                     <rect key="frame" x="0.0" y="52" width="175" height="16.5"/>
                                                                                                                     <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                                     <color key="textColor" name="BlueColor"/>
@@ -3499,7 +3497,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ManageOrderTableViewCell" id="WKI-II-qFa" customClass="ManageOrderTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="137.5"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="137.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WKI-II-qFa" id="1CU-pM-g41">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="137.5"/>
@@ -3934,7 +3932,7 @@
                                                                         </constraints>
                                                                         <prototypes>
                                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PayRollTableViewCell" id="ETZ-n8-fNe" customClass="PayRollTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="44.5" width="335" height="95.5"/>
+                                                                                <rect key="frame" x="0.0" y="28" width="335" height="95.5"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ETZ-n8-fNe" id="Qhf-85-05a">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="95.5"/>
@@ -4258,7 +4256,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SubMerchantDetailTableViewCell" id="qOu-q1-QWQ" customClass="SubMerchantDetailTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="133.5"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="133.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qOu-q1-QWQ" id="RDT-ta-aDN">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="133.5"/>
@@ -5054,7 +5052,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RoleDetailsTableViewCell" id="XOx-aF-BgL" customClass="RoleDetailsTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="146.5"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="146.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XOx-aF-BgL" id="5PV-YD-rZk">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="146.5"/>
@@ -5372,7 +5370,7 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddNewRoleTableViewCell" id="oGd-M9-0zA" customClass="AddNewRoleTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="44.5" width="355" height="81.5"/>
+                                                                <rect key="frame" x="0.0" y="28" width="355" height="81.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oGd-M9-0zA" id="4un-ep-O1G">
                                                                     <rect key="frame" x="0.0" y="0.0" width="355" height="81.5"/>
@@ -5627,7 +5625,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="OutletDetailsTableViewCell" id="B9D-ed-VXG" customClass="OutletDetailsTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="231.5"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="231.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="B9D-ed-VXG" id="Xol-8J-9Uk">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="231.5"/>
@@ -6582,7 +6580,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CountryPickerTableViewCell" id="bsj-GA-AOv" customClass="CountryPickerTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="50.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="50.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bsj-GA-AOv" id="dRc-k6-9o0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
@@ -6644,7 +6642,7 @@
                                         <rect key="frame" x="10" y="10" width="285" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="epL-D1-Qiu">
-                                                <rect key="frame" x="10" y="10.5" width="20" height="18.5"/>
+                                                <rect key="frame" x="10" y="11" width="20" height="18"/>
                                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="5r3-wM-hq8"/>
@@ -8895,7 +8893,7 @@ An Order ID is the unique number associated with every our secure checkout.This 
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <prototypes>
                                                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="OrderItemTableViewCell" id="dpb-ls-vwG" customClass="OrderItemTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                                                                <rect key="frame" x="0.0" y="44.5" width="335" height="120"/>
+                                                                                                <rect key="frame" x="0.0" y="28" width="335" height="120"/>
                                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dpb-ls-vwG" id="t6R-Cl-3bM">
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="120"/>
@@ -8930,7 +8928,7 @@ An Order ID is the unique number associated with every our secure checkout.This 
                                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EUM-w6-p7o">
                                                                                                                     <rect key="frame" x="110" y="4" width="215" height="102"/>
                                                                                                                     <subviews>
-                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Salad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ah-L9-Wj8">
+                                                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Salad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ah-L9-Wj8">
                                                                                                                             <rect key="frame" x="0.0" y="0.0" width="215" height="19"/>
                                                                                                                             <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="16"/>
                                                                                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -8979,7 +8977,7 @@ An Order ID is the unique number associated with every our secure checkout.This 
                                                                                                                         </view>
                                                                                                                     </subviews>
                                                                                                                 </stackView>
-                                                                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zeQ-Mq-bUv">
+                                                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zeQ-Mq-bUv">
                                                                                                                     <rect key="frame" x="300" y="1" width="25" height="25"/>
                                                                                                                     <constraints>
                                                                                                                         <constraint firstAttribute="width" secondItem="zeQ-Mq-bUv" secondAttribute="height" id="XBs-4a-fFw"/>
@@ -9325,7 +9323,7 @@ An Order ID is the unique number associated with every our secure checkout.This 
                                                                                                                         </constraints>
                                                                                                                         <prototypes>
                                                                                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="OrderNoteTableViewCell" id="Vwz-TY-aQ5" customClass="OrderNoteTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                                                                                                <rect key="frame" x="0.0" y="44.5" width="315" height="70.5"/>
+                                                                                                                                <rect key="frame" x="0.0" y="28" width="315" height="70.5"/>
                                                                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vwz-TY-aQ5" id="1DK-gy-czN">
                                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="315" height="70.5"/>
@@ -9985,7 +9983,7 @@ An Order ID is the unique number associated with every our secure checkout.This 
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FaqCollapseTableViewCell" id="RVw-iF-bTV" customClass="FaqCollapseTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="39"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="39"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RVw-iF-bTV" id="o6A-Z9-TAf">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="39"/>
@@ -10022,7 +10020,7 @@ An Order ID is the unique number associated with every our secure checkout.This 
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FaqExpandTableViewCell" id="KKL-Wk-FdF" customClass="FaqExpandTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="83.5" width="375" height="27.5"/>
+                                                <rect key="frame" x="0.0" y="67" width="375" height="27.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KKL-Wk-FdF" id="6oa-di-xMq">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="27.5"/>
@@ -10744,7 +10742,7 @@ An Order ID is the unique number associated with every our secure checkout.This 
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CommissionDetailsTableViewCell" id="Ydy-wn-JEz" customClass="CommissionDetailsTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="330.5"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="330.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ydy-wn-JEz" id="8UL-8n-fcd">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="330.5"/>
@@ -12023,7 +12021,7 @@ An Order ID is the unique number associated with every our secure checkout.This 
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DisputeTableViewCell" id="iWt-LQ-Ezg" customClass="DisputeTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="213"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="213"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iWt-LQ-Ezg" id="cot-4A-yAA">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="213"/>
@@ -12369,7 +12367,7 @@ An Order ID is the unique number associated with every our secure checkout.This 
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CustomerMessageCell" id="9Z3-Uc-hcF" customClass="CustomerMessageCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="122"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="122"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Z3-Uc-hcF" id="g9y-zb-pL4">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="122"/>
@@ -12481,7 +12479,7 @@ An Order ID is the unique number associated with every our secure checkout.This 
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MerchantMessageCell" id="MLZ-au-e9Y" customClass="MerchantMessageCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="166.5" width="375" height="122"/>
+                                                <rect key="frame" x="0.0" y="150" width="375" height="122"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MLZ-au-e9Y" id="cb8-h3-S0B">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="122"/>
@@ -13335,7 +13333,7 @@ An Order ID is the unique number associated with every our secure checkout.This 
                                         <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationTableViewCell" id="J16-yO-ksE" customClass="NotificationTableViewCell" customModule="Actorpay_Merchant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="78.5"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="78.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J16-yO-ksE" id="D9s-XW-tYW">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="78.5"/>

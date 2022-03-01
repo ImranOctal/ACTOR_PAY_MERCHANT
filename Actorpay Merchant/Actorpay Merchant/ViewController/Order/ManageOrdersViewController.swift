@@ -152,7 +152,7 @@ extension ManageOrdersViewController: UITableViewDelegate,UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if filteredArray.count == 0 {
-            tableView.setEmptyMessage("No Order Available")
+            tableView.setEmptyMessage("No Order Found")
         } else {
             tableView.restore()
         }
